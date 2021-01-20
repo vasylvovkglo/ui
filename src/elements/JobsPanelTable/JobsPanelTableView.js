@@ -16,9 +16,17 @@ const JobsPanelTableView = ({
   handleDelete,
   handleEdit,
   headers,
+  inputOnChange,
+  inputsDispatch,
+  inputsState,
   match,
+  matches,
   section,
+  selectDropdownList,
   selectedItem,
+  selectOnChange,
+  setEditItem,
+  setInputPlaceholder,
   setSelectedItem
 }) => {
   return (
@@ -46,8 +54,16 @@ const JobsPanelTableView = ({
           return section === 'data-inputs' ? (
             <EditableDataInputsRow
               handleEdit={handleEdit}
+              inputOnChange={inputOnChange}
+              inputsDispatch={inputsDispatch}
+              inputsState={inputsState}
               key={index}
+              matches={matches}
+              selectDropdownList={selectDropdownList}
               selectedDataInput={selectedItem}
+              selectOnChange={selectOnChange}
+              setEditItem={setEditItem}
+              setInputPlaceholder={setInputPlaceholder}
               setSelectedDataInput={setSelectedItem}
             />
           ) : section.includes('advanced') ? (
@@ -85,6 +101,18 @@ const JobsPanelTableView = ({
   )
 }
 
+JobsPanelTableView.defaultProps = {
+  handleEditInput: () => {},
+  inputOnChange: () => {},
+  inputsDispatch: () => {},
+  inputsState: null,
+  matches: [],
+  selectDropdownList: [],
+  selectOnChange: () => {},
+  setEditItem: () => {},
+  setInputPlaceholder: () => {}
+}
+
 JobsPanelTableView.propTypes = {
   addNewItem: PropTypes.bool.isRequired,
   children: PropTypes.object.isRequired,
@@ -94,10 +122,19 @@ JobsPanelTableView.propTypes = {
   generateActionsMenu: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
+  handleEditInput: PropTypes.func,
   headers: PropTypes.array.isRequired,
+  inputOnChange: PropTypes.func,
+  inputsDispatch: PropTypes.func,
+  inputsState: PropTypes.shape({}),
   match: PropTypes.shape({}).isRequired,
+  matches: PropTypes.arrayOf(PropTypes.shape({})),
   section: PropTypes.string.isRequired,
+  selectDropdownList: PropTypes.arrayOf(PropTypes.shape({})),
   selectedItem: PropTypes.shape({}).isRequired,
+  selectOnChange: PropTypes.func,
+  setEditItem: PropTypes.func,
+  setInputPlaceholder: PropTypes.func,
   setSelectedItem: PropTypes.func.isRequired
 }
 

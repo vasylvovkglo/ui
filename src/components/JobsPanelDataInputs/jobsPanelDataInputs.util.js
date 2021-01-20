@@ -15,7 +15,8 @@ export const handleAddItem = (
   setNewJobData,
   setPathPlaceholder,
   newInputUrlPath,
-  setNewInputUrl
+  setNewInputUrl,
+  setComboboxMatches
 ) => {
   if (
     newItemObj.name.length === 0 ||
@@ -91,6 +92,10 @@ export const handleAddItem = (
     type: setPathPlaceholder,
     payload: ''
   })
+  inputsDispatch({
+    type: setComboboxMatches,
+    payload: []
+  })
   setNewJobData({
     ...newJobData,
     [newItemObj.name]:
@@ -113,9 +118,39 @@ export const handleEdit = (
   selectedItem,
   setCurrentPanelData,
   setCurrentTableData,
-  setPreviousPanelData
+  setPreviousPanelData,
+  newItemObj,
+  newInputUrlPath,
+  removeNewItemObj,
+  setPathPlaceholder,
+  setNewInputUrl,
+  setAddNewItem
 ) => {
   const currentDataObj = { ...currentPanelData }
+  const { pathType, project, artifact } = newItemObj.path
+
+  if (
+    selectedItem.name.length === 0 ||
+    ((pathType.length === 0 || project.length === 0 || artifact.length === 0) &&
+      !newInputUrlPath)
+  ) {
+    inputsDispatch({
+      type: removeNewItemObj
+    })
+    inputsDispatch({
+      type: setPathPlaceholder,
+      payload: ''
+    })
+    inputsDispatch({
+      type: setNewInputUrl,
+      payload: ''
+    })
+
+    return inputsDispatch({
+      type: setAddNewItem,
+      payload: false
+    })
+  }
 
   if (newName) {
     delete currentDataObj[selectedItem.name]
@@ -231,18 +266,19 @@ export const handleInputPathTypeChange = (
   currentProject
 ) => {
   if (
-    pathType === AZURE_STORAGE_INPUT_PATH_SCHEME ||
-    pathType === GOOGLE_STORAGE_INPUT_PATH_SCHEME ||
-    pathType === HTTP_STORAGE_INPUT_PATH_SCHEME ||
-    pathType === HTTPS_STORAGE_INPUT_PATH_SCHEME ||
-    pathType === S3_INPUT_PATH_SCHEME ||
-    pathType === V3IO_INPUT_PATH_SCHEME
+    newInputDefaultPathProject.length > 0 &&
+    (pathType === AZURE_STORAGE_INPUT_PATH_SCHEME ||
+      pathType === GOOGLE_STORAGE_INPUT_PATH_SCHEME ||
+      pathType === HTTP_STORAGE_INPUT_PATH_SCHEME ||
+      pathType === HTTPS_STORAGE_INPUT_PATH_SCHEME ||
+      pathType === S3_INPUT_PATH_SCHEME ||
+      pathType === V3IO_INPUT_PATH_SCHEME)
   ) {
     inputsDispatch({
       type: inputsActions.SET_NEW_INPUT_DEFAULT_PATH_PROJECT,
       payload: ''
     })
-  } else {
+  } else if (newInputDefaultPathProject.length === 0) {
     inputsDispatch({
       type: inputsActions.SET_NEW_INPUT_DEFAULT_PATH_PROJECT,
       payload: `${currentProject}/`
