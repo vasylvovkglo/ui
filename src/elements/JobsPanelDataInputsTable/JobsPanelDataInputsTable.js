@@ -7,12 +7,15 @@ import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import JobsPanelTableAddItemRow from '../JobsPanelTableAddItemRow/JobsPanelTableAddItemRow'
 import JobsPanelTable from '../JobsPanelTable/JobsPanelTable'
 import Combobox from '../../common/Combobox/Combobox'
-
 import panelData from '../../components/JobsPanel/panelData'
 import { inputsActions } from '../../components/JobsPanelDataInputs/jobsPanelDataInputsReducer'
+import {
+  HTTP_STORAGE_INPUT_PATH_SCHEME,
+  HTTPS_STORAGE_INPUT_PATH_SCHEME,
+  MLRUN_STORAGE_INPUT_PATH_SCHEME
+} from '../../components/JobsPanelDataInputs/jobsPanelDataInputs.util'
 
 import { ReactComponent as Plus } from '../../images/plus.svg'
-import { MLRUN_STORAGE_INPUT_PATH_SCHEME } from '../../components/JobsPanelDataInputs/jobsPanelDataInputs.util'
 
 export const JobsPanelDataInputsTable = ({
   comboboxMatchesList,
@@ -52,6 +55,40 @@ export const JobsPanelDataInputsTable = ({
     }
   }, [handleDocumentClick, jobsPanelRef])
 
+  const handleSetSelectedItem = selectedInput => {
+    if (typeof selectedInput.data.path === 'object') {
+      selectedInput.data.name = selectedInput.newDataInputName
+    } else {
+      const pathType = selectedInput.data.path.replace(/:\/\/.*$/g, '://')
+      if (
+        pathType === MLRUN_STORAGE_INPUT_PATH_SCHEME ||
+        pathType === HTTP_STORAGE_INPUT_PATH_SCHEME ||
+        pathType === HTTPS_STORAGE_INPUT_PATH_SCHEME
+      ) {
+        selectedInput.data.path = {
+          pathType: pathType,
+          project: selectedInput.data.path.split('://')[1].split('/')[0] || '',
+          artifact: selectedInput.data.path.split('://')[1].split('/')[1] || ''
+        }
+        selectedInput.selectedInputUrlPath = ''
+      } else {
+        selectedInput.selectedInputUrlPath = selectedInput.data.path.split(
+          '://'
+        )[1]
+        selectedInput.data.path = {
+          pathType: pathType,
+          project: '',
+          artifact: ''
+        }
+      }
+    }
+
+    inputsDispatch({
+      type: inputsActions.SET_SELECTED_INPUT,
+      payload: selectedInput
+    })
+  }
+
   return (
     <JobsPanelTable
       addNewItem={inputsState.addNewInput}
@@ -60,9 +97,6 @@ export const JobsPanelDataInputsTable = ({
       handleDeleteItems={handleDeleteItems}
       handleEditItems={handleEditItems}
       headers={panelData['data-inputs']['table-headers']}
-      inputOnChange={path => {
-        handlePathChange(path)
-      }}
       inputsDispatch={inputsDispatch}
       inputsState={inputsState}
       match={match}
@@ -70,21 +104,7 @@ export const JobsPanelDataInputsTable = ({
       section="data-inputs"
       selectDropdownList={comboboxSelectList}
       selectedItem={inputsState.selectedDataInput}
-      selectOnChange={path => {
-        handlePathTypeChange(path)
-      }}
-      setSelectedItem={selectedInput =>
-        inputsDispatch({
-          type: inputsActions.SET_SELECTED_INPUT,
-          payload: selectedInput
-        })
-      }
-      setInputPlaceholder={placeholder =>
-        inputsDispatch({
-          type: inputsActions.SET_PATH_PLACEHOLDER,
-          payload: placeholder
-        })
-      }
+      setSelectedItem={handleSetSelectedItem}
     >
       {inputsState.addNewInput ? (
         <div className="table__row-add-item">

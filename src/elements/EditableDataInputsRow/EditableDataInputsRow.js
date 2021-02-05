@@ -5,31 +5,33 @@ import classnames from 'classnames'
 import Input from '../../common/Input/Input'
 import Combobox from '../../common/Combobox/Combobox'
 
-import { inputsActions } from '../../components/JobsPanelDataInputs/jobsPanelDataInputsReducer'
-
 import { ReactComponent as Checkmark } from '../../images/checkmark.svg'
+import { inputsActions } from '../../components/JobsPanelDataInputs/jobsPanelDataInputsReducer'
+import {
+  handleSelectedInputPathChange,
+  handleSelectedInputPathTypeChange
+} from './editableDataInputsRow.utils'
 
 const EditableDataInputsRow = ({
   handleEdit,
-  inputOnChange,
   inputsDispatch,
   inputsState,
+  match,
   matches,
   selectDropdownList,
   selectedDataInput,
-  selectOnChange,
   setEditItem,
-  setInputPlaceholder,
   setSelectedDataInput
 }) => {
-  const [previousInputValueState, setPreviousInputValueState] = useState('')
+  const [previousInputName, setPreviousInputName] = useState('')
   const [inputPathDefaultValue, setInputPathDefaultValue] = useState('')
-  const [selectedInputValue, setSelectedInputValue] = useState(null)
-  const [newInputPathState, setNewInputPathState] = useState(null)
-  const [inputName, setInputName] = useState(selectedDataInput.data.name)
+  const [selectedSelectValue, setSelectedSelectValue] = useState({
+    id: '',
+    className: '',
+    label: ''
+  })
   const [isEmptyValue, setIsEmptyValue] = useState({ name: false, path: false })
   const tableRowRef = useRef(null)
-
   const inputNameClassNames = classnames(
     'input',
     isEmptyValue.name && 'input_required'
@@ -40,68 +42,74 @@ const EditableDataInputsRow = ({
   )
 
   useEffect(() => {
-    const value = selectDropdownList.filter(
-      item => item.id === selectedDataInput.data.path.split('://')[0] + '://'
-    )[0]
-
-    setInputPathDefaultValue(selectedDataInput.data.path.split('://')[1])
-    setSelectedInputValue(value)
-    setNewInputPathState({ ...inputsState.newInput.path })
+    if (inputsState.newInputUrlPath.length > 0) {
+      setInputPathDefaultValue(inputsState.newInputUrlPath)
+    } else {
+      if (selectedDataInput.data.path.artifact.length > 0) {
+        setInputPathDefaultValue(
+          `${inputsState.selectedDataInput.data.path.project}/${inputsState.selectedDataInput.data.path.artifact}`
+        )
+      } else if (
+        inputsState.selectedDataInput.selectedInputUrlPath.length > 0
+      ) {
+        setInputPathDefaultValue(
+          inputsState.selectedDataInput.selectedInputUrlPath
+        )
+      }
+    }
   }, [
-    inputsState.newInput.path,
-    selectDropdownList,
-    selectedDataInput.data.path
+    inputsState.newInputUrlPath,
+    inputsState.selectedDataInput.data.path.artifact,
+    inputsState.selectedDataInput.data.path.project,
+    inputsState.selectedDataInput.selectedInputUrlPath,
+    selectedDataInput.data.path.artifact.length
   ])
 
   useEffect(() => {
-    if (selectedInputValue) {
-      if (!inputsState.newInput.name) {
-        inputsDispatch({
-          type: inputsActions.SET_NEW_INPUT_NAME,
-          payload: selectedDataInput.data.name
-        })
-      }
-      if (!inputsState.newInput.path.pathType) {
-        inputsDispatch({
-          type: inputsActions.SET_NEW_INPUT_PATH,
-          payload: {
-            ...newInputPathState,
-            pathType: selectedInputValue.id
-          }
-        })
+    if (selectedSelectValue.label.length === 0) {
+      const selectValue = selectDropdownList.filter(
+        item => item.id === selectedDataInput.data.path.pathType
+      )[0]
+      if (selectValue) {
+        setSelectedSelectValue(selectValue)
       }
     }
   }, [
-    inputsDispatch,
-    inputsState.newInput.name,
-    inputsState.newInput.path.pathType,
-    newInputPathState,
-    selectedDataInput.data.name,
-    selectedInputValue
+    selectDropdownList,
+    selectedDataInput.data.path.pathType,
+    selectedSelectValue.label.length
   ])
 
-  const handleEditInput = useCallback(() => {
-    if (selectedDataInput) {
-      setPreviousInputValueState(selectedDataInput.data.path)
+  useEffect(() => {
+    if (previousInputName.length === 0) {
+      setPreviousInputName(inputsState.selectedDataInput.data.name)
     }
-  }, [selectedDataInput])
+  }, [inputsState.selectedDataInput.data.name, previousInputName.length])
 
   const handleDocumentClick = useCallback(
     event => {
-      if (!tableRowRef.current.contains(event.target)) {
+      if (!tableRowRef.current?.contains(event.target)) {
         setSelectedDataInput({
           ...selectedDataInput,
-          data: { ...selectedDataInput.data, path: previousInputValueState }
+          data: {
+            ...selectedDataInput.data,
+            name: previousInputName
+          }
         })
+        handleEdit()
         setEditItem(false)
-        setInputPlaceholder('')
+        inputsDispatch({
+          type: inputsActions.SET_PATH_PLACEHOLDER,
+          payload: ''
+        })
       }
     },
     [
-      previousInputValueState,
+      handleEdit,
+      inputsDispatch,
+      previousInputName,
       selectedDataInput,
       setEditItem,
-      setInputPlaceholder,
       setSelectedDataInput
     ]
   )
@@ -116,26 +124,35 @@ const EditableDataInputsRow = ({
     }
   }, [handleDocumentClick, tableRowRef])
 
-  const handleInputsEdit = () => {
+  const handleInputsEdit = data => {
     setIsEmptyValue({ path: false, name: false })
-    if (!inputName) {
+
+    if (!selectedDataInput.data.path.name) {
       setIsEmptyValue(prevState => ({ ...prevState, name: true }))
     }
-    if (!inputPathDefaultValue) {
+
+    if (
+      !selectedDataInput.data.path.project &&
+      !selectedDataInput.selectedInputUrlPath
+    ) {
       setIsEmptyValue(prevState => ({ ...prevState, path: true }))
     }
-    if (inputName && inputPathDefaultValue) {
-      handleEdit(selectedDataInput, true)
-      setInputPlaceholder('')
+
+    if (
+      selectedDataInput.data.name &&
+      (selectedDataInput.data.path.project ||
+        inputsState.selectedDataInput.selectedInputUrlPath)
+    ) {
+      handleEdit(data, true)
+      inputsDispatch({
+        type: inputsActions.SET_PATH_PLACEHOLDER,
+        payload: ''
+      })
     }
   }
 
   return (
-    <div
-      className="table__row edit-row"
-      onClick={handleEditInput}
-      ref={tableRowRef}
-    >
+    <div className="table__row edit-row" ref={tableRowRef}>
       {selectedDataInput.isDefault ? (
         <div className="table__cell table__cell_disabled">
           <div className="data-ellipsis">{selectedDataInput.data.name}</div>
@@ -145,14 +162,13 @@ const EditableDataInputsRow = ({
           <Input
             className={inputNameClassNames}
             onChange={name => {
-              setInputName(name)
               setSelectedDataInput({
                 ...selectedDataInput,
                 newDataInputName: name
               })
             }}
             type="text"
-            value={inputName}
+            value={selectedDataInput.data.name}
           />
         </div>
       )}
@@ -161,22 +177,29 @@ const EditableDataInputsRow = ({
           <Combobox
             matches={matches}
             inputDefaultValue={inputPathDefaultValue}
-            inputOnChange={inputOnChange}
+            inputOnChange={value =>
+              handleSelectedInputPathChange(inputsDispatch, inputsState, value)
+            }
             inputPlaceholder={inputsState.pathPlaceholder}
             selectDropdownList={selectDropdownList}
-            selectOnChange={selectOnChange}
-            selectedInputValue={selectedInputValue}
-            setDataChanges={data =>
-              setSelectedDataInput({
-                ...selectedDataInput,
-                data: { ...selectedDataInput.data, path: data }
-              })
+            selectOnChange={pathType =>
+              handleSelectedInputPathTypeChange(
+                inputsDispatch,
+                pathType,
+                inputsState.pathPlaceholder,
+                inputsState.newInputDefaultPathProject,
+                match.params.projectName
+              )
             }
+            selectDefaultValue={selectedSelectValue}
           />
         </div>
       </div>
       <div className="table__cell table__cell-actions">
-        <button className="apply-edit-btn" onClick={handleInputsEdit}>
+        <button
+          className="apply-edit-btn"
+          onClick={() => handleInputsEdit(selectedDataInput)}
+        >
           <Checkmark />
         </button>
       </div>
@@ -185,30 +208,24 @@ const EditableDataInputsRow = ({
 }
 
 EditableDataInputsRow.defaultProps = {
-  inputOnChange: () => {},
   handleEditInput: () => {},
   inputsDispatch: () => {},
   inputsState: null,
   matches: [],
   selectDropdownList: [],
-  selectOnChange: () => {},
-  setEditItem: () => {},
-  setInputPlaceholder: () => {}
+  setEditItem: () => {}
 }
 
 EditableDataInputsRow.propTypes = {
   handleEdit: PropTypes.func.isRequired,
   handleEditInput: PropTypes.func,
-  inputOnChange: PropTypes.func,
   inputsDispatch: PropTypes.func,
   inputsState: PropTypes.shape({}),
   matches: PropTypes.arrayOf(PropTypes.shape({})),
   selectDropdownList: PropTypes.arrayOf(PropTypes.shape({})),
   selectedDataInput: PropTypes.shape({}).isRequired,
   setSelectedDataInput: PropTypes.func.isRequired,
-  selectOnChange: PropTypes.func,
-  setEditItem: PropTypes.func,
-  setInputPlaceholder: PropTypes.func
+  setEditItem: PropTypes.func
 }
 
 export default EditableDataInputsRow

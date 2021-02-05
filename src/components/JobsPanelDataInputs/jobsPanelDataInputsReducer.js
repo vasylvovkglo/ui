@@ -16,7 +16,20 @@ export const initialState = {
   newInputUrlPath: '',
   pathPlaceholder: '',
   projects: [],
-  selectedDataInput: {}
+  selectedDataInput: {
+    isDefault: false,
+    data: {
+      name: '',
+      path: {
+        pathType: '',
+        project: '',
+        artifact: ''
+      }
+    },
+    selectedInputUrlPath: ''
+  },
+  selectedInputProjectPathEntered: false,
+  selectedInputArtifactPathEntered: false
 }
 
 export const inputsActions = {
@@ -32,7 +45,15 @@ export const inputsActions = {
   SET_NEW_INPUT_URL_PATH: 'SET_NEW_INPUT_URL_PATH',
   SET_PATH_PLACEHOLDER: 'SET_PATH_PLACEHOLDER',
   SET_PROJECTS: 'SET_PROJECTS',
-  SET_SELECTED_INPUT: 'SET_SELECTED_INPUT'
+  SET_SELECTED_INPUT: 'SET_SELECTED_INPUT',
+  SET_SELECTED_INPUT_NAME: 'SET_SELECTED_INPUT_NAME',
+  SET_SELECTED_NEW_INPUT_NAME: 'SET_SELECTED_NEW_INPUT_NAME',
+  SET_SELECTED_INPUT_PATH: 'SET_SELECTED_INPUT_PATH',
+  SET_SELECTED_INPUT_URL_PATH: 'SET_SELECTED_INPUT_URL_PATH',
+  SET_SELECTED_INPUT_ARTIFACT_PATH_ENTERED:
+    'SET_SELECTED_INPUT_ARTIFACT_PATH_ENTERED',
+  SET_SELECTED_INPUT_PROJECT_PATH_ENTERED:
+    'SET_SELECTED_INPUT_PROJECT_PATH_ENTERED'
 }
 
 export const jobsPanelDataInputsReducer = (state, { type, payload }) => {
@@ -114,6 +135,54 @@ export const jobsPanelDataInputsReducer = (state, { type, payload }) => {
       return {
         ...state,
         selectedDataInput: payload
+      }
+    case inputsActions.SET_SELECTED_INPUT_NAME:
+      return {
+        ...state,
+        selectedDataInput: {
+          ...state.selectedDataInput,
+          data: {
+            ...state.selectedDataInput.data,
+            name: payload
+          }
+        }
+      }
+    case inputsActions.SET_SELECTED_NEW_INPUT_NAME:
+      return {
+        ...state,
+        selectedDataInput: {
+          ...state.selectedDataInput,
+          newDataInputName: payload
+        }
+      }
+    case inputsActions.SET_SELECTED_INPUT_PATH:
+      return {
+        ...state,
+        selectedDataInput: {
+          ...state.selectedDataInput,
+          data: {
+            ...state.selectedDataInput.data,
+            path: payload
+          }
+        }
+      }
+    case inputsActions.SET_SELECTED_INPUT_URL_PATH:
+      return {
+        ...state,
+        selectedDataInput: {
+          ...state.selectedDataInput,
+          selectedInputUrlPath: payload
+        }
+      }
+    case inputsActions.SET_SELECTED_INPUT_ARTIFACT_PATH_ENTERED:
+      return {
+        ...state,
+        selectedInputArtifactPathEntered: payload
+      }
+    case inputsActions.SET_SELECTED_INPUT_PROJECT_PATH_ENTERED:
+      return {
+        ...state,
+        selectedInputProjectPathEntered: payload
       }
     default:
       return state

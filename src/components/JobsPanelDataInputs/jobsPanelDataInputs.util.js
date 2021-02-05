@@ -16,7 +16,9 @@ export const handleAddItem = (
   setPathPlaceholder,
   newInputUrlPath,
   setNewInputUrl,
-  setComboboxMatches
+  setComboboxMatches,
+  setProjectEntered,
+  setArtifactEntered
 ) => {
   if (
     newItemObj.name.length === 0 ||
@@ -96,6 +98,18 @@ export const handleAddItem = (
     type: setComboboxMatches,
     payload: []
   })
+  inputsDispatch({
+    type: setProjectEntered,
+    payload: false
+  })
+  inputsDispatch({
+    type: setArtifactEntered,
+    payload: false
+  })
+  inputsDispatch({
+    type: setNewInputUrl,
+    payload: ''
+  })
   setNewJobData({
     ...newJobData,
     [newItemObj.name]:
@@ -114,58 +128,88 @@ export const handleEdit = (
   inputsDispatch,
   newName,
   panelDispatch,
-  removeSelectedItem,
+  setSelectedItem,
   selectedItem,
   setCurrentPanelData,
   setCurrentTableData,
   setPreviousPanelData,
-  newItemObj,
-  newInputUrlPath,
-  removeNewItemObj,
-  setPathPlaceholder,
-  setNewInputUrl,
-  setAddNewItem
+  setPathPlaceholder
 ) => {
   const currentDataObj = { ...currentPanelData }
-  const { pathType, project, artifact } = newItemObj.path
+  const { pathType, project, artifact } = selectedItem.data.path
 
   if (
-    selectedItem.name.length === 0 ||
+    selectedItem.data.name.length === 0 ||
     ((pathType.length === 0 || project.length === 0 || artifact.length === 0) &&
-      !newInputUrlPath)
+      !selectedItem.selectedInputUrlPath)
   ) {
-    inputsDispatch({
-      type: removeNewItemObj
-    })
     inputsDispatch({
       type: setPathPlaceholder,
       payload: ''
     })
     inputsDispatch({
-      type: setNewInputUrl,
-      payload: ''
+      type: setSelectedItem,
+      payload: {
+        isDefault: false,
+        data: {
+          name: '',
+          path: {
+            pathType: '',
+            project: '',
+            artifact: ''
+          }
+        },
+        selectedInputUrlPath: ''
+      }
     })
 
-    return inputsDispatch({
-      type: setAddNewItem,
-      payload: false
+    const dataArray = currentTableData.map(dataItem => {
+      if (dataItem.data.name === selectedItem.data.name) {
+        dataItem.data.name = newName || selectedItem.data.name
+        dataItem.data.path = currentPanelData[selectedItem.data.name]
+      }
+
+      return dataItem
+    })
+
+    return panelDispatch({
+      type: setCurrentTableData,
+      payload: dataArray
     })
   }
 
   if (newName) {
-    delete currentDataObj[selectedItem.name]
-    currentDataObj[newName] = selectedItem.path
+    delete currentDataObj[selectedItem.data.name]
+    currentDataObj[newName] = selectedItem.data.path
   } else {
-    currentDataObj[selectedItem.name] = selectedItem.path
+    currentDataObj[selectedItem.data.name] = selectedItem.data.path
   }
 
-  setCurrentPanelData({ ...currentDataObj })
+  if (selectedItem.selectedInputUrlPath.length > 0) {
+    setCurrentPanelData({
+      [selectedItem.data.name]: pathType + selectedItem.selectedInputUrlPath
+    })
+  } else if (artifact) {
+    setCurrentPanelData({
+      [selectedItem.data.name]: pathType + project + '/' + artifact
+    })
+  } else {
+    setCurrentPanelData({
+      [selectedItem.data.name]: currentPanelData[selectedItem.data.name]
+    })
+  }
 
   const newDataArray = currentTableData.map(dataItem => {
-    if (dataItem.data.name === selectedItem.name) {
-      dataItem.data.name = newName || selectedItem.name
-      dataItem.data.path = selectedItem.path
+    if (dataItem.data.name === selectedItem.data.name) {
+      dataItem.data.name = newName || selectedItem.data.name
+
+      if (project.length === 0) {
+        dataItem.data.path = pathType + selectedItem.selectedInputUrlPath
+      } else {
+        dataItem.data.path = pathType + project + '/' + artifact
+      }
     }
+
     return dataItem
   })
 
@@ -178,8 +222,19 @@ export const handleEdit = (
     payload: newDataArray
   })
   inputsDispatch({
-    type: removeSelectedItem,
-    payload: {}
+    type: setSelectedItem,
+    payload: {
+      isDefault: false,
+      data: {
+        name: '',
+        path: {
+          pathType: '',
+          project: '',
+          artifact: ''
+        }
+      },
+      selectedInputUrlPath: ''
+    }
   })
 }
 
@@ -197,6 +252,7 @@ export const handleDelete = (
   delete newInputs[selectedItem.data.name]
 
   setCurrentPanelData({ ...newInputs })
+
   panelDispatch({
     type: setPreviousPanelData,
     payload: previousPanelData.filter(
@@ -259,7 +315,7 @@ export const V3IO_INPUT_PATH_SCHEME = 'v3io://'
 
 export const handleInputPathTypeChange = (
   inputsDispatch,
-  newInput,
+  // newInput,
   pathType,
   pathPlaceholder,
   newInputDefaultPathProject,
@@ -312,13 +368,13 @@ export const handleInputPathTypeChange = (
 }
 
 export const handleInputPathChange = (inputsDispatch, inputsState, path) => {
-  const pathScheme = inputsState.newInput.path.pathType
-
   if (
-    pathScheme === AZURE_STORAGE_INPUT_PATH_SCHEME ||
-    pathScheme === GOOGLE_STORAGE_INPUT_PATH_SCHEME ||
-    pathScheme === S3_INPUT_PATH_SCHEME ||
-    pathScheme === V3IO_INPUT_PATH_SCHEME
+    [
+      AZURE_STORAGE_INPUT_PATH_SCHEME,
+      GOOGLE_STORAGE_INPUT_PATH_SCHEME,
+      S3_INPUT_PATH_SCHEME,
+      V3IO_INPUT_PATH_SCHEME
+    ].includes(inputsState.newInput.path.pathType)
   ) {
     return inputsDispatch({
       type: inputsActions.SET_NEW_INPUT_URL_PATH,
@@ -367,5 +423,19 @@ export const handleInputPathChange = (inputsDispatch, inputsState, path) => {
   inputsDispatch({
     type: inputsActions.SET_NEW_INPUT_ARTIFACT_PATH_ENTERED,
     payload: !!artifactIsEntered
+  })
+}
+
+export const setProjectsList = (inputsDispatch, match, projectStore) => {
+  const projectsList = projectStore.projects.map(project => ({
+    label:
+      project.metadata.name === match.params.projectName
+        ? 'Current project'
+        : project.metadata.name,
+    id: project.metadata.name
+  }))
+  inputsDispatch({
+    type: inputsActions.SET_PROJECTS,
+    payload: projectsList
   })
 }

@@ -16,7 +16,6 @@ const JobsPanelTableView = ({
   handleDelete,
   handleEdit,
   headers,
-  inputOnChange,
   inputsDispatch,
   inputsState,
   match,
@@ -24,9 +23,7 @@ const JobsPanelTableView = ({
   section,
   selectDropdownList,
   selectedItem,
-  selectOnChange,
   setEditItem,
-  setInputPlaceholder,
   setSelectedItem
 }) => {
   return (
@@ -54,16 +51,14 @@ const JobsPanelTableView = ({
           return section === 'data-inputs' ? (
             <EditableDataInputsRow
               handleEdit={handleEdit}
-              inputOnChange={inputOnChange}
               inputsDispatch={inputsDispatch}
               inputsState={inputsState}
               key={index}
+              match={match}
               matches={matches}
               selectDropdownList={selectDropdownList}
               selectedDataInput={selectedItem}
-              selectOnChange={selectOnChange}
               setEditItem={setEditItem}
-              setInputPlaceholder={setInputPlaceholder}
               setSelectedDataInput={setSelectedItem}
             />
           ) : section.includes('advanced') ? (
@@ -103,14 +98,11 @@ const JobsPanelTableView = ({
 
 JobsPanelTableView.defaultProps = {
   handleEditInput: () => {},
-  inputOnChange: () => {},
   inputsDispatch: () => {},
   inputsState: null,
   matches: [],
   selectDropdownList: [],
-  selectOnChange: () => {},
-  setEditItem: () => {},
-  setInputPlaceholder: () => {}
+  setEditItem: () => {}
 }
 
 JobsPanelTableView.propTypes = {
@@ -124,7 +116,6 @@ JobsPanelTableView.propTypes = {
   handleEdit: PropTypes.func.isRequired,
   handleEditInput: PropTypes.func,
   headers: PropTypes.array.isRequired,
-  inputOnChange: PropTypes.func,
   inputsDispatch: PropTypes.func,
   inputsState: PropTypes.shape({}),
   match: PropTypes.shape({}).isRequired,
@@ -132,9 +123,7 @@ JobsPanelTableView.propTypes = {
   section: PropTypes.string.isRequired,
   selectDropdownList: PropTypes.arrayOf(PropTypes.shape({})),
   selectedItem: PropTypes.shape({}).isRequired,
-  selectOnChange: PropTypes.func,
   setEditItem: PropTypes.func,
-  setInputPlaceholder: PropTypes.func,
   setSelectedItem: PropTypes.func.isRequired
 }
 

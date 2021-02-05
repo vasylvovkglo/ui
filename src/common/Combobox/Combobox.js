@@ -12,10 +12,9 @@ const Combobox = ({
   inputOnChange,
   matches,
   selectDropdownList,
-  selectedInputValue,
+  selectDefaultValue,
   selectOnChange,
-  selectPlaceholder,
-  setDataChanges
+  selectPlaceholder
 }) => {
   const [inputValue, setInputValue] = useState('')
   const [selectValue, setSelectValue] = useState({
@@ -35,15 +34,10 @@ const Combobox = ({
   const inputRef = React.createRef()
 
   useEffect(() => {
-    if (selectedInputValue) {
-      setSelectValue(selectedInputValue)
-
-      setDropdownStyle({
-        left: 0,
-        paddingTop: '10px'
-      })
+    if (selectDefaultValue) {
+      setSelectValue(selectDefaultValue)
     }
-  }, [selectedInputValue])
+  }, [selectDefaultValue])
 
   useEffect(() => {
     if (
@@ -110,10 +104,6 @@ const Combobox = ({
       setInputValue(inputValueItems.join('/'))
     }
 
-    if (selectedInputValue) {
-      setDataChanges(selectValue.id + inputValueItems.join('/'))
-    }
-
     setShowMatchesDropdown(false)
     inputOnChange(inputValueItems.join('/'))
     inputRef.current.focus()
@@ -126,10 +116,6 @@ const Combobox = ({
 
     if (selectValue.id.length > 0) {
       setInputValue('')
-    }
-
-    if (selectedInputValue) {
-      setDataChanges(option.id + inputValue)
     }
 
     setSelectValue(option)
@@ -163,8 +149,6 @@ const Combobox = ({
   const handleInputOnChange = event => {
     const target = event.target
 
-    selectOnChange(selectValue.id)
-
     inputOnChange(target.value)
 
     setDropdownStyle({
@@ -174,10 +158,6 @@ const Combobox = ({
 
     if (searchIsFocused) {
       setSearchIsFocused(false)
-    }
-
-    if (selectedInputValue) {
-      setDataChanges(selectValue.id + target.value)
     }
 
     setInputValue(target.value)
@@ -225,8 +205,8 @@ Combobox.defaultProps = {
   inputDefaultValue: '',
   inputPlaceholder: '',
   selectedInputValue: null,
-  selectPlaceholder: '',
-  setDataChanges: () => {}
+  selectDefaultValue: null,
+  selectPlaceholder: ''
 }
 
 Combobox.propTypes = {
@@ -238,8 +218,8 @@ Combobox.propTypes = {
   selectDropdownList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   selectedInputValue: PropTypes.shape({}),
   selectOnChange: PropTypes.func.isRequired,
-  selectPlaceholder: PropTypes.string,
-  setDataChanges: PropTypes.func
+  selectDefaultValue: PropTypes.shape({}),
+  selectPlaceholder: PropTypes.string
 }
 
 export default Combobox

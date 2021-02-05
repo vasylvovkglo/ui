@@ -17,7 +17,6 @@ const JobsPanelTable = ({
   handleEditItems,
   handleSetSelectedVolume,
   headers,
-  inputOnChange,
   inputsDispatch,
   inputsState,
   match,
@@ -25,7 +24,6 @@ const JobsPanelTable = ({
   section,
   selectDropdownList,
   selectedItem,
-  selectOnChange,
   setInputPlaceholder,
   setSelectedItem
 }) => {
@@ -90,7 +88,6 @@ const JobsPanelTable = ({
       handleDelete={handleDelete}
       handleEdit={handleEdit}
       headers={headers}
-      inputOnChange={inputOnChange}
       inputsDispatch={inputsDispatch}
       inputsState={inputsState}
       match={match}
@@ -98,7 +95,6 @@ const JobsPanelTable = ({
       section={section}
       selectDropdownList={selectDropdownList}
       selectedItem={selectedItem}
-      selectOnChange={selectOnChange}
       setEditItem={setEditItem}
       setInputPlaceholder={setInputPlaceholder}
       setSelectedItem={setSelectedItem}
@@ -111,12 +107,10 @@ JobsPanelTable.defaultProps = {
   headers: [],
   handleDeleteItems: null,
   handleSetSelectedVolume: null,
-  inputOnChange: () => {},
   inputsDispatch: () => {},
   inputsState: null,
   matches: [],
   selectDropdownList: [],
-  selectOnChange: () => {},
   setInputPlaceholder: () => {}
 }
 
@@ -131,7 +125,6 @@ JobsPanelTable.propTypes = {
   handleEditItems: PropTypes.func.isRequired,
   handleSetSelectedVolume: PropTypes.func,
   headers: PropTypes.arrayOf(PropTypes.shape({})),
-  inputOnChange: PropTypes.func,
   inputsDispatch: PropTypes.func,
   inputsState: PropTypes.shape({}),
   match: PropTypes.shape({}).isRequired,
@@ -139,7 +132,6 @@ JobsPanelTable.propTypes = {
   section: PropTypes.string.isRequired,
   selectDropdownList: PropTypes.arrayOf(PropTypes.shape({})),
   selectedItem: PropTypes.shape({}).isRequired,
-  selectOnChange: PropTypes.func,
   setInputPlaceholder: PropTypes.func,
   setSelectedItem: PropTypes.func.isRequired
 }
