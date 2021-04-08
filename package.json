@@ -19,7 +19,6 @@
     "js-base64": "^2.5.2",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "pm2": "^4.5.6",
     "pretty-bytes": "^5.3.0",
     "prismjs": "^1.19.0",
     "prop-types": "^15.7.2",
@@ -49,7 +48,10 @@
     "docker": "docker build -t ${MLRUN_DOCKER_REGISTRY}${MLRUN_DOCKER_REPO:-mlrun}/mlrun-ui:${MLRUN_DOCKER_TAG:-latest} --build-arg COMMIT_HASH=\"`git rev-parse --short HEAD`\" --build-arg DATE=\"`date -u`\" -f Dockerfile .",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "testui": "export NODE_ENV=development && export BABEL_ENV=development && cucumber-js --require-module @babel/register --require-module @babel/polyfill -f json:reports/cucumber_report.json"
+    "test:ui": "export NODE_ENV=development && export BABEL_ENV=development && cucumber-js --require-module @babel/register --require-module @babel/polyfill -f json:tests/reports/cucumber_report.json -f html:tests/reports/default_cucumber_report.html tests",
+    "report": "node tests/report.js",
+    "test:regression": "npm run test:ui; npm run report",
+    "start:regression": "concurrently \"npm:start\" \"npm:test:regression\""
   },
   "eslintConfig": {
     "extends": "react-app"

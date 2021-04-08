@@ -1,31 +1,37 @@
-import { By } from 'selenium-webdriver';
+import { By } from 'selenium-webdriver'
 
-module.exports = function (tableStructure) {
-    // console.log('debug: ', tableStructure);
-    var tableRoot = tableStructure['root'] ? tableStructure['root'] : '';
-    var headerRoot = tableStructure['header'] ? tableStructure['header']['root'] : '';
-    var bodyRoot = tableStructure['body'] ? tableStructure['body']['root'] : '';
-    var body__row = tableStructure['body'] ? tableStructure['body']['row']['root'] : false;
+module.exports = function(tableStructure) {
+  // console.log('debug: ', tableStructure);
+  var tableRoot = tableStructure['root'] ? tableStructure['root'] : ''
+  //   var headerRoot = tableStructure['header']
+  //     ? tableStructure['header']['root']
+  //     : ''
+  var bodyRoot = tableStructure['body'] ? tableStructure['body']['root'] : ''
+  var body__row = tableStructure['body']
+    ? tableStructure['body']['row']['root']
+    : false
 
-    var column_locator = tableRoot + ' ' + bodyRoot + ' ' +  body__row
-    var column_selectors = {}
-    var field_selectors = {}
+  var column_locator = tableRoot + ' ' + bodyRoot + ' ' + body__row
+  var column_selectors = {}
+  var field_selectors = {}
 
-    var fields = tableStructure['body']['row']['fields'];
-    for (const key in fields) {
-        column_selectors[key] = By.css(column_locator + ' ' + fields[key]);
-        field_selectors[key] = function (rowIndex) {
-            return By.css(column_locator + ':nth-of-type(' + rowIndex + ') ' + fields[key]);
-        }
+  var fields = tableStructure['body']['row']['fields']
+  for (const key in fields) {
+    column_selectors[key] = By.css(column_locator + ' ' + fields[key])
+    field_selectors[key] = function(rowIndex) {
+      return By.css(
+        column_locator + ':nth-of-type(' + rowIndex + ') ' + fields[key]
+      )
     }
-    return {
-        tableColumns: column_selectors,
-        tableFields: field_selectors
-    }
-};
+  }
+  return {
+    tableColumns: column_selectors,
+    tableFields: field_selectors
+  }
+}
 
 // examples table structures
-// 
+//
 // module.exports = TableComponent;
 // 'table' = {
 //     'root': '',
@@ -44,7 +50,7 @@ module.exports = function (tableStructure) {
 //                 'ml_functions': 'div.project-card__statistic div.project-data-card__statistics-item:nth-of-type(5) div.statistics_default',
 //                 'action_menu': 'div.project-card__actions-menu'
 //             }
-//         }       
+//         }
 //     }
 // }
 

@@ -2,6 +2,7 @@ Feature: MLRun Projects Page
 
     Testcases that verifies functionality on MLRun Projects Page
 
+    @sanity
     Scenario: Create new ML Project with description
         Given open url "http://localhost:3000"
         Then check "automation-test-name" value not in "name" column in "Projects_Table" table on "Projects" wizard
