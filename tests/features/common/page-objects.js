@@ -43,5 +43,7 @@ module.exports = {
   ML_Function_Info_Pane: infoPane['featuresInfoPane'],
   Delete_Function_Popup: interactivePopup['deleteFunction'],
   Create_ML_Function_Popup: interactivePopup['createMLFunctionPopup'],
-  Project_Settings_General_Tab: projectsSettings['generalTab']
+  Project_Settings_General_Tab: projectsSettings['generalTab'],
+  Change_Project_Owner_Popup: interactivePopup['changeProjectOwnerPopup'],
+  Project_Members_Popup: interactivePopup['projectMembersPopup']
 }

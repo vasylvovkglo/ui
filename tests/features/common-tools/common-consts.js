@@ -74,7 +74,8 @@ module.exports = {
   },
   Label_Hint: {
     New_Job_Volumes:
-      'Volumes that define data paths and the required information for accessing the data from the function'
+      'Volumes that define data paths and the required information for accessing the data from the function',
+    Members_Hint: 'Some of the members might be user groups'
   },
   Descriptions: {
     Archive_Project:
