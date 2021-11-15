@@ -12,7 +12,8 @@ import {
   generateInputGroup,
   generateNumberInputGroup,
   generateLabelGroup,
-  generateDropdownGroup
+  generateDropdownGroup,
+  generateCheckboxComponent
 } from '../../common-tools/common-tools'
 const { By } = require('selenium-webdriver')
 
@@ -777,15 +778,14 @@ module.exports = {
         'div.feature-set-panel div.accordion__container:nth-of-type(3) button.new-item-side-panel__expand-icon'
       ),
       // online group
-      Online_Checkbox: checkboxComponent({
-        root:
+      Online_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.accordion__body div.target-store__item:nth-of-type(1) span.checkbox',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: 'svg:not([class])'
-        }
-      }),
+          true,
+          false,
+          true
+        )
+      ),
       Online_Path_Input: inputGroup(
         generateInputGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(1) div.input-wrapper',
@@ -795,15 +795,14 @@ module.exports = {
         )
       ),
       // Offline group
-      Offline_Checkbox: checkboxComponent({
-        root:
+      Offline_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.accordion__body div.target-store__item:nth-of-type(2) span.checkbox',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: 'svg:not([class])'
-        }
-      }),
+          true,
+          false,
+          true
+        )
+      ),
       Offline_Path_Input: inputGroup(
         generateInputGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(2) div.input-wrapper',
@@ -812,45 +811,41 @@ module.exports = {
           true
         )
       ),
-      Offline_Partition_Checkbox: checkboxComponent({
-        root:
+      Offline_Partition_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(2) div.target-store__inputs-container span.checkbox',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: 'svg:not([class])'
-        }
-      }),
+          true,
+          false,
+          true
+        )
+      ),
       Offline_Partition_ShowHide_Link: By.css(
         '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .link'
       ),
-      Offline_Partition_By_Key_Checkbox: checkboxComponent({
-        root:
+      Offline_Partition_By_Key_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(1)',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
-      Offline_Partition_By_Time_Checkbox: checkboxComponent({
-        root:
+          true,
+          false,
+          false
+        )
+      ),
+      Offline_Partition_By_Time_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(2)',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
-      Offline_Partition_By_Columns_Checkbox: checkboxComponent({
-        root:
+          true,
+          false,
+          false
+        )
+      ),
+      Offline_Partition_By_Columns_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(3)',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
+          true,
+          false,
+          false
+        )
+      ),
       Offline_Partition_Distinct_Keys_Radiobutton: radiobuttonComponent({
         root:
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .radio-buttons-container .radio-buttons__content:nth-of-type(1)',
@@ -897,15 +892,14 @@ module.exports = {
         )
       ),
       // Other group
-      External_Offline_Checkbox: checkboxComponent({
-        root:
+      External_Offline_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.accordion__body div.target-store__item:nth-of-type(3) span.checkbox',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: 'svg:not([class])'
-        }
-      }),
+          true,
+          false,
+          true
+        )
+      ),
       File_Type_Dropdown: dropdownComponent(
         generateDropdownGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(3) div.select',
@@ -922,45 +916,41 @@ module.exports = {
           false
         )
       ),
-      External_Offline_Partition_Checkbox: checkboxComponent({
-        root:
+      External_Offline_Partition_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(3) div.target-store__inputs-container span.checkbox',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: 'svg:not([class])'
-        }
-      }),
+          true,
+          false,
+          true
+        )
+      ),
       External_Offline_Partition_ShowHide_Link: By.css(
         '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .link'
       ),
-      External_Offline_Partition_By_Key_Checkbox: checkboxComponent({
-        root:
+      External_Offline_Partition_By_Key_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(1)',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
-      External_Offline_Partition_By_Time_Checkbox: checkboxComponent({
-        root:
+          true,
+          false,
+          false
+        )
+      ),
+      External_Offline_Partition_By_Time_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(2)',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
-      External_Offline_Partition_By_Columns_Checkbox: checkboxComponent({
-        root:
+          true,
+          false,
+          false
+        )
+      ),
+      External_Offline_Partition_By_Columns_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(3)',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
+          true,
+          false,
+          false
+        )
+      ),
       External_Offline_Partition_Distinct_Keys_Radiobutton: radiobuttonComponent(
         {
           root:
@@ -1480,15 +1470,14 @@ module.exports = {
       Add_Model_Table_Row_Button: By.css(
         '.new-item-side-panel .accordion__container:nth-of-type(5) .topology .model-table .add-input.btn-add'
       ),
-      Model_Tracking_Checkbox: checkboxComponent({
-        root:
+      Model_Tracking_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.new-item-side-panel .accordion__container:nth-of-type(5) .topology .checkbox.topology__model-tracking',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
+          true,
+          false,
+          false
+        )
+      ),
       Secret_Runtime_Configuration_Table: commonTable(
         secretRuntimeConfigurationTable
       ),
@@ -1536,15 +1525,14 @@ module.exports = {
           true
         )
       ),
-      Parameters_Table_Value_Checkbox: checkboxComponent({
-        root:
+      Parameters_Table_Value_Checkbox: checkboxComponent(
+        generateCheckboxComponent(
           '.new-item-side-panel .accordion__container:nth-of-type(5) .advanced .panel-section__body .table__body .input-row-wrapper .checkbox',
-        elements: {
-          checkbox: 'svg[class]',
-          name: '',
-          icon: ''
-        }
-      }),
+          true,
+          false,
+          false
+        )
+      ),
       Add_Parameter_Table_Row_Button: By.css(
         '.new-item-side-panel .accordion__container:nth-of-type(5) .advanced .panel-section__body .table__body .parameters-table__btn.btn-add'
       ),
