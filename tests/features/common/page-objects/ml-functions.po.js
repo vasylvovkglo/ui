@@ -3,7 +3,10 @@ import inputGroup from '../components/input-group.component'
 import checkboxComponent from '../components/checkbox.component'
 import commonTable from '../components/table.component'
 import actionMenu from '../components/action-menu.component'
-import { generateInputGroup } from '../../common-tools/common-tools'
+import {
+  generateCheckboxGroup,
+  generateInputGroup
+} from '../../common-tools/common-tools'
 
 const actionMenuStructure = {
   root: 'div.actions-menu__container',
@@ -60,14 +63,14 @@ module.exports = {
         false
       )
     ),
-    Show_Untagged_Functions_Checkbox: checkboxComponent({
-      root: '.content .content__action-bar .checkbox.filters-checkbox',
-      elements: {
-        checkbox: 'svg[class]',
-        name: '',
-        icon: ''
-      }
-    }),
+    Show_Untagged_Functions_Checkbox: checkboxComponent(
+      generateCheckboxGroup(
+        '.content .content__action-bar .checkbox.filters-checkbox',
+        true,
+        false,
+        false
+      )
+    ),
     New_Function_Button: By.css('.content .new-function .data-ellipsis button'),
     Table_Refresh_Button: By.css(
       '.content .content__action-bar .actions .data-ellipsis:nth-of-type(1) button'

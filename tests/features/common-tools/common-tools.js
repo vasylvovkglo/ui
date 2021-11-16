@@ -16,18 +16,15 @@ module.exports = {
     hint = false,
     warning = false
   ) {
-    const structure = { elements: {} }
-    structure.root = root
+    const structure = { root, elements: {} }
     structure.elements.input = 'input'
     if (label) {
       structure.elements.label = 'label'
     }
     if (hint) {
-      if (typeof hint === 'string') {
-        structure.elements.hint = hint
-      } else {
-        structure.elements.hint = 'div.tip-container svg'
-      }
+      typeof hint === 'string'
+        ? (structure.elements.hint = hint)
+        : (structure.elements.hint = 'div.tip-container svg')
     }
     if (warning) {
       structure.elements.warningHint = 'div.input__warning svg'
@@ -43,8 +40,7 @@ module.exports = {
     hint = false,
     warning = false
   ) {
-    const structure = { elements: {} }
-    structure.root = root
+    const structure = { root, elements: {} }
     structure.elements.input = 'input'
     if (incDecBtn) {
       structure.elements.inc_btn = incDecBtn.inc_btn
@@ -53,17 +49,15 @@ module.exports = {
       structure.elements.inc_btn = '.range__buttons button[class*=increase]'
       structure.elements.dec_btn = '.range__buttons button[class*=decrease]'
     }
-    if (label) {
-      structure.elements.label = label
-    } else {
-      structure.elements.label = '.data-ellipsis'
-    }
+
+    label
+      ? (structure.elements.label = label)
+      : (structure.elements.label = '.data-ellipsis')
+
     if (hint) {
-      if (typeof hint === 'string') {
-        structure.elements.hint = hint
-      } else {
-        structure.elements.hint = 'div.tip-container svg'
-      }
+      typeof hint === 'string'
+        ? (structure.elements.hint = hint)
+        : (structure.elements.hint = 'div.tip-container svg')
     }
     if (warning) {
       structure.elements.warningHint = '.range__warning svg'
@@ -76,18 +70,14 @@ module.exports = {
     const structure = { elements: {} }
     structure.root = root
 
-    if (label) {
-      structure.elements.label = label
-    } else {
-      structure.elements.label = '.data-ellipsis'
-    }
+    label
+      ? (structure.elements.label = label)
+      : (structure.elements.label = '.data-ellipsis')
 
     if (hint) {
-      if (typeof hint === 'string') {
-        structure.elements.hint = hint
-      } else {
-        structure.elements.hint = 'div.tip-container svg'
-      }
+      typeof hint === 'string'
+        ? (structure.elements.hint = hint)
+        : (structure.elements.hint = 'div.tip-container svg')
     }
 
     return structure
@@ -102,23 +92,32 @@ module.exports = {
     structure.root = root
     structure.dropdownElements.label = '.data-ellipsis'
 
-    if (open_button) {
-      structure.dropdownElements.open_button = open_button
-    } else {
-      structure.dropdownElements.open_button = '.select__value'
-    }
+    open_button
+      ? (structure.dropdownElements.open_button = open_button)
+      : (structure.dropdownElements.open_button = '.select__value')
 
-    if (options) {
-      structure.dropdownElements.options = options
-    } else {
-      structure.dropdownElements.options = '.select__body .select__item'
-    }
+    options
+      ? (structure.dropdownElements.options = options)
+      : (structure.dropdownElements.options = '.select__body .select__item')
 
-    if (option_name) {
-      structure.dropdownElements.option_name = option_name
-    } else {
-      structure.dropdownElements.option_name = ''
-    }
+    option_name
+      ? (structure.dropdownElements.option_name = option_name)
+      : (structure.dropdownElements.option_name = '')
+
+    return structure
+  },
+  generateCheckboxGroup: function(root, checkbox, name, icon) {
+    const structure = { root, elements: {} }
+
+    checkbox
+      ? (structure.elements.checkbox = 'svg[class]')
+      : (structure.elements.checkbox = '')
+
+    name ? (structure.elements.name = name) : (structure.elements.name = '')
+
+    icon
+      ? (structure.elements.icon = 'svg:not([class])')
+      : (structure.elements.icon = '')
 
     return structure
   }
