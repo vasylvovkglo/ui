@@ -13,7 +13,7 @@ import {
   generateNumberInputGroup,
   generateLabelGroup,
   generateDropdownGroup,
-  generateCheckboxComponent
+  generateCheckboxGroup
 } from '../../common-tools/common-tools'
 const { By } = require('selenium-webdriver')
 
@@ -779,7 +779,7 @@ module.exports = {
       ),
       // online group
       Online_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.accordion__body div.target-store__item:nth-of-type(1) span.checkbox',
           true,
           false,
@@ -796,7 +796,7 @@ module.exports = {
       ),
       // Offline group
       Offline_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.accordion__body div.target-store__item:nth-of-type(2) span.checkbox',
           true,
           false,
@@ -812,7 +812,7 @@ module.exports = {
         )
       ),
       Offline_Partition_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(2) div.target-store__inputs-container span.checkbox',
           true,
           false,
@@ -823,7 +823,7 @@ module.exports = {
         '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .link'
       ),
       Offline_Partition_By_Key_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(1)',
           true,
           false,
@@ -831,7 +831,7 @@ module.exports = {
         )
       ),
       Offline_Partition_By_Time_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(2)',
           true,
           false,
@@ -839,7 +839,7 @@ module.exports = {
         )
       ),
       Offline_Partition_By_Columns_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(3)',
           true,
           false,
@@ -893,7 +893,7 @@ module.exports = {
       ),
       // Other group
       External_Offline_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.accordion__body div.target-store__item:nth-of-type(3) span.checkbox',
           true,
           false,
@@ -917,7 +917,7 @@ module.exports = {
         )
       ),
       External_Offline_Partition_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(3) div.target-store__inputs-container span.checkbox',
           true,
           false,
@@ -928,7 +928,7 @@ module.exports = {
         '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .link'
       ),
       External_Offline_Partition_By_Key_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(1)',
           true,
           false,
@@ -936,7 +936,7 @@ module.exports = {
         )
       ),
       External_Offline_Partition_By_Time_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(2)',
           true,
           false,
@@ -944,7 +944,7 @@ module.exports = {
         )
       ),
       External_Offline_Partition_By_Columns_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .partition-fields .partition-fields__checkbox-container .checkbox:nth-of-type(3)',
           true,
           false,
@@ -1471,7 +1471,7 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(5) .topology .model-table .add-input.btn-add'
       ),
       Model_Tracking_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.new-item-side-panel .accordion__container:nth-of-type(5) .topology .checkbox.topology__model-tracking',
           true,
           false,
@@ -1526,7 +1526,7 @@ module.exports = {
         )
       ),
       Parameters_Table_Value_Checkbox: checkboxComponent(
-        generateCheckboxComponent(
+        generateCheckboxGroup(
           '.new-item-side-panel .accordion__container:nth-of-type(5) .advanced .panel-section__body .table__body .input-row-wrapper .checkbox',
           true,
           false,

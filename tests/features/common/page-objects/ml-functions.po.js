@@ -4,7 +4,7 @@ import checkboxComponent from '../components/checkbox.component'
 import commonTable from '../components/table.component'
 import actionMenu from '../components/action-menu.component'
 import {
-  generateCheckboxComponent,
+  generateCheckboxGroup,
   generateInputGroup
 } from '../../common-tools/common-tools'
 
@@ -64,7 +64,7 @@ module.exports = {
       )
     ),
     Show_Untagged_Functions_Checkbox: checkboxComponent(
-      generateCheckboxComponent(
+      generateCheckboxGroup(
         '.content .content__action-bar .checkbox.filters-checkbox',
         true,
         false,

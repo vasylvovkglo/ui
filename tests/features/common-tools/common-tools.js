@@ -106,7 +106,7 @@ module.exports = {
 
     return structure
   },
-  generateCheckboxComponent: function(root, checkbox, name, icon) {
+  generateCheckboxGroup: function(root, checkbox, name, icon) {
     const structure = { root, elements: {} }
 
     checkbox
