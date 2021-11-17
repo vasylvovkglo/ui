@@ -12,6 +12,21 @@ module.exports = {
       'Analysis'
     ]
   },
+  Files_Info_Pane: {
+    Tab_List: ['Overview', 'Preview'],
+    Overview_General_Headers: [
+      'Hash',
+      'Key',
+      'Iter',
+      'Size',
+      'Path',
+      'URI',
+      'UID',
+      'Updated',
+      'Labels'
+    ],
+    Overview_Producer_Headers: ['Kind']
+  },
   New_Feature_Store: {
     Kind_Options: ['HTTP', 'CSV', 'PARQUET'],
     Target_Store_File_Type: [
@@ -74,7 +89,11 @@ module.exports = {
   },
   Label_Hint: {
     New_Job_Volumes:
-      'Volumes that define data paths and the required information for accessing the data from the function'
+      'Volumes that define data paths and the required information for accessing the data from the function',
+    Files_Hash:
+      'Represents hash of the data. when the data changes the hash would change',
+    Files_UID:
+      'Unique identifier representing the job or the workflow that generated the artifact'
   },
   Descriptions: {
     Archive_Project:

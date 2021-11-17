@@ -1,5 +1,7 @@
 import actionMenu from '../components/action-menu.component'
 import commonTable from '../components/table.component'
+import { generateLabelGroup } from '../../common-tools/common-tools'
+import labelComponent from '../components/label.component'
 const { By } = require('selenium-webdriver')
 
 // TO DO: that is dublicate from Feature Store PO. In feuture that should be fixed
@@ -19,6 +21,19 @@ const infoPaneTabSelector = {
       root: 'a',
       fields: {
         tab: '.details-menu__tab'
+      }
+    }
+  }
+}
+
+const infoPaneOverviewHeaders = {
+  root: '.table__item .item-info__details:nth-of-type(1)',
+  header: {},
+  body: {
+    row: {
+      root: 'li',
+      fields: {
+        tab: '.details-item__header'
       }
     }
   }
@@ -203,5 +218,32 @@ module.exports = {
   },
   mlFunctionInfoPane: {
     Cross_Close_Button: crossCloseButton
+  },
+  filesInfoPane: {
+    Header: header,
+    Updated: updated,
+    Download_Button: By.css(
+      'div.table__item .item-header__buttons .download-container'
+    ),
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_General_Headers: commonTable(infoPaneOverviewHeaders),
+    Overview_Hash_Header: labelComponent(
+      generateLabelGroup(
+        '.item-info__details:nth-of-type(1) .details-item:nth-of-type(1) .details-item__header',
+        false,
+        true
+      )
+    ),
+    Overview_UID_Header: labelComponent(
+      generateLabelGroup(
+        '.item-info__details:nth-of-type(1) .details-item:nth-of-type(7) .details-item__header',
+        false,
+        true
+      )
+    ),
+    Preview_Tab_Info_Pane_Table: commonTable(previewInfoPaneTable),
+    Expand_Sources: By.css('.details-item .info-sources')
+    // Info_Sources_Table: commonTable()
   }
 }

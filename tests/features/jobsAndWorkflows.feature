@@ -6,7 +6,7 @@ Feature: Jobs and workflows
     Scenario: Check all mandatory components on Jobs Monitor tab
         Given open url
         And wait load page
-        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
@@ -71,9 +71,10 @@ Feature: Jobs and workflows
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
-        Then type value "ea" to "Table_Name_Filter_Input" field on "Jobs_Monitor_Tab" wizard
+        Then type value "ing" to "Table_Name_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
-        Then value in "name" column with "text" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "ea"
+        And wait load page
+        Then value in "name" column with "text" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "ing"
 
     @passive
     Scenario: verify filtering by job label with key on Jobs Monitor tab
@@ -85,10 +86,11 @@ Feature: Jobs and workflows
         And wait load page
         Then type value "host" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host"
-        Then type value "host=jupyter-85b59bf584-xg9kj" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
+        Then type value "host=test-m-ingest-lw42t" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
-        Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=jupyter-85b59bf584-xg9kj"
+        Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=test-m-ingest-lw42t"
 
     @passive
     @inProgress
@@ -112,6 +114,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         Then verify "Search_Input" element visibility on "Create_Job" wizard
         Then verify "Select_Function_From_Dropdown" element visibility in "Select_Functions_From_Accordion" on "Create_Job" wizard
         Then verify "Collapse_Button" element visibility in "Function_Templates_Accordion" on "Create_Job" wizard
@@ -125,10 +128,12 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When type searchable fragment "server" into "Search_Input" on "Create_Job" wizard
         Then searchable fragment "server" should be in every sugested option into "Search_Input" on "Create_Job" wizard
         Then value in "name" column with "text" in "Selected_Functions_Templates" in "Select_Functions_From_Accordion" on "Create_Job" wizard should contains "server"
         When expand each row in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        And wait load page
         Then subtable column "templates_list" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard should contains "server" in "name" column
 
     @passive
@@ -140,6 +145,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
@@ -163,6 +169,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
@@ -178,6 +185,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
@@ -198,6 +206,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
@@ -258,7 +267,7 @@ Feature: Jobs and workflows
             | Volume_Name_5 | /path/to/happines5 |
             | Volume_Name_7 | /path/to/happines7 |
             | Volume_Name_0 | /path/to/happines0 |
-        When click on "Remove" in action menu in "Volume_Paths_Table" table in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        When click on "Remove" in action menu in "Volume_Paths_Table" table in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
             |  volume_name  |
             | Volume_Name_0 |
             | Volume_Name_3 |
@@ -277,6 +286,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
@@ -319,14 +329,35 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-        Then verify "Advanced_Environment_Variables_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         Then verify "Advanced_Secrets_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        When collapse "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+
+    @passive
+    @demo
+    Scenario: verify mandatory elements in Advanced Accordion on Create New Jobs side panel in Demo mode
+        Given open url
+        And wait load page
+        And turn on demo mode
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        And wait load page
+        When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Advanced_Environment_Variables_Demo_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
 
     @passive
@@ -340,27 +371,28 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         And click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         And expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-        When add rows to "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        When add rows to "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
             | value_input |
             |    value1   |
             |    value2   |
             |    value3   |
-        Then verify values in "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify values in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
             | kind | value  |
             | file | value1 |
             | file | value2 |
             | file | value3 |
-         When click on "delete_btn" in "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
+         When click on "delete_btn" in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
             | value  |
             | value3 |
             | value1 |
-        Then verify values in "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify values in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
             | kind | value  |
             | file | value2 |
 
@@ -377,6 +409,7 @@ Feature: Jobs and workflows
         And turn on demo mode
         And wait load page
         And click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
         And expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page

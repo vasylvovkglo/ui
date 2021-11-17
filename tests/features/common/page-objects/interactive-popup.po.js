@@ -123,5 +123,39 @@ module.exports = {
     Continue_Button: By.css(
       '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
     )
+  },
+  registerFilePopup: {
+    Cross_Cancel_Button: commonCrossCancelButton,
+    New_File_Name_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
+        true,
+        true,
+        true
+      )
+    ),
+    New_File_Target_Path_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
+        true,
+        false,
+        true
+      )
+    ),
+    New_File_Description_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)',
+        true,
+        false,
+        true
+      )
+    ),
+    New_File_Type_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .artifact-register-form .select')
+    ),
+    Cancel_Button: commonCancelButton,
+    Register_Button: By.css(
+      '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
+    )
   }
 }
