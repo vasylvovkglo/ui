@@ -427,7 +427,7 @@ const advancedEnvironmentVariablesDemoTable = {
 
 const advancedSecretsTable = {
   root:
-    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section:nth-of-type(3) .job-panel__table',
+    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section:nth-of-type(2) .secrets',
   header: {
     root: '.table__header',
     sorters: {
@@ -1635,11 +1635,11 @@ module.exports = {
       Model_Tracking_Checkbox: checkboxComponent(
         generateCheckboxGroup(
           '.new-item-side-panel .accordion__container:nth-of-type(5) .topology .checkbox.topology__model-tracking',
-        true,
-        false,
-        false
-      )
-    ),
+          true,
+          false,
+          false
+        )
+      ),
       Secrets_Runtime_Configuration_Table: commonTable(
         secretRuntimeConfigurationTable
       ),

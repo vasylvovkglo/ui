@@ -267,6 +267,33 @@ When(
   }
 )
 
+When('click on {string} in {string} table on {string} wizard', async function(
+  field,
+  tableName,
+  wizardName,
+  dataTable
+) {
+  const column = dataTable['rawTable'][0][0]
+  const rows = dataTable.rows()
+  for (const row_indx in rows) {
+    const arr = await findRowIndexesByColumnValue(
+      this.driver,
+      pageObjects[wizardName][tableName],
+      column,
+      rows[row_indx][0]
+    )
+    const indx = arr[0] - pageObjects[wizardName][tableName].offset
+    await hoverComponent(
+      this.driver,
+      pageObjects[wizardName][tableName]['tableFields'][field](indx)
+    )
+    await clickOnComponent(
+      this.driver,
+      pageObjects[wizardName][tableName]['tableFields'][field](indx)
+    )
+  }
+})
+
 When(
   'click on {string} in {string} table in {string} on {string} wizard with offset {string}',
   async function(
@@ -291,12 +318,11 @@ When(
       if (offsetFlag === 'true') {
         indx -= pageObjects[wizardName][accordionName][tableName].offset
       }
-
       await hoverComponent(
         this.driver,
-        pageObjects[wizardName][accordionName][tableName]['tableFields'][field](
-          indx
-        )
+        pageObjects[wizardName][accordionName][tableName]['tableFields'][
+          column
+        ](indx)
       )
       await clickOnComponent(
         this.driver,

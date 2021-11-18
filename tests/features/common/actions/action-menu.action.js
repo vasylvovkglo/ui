@@ -1,11 +1,8 @@
 const action = {
   openActionMenu: async function(driver, actionMenu) {
-    const elements = await driver.findElements(actionMenu.options)
-    if (elements.length === 0) {
-      const element = await driver.findElement(actionMenu.open_button)
-      if (element) {
-        element.click()
-      }
+    const element = await driver.findElement(actionMenu.open_button)
+    if (element) {
+      element.click()
     }
   },
   selectOptionInActionMenu: async function(driver, actionMenu, option) {
