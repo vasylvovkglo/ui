@@ -39,6 +39,26 @@ const infoPaneOverviewHeaders = {
   }
 }
 
+const filesInfoSourcesTable = {
+  root: '.info-sources .info-sources-table',
+  header: {
+    root: '.info-sources-table__header',
+    sorters: {
+      name: '.info-sources-table__header-item:nth-of-type(1)',
+      path: '.info-sources-table__header-item:nth-of-type(2)'
+    }
+  },
+  body: {
+    row: {
+      root: '.info-sources-table__content',
+      fields: {
+        name: '.info-sources-table__content-key .data-ellipsis',
+        path: '.info-sources-table__content-value'
+      }
+    }
+  }
+}
+
 // Features Info Pane Table
 const featuresInfoPaneTable = {
   root: '.table__item .details-metadata .details-metadata__table',
@@ -243,7 +263,7 @@ module.exports = {
       )
     ),
     Preview_Tab_Info_Pane_Table: commonTable(previewInfoPaneTable),
-    Expand_Sources: By.css('.details-item .info-sources')
-    // Info_Sources_Table: commonTable()
+    Expand_Sources: By.css('.details-item .info-sources'),
+    Info_Sources_Table: commonTable(filesInfoSourcesTable)
   }
 }

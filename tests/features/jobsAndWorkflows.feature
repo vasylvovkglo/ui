@@ -362,7 +362,6 @@ Feature: Jobs and workflows
 
     @passive
     @inProgress
-    @failed
     Scenario: verify Advanced Environment Variables Table in Advanced Accordion on Create New Jobs side panel
         Given open url
         And wait load page

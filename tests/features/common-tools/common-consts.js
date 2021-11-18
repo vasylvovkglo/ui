@@ -24,8 +24,7 @@ module.exports = {
       'UID',
       'Updated',
       'Labels'
-    ],
-    Overview_Producer_Headers: ['Kind']
+    ]
   },
   New_Feature_Store: {
     Kind_Options: ['HTTP', 'CSV', 'PARQUET'],

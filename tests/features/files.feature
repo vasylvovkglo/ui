@@ -44,15 +44,15 @@ Feature: Files Page
     Then verify if "Register_Dataset" popup dialog appears
     Then verify "Cross_Cancel_Button" element visibility on "Register_File_Popup" wizard
     Then verify "New_File_Name_Input" element visibility on "Register_File_Popup" wizard
-#        Then verify "New_File_Name_Input" on "Register_File_Popup" wizard should display "Input_Hint"."Artifact_Names_Unique"
-#        Then type value "   " to "New_File_Name_Input" field on "Register_File_Popup" wizard
-#        Then verify "New_File_Name_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+    Then verify "New_File_Name_Input" on "Register_File_Popup" wizard should display "Input_Hint"."Artifact_Names_Unique"
+    Then type value "   " to "New_File_Name_Input" field on "Register_File_Popup" wizard
+    Then verify "New_File_Name_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "New_File_Target_Path_Input" element visibility on "Register_File_Popup" wizard
-#        Then type value "   " to "New_File_Target_Path_Input" field on "Register_File_Popup" wizard
-#        Then verify "New_File_Target_Path_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+    Then type value "   " to "New_File_Target_Path_Input" field on "Register_File_Popup" wizard
+    Then verify "New_File_Target_Path_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "New_File_Description_Input" element visibility on "Register_File_Popup" wizard
-#        Then type value "   " to "New_File_Description_Input" field on "Register_File_Popup" wizard
-#        Then verify "New_File_Description_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+    Then type value "   " to "New_File_Description_Input" field on "Register_File_Popup" wizard
+    Then verify "New_File_Description_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "New_File_Type_Dropdown" element visibility on "Register_File_Popup" wizard
     Then verify "Cancel_Button" element visibility on "Register_File_Popup" wizard
     Then verify "Register_Button" element visibility on "Register_File_Popup" wizard
@@ -97,7 +97,8 @@ Feature: Files Page
     Then verify "Updated" element visibility on "Files_Info_Pane" wizard
     Then verify "Download_Button" element visibility on "Files_Info_Pane" wizard
     Then verify "Cross_Close_Button" element visibility on "Files_Info_Pane" wizard
-    Then verify "Preview_Tab_Info_Pane_Table" element visibility on "Files_Info_Pane" wizard
+#    Then verify "Preview_Tab_Info_Pane_Table" element visibility on "Files_Info_Pane" wizard
+#    TO DO: should be implemented mock requests
 
   @passive
   @inProgress
@@ -113,7 +114,7 @@ Feature: Files Page
     Then verify "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard should contains "Files_Info_Pane"."Tab_List"
     Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
     When click on "Expand_Sources" element on "Files_Info_Pane" wizard
-
+    Then verify "Info_Sources_Table" element visibility on "Files_Info_Pane" wizard
 
 
 

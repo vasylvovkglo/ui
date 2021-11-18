@@ -128,7 +128,7 @@ module.exports = {
     Cross_Cancel_Button: commonCrossCancelButton,
     New_File_Name_Input: inputGroup(
       generateInputGroup(
-        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)',
         true,
         true,
         true
