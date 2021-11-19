@@ -10,6 +10,7 @@ import jobsAndWorkflows from './page-objects/jobs-and-workflows.po'
 import Functions from './page-objects/ml-functions.po'
 import projectsSettings from './page-objects/project-settings.po'
 import files from './page-objects/files.po'
+import models from './page-objects/models.po'
 
 module.exports = {
   commonPagesHeader: {
@@ -47,5 +48,7 @@ module.exports = {
   Project_Settings_General_Tab: projectsSettings['generalTab'],
   Files: files['filesTab'],
   Register_File_Popup: interactivePopup['registerFilePopup'],
-  Files_Info_Pane: infoPane['filesInfoPane']
+  Files_Info_Pane: infoPane['filesInfoPane'],
+  Models: models['modelsTab'],
+  Register_Model_Popup: interactivePopup['registerModelPopup']
 }

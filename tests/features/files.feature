@@ -1,6 +1,6 @@
 Feature: Files Page
 
-  Testcases that verifies functionality on ML Functions Pages
+  Testcases that verifies functionality on Files Page
 
   @passive
   Scenario: Check all mandatory components on Files tab
@@ -41,7 +41,7 @@ Feature: Files Page
     And click on cell with value "Files" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
     And wait load page
     Then click on "Register_File_Button" element on "Files" wizard
-    Then verify if "Register_Dataset" popup dialog appears
+    Then verify if "Register_File_Popup" popup dialog appears
     Then verify "Cross_Cancel_Button" element visibility on "Register_File_Popup" wizard
     Then verify "New_File_Name_Input" element visibility on "Register_File_Popup" wizard
     Then verify "New_File_Name_Input" on "Register_File_Popup" wizard should display "Input_Hint"."Artifact_Names_Unique"
