@@ -14,6 +14,18 @@ const commonCancelButton = By.css(
 const commonCrossCancelButton = By.css(
   'div.pop-up-dialog div.pop-up-dialog__header-close svg'
 )
+const commonNameInput =
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)'
+
+const commonTargetPathInput =
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)'
+
+const commonDescriptionInput =
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)'
+
+const commonRegisterButton = By.css(
+  '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
+)
 
 const commonTitle = By.css('div.pop-up-dialog div.pop-up-dialog__header-text')
 
@@ -66,28 +78,13 @@ module.exports = {
     Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
     Name_Input: inputGroup(
-      generateInputGroup(
-        'div.pop-up-dialog div.artifact-register-form div.input-wrapper:nth-of-type(1)',
-        true,
-        true,
-        true
-      )
+      generateInputGroup(commonNameInput, true, true, true)
     ),
     Target_Path_Input: inputGroup(
-      generateInputGroup(
-        'div.pop-up-dialog div.artifact-register-form div.input-wrapper:nth-of-type(2)',
-        true,
-        false,
-        true
-      )
+      generateInputGroup(commonTargetPathInput, true, false, true)
     ),
     Description_Input: inputGroup(
-      generateInputGroup(
-        'div.pop-up-dialog div.artifact-register-form div.input-wrapper:nth-of-type(3)',
-        true,
-        false,
-        false
-      )
+      generateInputGroup(commonDescriptionInput, true, false, false)
     ),
     Cancel_Button: commonCancelButton,
     Archive_Button: By.css('div.pop-up-dialog button.btn-primary')
@@ -120,42 +117,39 @@ module.exports = {
       generateDropdownGroup('.pop-up-dialog .select', false, false, false)
     ),
     Cancel_Button: commonCancelButton,
-    Continue_Button: By.css(
-      '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
-    )
+    Continue_Button: commonRegisterButton
   },
   registerFilePopup: {
+    Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
     New_File_Name_Input: inputGroup(
-      generateInputGroup(
-        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)',
-        true,
-        true,
-        true
-      )
+      generateInputGroup(commonNameInput, true, true, true)
     ),
     New_File_Target_Path_Input: inputGroup(
-      generateInputGroup(
-        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
-        true,
-        false,
-        true
-      )
+      generateInputGroup(commonTargetPathInput, true, false, true)
     ),
     New_File_Description_Input: inputGroup(
-      generateInputGroup(
-        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)',
-        true,
-        false,
-        true
-      )
+      generateInputGroup(commonDescriptionInput, true, false, true)
     ),
     New_File_Type_Dropdown: dropdownComponent(
       generateDropdownGroup('.pop-up-dialog .artifact-register-form .select')
     ),
     Cancel_Button: commonCancelButton,
-    Register_Button: By.css(
-      '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
-    )
+    Register_Button: commonRegisterButton
+  },
+  registerModelPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    New_File_Name_Input: inputGroup(
+      generateInputGroup(commonNameInput, true, true, true)
+    ),
+    New_File_Target_Path_Input: inputGroup(
+      generateInputGroup(commonTargetPathInput, true, false, true)
+    ),
+    New_File_Description_Input: inputGroup(
+      generateInputGroup(commonDescriptionInput, true, false, true)
+    ),
+    Cancel_Button: commonCancelButton,
+    Register_Button: commonRegisterButton
   }
 }
