@@ -14,14 +14,26 @@ const commonCancelButton = By.css(
 const commonCrossCancelButton = By.css(
   'div.pop-up-dialog div.pop-up-dialog__header-close svg'
 )
-const commonNameInput =
-  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)'
+const commonNameInput = generateInputGroup(
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)',
+  true,
+  true,
+  true
+)
 
-const commonTargetPathInput =
-  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)'
+const commonTargetPathInput = generateInputGroup(
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
+  true,
+  false,
+  true
+)
 
-const commonDescriptionInput =
-  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)'
+const commonDescriptionInput = generateInputGroup(
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)',
+  true,
+  false,
+  true
+)
 
 const commonRegisterButton = By.css(
   '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
@@ -77,15 +89,9 @@ module.exports = {
   registerDataset: {
     Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
-    Name_Input: inputGroup(
-      generateInputGroup(commonNameInput, true, true, true)
-    ),
-    Target_Path_Input: inputGroup(
-      generateInputGroup(commonTargetPathInput, true, false, true)
-    ),
-    Description_Input: inputGroup(
-      generateInputGroup(commonDescriptionInput, true, false, false)
-    ),
+    Name_Input: inputGroup(commonNameInput),
+    Target_Path_Input: inputGroup(commonTargetPathInput),
+    Description_Input: inputGroup(commonDescriptionInput),
     Cancel_Button: commonCancelButton,
     Archive_Button: By.css('div.pop-up-dialog button.btn-primary')
   },
@@ -122,15 +128,9 @@ module.exports = {
   registerFilePopup: {
     Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
-    New_File_Name_Input: inputGroup(
-      generateInputGroup(commonNameInput, true, true, true)
-    ),
-    New_File_Target_Path_Input: inputGroup(
-      generateInputGroup(commonTargetPathInput, true, false, true)
-    ),
-    New_File_Description_Input: inputGroup(
-      generateInputGroup(commonDescriptionInput, true, false, true)
-    ),
+    New_File_Name_Input: inputGroup(commonNameInput),
+    New_File_Target_Path_Input: inputGroup(commonTargetPathInput),
+    New_File_Description_Input: inputGroup(commonDescriptionInput),
     New_File_Type_Dropdown: dropdownComponent(
       generateDropdownGroup('.pop-up-dialog .artifact-register-form .select')
     ),
@@ -140,15 +140,9 @@ module.exports = {
   registerModelPopup: {
     Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
-    New_File_Name_Input: inputGroup(
-      generateInputGroup(commonNameInput, true, true, true)
-    ),
-    New_File_Target_Path_Input: inputGroup(
-      generateInputGroup(commonTargetPathInput, true, false, true)
-    ),
-    New_File_Description_Input: inputGroup(
-      generateInputGroup(commonDescriptionInput, true, false, true)
-    ),
+    New_File_Name_Input: inputGroup(commonNameInput),
+    New_File_Target_Path_Input: inputGroup(commonTargetPathInput),
+    New_File_Description_Input: inputGroup(commonDescriptionInput),
     Cancel_Button: commonCancelButton,
     Register_Button: commonRegisterButton
   }

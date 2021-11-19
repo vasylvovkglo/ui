@@ -32,6 +32,7 @@ Feature: Models Page
     Then value in "name" column with "text" in "Models_Table" on "Models" wizard should contains "survival"
 
   @passive
+  @inProgress
   Scenario: Verify filtering by label with key on Models tab
     Given open url
     And wait load page
