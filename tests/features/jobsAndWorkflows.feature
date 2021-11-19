@@ -1,6 +1,6 @@
 Feature: Jobs and workflows
 
-    Tescases that verifies functionality on Jobs and Workflows Pages
+    Testcases that verifies functionality on Jobs and Workflows Pages
 
     @passive
     Scenario: Check all mandatory components on Jobs Monitor tab
@@ -22,6 +22,39 @@ Feature: Jobs and workflows
         Then verify "Table_Labels_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Start_Time_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Jobs_Monitor_Table" element visibility on "Jobs_Monitor_Tab" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Workflows Monitor tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard should contains "Jobs_And_Workflows"."Tab_List"
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Monitor Workflows" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then verify "Workflows_Monitor_Table" element visibility on "Workflows_Monitor_Tab" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Schedule Monitor tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard should contains "Jobs_And_Workflows"."Tab_List"
+        And select "Schedule" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Schedule" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then verify "Table_Name_Filter_Input" element visibility on "Schedule_Monitor_Tab" wizard
+        Then verify "Table_Labels_Filter_Input" element visibility on "Schedule_Monitor_Tab" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Schedule_Monitor_Tab" wizard
+        Then verify "Schedule_Monitor_Table" element visibility on "Schedule_Monitor_Tab" wizard
 
     @passive
     Scenario: Check date picker dropdown options on Jobs Monitor tab
@@ -77,6 +110,25 @@ Feature: Jobs and workflows
         Then value in "name" column with "text" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "ing"
 
     @passive
+    @inProgress
+    Scenario: verify filtering by job name on Schedule Monitor tab
+        Given open url
+        And wait load page
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Schedule" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Schedule" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then type value "test" to "Table_Name_Filter_Input" field on "Schedule_Monitor_Tab" wizard
+        Then click on "Table_Refresh_Button" element on "Schedule_Monitor_Tab" wizard
+        And wait load page
+        Then value in "name" column with "text" in "Schedule_Monitor_Table" on "Schedule_Monitor_Tab" wizard should contains "test"
+#    TO DO: should be implemented mock requests for filters
+
+    @passive
     Scenario: verify filtering by job label with key on Jobs Monitor tab
         Given open url
         And wait load page
@@ -91,6 +143,28 @@ Feature: Jobs and workflows
         Then type value "host=test-m-ingest-lw42t" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
         Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=test-m-ingest-lw42t"
+
+    @passive
+    @inProgress
+    Scenario: verify filtering by job label with key on Jobs Monitor tab
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Schedule" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Schedule" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then type value "v3io_user" to "Table_Labels_Filter_Input" field on "Schedule_Monitor_Tab" wizard
+        Then click on "Table_Refresh_Button" element on "Schedule_Monitor_Tab" wizard
+        And wait load page
+        Then value in "labels" column with "dropdowns" in "Schedule_Monitor_Table" on "Schedule_Monitor_Tab" wizard should contains "v3io_user"
+        Then type value "v3io_user=admin" to "Table_Labels_Filter_Input" field on "Schedule_Monitor_Tab" wizard
+        Then click on "Table_Refresh_Button" element on "Schedule_Monitor_Tab" wizard
+        And wait load page
+        Then value in "labels" column with "dropdowns" in "Schedule_Monitor_Table" on "Schedule_Monitor_Tab" wizard should contains "v3io_user=admin"
+#    TO DO: should be implemented mock requests for filters
 
     @passive
     @inProgress
@@ -135,6 +209,47 @@ Feature: Jobs and workflows
         When expand each row in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
         Then subtable column "templates_list" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard should contains "server" in "name" column
+
+    @passive
+    Scenario: Check all mandatory components in Item infopane on Overview tab table on Jobs Monitor Page
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify "Monitor Jobs" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Schedule_Monitor_Table" table on "Schedule_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Arrow_Back" element visibility on "Jobs_Monitor_Tab_Info_Pane" wizard
+        Then verify "Header" element visibility on "Jobs_Monitor_Tab_Info_Pane" wizard
+        Then verify "Updated" element visibility on "Jobs_Monitor_Tab_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "Jobs_Monitor_Tab_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" element visibility on "Jobs_Monitor_Tab_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" on "Jobs_Monitor_Tab_Info_Pane" wizard should contains "Jobs_Monitor_Tab_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Jobs_Monitor_Tab_Info_Pane" wizard
+        Then verify "Overview_Headers" on "Jobs_Monitor_Tab_Info_Pane" wizard should contains "Jobs_Monitor_Tab_Info_Pane"."Overview_Headers"
+
+    @passive
+    Scenario: Check all mandatory components in Item infopane on Overview tab table on Schedule Page
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Schedule" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Schedule" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Schedule_Monitor_Table" table on "Schedule_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Header" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Updated" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard
+        Then verify "Overview_Headers" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Overview_Headers"
 
     @passive
     Scenario: verify mandatory elements on Create New Jobs side panel except accordions

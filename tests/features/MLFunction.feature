@@ -1,6 +1,6 @@
 Feature: ML Functions
 
-    Tescases that verifies functionality on ML Functions Pages
+    Testcases that verifies functionality on ML Functions Pages
 
     @passive
     Scenario: Check all mandatory components on ML Functions Page
@@ -30,6 +30,23 @@ Feature: ML Functions
         Then click on "Table_Refresh_Button" element on "ML_Functions" wizard
         And wait load page
         Then value in "name" column with "text" in "Functions_Table" on "ML_Functions" wizard should contains "test"
+
+    @passive
+    Scenario: Check all mandatory components in Item infopane on Overview tab table
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        When click on cell with row index 1 in "name" column in "Functions_Table" table on "ML_Functions" wizard
+        Then verify "Header" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Updated" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" element visibility on "ML_Function_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard
+        Then verify "Overview_Headers" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Overview_Headers"
 
     @passive
     Scenario: Check all mandatory components on Create ML Function Popup
@@ -569,3 +586,16 @@ Feature: ML Functions
         Then verify values in "Parameters_Runtime_Configuration_Table" table in "Serving_Runtime_Configuration_Accordion" on "New_Function" wizard
             | name  |  type  | value  |
             | name1 | string | valueB |
+
+    @passive
+    Scenario: Check MLRun logo redirection
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And click on "MLRun_Logo" element on "commonPagesHeader" wizard
+        And wait load page
+        Then verify "Projects_Table" element visibility on "Projects" wizard
+        

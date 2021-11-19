@@ -16,3 +16,13 @@ Feature: MLRun Project Page
         Then verify "Jobs_Info_Card_Statistics" element visibility on "Project" wizard
         Then verify "Real_Time_Functions_Card_Statistics" element visibility on "Project" wizard
         Then verify "General_Info_Quick_Links" element visibility on "Project" wizard
+
+    @passive
+    Scenario: Check MLRun logo redirection
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on "MLRun_Logo" element on "commonPagesHeader" wizard
+        And wait load page
+        Then verify "Projects_Table" element visibility on "Projects" wizard

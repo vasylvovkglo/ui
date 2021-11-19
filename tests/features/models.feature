@@ -73,3 +73,15 @@ Feature: Models Page
     Then verify "Cancel_Button" element visibility on "Register_Model_Popup" wizard
     Then verify "Register_Button" element visibility on "Register_Model_Popup" wizard
 
+  @passive
+  Scenario: Check MLRun logo redirection
+    Given open url
+    And wait load page
+    And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+    And wait load page
+    And click on cell with value "Models" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+    And wait load page
+    And click on "MLRun_Logo" element on "commonPagesHeader" wizard
+    And wait load page
+    Then verify "Projects_Table" element visibility on "Projects" wizard
+

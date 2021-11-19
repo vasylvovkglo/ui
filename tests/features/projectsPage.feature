@@ -14,6 +14,17 @@ Feature: MLRun Projects Page
         Then verify "Projects_Table" element visibility on "Projects" wizard
 
     @passive
+    Scenario: Verify filtering by project name
+        Given open url
+        And wait load page
+        Then type value "stocks" to "Search_Projects_Input" field on "Projects" wizard
+        Then value in "name" column with "text" in "Projects_Table" on "Projects" wizard should contains "stocks"
+        Then type value "at" to "Search_Projects_Input" field on "Projects" wizard
+        Then click on "Refresh_Projects_Button" element on "Projects" wizard
+        And wait load page
+        Then value in "name" column with "text" in "Projects_Table" on "Projects" wizard should contains "at"
+
+    @passive
     Scenario: Sort projects in ascending and decending order
         Given open url
         And wait load page
@@ -90,3 +101,19 @@ Feature: MLRun Projects Page
         Then click on "Delete_Button" element on "Delete_Project" wizard
         Then check "automation-test-name2" value not in "name" column in "Projects_Table" table on "Projects" wizard
         And remove "automation-test-name2" MLRun Project with code 500
+
+    Scenario: Unarchive ML Project
+        * create "automation-test-name3" MLRun Project with code 200
+        Given open url
+        And wait load page
+        Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
+        Then select "Archive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "automation-test-name3" value in "name" column
+        Then verify if "Archive_Project" popup dialog appears
+        Then click on "Archive_Button" element on "Archive_Project" wizard
+        Then check "automation-test-name3" value not in "name" column in "Projects_Table" table on "Projects" wizard
+        When select "Archived Projects" option in "Projects_Dropdown" dropdown on "Projects" wizard
+        Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
+        Then select "Unarchive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "automation-test-name3" value in "name" column
+        When select "All Projects" option in "Projects_Dropdown" dropdown on "Projects" wizard
+        Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
+        And remove "automation-test-name3" MLRun Project with code 204

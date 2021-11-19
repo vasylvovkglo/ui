@@ -237,7 +237,21 @@ module.exports = {
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector
   },
   mlFunctionInfoPane: {
-    Cross_Close_Button: crossCloseButton
+    Header: header,
+    Updated: updated,
+    Action_Menu: commonActionMenu,
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_Headers: commonTable(infoPaneOverviewHeaders)
+  },
+  jobsMonitorTabInfoPane: {
+    Arrow_Back: By.css('div.table__item a.item-header__back-btn'),
+    Header: header,
+    Updated: updated,
+    Action_Menu: commonActionMenu,
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_Headers: commonTable(infoPaneOverviewHeaders)
   },
   filesInfoPane: {
     Header: header,
@@ -262,7 +276,6 @@ module.exports = {
         true
       )
     ),
-    Preview_Tab_Info_Pane_Table: commonTable(previewInfoPaneTable),
     Expand_Sources: By.css('.details-item .info-sources'),
     Info_Sources_Table: commonTable(filesInfoSourcesTable)
   }

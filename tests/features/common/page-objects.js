@@ -16,7 +16,8 @@ module.exports = {
   commonPagesHeader: {
     loader: By.css('div.loader-wrapper div.loader'),
     See_On_Github: By.css('header.header a.header__link'),
-    Common_Hint: By.css('div.tip')
+    Common_Hint: By.css('div.tip'),
+    MLRun_Logo: By.css('header.header a.header__logo')
   },
   Projects: projects,
   Project: project,
@@ -36,13 +37,16 @@ module.exports = {
   Register_Dataset: interactivePopup['registerDataset'],
   New_Feature_Set: sidePanel['newFeatureSet'],
   Jobs_Monitor_Tab: jobsAndWorkflows['JobsMonitorTab'],
+  Jobs_Monitor_Tab_Info_Pane: infoPane['jobsMonitorTabInfoPane'],
+  Workflows_Monitor_Tab: jobsAndWorkflows['WorkflowsMonitorTab'],
+  Schedule_Monitor_Tab: jobsAndWorkflows['ScheduleMonitorTab'],
   Create_Feature_Set_Popup_Dialog:
     interactivePopup['createFeatureSetPopupDialog'],
   Create_Job: jobsAndWorkflows['CreateJob'],
   New_JobTemplate_Edit: sidePanel['newJobTemplateEdit'],
   ML_Functions: Functions['mlFunctions'],
   New_Function: sidePanel['newFunction'],
-  ML_Function_Info_Pane: infoPane['featuresInfoPane'],
+  ML_Function_Info_Pane: infoPane['mlFunctionInfoPane'],
   Delete_Function_Popup: interactivePopup['deleteFunction'],
   Create_ML_Function_Popup: interactivePopup['createMLFunctionPopup'],
   Project_Settings_General_Tab: projectsSettings['generalTab'],
