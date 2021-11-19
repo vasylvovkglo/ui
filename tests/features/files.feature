@@ -116,5 +116,17 @@ Feature: Files Page
     When click on "Expand_Sources" element on "Files_Info_Pane" wizard
     Then verify "Info_Sources_Table" element visibility on "Files_Info_Pane" wizard
 
+  @passive
+  Scenario: Check MLRun logo redirection
+    Given open url
+    And wait load page
+    And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+    And wait load page
+    And click on cell with value "Files" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+    And wait load page
+    And click on "MLRun_Logo" element on "commonPagesHeader" wizard
+    And wait load page
+    Then verify "Projects_Table" element visibility on "Projects" wizard
+
 
 

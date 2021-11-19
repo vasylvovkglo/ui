@@ -12,6 +12,19 @@ module.exports = {
       'Analysis'
     ]
   },
+  ML_Function_Info_Pane: {
+    Tab_List: ['Overview', 'Code', 'Build Log'],
+    Overview_Headers: [
+      'Name',
+      'Kind',
+      'Hash',
+      'Code origin',
+      'Updated',
+      'Command',
+      'Image',
+      'Description'
+    ]
+  },
   Files_Info_Pane: {
     Tab_List: ['Overview', 'Preview'],
     Overview_General_Headers: [
@@ -102,6 +115,21 @@ module.exports = {
   },
   Jobs_And_Workflows: {
     Tab_List: ['Monitor Jobs', 'Monitor Workflows', 'Schedule']
+  },
+  Jobs_Monitor_Tab_Info_Pane: {
+    Tab_List: ['Overview', 'Inputs', 'Artifacts', 'Results', 'Logs', 'Pods'],
+    Overview_Headers: [
+      'UID',
+      'Start time',
+      'Last Updated',
+      'Parameters',
+      'Function',
+      'Results',
+      'Labels',
+      'Log level',
+      'Output path',
+      'Iterations'
+    ]
   },
   Jobs_Monitor_Tab: {
     'Any time': 'Any time',
