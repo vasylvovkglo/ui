@@ -85,3 +85,16 @@ Feature: Models Page
     And wait load page
     Then verify "Projects_Table" element visibility on "Projects" wizard
 
+  @passive
+  Scenario: Verify View YAML action
+    Given open url
+    And wait load page
+    And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+    And wait load page
+    And click on cell with value "Models" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+    And wait load page
+    Then select "View YAML" option in action menu on "Models" wizard in "Models_Table" table at row with "data_clean_model" value in "name" column
+    Then verify if "View_YAML" popup dialog appears
+    Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
+    Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
+

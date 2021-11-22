@@ -42,7 +42,7 @@ const resultsTable = {
 const actionMenuStructure = {
   root: 'div.actions-menu__container',
   menuElements: {
-    open_button: 'div.data-ellipsis button',
+    open_button: 'button',
     options: 'div.actions-menu__body div.actions-menu__option'
   }
 }

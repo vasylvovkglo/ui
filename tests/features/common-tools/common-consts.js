@@ -111,7 +111,9 @@ module.exports = {
     Archive_Project:
       "Note that moving a project to archive doesn't stop it from consuming resources. We recommend that before " +
       "setting the project as archive you'll remove scheduled jobs and suspend Nuclio functions.",
-    Delete_Project: 'Deleted projects can not be restored.'
+    Delete_Project: 'Deleted projects can not be restored.',
+    Delete_Function: 'Deleted functions cannot be restored.',
+    Delete_Scheduled_Job: 'Deleted scheduled jobs can not be restored.'
   },
   Jobs_And_Workflows: {
     Tab_List: ['Monitor Jobs', 'Monitor Workflows', 'Schedule']

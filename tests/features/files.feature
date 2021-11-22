@@ -128,5 +128,33 @@ Feature: Files Page
     And wait load page
     Then verify "Projects_Table" element visibility on "Projects" wizard
 
+  @passive
+  Scenario: Verify View YAML action
+    Given open url
+    And wait load page
+    And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+    And wait load page
+    And click on cell with value "Files" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+    And wait load page
+    Then select "View YAML" option in action menu on "Files" wizard in "Files_Table" table at row with "test-i" value in "name" column
+    Then verify if "View_YAML" popup dialog appears
+    Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
+    Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
+
+  @passive
+  Scenario: Verify View YAML action in Item infopane
+    Given open url
+    And wait load page
+    And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+    And wait load page
+    And click on cell with value "Files" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+    And wait load page
+    When click on cell with row index 1 in "name" column in "Files_Table" table on "Files" wizard
+    Then verify "Action_Menu" element visibility on "Files_Info_Pane" wizard
+    Then select "View YAML" option in action menu on "Files_Info_Pane" wizard
+    Then verify if "View_YAML" popup dialog appears
+    Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
+    Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
+
 
 

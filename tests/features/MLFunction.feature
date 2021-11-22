@@ -49,6 +49,36 @@ Feature: ML Functions
         Then verify "Overview_Headers" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Overview_Headers"
 
     @passive
+    Scenario: Verify all mandatory components on Delete existing function
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "test-m" value in "name" column
+        Then verify if "Delete_Function_Popup" popup dialog appears
+        Then "Description" component on "Delete_Function_Popup" should contains "Descriptions"."Delete_Function"
+        Then verify "Cancel_Button" element visibility on "Delete_Function_Popup" wizard
+        Then verify "Delete_Button" element visibility on "Delete_Function_Popup" wizard
+
+    @passive
+    Scenario: Verify all mandatory components on Delete existing function in Item infopane
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        When click on cell with row index 1 in "name" column in "Functions_Table" table on "ML_Functions" wizard
+        Then verify "Action_Menu" element visibility on "ML_Function_Info_Pane" wizard
+        Then select "Delete" option in action menu on "ML_Function_Info_Pane" wizard
+        Then verify if "Delete_Function_Popup" popup dialog appears
+        Then "Description" component on "Delete_Function_Popup" should contains "Descriptions"."Delete_Function"
+        Then verify "Cancel_Button" element visibility on "Delete_Function_Popup" wizard
+        Then verify "Delete_Button" element visibility on "Delete_Function_Popup" wizard
+
+    @passive
     Scenario: Check all mandatory components on Create ML Function Popup
         Given open url
         And wait load page
@@ -598,4 +628,32 @@ Feature: ML Functions
         And click on "MLRun_Logo" element on "commonPagesHeader" wizard
         And wait load page
         Then verify "Projects_Table" element visibility on "Projects" wizard
+
+    @passive
+    Scenario: Verify View YAML action
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then select "View YAML" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "test-m" value in "name" column
+        Then verify if "View_YAML" popup dialog appears
+        Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
+        Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
+
+    @passive
+    Scenario: Verify View YAML action in Item infopane
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        When click on cell with row index 1 in "name" column in "Functions_Table" table on "ML_Functions" wizard
+        Then verify "Action_Menu" element visibility on "ML_Function_Info_Pane" wizard
+        Then select "View YAML" option in action menu on "ML_Function_Info_Pane" wizard
+        Then verify if "View_YAML" popup dialog appears
+        Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
+        Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
         

@@ -8,7 +8,7 @@ const { By } = require('selenium-webdriver')
 const actionMenuStructure = {
   root: 'div.table__item div.item-header__buttons>div.actions-menu__container',
   menuElements: {
-    open_button: 'div.data-ellipsis button',
+    open_button: 'button',
     options: 'div.actions-menu__body div.actions-menu__option'
   }
 }
@@ -259,6 +259,7 @@ module.exports = {
     Download_Button: By.css(
       'div.table__item .item-header__buttons .download-container'
     ),
+    Action_Menu: commonActionMenu,
     Cross_Close_Button: crossCloseButton,
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
     Overview_General_Headers: commonTable(infoPaneOverviewHeaders),

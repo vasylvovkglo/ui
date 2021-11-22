@@ -11,6 +11,11 @@ const { By } = require('selenium-webdriver')
 const commonCancelButton = By.css(
   'div.pop-up-dialog button.pop-up-dialog__btn_cancel'
 )
+
+const commonDeleteButton = By.css('div.pop-up-dialog button.btn-danger')
+
+const commonDescription = By.css('div.pop-up-dialog > div:not([class])')
+
 const commonCrossCancelButton = By.css(
   'div.pop-up-dialog div.pop-up-dialog__header-close svg'
 )
@@ -35,7 +40,7 @@ const commonDescriptionInput = generateInputGroup(
   true
 )
 
-const commonRegisterButton = By.css(
+const commonConfirmButton = By.css(
   '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
 )
 
@@ -67,24 +72,31 @@ module.exports = {
   },
   archiveProject: {
     Title: commonTitle,
-    Description: By.css('div.pop-up-dialog > div:not([class])'),
+    Description: commonDescription,
     Cross_Cancel_Button: commonCrossCancelButton,
     Cancel_Button: commonCancelButton,
-    Archive_Button: By.css('div.pop-up-dialog button.btn-primary')
+    Archive_Button: commonConfirmButton
   },
   deleteProject: {
     Title: commonTitle,
-    Description: By.css('div.pop-up-dialog > div:not([class])'),
+    Description: commonDescription,
     Cross_Cancel_Button: commonCrossCancelButton,
     Cancel_Button: commonCancelButton,
-    Delete_Button: By.css('div.pop-up-dialog button.btn-danger')
+    Delete_Button: commonDeleteButton
   },
   deleteFunction: {
     Title: commonTitle,
-    Description: By.css('div.pop-up-dialog > div:not([class])'),
+    Description: commonDescription,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Cancel_Button: By.css('div.pop-up-dialog button.btn-label'),
+    Delete_Button: commonDeleteButton
+  },
+  deleteScheduledJob: {
+    Title: commonTitle,
+    Description: commonDescription,
     Cross_Cancel_Button: commonCrossCancelButton,
     Cancel_Button: commonCancelButton,
-    Delete_Button: By.css('div.pop-up-dialog button.btn-danger')
+    Delete_Button: commonDeleteButton
   },
   registerDataset: {
     Title: commonTitle,
@@ -93,12 +105,12 @@ module.exports = {
     Target_Path_Input: inputGroup(commonTargetPathInput),
     Description_Input: inputGroup(commonDescriptionInput),
     Cancel_Button: commonCancelButton,
-    Archive_Button: By.css('div.pop-up-dialog button.btn-primary')
+    Archive_Button: commonConfirmButton
   },
   createFeatureSetPopupDialog: {
     Cross_Cancel_Button: commonCrossCancelButton,
-    Description: By.css('div.pop-up-dialog > div:not([class])'),
-    OK_Button: By.css('div.pop-up-dialog button.btn-primary')
+    Description: commonDescription,
+    OK_Button: commonConfirmButton
   },
   createMLFunctionPopup: {
     Cross_Cancel_Button: commonCrossCancelButton,
@@ -123,7 +135,7 @@ module.exports = {
       generateDropdownGroup('.pop-up-dialog .select', false, false, false)
     ),
     Cancel_Button: commonCancelButton,
-    Continue_Button: commonRegisterButton
+    Continue_Button: commonConfirmButton
   },
   registerFilePopup: {
     Title: commonTitle,
@@ -135,7 +147,7 @@ module.exports = {
       generateDropdownGroup('.pop-up-dialog .artifact-register-form .select')
     ),
     Cancel_Button: commonCancelButton,
-    Register_Button: commonRegisterButton
+    Register_Button: commonConfirmButton
   },
   registerModelPopup: {
     Title: commonTitle,
@@ -144,6 +156,13 @@ module.exports = {
     New_File_Target_Path_Input: inputGroup(commonTargetPathInput),
     New_File_Description_Input: inputGroup(commonDescriptionInput),
     Cancel_Button: commonCancelButton,
-    Register_Button: commonRegisterButton
+    Register_Button: commonConfirmButton
+  },
+  viewYamlPopup: {
+    Title: By.css('div.pop-up-dialog div.pop-up-dialog__header'),
+    Cross_Cancel_Button: commonCrossCancelButton,
+    YAML_Modal_Container: By.css(
+      'div.pop-up-dialog div.yaml-modal-container pre'
+    )
   }
 }

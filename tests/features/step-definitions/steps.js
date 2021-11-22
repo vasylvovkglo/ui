@@ -67,6 +67,10 @@ import {
   isRadioButtonUnselected,
   selectRadiobutton
 } from '../common/actions/radio-button.action'
+import {
+  openActionMenu,
+  selectOptionInActionMenu
+} from '../common/actions/action-menu.action'
 
 Given('open url', async function() {
   await navigateToPage(this.driver, `http://${test_url}:${test_port}`)
@@ -675,4 +679,14 @@ When('create {string} MLRun Project with code {int}', async function(
 ) {
   await createAPIMLProject(nameProject, status)
   await this.driver.sleep(2000)
+})
+
+Then('select {string} option in action menu on {string} wizard', async function(
+  option,
+  wizard
+) {
+  const actionMenu = pageObjects[wizard]['Action_Menu']
+  await openActionMenu(this.driver, actionMenu)
+  await this.driver.sleep(500)
+  await selectOptionInActionMenu(this.driver, actionMenu, option)
 })
