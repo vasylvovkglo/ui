@@ -40,6 +40,7 @@ module.exports = {
   Jobs_Monitor_Tab_Info_Pane: infoPane['jobsMonitorTabInfoPane'],
   Workflows_Monitor_Tab: jobsAndWorkflows['WorkflowsMonitorTab'],
   Schedule_Monitor_Tab: jobsAndWorkflows['ScheduleMonitorTab'],
+  Delete_Scheduled_Job_Popup: interactivePopup['deleteScheduledJob'],
   Create_Feature_Set_Popup_Dialog:
     interactivePopup['createFeatureSetPopupDialog'],
   Create_Job: jobsAndWorkflows['CreateJob'],
@@ -54,5 +55,6 @@ module.exports = {
   Register_File_Popup: interactivePopup['registerFilePopup'],
   Files_Info_Pane: infoPane['filesInfoPane'],
   Models: models['modelsTab'],
-  Register_Model_Popup: interactivePopup['registerModelPopup']
+  Register_Model_Popup: interactivePopup['registerModelPopup'],
+  View_YAML: interactivePopup['viewYamlPopup']
 }

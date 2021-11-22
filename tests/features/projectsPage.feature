@@ -117,3 +117,12 @@ Feature: MLRun Projects Page
         When select "All Projects" option in "Projects_Dropdown" dropdown on "Projects" wizard
         Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
         And remove "automation-test-name3" MLRun Project with code 204
+
+    @passive
+    Scenario: Verify View YAML action
+        Given open url
+        And wait load page
+        Then select "View YAML" option in action menu on "Projects" wizard in "Projects_Table" table at row with "default" value in "name" column
+        Then verify if "View_YAML" popup dialog appears
+        Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
+        Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
