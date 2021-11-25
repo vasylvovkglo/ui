@@ -33,6 +33,7 @@ Feature: Feature Store Page
         And wait load page
         Then verify "Features" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Features_Tab" wizard should contains "Feature_Store"."Tab_List"
+        Then verify "Add_To_Feature_Vector_Button" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
@@ -585,3 +586,46 @@ Feature: Feature Store Page
         Then verify if "View_YAML" popup dialog appears
         Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
         Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Add to feature vector popup
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Features" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then verify "Features" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then click on "Add_To_Feature_Vector_Button" element on "Feature_Store_Features_Tab" wizard
+        Then verify if "Add_To_Feature_Vector_Popup" popup dialog appears
+        Then verify "Cross_Cancel_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then verify "Project_Name_Dropdown" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then verify "Vector_Name_Dropdown" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then verify "Vector_Tag_Dropdown" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then verify "Cancel_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then verify "Select_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then verify "Create_Feature_Vector_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Create feature vector popup
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Features" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then verify "Features" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then click on "Add_To_Feature_Vector_Button" element on "Feature_Store_Features_Tab" wizard
+        Then verify if "Add_To_Feature_Vector_Popup" popup dialog appears
+        Then click on "Create_Feature_Vector_Button" element on "Add_To_Feature_Vector_Popup" wizard
+        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
+        Then verify "Cross_Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Name_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Tag_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Select_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+

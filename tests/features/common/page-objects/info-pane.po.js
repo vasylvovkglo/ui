@@ -163,6 +163,65 @@ const statisticsInfoPaneTable = {
   }
 }
 
+const inputsTable = {
+  root: '.table__item .inputs_container',
+  header: {
+    root: '',
+    sorters: {}
+  },
+  body: {
+    root: 'ul.table__item_inputs',
+    row: {
+      root: 'li',
+      fields: {
+        name: 'div:nth-of-type(1)',
+        path: 'div:nth-of-type(2)'
+      }
+    }
+  }
+}
+
+const artifactsTable = {
+  root: '.table__item .item-artifacts',
+  header: {
+    root: '',
+    sorters: {}
+  },
+  body: {
+    row: {
+      root: '.item-artifacts__row-wrapper',
+      fields: {
+        name: '.item-artifacts__row-item:nth-of-type(1) span.link',
+        path: '.item-artifacts__row-item:nth-of-type(2) .data-ellipsis',
+        size: '.item-artifacts__row-item:nth-of-type(3) .data-ellipsis',
+        updated: '.item-artifacts__row-item:nth-of-type(4) .data-ellipsis',
+        show_details:
+          '.item-artifacts__row-item:nth-of-type(5) .data-ellipsis a',
+        download:
+          '.item-artifacts__row-item:nth-of-type(6) .download-container svg'
+      }
+    }
+  }
+}
+
+const resultsTable = {
+  root: '.table__item .table__item-results',
+  header: {
+    root: '',
+    sorters: {}
+  },
+  body: {
+    root: '.results-table',
+    row: {
+      root: '.results-table__row',
+      fields: {
+        key: '.results-table__cell:nth-of-type(1)',
+        value: '.results-table__cell:nth-of-type(2)'
+      }
+    }
+  }
+}
+
 // common components
 const header = By.css('div.table__item div.item-header__data h3')
 const updated = By.css('div.table__item div.item-header__data span')
@@ -252,6 +311,24 @@ module.exports = {
     Cross_Close_Button: crossCloseButton,
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
     Overview_Headers: commonTable(infoPaneOverviewHeaders)
+  },
+  workflowsMonitorTabInfoPane: {
+    Arrow_Back: By.css('.workflow-header a.link-back__icon'),
+    Header: By.css('.workflow-header .link-back__title .data-ellipsis'),
+    Updated: updated,
+    Action_Menu: commonActionMenu,
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_Headers: commonTable(infoPaneOverviewHeaders)
+  },
+  inputsInfoPane: {
+    Inputs_Table: commonTable(inputsTable)
+  },
+  artifactsInfoPane: {
+    Artifacts_Table: commonTable(artifactsTable)
+  },
+  resultsInfoPane: {
+    Results_Table: commonTable(resultsTable)
   },
   filesInfoPane: {
     Header: header,

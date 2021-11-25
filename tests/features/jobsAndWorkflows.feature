@@ -658,3 +658,145 @@ Feature: Jobs and workflows
         Then verify if "View_YAML" popup dialog appears
         Then verify "Cross_Cancel_Button" element visibility on "View_YAML" wizard
         Then verify "YAML_Modal_Container" element visibility on "View_YAML" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Workflow List View
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Monitor Workflows" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then verify "Workflows_Monitor_Table" element visibility on "Workflows_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        Then verify "Workflow_List_View_Table" element visibility on "Workflows_Monitor_Tab" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Overview tab Item infopane on Workflow List View Tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflow_List_View_Table" table on "Workflows_Monitor_Tab" wizard
+        Then verify "Arrow_Back" element visibility on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Header" element visibility on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Updated" element visibility on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" element visibility on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" on "Workflows_Monitor_Tab_Info_Pane" wizard should contains "Jobs_Monitor_Tab_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Overview_Headers" on "Workflows_Monitor_Tab_Info_Pane" wizard should contains "Jobs_Monitor_Tab_Info_Pane"."Overview_Headers"
+
+    @passive
+    Scenario: Check all mandatory components on Inputs tab Item infopane on Workflow List View Tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Monitor Workflows" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflow_List_View_Table" table on "Workflows_Monitor_Tab" wizard
+        And select "Inputs" tab in "Info_Pane_Tab_Selector" on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Inputs_Table" element visibility on "Inputs_Info_Pane" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Artifacts tab Item infopane on Workflow List View Tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Monitor Workflows" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflow_List_View_Table" table on "Workflows_Monitor_Tab" wizard
+        And select "Artifacts" tab in "Info_Pane_Tab_Selector" on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Artifacts_Table" element visibility on "Artifacts_Info_Pane" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Results tab Item infopane on Workflow List View Tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Monitor Workflows" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflow_List_View_Table" table on "Workflows_Monitor_Tab" wizard
+        And select "Results" tab in "Info_Pane_Tab_Selector" on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then verify "Results_Table" element visibility on "Results_Info_Pane" wizard
+
+    @passive
+    Scenario: Verify all mandatory component on Re-run Workflow sidebar
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        Then select "Re-run" option in action menu on "Workflows_Monitor_Tab" wizard in "Workflow_List_View_Table" table at row with "test-classifier" value in "name" column
+        And wait load page
+        Then verify "Data_Source_Input_Sources_Table" element visibility in "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Default_Input_Path_Input" element visibility in "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Default_Artifact_Path_Input" element visibility in "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Job_Custom_Parameters_Table" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Parameters_Additional_Settings_Input" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Result_Input" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Turning_Stratedgy_Dropdown" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Criteria_Dropdown" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        When expand "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Volume_Paths_Table" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Resources_Node_Selector_Table" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Memory_Unit_Dropdown" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Memory_Request_Number_Input" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Memory_Limit_Number_Input" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "CPU_Unit_Dropdown" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "CPU_Request_Number_Input" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "CPU_Limit_Number_Input" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "GPU_Limit_Number_Input" element visibility in "Resouces_Accordion" on "New_JobTemplate_Edit" wizard
+        When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Advanced_Environment_Variables_Demo_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Shedule_For_Later_Button" element visibility on "New_JobTemplate_Edit" wizard
+        Then verify "Run_Now_Button" element visibility on "New_JobTemplate_Edit" wizard
+
+

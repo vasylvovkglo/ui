@@ -89,6 +89,7 @@ module.exports = {
     Data_Container_Hint:
       'The name of the data container that contains the data',
     DataAccess_Key_Hint: 'A platform data-access key',
+    Name_Already_Exists: 'Name already exists',
     Relative_Directory_Path_Hint:
       'A relative directory path within the data container',
     SECRET_INPUT_HINT:

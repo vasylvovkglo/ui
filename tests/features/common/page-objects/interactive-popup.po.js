@@ -164,5 +164,57 @@ module.exports = {
     YAML_Modal_Container: By.css(
       'div.pop-up-dialog div.yaml-modal-container pre'
     )
+  },
+  createNewSecretPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    New_Secret_Key_Input: inputGroup(
+      generateInputGroup(
+        '.secrets__form-input:nth-of-type(2) .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    New_Secret_Value_Input: inputGroup(
+      generateInputGroup(
+        '.secrets__form-input:nth-of-type(3) .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    Cancel_Button: By.css('div.pop-up-dialog button.btn-label'),
+    Save_Button: By.css(
+      '.pop-up-dialog .secrets__footer-container .btn.btn-primary'
+    )
+  },
+  addToFeatureVectorPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Project_Name_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .project-name')
+    ),
+    Vector_Name_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .vector-name')
+    ),
+    Vector_Tag_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .vector-tag')
+    ),
+    Cancel_Button: commonCancelButton,
+    Select_Button: commonConfirmButton,
+    Create_Feature_Vector_Button: By.css(
+      '.pop-up-dialog .create-feature-vector__btn'
+    )
+  },
+  createFeatureVectorPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Name_Input: By.css('.pop-up-dialog .vector-name-wrapper input'),
+    Tag_Input: By.css('.pop-up-dialog .vector-tag-wrapper input'),
+    Description_Input: By.css('.pop-up-dialog .text-area-wrapper textarea'),
+    Labels_Input: By.css('.pop-up-dialog .labels-container .chips-wrapper'),
+    Cancel_Button: commonCancelButton,
+    Select_Button: commonConfirmButton
   }
 }

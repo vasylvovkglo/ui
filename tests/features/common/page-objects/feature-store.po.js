@@ -253,7 +253,7 @@ module.exports = {
   featuresTab: {
     Feature_Store_Tab_Selector: featureStoreTabSelector,
     Add_To_Feature_Vector_Button: By.css(
-      'div.feature-store-container div.content__action-bar div.add-to-feature-vector button'
+      'div.content__action-bar div.data-ellipsis  button.btn-secondary'
     ),
     Table_Name_Filter_Input: commonNameFilterInput,
     Table_Label_Filter_Input: commonLabelFilterInput,
