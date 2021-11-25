@@ -52,3 +52,13 @@ Feature: MLRun Project Page
         Then verify "Discard_Button" element visibility on "Project_Members_Popup" wizard
         Then verify "Apply_Button" element visibility on "Project_Members_Popup" wizard
         Then verify "Fotter_Annotation_Label" element visibility on "Project_Members_Popup" wizard
+
+    @passive
+    Scenario: Check MLRun logo redirection
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on "MLRun_Logo" element on "commonPagesHeader" wizard
+        And wait load page
+        Then verify "Projects_Table" element visibility on "Projects" wizard

@@ -5,7 +5,7 @@ Feature: Project Settings page
 
     @passive
     @inProgress
-    Scenario: Ferify all mandatory components on General Tab
+    Scenario: Verify all mandatory components on General Tab
         Given open url
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
@@ -17,7 +17,7 @@ Feature: Project Settings page
         Then verify "Artifact_Path_Input" on "Project_Settings_General_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Parameters_Table" element visibility on "Project_Settings_General_Tab" wizard
 
-    Scenario: Ferify Parameters Table on General Tab
+    Scenario: Verify Parameters Table on General Tab
         * create "automation-test-name5" MLRun Project with code 200
         Given open url
         And click on cell with value "automation-test-name5" in "name" column in "Projects_Table" table on "Projects" wizard
@@ -58,3 +58,14 @@ Feature: Project Settings page
             | key0 | value0 |
             | key6 | value6 |
         And remove "automation-test-name5" MLRun Project with code 204
+
+    @passive
+    Scenario: Check MLRun logo redirection
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on "Project_Settings_Button" element on "Project" wizard
+        And click on "MLRun_Logo" element on "commonPagesHeader" wizard
+        And wait load page
+        Then verify "Projects_Table" element visibility on "Projects" wizard
