@@ -55,6 +55,8 @@ module.exports = {
   Delete_Function_Popup: interactivePopup['deleteFunction'],
   Create_ML_Function_Popup: interactivePopup['createMLFunctionPopup'],
   Project_Settings_General_Tab: projectsSettings['generalTab'],
+  Change_Project_Owner_Popup: interactivePopup['changeProjectOwnerPopup'],
+  Project_Members_Popup: interactivePopup['projectMembersPopup'],
   Projects_Settings_Secret_Tab: projectsSettings['secretsTab'],
   Create_New_Secret_Popup: interactivePopup['createNewSecretPopup'],
   Files: files['filesTab'],

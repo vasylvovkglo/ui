@@ -107,6 +107,7 @@ module.exports = {
   Label_Hint: {
     New_Job_Volumes:
       'Volumes that define data paths and the required information for accessing the data from the function',
+    Members_Hint: 'Some of the members might be user groups',
     Files_Hash:
       'Represents hash of the data. when the data changes the hash would change',
     Files_UID:

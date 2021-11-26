@@ -413,6 +413,7 @@ Feature: Feature Store Page
         And wait load page
 
     @passive
+    @debug
     Scenario: Test rows Labels on Feature Store Feature Set new item wizard
         Given open url
         And wait load page
@@ -433,7 +434,7 @@ Feature: Feature Store Page
             | key1\n:\nvalue1 |
             | key2\n:\nvalue2 |
             | key3\n:\nvalue3 |
-        When click on "remove_btn" in "Labels_Table" table on "New_Feature_Set" wizard
+        When click on "remove_btn" in "Labels_Table" table on "New_Feature_Set" wizard with offset "false" 
             |      label      |
             | key1\n:\nvalue1 |
             | key3\n:\nvalue3 |
