@@ -40,6 +40,24 @@ const parametersTable = {
   }
 }
 
+const secretsTable = {
+  root: '.settings__card-content',
+  header: {},
+  body: {
+    offset: 1,
+    row: {
+      root: '.secret-row',
+      fields: {
+        key: '.secret__cell:nth-of-type(1)',
+        edit_btn:
+          '.secret__actions .data-ellipsis:nth-of-type(1) .action__button',
+        remove_btn:
+          '.secret__actions .data-ellipsis:nth-of-type(2) .action__button'
+      }
+    }
+  }
+}
+
 module.exports = {
   generalTab: {
     Project_Settings_Tab_Selector: commonTable(tabSelector),
@@ -77,5 +95,9 @@ module.exports = {
     Parameters_Table_Discard_Row_Button: By.css(
       '.key-value-table.settings__params .table-row.no-hover button:nth-of-type(2)'
     )
+  },
+  secretsTab: {
+    Secrets_Table: commonTable(secretsTable),
+    Add_Secret_Button: By.css('.secret__row .new-secret__button')
   }
 }

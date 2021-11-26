@@ -371,7 +371,9 @@ module.exports = {
     Jobs_Monitor_Table: commonTable(jobsMonitorTable)
   },
   WorkflowsMonitorTab: {
-    Workflows_Monitor_Table: commonTable(workflowsMonitorTable)
+    Workflows_Monitor_Table: commonTable(workflowsMonitorTable),
+    Toggle_View_Button: By.css('.workflow-header .actions .toggle-view-btn'),
+    Workflow_List_View_Table: commonTable(jobsMonitorTable)
   },
   ScheduleMonitorTab: {
     Table_Name_Filter_Input: inputGroup(

@@ -1,12 +1,57 @@
 import inputGroup from '../components/input-group.component'
 import dropdownComponent from '../components/dropdown.component'
+import commonTable from '../components/table.component'
+import labelComponent from '../components/label.component'
+import checkboxComponent from '../components/checkbox.component'
 
 import {
+  generateLabelGroup,
   generateInputGroup,
   generateDropdownGroup
 } from '../../common-tools/common-tools'
 
 const { By } = require('selenium-webdriver')
+
+const memberOverviewLabelsTable = {
+  root: '#overlay_container .pop-up-dialog .info-row',
+  header: {},
+  body: {
+    root: 'members-overview',
+    row: {
+      root: '.member-overview',
+      fields: {
+        name: ''
+      }
+    }
+  }
+}
+
+const membersTable = {
+  root: ' #overlay_container .pop-up-dialog .members-table',
+  header: {},
+  body: {
+    root: '.table-body',
+    offset: 0,
+    row: {
+      root: '.table-row',
+      fields: {
+        name: '.member-name',
+        role_dropdown: {
+          componentType: dropdownComponent,
+          structure: generateDropdownGroup(
+            '.member-roles .select',
+            false,
+            false,
+            false
+          )
+        },
+        delete_btn: '.member-actions button'
+      }
+    }
+  }
+}
+
+// Common components
 
 const commonCancelButton = By.css(
   'div.pop-up-dialog button.pop-up-dialog__btn_cancel'
@@ -164,5 +209,122 @@ module.exports = {
     YAML_Modal_Container: By.css(
       'div.pop-up-dialog div.yaml-modal-container pre'
     )
+  },
+  changeProjectOwnerPopup: {
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Title: commonTitle,
+    Search_Input_Dropdown: dropdownComponent(
+      generateDropdownGroup(
+        '.pop-up-dialog .owner-table',
+        '.input-wrapper .input', //open component subLocator
+        '.members-list .member-row', // options sublocator
+        '.member-name' // option name subLocator
+      )
+    ),
+    Discard_Button: commonCancelButton,
+    Apply_Button: By.css('.pop-up-dialog .data-ellipsis button.btn-secondary'),
+    Fotter_Annotation_Label: By.css(
+      '.change-owner__pop-up > .pop-up-dialog .footer-annotation'
+    )
+  },
+  projectMembersPopup: {
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Title: commonTitle,
+    Member_Overview_Labels_Table: commonTable(memberOverviewLabelsTable),
+    Member_Overview_Tooltip: labelComponent(
+      generateLabelGroup(
+        '#overlay_container .pop-up-dialog .info-row', // root
+        '', // empty sublocator
+        true // for single hint
+      )
+    ),
+    Invate_New_Members_Button: By.css(
+      ' #overlay_container .pop-up-dialog .info-row .invite-new-members-btn'
+    ),
+    Members_Table: commonTable(membersTable),
+    Members_Filter_Input: inputGroup(
+      generateInputGroup(
+        ' #overlay_container .pop-up-dialog .members-table .table-header .input-wrapper',
+        true,
+        false,
+        false
+      )
+    ),
+    Role_Filter_Dropdown: dropdownComponent(
+      generateDropdownGroup(
+        '.member-roles .select', //root
+        false, // open component default subLocator
+        false, // options default sublocator
+        false // option name default subLocator
+      )
+    ),
+    Notify_by_Email_Checbox: checkboxComponent({
+      root:
+        '#overlay_container .pop-up-dialog .footer-actions .notify-by-email',
+      elements: {
+        checkbox: 'svg[class]',
+        name: '',
+        icon: ''
+      }
+    }),
+    Discard_Button: commonCancelButton,
+    Apply_Button: By.css(
+      ' #overlay_container .pop-up-dialog .data-ellipsis button.btn-secondary'
+    ),
+    Fotter_Annotation_Label: By.css(
+      ' #overlay_container .pop-up-dialog .footer-annotation'
+    )
+  },
+  createNewSecretPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    New_Secret_Key_Input: inputGroup(
+      generateInputGroup(
+        '.secrets__form-input:nth-of-type(2) .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    New_Secret_Value_Input: inputGroup(
+      generateInputGroup(
+        '.secrets__form-input:nth-of-type(3) .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    Cancel_Button: By.css('div.pop-up-dialog button.btn-label'),
+    Save_Button: By.css(
+      '.pop-up-dialog .secrets__footer-container .btn.btn-primary'
+    )
+  },
+  addToFeatureVectorPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Project_Name_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .project-name')
+    ),
+    Vector_Name_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .vector-name')
+    ),
+    Vector_Tag_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .vector-tag')
+    ),
+    Cancel_Button: commonCancelButton,
+    Select_Button: commonConfirmButton,
+    Create_Feature_Vector_Button: By.css(
+      '.pop-up-dialog .create-feature-vector__btn'
+    )
+  },
+  createFeatureVectorPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Name_Input: By.css('.pop-up-dialog .vector-name-wrapper input'),
+    Tag_Input: By.css('.pop-up-dialog .vector-tag-wrapper input'),
+    Description_Input: By.css('.pop-up-dialog .text-area-wrapper textarea'),
+    Labels_Input: By.css('.pop-up-dialog .labels-container .chips-wrapper'),
+    Cancel_Button: commonCancelButton,
+    Select_Button: commonConfirmButton
   }
 }

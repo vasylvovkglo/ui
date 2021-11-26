@@ -69,3 +69,45 @@ Feature: Project Settings page
         And click on "MLRun_Logo" element on "commonPagesHeader" wizard
         And wait load page
         Then verify "Projects_Table" element visibility on "Projects" wizard
+
+    @passive
+    Scenario: Verify all mandatory components on Secrets tab and Create New Secret Popup
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on "Project_Settings_Button" element on "Project" wizard
+        And wait load page
+        And select "Secrets" tab in "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard
+        And wait load page
+        Then verify "Secrets_Table" element visibility on "Projects_Settings_Secret_Tab" wizard
+        Then click on "Add_Secret_Button" element on "Projects_Settings_Secret_Tab" wizard
+        Then verify if "Create_New_Secret_Popup" popup dialog appears
+        Then verify "Cross_Cancel_Button" element visibility on "Create_New_Secret_Popup" wizard
+        Then verify "New_Secret_Key_Input" element visibility on "Create_New_Secret_Popup" wizard
+        Then type value "   " to "New_Secret_Key_Input" field on "Create_New_Secret_Popup" wizard
+        Then verify "New_Secret_Key_Input" on "Create_New_Secret_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then verify "New_Secret_Value_Input" element visibility on "Create_New_Secret_Popup" wizard
+        Then type value "   " to "New_Secret_Value_Input" field on "Create_New_Secret_Popup" wizard
+        Then verify "New_Secret_Value_Input" on "Create_New_Secret_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then verify "Cancel_Button" element visibility on "Create_New_Secret_Popup" wizard
+        Then verify "Save_Button" element visibility on "Create_New_Secret_Popup" wizard
+
+    @inProgress
+    Scenario: Verify Secrets table on Secrets tab
+        * create "automation-test-name6" MLRun Project with code 200
+        Given open url
+        And click on cell with value "automation-test-name6" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on "Project_Settings_Button" element on "Project" wizard
+        And wait load page
+        And select "Secrets" tab in "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard
+        And wait load page
+        Then click on "Add_Secret_Button" element on "Projects_Settings_Secret_Tab" wizard
+        Then type value "test" to "New_Secret_Key_Input" field on "Create_New_Secret_Popup" wizard
+        Then type value "1234" to "New_Secret_Value_Input" field on "Create_New_Secret_Popup" wizard
+        Then click on "Save_Button" element on "Create_New_Secret_Popup" wizard
+        Then click on "Add_Secret_Button" element on "Projects_Settings_Secret_Tab" wizard
+        Then type value "test" to "New_Secret_Key_Input" field on "Create_New_Secret_Popup" wizard
+        Then verify "New_Secret_Key_Input" on "Create_New_Secret_Popup" wizard should display warning "Input_Hint"."Name_Already_Exists"
+        And remove "automation-test-name6" MLRun Project with code 204
