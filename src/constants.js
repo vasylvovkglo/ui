@@ -21,6 +21,8 @@ export const V3IO_INPUT_PATH_SCHEME = 'v3io:///'
 
 export const FETCH_FRONTEND_SPEC_SUCCESS = 'FETCH_FRONTEND_SPEC_SUCCESS'
 
+export const STATUS_CODE_FORBIDDEN = 403
+
 /*=========== PAGES & TABS =============*/
 
 export const PROJECTS_PAGE = 'PROJECTS'
@@ -43,6 +45,7 @@ export const DATASETS_TAB = 'datasets'
 export const FEATURES_TAB = 'features'
 export const FEATURE_SETS_TAB = 'feature-sets'
 export const FEATURE_VECTORS_TAB = 'feature-vectors'
+export const ADD_TO_FEATURE_VECTOR_TAB = 'add-to-feature-vector'
 
 export const FUNCTIONS_PAGE = 'FUNCTIONS'
 export const ARTIFACTS_PAGE = 'ARTIFACTS'
@@ -119,6 +122,7 @@ export const FETCH_FUNCTION_TEMPLATE_BEGIN = 'FETCH_FUNCTION_TEMPLATE_BEGIN'
 export const FETCH_FUNCTION_TEMPLATE_FAILURE = 'FETCH_FUNCTION_TEMPLATE_FAILURE'
 export const FETCH_FUNCTION_TEMPLATE_SUCCESS = 'FETCH_FUNCTION_TEMPLATE_SUCCESS'
 export const FUNCTION_TYPE_JOB = 'job'
+export const FUNCTION_TYPE_LOCAL = 'local'
 export const FUNCTION_TYPE_SERVING = 'serving'
 export const GET_FUNCTION_WITH_HASH_BEGIN = 'GET_FUNCTION_WITH_HASH_BEGIN'
 export const GET_FUNCTION_WITH_HASH_FAILURE = 'GET_FUNCTION_WITH_HASH_FAILURE'
@@ -172,6 +176,7 @@ export const FETCH_ARTIFACTS_SUCCESS = 'FETCH_ARTIFACTS_SUCCESS'
 export const REMOVE_ARTIFACTS = 'REMOVE_ARTIFACTS'
 export const REMOVE_ARTIFACTS_ERROR = 'REMOVE_ARTIFACTS_ERROR'
 export const SHOW_ARTIFACT_PREVIEW = 'SHOW_ARTIFACT_PREVIEW'
+export const ARTIFACT_PREVIEW_TABLE_ROW_LIMIT = 100
 
 /*=========== FILES =============*/
 
@@ -288,9 +293,9 @@ export const SET_PROJECT_PARAMS = 'SET_PROJECT_PARAMS'
 export const SET_PROJECT_SECRETS = 'SET_PROJECT_SECRETS'
 export const SET_PROJECT_SETTINGS = 'SET_PROJECT_SETTINGS'
 export const FETCH_PROJECT_BEGIN = 'FETCH_PROJECT_BEGIN'
-export const FETCH_PROJECT_COUNTERS_BEGIN = 'FETCH_PROJECT_COUNTERS_BEGIN'
-export const FETCH_PROJECT_COUNTERS_FAILURE = 'FETCH_PROJECT_COUNTERS_FAILURE'
-export const FETCH_PROJECT_COUNTERS_SUCCESS = 'FETCH_PROJECT_COUNTERS_SUCCESS'
+export const FETCH_PROJECT_SUMMARY_BEGIN = 'FETCH_PROJECT_SUMMARY_BEGIN'
+export const FETCH_PROJECT_SUMMARY_FAILURE = 'FETCH_PROJECT_SUMMARY_FAILURE'
+export const FETCH_PROJECT_SUMMARY_SUCCESS = 'FETCH_PROJECT_SUMMARY_SUCCESS'
 export const FETCH_PROJECT_DATASETS_BEGIN = 'FETCH_PROJECT_DATASETS_BEGIN'
 export const FETCH_PROJECT_DATASETS_FAILURE = 'FETCH_PROJECT_DATASETS_FAILURE'
 export const FETCH_PROJECT_DATASETS_SUCCESS = 'FETCH_PROJECT_DATASETS_SUCCESS'
@@ -350,7 +355,7 @@ export const REMOVE_JOB_LOGS = 'REMOVE_JOB_LOGS'
 export const REMOVE_NEW_PROJECT = 'REMOVE_NEW_PROJECT'
 export const REMOVE_NEW_PROJECT_ERROR = 'REMOVE_NEW_PROJECT_ERROR'
 export const REMOVE_PROJECTS = 'REMOVE_PROJECTS'
-export const REMOVE_PROJECT_COUNTERS = 'REMOVE_PROJECT_COUNTERS'
+export const REMOVE_PROJECT_SUMMARY = 'REMOVE_PROJECT_SUMMARY'
 export const REMOVE_PROJECT_DATA = 'REMOVE_PROJECT_DATA'
 export const SET_NEW_PROJECT_DESCRIPTION = 'SET_NEW_PROJECT_DESCRIPTION'
 export const SET_NEW_PROJECT_NAME = 'SET_NEW_PROJECT_NAME'
@@ -422,12 +427,13 @@ export const UPDATE_FEATURE_VECTOR = 'UPDATE_FEATURE_VECTOR'
 
 /*=========== FILTERS =============*/
 
-export const SET_FILTERS = 'SET_FILTERS'
-export const SET_FILTER_TAG_OPTIONS = 'SET_FILTER_TAG_OPTIONS'
 export const REMOVE_FILTERS = 'REMOVE_FILTERS'
 export const INIT_GROUP_FILTER = 'name'
 export const INIT_STATE_FILTER = 'all'
 export const INIT_TAG_FILTER = 'latest'
+export const SET_FILTERS = 'SET_FILTERS'
+export const SET_FILTER_TAG_OPTIONS = 'SET_FILTER_TAG_OPTIONS'
+export const SET_FILTER_PROJECT_OPTIONS = 'SET_FILTER_PROJECT_OPTIONS'
 
 export const TREE_FILTER = 'tree'
 export const TAG_FILTER = 'tag'
@@ -440,6 +446,7 @@ export const ITERATIONS_FILTER = 'iterations'
 export const DATE_RANGE_TIME_FILTER = 'dateRangeTime'
 export const SHOW_UNTAGGED_FILTER = 'showUntagged'
 export const SORT_BY = 'sortBy'
+export const PROJECT_FILTER = 'project'
 
 /*=========== BUTTONS =============*/
 
@@ -458,3 +465,24 @@ export const ENV_VARIABLE_TYPE_VALUE = 'value'
 export const ENV_VARIABLE_TYPE_SECRET = 'secret'
 
 export const PANEL_DEFAULT_ACCESS_KEY = '$generate'
+
+/*=========== VALITATION =============*/
+
+export const validation = {
+  BEGIN_END_NOT_WITH: 'Must not begin and end with',
+  BEGIN_END_WITH: 'Must begin and end with',
+  BEGIN_NOT_WITH: 'Must not begin with',
+  BEGIN_WITH: 'Must begin with',
+  END_NOT_WITH: 'Must not end with',
+  END_WITH: 'Must end with',
+  MUST_CONTAIN_EXACTLY_ONE: 'Must contain exactly one',
+  MUST_HAVE_DOT_AFTER_AT: 'Must have at least one . after @',
+  MUST_NOT_BE: 'Must not be',
+  NO_CONSECUTIVE_CHARACTER: 'No consecutive characters',
+  ONLY_AT_THE_BEGINNING: 'Only at the beginning',
+  VALID_CHARACTERS: 'Valid characters'
+}
+
+/*=========== STATUS CODES =============*/
+
+export const CONFLICT = 409

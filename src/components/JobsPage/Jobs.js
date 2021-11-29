@@ -3,11 +3,10 @@ import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { isEmpty, cloneDeep } from 'lodash'
 
-import Button from '../../common/Button/Button'
+import ConfirmDialog from '../../common/ConfirmDialog/ConfirmDialog'
 import Content from '../../layout/Content/Content'
 import JobsPanel from '../JobsPanel/JobsPanel'
 import Loader from '../../common/Loader/Loader'
-import PopUpDialog from '../../common/PopUpDialog/PopUpDialog'
 import Workflow from '../Workflow/Workflow'
 import Details from '../Details/Details'
 
@@ -17,6 +16,7 @@ import jobsActions from '../../actions/jobs'
 import notificationActions from '../../actions/notification'
 import workflowsActions from '../../actions/workflow'
 
+import { useDemoMode } from '../../hooks/demoMode.hook'
 import { generateKeyValues } from '../../utils'
 import { generatePageData } from './jobsData'
 import { getJobIdentifier } from '../../utils/getUniqueIdentifier'
@@ -25,7 +25,6 @@ import {
   datePickerOptions,
   PAST_WEEK_DATE_OPTION
 } from '../../utils/datePicker.util'
-
 import {
   DANGER_BUTTON,
   INIT_GROUP_FILTER,
@@ -36,7 +35,6 @@ import {
   SCHEDULE_TAB,
   TERTIARY_BUTTON
 } from '../../constants'
-import { isDemoMode } from '../../utils/helper'
 import { parseJob } from '../../utils/parseJob'
 import { parseFunction } from '../../utils/parseFunction'
 import functionsActions from '../../actions/functions'
@@ -62,7 +60,6 @@ const Jobs = ({
   handleRunScheduledJob,
   history,
   jobsStore,
-  location,
   match,
   removeFunction,
   removeFunctionLogs,
@@ -74,7 +71,6 @@ const Jobs = ({
   setFilters,
   setLoading,
   setNotification,
-  subPage,
   workflowsStore
 }) => {
   const [jobs, setJobs] = useState([])
@@ -82,6 +78,9 @@ const Jobs = ({
   const [selectedJob, setSelectedJob] = useState({})
   const [editableItem, setEditableItem] = useState(null)
   const [selectedFunction, setSelectedFunction] = useState({})
+  const [workflowsViewMode, setWorkflowsViewMode] = useState('graph')
+  const [dataIsLoaded, setDataIsLoaded] = useState(false)
+  const isDemoMode = useDemoMode()
 
   const dispatch = useDispatch()
   let fetchFunctionLogsTimeout = useRef(null)
@@ -148,7 +147,7 @@ const Jobs = ({
 
   const handleSuccessRerunJob = tab => {
     if (tab === match.params.pageTab) {
-      refreshJobs()
+      refreshJobs(filtersStore)
     }
 
     setEditableItem(null)
@@ -162,8 +161,8 @@ const Jobs = ({
   const onRemoveScheduledJob = scheduledJob => {
     setConfirmData({
       item: scheduledJob,
-      title: `Delete scheduled job "${scheduledJob.name}"?`,
-      description: 'Deleted scheduled jobs can not be restored.',
+      header: 'Delete scheduled job?',
+      message: `You try to delete scheduled job "${scheduledJob.name}". Deleted scheduled jobs can not be restored.`,
       btnConfirmLabel: 'Delete',
       btnConfirmType: DANGER_BUTTON,
       rejectHandler: () => {
@@ -220,9 +219,7 @@ const Jobs = ({
           },
           spec: {
             function: job.function,
-            handler:
-              Object.values(functionData?.spec?.entry_points ?? {})[0]?.name ??
-              '',
+            handler: job?.handler ?? '',
             hyperparams: job.hyperparams,
             input_path: job.input_path ?? '',
             inputs: job.inputs ?? {},
@@ -241,7 +238,7 @@ const Jobs = ({
   const handleAbortJob = job => {
     abortJob(match.params.projectName, job)
       .then(() => {
-        refreshJobs()
+        refreshJobs(filtersStore)
         setNotification({
           status: 200,
           id: Math.random(),
@@ -262,7 +259,8 @@ const Jobs = ({
   const onAbortJob = job => {
     setConfirmData({
       item: job,
-      title: `Abort job "${job.name}"?`,
+      header: 'Abort job?',
+      message: `You try to abort job "${job.name}".`,
       btnConfirmLabel: 'Abort',
       btnConfirmType: DANGER_BUTTON,
       rejectHandler: () => {
@@ -300,7 +298,7 @@ const Jobs = ({
   const pageData = useCallback(
     generatePageData(
       match.params.pageTab,
-      location.search,
+      isDemoMode,
       onRemoveScheduledJob,
       handleRunJob,
       handleEditScheduleJob,
@@ -319,9 +317,9 @@ const Jobs = ({
     ),
     [
       match.params.pageTab,
-      location.search,
       match.params.workflowId,
       appStore.frontendSpec.jobs_dashboard_url,
+      isDemoMode,
       selectedJob,
       selectedFunction
     ]
@@ -342,18 +340,40 @@ const Jobs = ({
             status: error?.response?.status || 400,
             id: Math.random(),
             message: 'Failed to fetch jobs',
-            retry: () => refreshJobs(filtersStore.filters)
+            retry: () => refreshJobs(filters)
           })
         })
     },
-    [
-      fetchJobs,
-      filtersStore.filters,
-      match.params.pageTab,
-      match.params.projectName,
-      setNotification
-    ]
+    [fetchJobs, match.params.pageTab, match.params.projectName, setNotification]
   )
+
+  const fetchCurrentJob = useCallback(() => {
+    fetchJob(match.params.projectName, match.params.jobId)
+      .then(job => {
+        setSelectedJob(parseJob(job))
+      })
+      .catch(error => {
+        setNotification({
+          status: error?.response?.status || 400,
+          id: Math.random(),
+          message: 'Failed to fetch job'
+        })
+        history.push(
+          match.url
+            .split('/')
+            .splice(0, match.path.split('/').indexOf(':workflowId') + 1)
+            .join('/')
+        )
+      })
+  }, [
+    fetchJob,
+    history,
+    match.params.jobId,
+    match.params.projectName,
+    match.path,
+    match.url,
+    setNotification
+  ])
 
   useEffect(() => {
     if (!isEmpty(selectedJob) && match.params.pageTab === MONITOR_JOBS_TAB) {
@@ -387,23 +407,7 @@ const Jobs = ({
       match.params.jobId &&
       (isEmpty(selectedJob) || match.params.jobId !== selectedJob.uid)
     ) {
-      fetchJob(match.params.projectName, match.params.jobId)
-        .then(job => {
-          setSelectedJob(parseJob(job))
-        })
-        .catch(error => {
-          setNotification({
-            status: error?.response?.status || 400,
-            id: Math.random(),
-            message: 'Failed to fetch job'
-          })
-          history.push(
-            match.url
-              .split('/')
-              .splice(0, match.path.split('/').indexOf(':workflowId') + 1)
-              .join('/')
-          )
-        })
+      fetchCurrentJob()
     } else if (!isEmpty(selectedJob) && !match.params.jobId) {
       setSelectedJob({})
       removeJob()
@@ -438,7 +442,7 @@ const Jobs = ({
       removeFunction()
     }
   }, [
-    fetchJob,
+    fetchCurrentJob,
     getFunctionWithHash,
     history,
     match.params.functionHash,
@@ -455,7 +459,7 @@ const Jobs = ({
   ])
 
   useEffect(() => {
-    if (isEmpty(selectedJob) && !match.params.jobId) {
+    if (isEmpty(selectedJob) && !match.params.jobId && !dataIsLoaded) {
       let filters = {}
 
       if (match.params.pageTab === MONITOR_JOBS_TAB) {
@@ -474,18 +478,23 @@ const Jobs = ({
       }
 
       refreshJobs(filters)
-
-      return () => {
-        setJobs([])
-      }
+      setDataIsLoaded(true)
     }
   }, [
+    dataIsLoaded,
     match.params.jobId,
     match.params.pageTab,
     refreshJobs,
     selectedJob,
     setFilters
   ])
+
+  useEffect(() => {
+    return () => {
+      setJobs([])
+      setDataIsLoaded(false)
+    }
+  }, [match.params.projectName, match.params.pageTab])
 
   const getWorkflows = useCallback(() => {
     fetchWorkflows(match.params.projectName)
@@ -494,14 +503,6 @@ const Jobs = ({
   useEffect(() => {
     if (match.params.pageTab === SCHEDULE_TAB) {
       setFilters({ groupBy: 'none' })
-    } else if (
-      match.params.pageTab === MONITOR_JOBS_TAB &&
-      !match.params.jobId
-    ) {
-      if (!isDemoMode(location.search)) {
-        getWorkflows()
-      }
-      setFilters({ groupBy: INIT_GROUP_FILTER })
     } else if (match.params.pageTab === MONITOR_WORKFLOWS_TAB) {
       if (match.params.workflowId) {
         setFilters({ groupBy: 'none' })
@@ -510,14 +511,22 @@ const Jobs = ({
         setFilters({ groupBy: 'workflow' })
       }
     }
+  }, [getWorkflows, match.params.pageTab, match.params.workflowId, setFilters])
+
+  useEffect(() => {
+    if (match.params.pageTab === MONITOR_JOBS_TAB && !match.params.jobId) {
+      if (!isDemoMode) {
+        getWorkflows()
+      }
+
+      setFilters({ groupBy: INIT_GROUP_FILTER })
+    }
   }, [
     getWorkflows,
+    isDemoMode,
+    match.params.jobId,
     match.params.pageTab,
-    match.params.workflowId,
-    location.search,
-    subPage,
-    setFilters,
-    match.params.jobId
+    setFilters
   ])
 
   const handleSelectJob = item => {
@@ -552,7 +561,7 @@ const Jobs = ({
           `/projects/${match.params.projectName}/jobs/${match.params.pageTab}`
         )
         setEditableItem(null)
-        refreshJobs()
+        refreshJobs(filtersStore)
       })
       .catch(error => {
         dispatch(editJobFailure(error.message))
@@ -588,12 +597,15 @@ const Jobs = ({
             selectedFunction={selectedFunction}
             selectedJob={selectedJob}
             setLoading={setLoading}
+            setWorkflowsViewMode={setWorkflowsViewMode}
+            workflowsViewMode={workflowsViewMode}
           />
         ) : !isEmpty(selectedJob) ? (
           <Details
             actionsMenu={pageData.actionsMenu}
             detailsMenu={pageData.details.menu}
             handleCancel={handleCancel}
+            handleRefresh={fetchCurrentJob}
             isDetailsScreen
             match={match}
             pageData={pageData}
@@ -602,25 +614,21 @@ const Jobs = ({
         ) : null}
       </Content>
       {confirmData && (
-        <PopUpDialog
-          headerText={confirmData.title}
+        <ConfirmDialog
+          cancelButton={{
+            handler: confirmData.rejectHandler,
+            label: 'Cancel',
+            variant: TERTIARY_BUTTON
+          }}
           closePopUp={confirmData.rejectHandler}
-        >
-          <div>{confirmData.description}</div>
-          <div className="pop-up-dialog__footer-container">
-            <Button
-              variant={TERTIARY_BUTTON}
-              label="Cancel"
-              onClick={confirmData.rejectHandler}
-              className="pop-up-dialog__btn_cancel"
-            />
-            <Button
-              variant={confirmData.btnConfirmType}
-              label={confirmData.btnConfirmLabel}
-              onClick={() => confirmData.confirmHandler(confirmData.item)}
-            />
-          </div>
-        </PopUpDialog>
+          confirmButton={{
+            handler: () => confirmData.confirmHandler(confirmData.item),
+            label: confirmData.btnConfirmLabel,
+            variant: confirmData.btnConfirmType
+          }}
+          header={confirmData.header}
+          message={confirmData.message}
+        />
       )}
       {(jobsStore.loading ||
         workflowsStore.workflows.loading ||
@@ -652,14 +660,9 @@ const Jobs = ({
   )
 }
 
-Jobs.defaultProps = {
-  subPage: ''
-}
-
 Jobs.propTypes = {
   history: PropTypes.shape({}).isRequired,
-  match: PropTypes.shape({}).isRequired,
-  subPage: PropTypes.string
+  match: PropTypes.shape({}).isRequired
 }
 
 export default connect(
