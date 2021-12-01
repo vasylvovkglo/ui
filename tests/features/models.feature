@@ -11,7 +11,7 @@ Feature: Models Page
     And click on cell with value "Models" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
     And wait load page
     Then verify "Table_Name_Filter_Input" element visibility on "Models" wizard
-    Then verify "Table_Label_Filter_Input" element visibility on "Models" wizard
+    Then verify "Table_Labels_Filter_Input" element visibility on "Models" wizard
     Then verify "Table_Tree_Filter_Dropdown" element visibility on "Models" wizard
     Then verify "Show_Iterations_Checkbox" element visibility on "Models" wizard
     Then verify "Table_Refresh_Button" element visibility on "Models" wizard
@@ -62,14 +62,14 @@ Feature: Models Page
     Then verify "Cross_Cancel_Button" element visibility on "Register_Model_Popup" wizard
     Then verify "New_File_Name_Input" element visibility on "Register_Model_Popup" wizard
     Then verify "New_File_Name_Input" on "Register_Model_Popup" wizard should display "Input_Hint"."Artifact_Names_Unique"
-    Then type value "   " to "New_File_Name_Input" field on "Register_Model_Popup" wizard
-    Then verify "New_File_Name_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#    Then type value "   " to "New_File_Name_Input" field on "Register_Model_Popup" wizard
+#    Then verify "New_File_Name_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "New_File_Target_Path_Input" element visibility on "Register_Model_Popup" wizard
-    Then type value "   " to "New_File_Target_Path_Input" field on "Register_Model_Popup" wizard
-    Then verify "New_File_Target_Path_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#    Then type value "   " to "New_File_Target_Path_Input" field on "Register_Model_Popup" wizard
+#    Then verify "New_File_Target_Path_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "New_File_Description_Input" element visibility on "Register_Model_Popup" wizard
-    Then type value "   " to "New_File_Description_Input" field on "Register_Model_Popup" wizard
-    Then verify "New_File_Description_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#    Then type value "   " to "New_File_Description_Input" field on "Register_Model_Popup" wizard
+#    Then verify "New_File_Description_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "Cancel_Button" element visibility on "Register_Model_Popup" wizard
     Then verify "Register_Button" element visibility on "Register_Model_Popup" wizard
 

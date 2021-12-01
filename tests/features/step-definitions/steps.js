@@ -9,6 +9,7 @@ import {
   componentIsPresent,
   componentIsVisible,
   verifyText,
+  verifyTextRegExp,
   waitPageLoad,
   deleteAPIMLProject,
   createAPIMLProject,
@@ -238,6 +239,18 @@ Then(
   async function(component, wizard, constStorage, constValue) {
     await waiteUntilComponent(this.driver, pageObjects[wizard][component])
     await verifyText(
+      this.driver,
+      pageObjects[wizard][component],
+      pageObjectsConsts[constStorage][constValue]
+    )
+  }
+)
+
+Then(
+  '{string} component on {string} should be equal {string}.{string}',
+  async function(component, wizard, constStorage, constValue) {
+    await waiteUntilComponent(this.driver, pageObjects[wizard][component])
+    await verifyTextRegExp(
       this.driver,
       pageObjects[wizard][component],
       pageObjectsConsts[constStorage][constValue]

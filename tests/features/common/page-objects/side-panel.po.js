@@ -360,7 +360,7 @@ const resourcesNodeSelectorTable = {
 
 const advancedEnvironmentVariablesTable = {
   root:
-    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section:nth-of-type(2) .job-panel__table',
+    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section',
   header: {
     root: '.table__header',
     sorters: {
@@ -370,25 +370,30 @@ const advancedEnvironmentVariablesTable = {
   },
   body: {
     offset: 1,
-    add_row_btn: '.table__row .add-input',
+    add_row_btn: '.table-row .add-new-item-btn',
     row: {
-      root: 'div[class^=table__row]',
+      root: 'div[class^=table-row]',
       fields: {
-        kind: '.table__cell:nth-of-type(1) .data-ellipsis',
-        value: '.table__cell:nth-of-type(2) .data-ellipsis',
-        delete_btn: '.btn_delete',
-        kind_dropdown: {
-          componentType: dropdownComponent,
-          structure: generateDropdownGroup(
-            '.select',
-            '.select__value',
-            '.select__body .select__item',
-            '.data-ellipsis .data-ellipsis'
+        name: '.table-cell:nth-of-type(1) .data-ellipsis',
+        value: '.table-cell:nth-of-type(2) .data-ellipsis',
+        delete_btn: '.key-value-table__btn',
+        name_input: {
+          componentType: inputGroup,
+          structure: generateInputGroup(
+            '.input-wrapper:nth-of-type(1)',
+            true,
+            false,
+            false
           )
         },
         value_input: {
           componentType: inputGroup,
-          structure: generateInputGroup('.input-wrapper', true, false, false)
+          structure: generateInputGroup(
+            '.input-wrapper:nth-of-type(2)',
+            true,
+            false,
+            false
+          )
         },
         add_row_btn: 'button svg'
       }
@@ -427,7 +432,7 @@ const advancedEnvironmentVariablesDemoTable = {
 
 const advancedSecretsTable = {
   root:
-    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section:nth-of-type(2) .secrets',
+    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .job-panel__section:nth-of-type(2)',
   header: {
     root: '.table__header',
     sorters: {
@@ -530,7 +535,7 @@ const functionEnvironmentVariablesTable = {
       fields: {
         name: '.table-cell__key .data-ellipsis',
         value: '.table-cell__value .data-ellipsis',
-        delete_btn: '.table-cell:nth-of-type(3) .key-value-table__btn',
+        delete_btn: '.table-cell:nth-of-type(2) .key-value-table__btn',
         name_input: {
           componentType: inputGroup,
           structure: generateInputGroup(
@@ -683,7 +688,7 @@ const parametersRuntimeConfigurationTable = {
 
 // common components
 const commonCrossCloseButton = By.css(
-  'div.new-item-side-panel button.panel-title__btn_close'
+  'div.new-item-side-panel button.round-icon-cp__icon'
 )
 
 const commonVolumePathsTableTypeDropdown = dropdownComponent(
@@ -1266,8 +1271,15 @@ module.exports = {
       Advanced_Environment_Variables_Demo_Table: commonTable(
         advancedEnvironmentVariablesDemoTable
       ),
-
       Environment_Variables_Name_Input: inputGroup(
+        generateInputGroup(
+          '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section .input-wrapper:nth-of-type(1)',
+          true,
+          false,
+          true
+        )
+      ),
+      Environment_Variables_Demo_Name_Input: inputGroup(
         generateInputGroup(
           '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body .env-variables-table .table__body .input-row-wrapper .input-wrapper:nth-of-type(1)',
           true,
@@ -1284,6 +1296,14 @@ module.exports = {
         )
       ),
       Environment_Variables_Value_Input: inputGroup(
+        generateInputGroup(
+          '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section .input-wrapper:nth-of-type(2)',
+          true,
+          false,
+          true
+        )
+      ),
+      Environment_Variables_Demo_Value_Input: inputGroup(
         generateInputGroup(
           '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body .env-variables-table .table__body .input-row-wrapper .input-wrapper:nth-of-type(3)',
           true,
@@ -1308,10 +1328,10 @@ module.exports = {
         )
       ),
       Add_Row_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body .env-variables-table .table__body .variables-table__btn.btn-add'
+        '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body .btn-add'
       ),
       Discard_Row_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body .env-variables-table .table__body button[class=variables-table__btn]'
+        '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body button:nth-of-type(2)'
       )
     },
     Shedule_For_Later_Button: By.css(
@@ -1322,7 +1342,9 @@ module.exports = {
     )
   },
   newFunction: {
-    Cross_Close_Button: commonCrossCloseButton,
+    Cross_Close_Button: By.css(
+      'div.new-item-side-panel button.panel-title__btn_close'
+    ),
     General_Accordion: {
       Accordion_Header: By.css(
         '.new-item-side-panel .accordion__container:nth-of-type(1) h5'

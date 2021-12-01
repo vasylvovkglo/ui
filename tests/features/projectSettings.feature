@@ -13,8 +13,8 @@ Feature: Project Settings page
         Then verify "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard should contains "Project_Settings"."Tab_List"
         Then verify "General" tab is activ in "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard
         Then verify "Artifact_Path_Input" element visibility on "Project_Settings_General_Tab" wizard
-        Then type value "   " to "Artifact_Path_Input" field on "Project_Settings_General_Tab" wizard
-        Then verify "Artifact_Path_Input" on "Project_Settings_General_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then type value "   " to "Artifact_Path_Input" field on "Project_Settings_General_Tab" wizard
+#        Then verify "Artifact_Path_Input" on "Project_Settings_General_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Parameters_Table" element visibility on "Project_Settings_General_Tab" wizard
 
     Scenario: Verify Parameters Table on General Tab

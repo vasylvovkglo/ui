@@ -85,6 +85,11 @@ const action = {
     const txt = await element.getText('value')
     expect(txt).equal(value)
   },
+  verifyTextRegExp: async function(driver, component, regexp) {
+    const element = await driver.findElement(component)
+    const txt = await element.getText('value')
+    expect(true).equal(regexp.test(txt))
+  },
   isComponentContainsAttributeValue: async function(
     driver,
     component,

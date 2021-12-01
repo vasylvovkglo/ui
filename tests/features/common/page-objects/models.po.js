@@ -37,7 +37,7 @@ const modelsTable = {
       root: '.table-body__row',
       fields: {
         expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
-        name: '.table-body__cell:nth-of-type(1) a .name-wrapper span',
+        name: '.table-body__cell:nth-of-type(1) a .name-wrapper span.link',
         labels: {
           componentType: dropdownComponent,
           structure: generateDropdownGroup(

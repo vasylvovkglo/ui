@@ -334,7 +334,7 @@ module.exports = {
     ),
     Table_Refresh_Button: tableRefreshButton,
     Table_Expand_Rows_Button: By.css(
-      'div.content__action-bar div.actions div.data-ellipsis:nth-of-type(2) button'
+      'div.content__action-bar div.actions div.round-icon-cp:nth-of-type(2) button'
     ),
     Status_Filter_Dropdown: dropdownComponent(
       generateDropdownGroup(

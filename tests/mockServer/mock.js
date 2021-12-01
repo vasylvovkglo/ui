@@ -329,12 +329,18 @@ function getRun(req, res) {
 }
 
 function getProjectsShedules(req, res) {
-  let collectedShedules = schedules.schedules.filter(
+  let collectedSchedules = schedules.schedules.filter(
     schedule =>
       schedule.scheduled_object.task.metadata.project === req.params['project']
   )
 
-  res.send({ schedules: collectedShedules })
+  if (req.query['name']) {
+    collectedSchedules = collectedSchedules.filter(schedule =>
+      schedule.name.includes(req.query['name'].slice(1))
+    )
+  }
+
+  res.send({ schedules: collectedSchedules })
 }
 
 function getProjectsFeaturesEntities(req, res) {
@@ -382,9 +388,21 @@ function getProjectsFeaturesEntities(req, res) {
     if (req.query['name']) {
       collectedArtifacts = collectedArtifacts.filter(feature => {
         if (req.query['name'].includes('~')) {
-          return feature.feature.name.includes(req.query['name'].slice(1))
+          if (artifact === 'feature-vectors') {
+            return feature.metadata.name.includes(req.query['name'].slice(1))
+          } else if (artifact === 'features') {
+            return feature.feature.name.includes(req.query['name'].slice(1))
+          } else if (artifact === 'entities') {
+            return feature.entity.name.includes(req.query['name'].slice(1))
+          }
         } else {
-          return feature.feature.name === req.query['name']
+          if (artifact === 'feature-vectors') {
+            return feature.metadata.name.includes(req.query['name'].slice(1))
+          } else if (artifact === 'features') {
+            return feature.feature.name === req.query['name']
+          } else if (artifact === 'entities') {
+            return feature.entity.name === req.query['name']
+          }
         }
       })
     }

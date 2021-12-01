@@ -59,35 +59,35 @@ const commonCancelButton = By.css(
 
 const commonDeleteButton = By.css('div.pop-up-dialog button.btn-danger')
 
-const commonDescription = By.css('div.pop-up-dialog > div:not([class])')
+const commonDescription = By.css(
+  'div.pop-up-dialog div.confirm-dialog__message'
+)
 
 const commonCrossCancelButton = By.css(
-  'div.pop-up-dialog div.pop-up-dialog__header-close svg'
+  'div.pop-up-dialog div.pop-up-dialog__btn_close svg'
 )
 const commonNameInput = generateInputGroup(
-  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)',
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
   true,
   true,
   true
 )
 
 const commonTargetPathInput = generateInputGroup(
-  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
-  true,
-  false,
-  true
-)
-
-const commonDescriptionInput = generateInputGroup(
   '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)',
   true,
   false,
   true
 )
 
-const commonConfirmButton = By.css(
-  '.pop-up-dialog .pop-up-dialog__footer-container .btn.btn-primary'
+const commonDescriptionInput = generateInputGroup(
+  '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(4)',
+  true,
+  false,
+  true
 )
+
+const commonConfirmButton = By.css('.pop-up-dialog .btn.btn-primary')
 
 const commonTitle = By.css('div.pop-up-dialog div.pop-up-dialog__header-text')
 
@@ -197,9 +197,30 @@ module.exports = {
   registerModelPopup: {
     Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
-    New_File_Name_Input: inputGroup(commonNameInput),
-    New_File_Target_Path_Input: inputGroup(commonTargetPathInput),
-    New_File_Description_Input: inputGroup(commonDescriptionInput),
+    New_File_Name_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)',
+        true,
+        true,
+        false
+      )
+    ),
+    New_File_Target_Path_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
+        true,
+        true,
+        false
+      )
+    ),
+    New_File_Description_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)',
+        true,
+        true,
+        false
+      )
+    ),
     Cancel_Button: commonCancelButton,
     Register_Button: commonConfirmButton
   },
@@ -320,11 +341,25 @@ module.exports = {
   createFeatureVectorPopup: {
     Title: commonTitle,
     Cross_Cancel_Button: commonCrossCancelButton,
-    Name_Input: By.css('.pop-up-dialog .vector-name-wrapper input'),
-    Tag_Input: By.css('.pop-up-dialog .vector-tag-wrapper input'),
+    Name_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .vector-name-wrapper',
+        true,
+        true,
+        true
+      )
+    ),
+    Tag_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .vector-tag-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
     Description_Input: By.css('.pop-up-dialog .text-area-wrapper textarea'),
     Labels_Input: By.css('.pop-up-dialog .labels-container .chips-wrapper'),
     Cancel_Button: commonCancelButton,
-    Select_Button: commonConfirmButton
+    Create_Button: commonConfirmButton
   }
 }

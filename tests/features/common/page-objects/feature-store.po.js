@@ -73,8 +73,7 @@ const featureSetsTable = {
       root: 'div.table-body__row',
       fields: {
         expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
-        name:
-          'div.table-body__cell:nth-of-type(1) a div.data-ellipsis:nth-of-type(1) span',
+        name: 'div.table-body__cell:nth-of-type(1) a span.link',
         description: 'div.table-body__cell:nth-of-type(2) > div.data-ellipsis',
         labels_table: {
           componentType: commonTable,
@@ -171,6 +170,32 @@ const featureVectorTable = {
   }
 }
 
+const addToFeatureVectorTable = {
+  root: '.table-container .table .table__content',
+  header: {
+    root: 'div.table-head',
+    sorters: {
+      featureName: 'div.table-head__item:nth-of-type(1) div.data-ellipsis',
+      featureSet: 'div.table-head__item:nth-of-type(2) div.data-ellipsis',
+      type: 'div.table-head__item:nth-of-type(3) div.data-ellipsis',
+      entities: 'div.table-head__item:nth-of-type(4) div.data-ellipsis'
+    }
+  },
+  body: {
+    root: 'div.table-body',
+    row: {
+      root: 'div.table-body__row',
+      fields: {
+        expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
+        featureName: 'div.table-body__cell:nth-of-type(1) div.data-ellipsis',
+        featureSet: 'div.table-body__cell:nth-of-type(2) a span.link',
+        type: 'div.table-body__cell:nth-of-type(3) div.data-ellipsis',
+        entities: 'div.table-body__cell:nth-of-type(4) div.chips-wrapper'
+      }
+    }
+  }
+}
+
 // Datasets
 const datasetsTable = {
   root: '.table-container .table .table__content',
@@ -186,7 +211,7 @@ const datasetsTable = {
       root: 'div.table-body__row',
       fields: {
         expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
-        name: 'div.table-body__cell:nth-of-type(1) div.data-ellipsis span.link',
+        name: 'div.table-body__cell:nth-of-type(1) a span.link',
         labels: 'div.table-body__cell:nth-of-type(2)',
         producer:
           'div.table-body__cell:nth-of-type(3) div.data-ellipsis a.link',
@@ -278,5 +303,25 @@ module.exports = {
     Table_Tree_Filter_Dropdown: commonTableTreeFilterDropdown,
     Table_Refresh_Button: tableRefreshButton,
     Feature_Datasets_Table: commonTable(datasetsTable)
+  },
+  addToFeatureVector: {
+    Table_Tree_Filter_Dropdown: commonTableTreeFilterDropdown,
+    Table_Name_Filter_Input: commonNameFilterInput,
+    Table_Label_Filter_Input: commonLabelFilterInput,
+    Table_Projects_Filter_Dropdown: dropdownComponent(
+      generateDropdownGroup(
+        '.content .content__action-bar .filters .select',
+        'svg',
+        '.select__options-list .select__item',
+        ''
+      )
+    ),
+    Table_Refresh_Button: tableRefreshButton,
+    Add_To_Feature_Vector_Table: commonTable(addToFeatureVectorTable),
+    Add_Button: By.css('.features-panel__buttons .btn-primary'),
+    Cancel_Button: By.css('.features-panel__buttons .btn-label'),
+    Features_Panel_Title: By.css(
+      '.features-panel__header-vector .features-panel__header-vector-name'
+    )
   }
 }

@@ -61,7 +61,7 @@ Feature: MLRun Projects Page
         And wait load page
         Then select "Delete" option in action menu on "Projects" wizard in "Projects_Table" table at row with "churn-project-admin" value in "name" column
         Then verify if "Delete_Project" popup dialog appears
-        Then "Description" component on "Delete_Project" should contains "Descriptions"."Delete_Project"
+        Then "Description" component on "Delete_Project" should be equal "Descriptions"."Delete_Project"
         Then verify "Cancel_Button" element visibility on "Delete_Project" wizard
         Then verify "Delete_Button" element visibility on "Delete_Project" wizard
 
@@ -103,20 +103,20 @@ Feature: MLRun Projects Page
         And remove "automation-test-name2" MLRun Project with code 500
 
     Scenario: Unarchive ML Project
-        * create "automation-test-name3" MLRun Project with code 200
+        * create "automation-test-name7" MLRun Project with code 200
         Given open url
         And wait load page
-        Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
-        Then select "Archive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "automation-test-name3" value in "name" column
+        Then check "automation-test-name7" value in "name" column in "Projects_Table" table on "Projects" wizard
+        Then select "Archive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "automation-test-name7" value in "name" column
         Then verify if "Archive_Project" popup dialog appears
         Then click on "Archive_Button" element on "Archive_Project" wizard
-        Then check "automation-test-name3" value not in "name" column in "Projects_Table" table on "Projects" wizard
+        Then check "automation-test-name7" value not in "name" column in "Projects_Table" table on "Projects" wizard
         When select "Archived Projects" option in "Projects_Dropdown" dropdown on "Projects" wizard
-        Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
-        Then select "Unarchive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "automation-test-name3" value in "name" column
+        Then check "automation-test-name7" value in "name" column in "Projects_Table" table on "Projects" wizard
+        Then select "Unarchive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "automation-test-name7" value in "name" column
         When select "All Projects" option in "Projects_Dropdown" dropdown on "Projects" wizard
-        Then check "automation-test-name3" value in "name" column in "Projects_Table" table on "Projects" wizard
-        And remove "automation-test-name3" MLRun Project with code 204
+        Then check "automation-test-name7" value in "name" column in "Projects_Table" table on "Projects" wizard
+        And remove "automation-test-name7" MLRun Project with code 204
 
     @passive
     Scenario: Verify View YAML action

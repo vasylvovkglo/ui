@@ -14,11 +14,11 @@ Feature: Feature Store Page
         Then verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
-        Then type value "   " to "Table_Name_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
-        Then verify "Table_Name_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then type value "   " to "Table_Name_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
+#        Then verify "Table_Name_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
-        Then type value "   " to "Table_Label_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
-        Then verify "Table_Label_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then type value "   " to "Table_Label_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
+#        Then verify "Table_Label_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Feature_Sets_Table" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
 
@@ -297,8 +297,8 @@ Feature: Feature Store Page
         Then verify "Collapse_Button" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "URL_Combobox" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Attributes_Input" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
-        Then type value "   " to "Attributes_Input" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
-        Then verify "Attributes_Input" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then type value "   " to "Attributes_Input" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+#        Then verify "Attributes_Input" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Data_Source_Accordion" is collapsed on "New_Feature_Set" wizard
         Then verify "Accordion_Header" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
@@ -330,8 +330,8 @@ Feature: Feature Store Page
         And verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Set_Name_Input" on "New_Feature_Set" wizard should display "Input_Hint"."Feature_Set_Name_Hint"
-        Then type value "#$@" to "Feature_Set_Name_Input" field on "New_Feature_Set" wizard
-        Then verify "Feature_Set_Name_Input" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then type value "#$@" to "Feature_Set_Name_Input" field on "New_Feature_Set" wizard
+#        Then verify "Feature_Set_Name_Input" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Kind_Dropdown" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should contains "New_Feature_Store"."Kind_Options"
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         When collapse "Schema_Accordion" on "New_Feature_Set" wizard
@@ -388,6 +388,7 @@ Feature: Feature Store Page
         Then verify "Offline_Partition_Columns_Input" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "Offline_Partition_Granularity_Dropdown" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then "External_Offline_Checkbox" element should be unchecked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When uncheck "Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When check "External_Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "File_Type_Dropdown" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "URL_Input" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
@@ -591,7 +592,7 @@ Feature: Feature Store Page
     @passive
     Scenario: Check all mandatory components on Add to feature vector popup
         Given open url
-        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
@@ -611,16 +612,14 @@ Feature: Feature Store Page
     @passive
     Scenario: Check all mandatory components on Create feature vector popup
         Given open url
-        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And turn on demo mode
+        And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
-        And select "Features" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And wait load page
-        Then verify "Features" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
-        Then click on "Add_To_Feature_Vector_Button" element on "Feature_Store_Features_Tab" wizard
-        Then verify if "Add_To_Feature_Vector_Popup" popup dialog appears
-        Then click on "Create_Feature_Vector_Button" element on "Add_To_Feature_Vector_Popup" wizard
+        Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify if "Create_Feature_Vector_Popup" popup dialog appears
         Then verify "Cross_Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Name_Input" element visibility on "Create_Feature_Vector_Popup" wizard
@@ -628,5 +627,52 @@ Feature: Feature Store Page
         Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
-        Then verify "Select_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Create_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+
+    @passive
+    Scenario: Check all mandatory components on Add to feature vector tab
+        Given open url
+        And turn on demo mode
+        And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
+        Then type into "Name_Input" on "Create_Feature_Vector_Popup" popup dialog "test" value
+        Then type into "Tag_Input" on "Create_Feature_Vector_Popup" popup dialog "latest" value
+        Then click on "Create_Button" element on "Create_Feature_Vector_Popup" wizard
+        And wait load page
+        Then verify "Add_To_Feature_Vector_Table" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Table_Tree_Filter_Dropdown" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Table_Name_Filter_Input" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Table_Label_Filter_Input" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Table_Projects_Filter_Dropdown" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Features_Panel_Title" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Cancel_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Add_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
+
+    @inProgress
+    Scenario: Add to feature vector
+        Given open url
+        And turn on demo mode
+        And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
+        Then type into "Name_Input" on "Create_Feature_Vector_Popup" popup dialog "temp_vector" value
+        Then type into "Tag_Input" on "Create_Feature_Vector_Popup" popup dialog "temp_tag" value
+        Then click on "Create_Button" element on "Create_Feature_Vector_Popup" wizard
+        And wait load page
+        Then click on "Add_Button" element on "Add_To_Feature_Vector_Tab" wizard
+        When select "temp_tag" option in "Table_Tree_Filter_Dropdown" filter dropdown on "Add_To_Feature_Vector_Tab" wizard
+        Then value in "name" column with "text" in "Feature_Vectors_Table" on "Feature_Store_Features_Vectors_Tab" wizard should contains "temp_vector"
+        # Can't delete vector after creating, run this test only with mock
 

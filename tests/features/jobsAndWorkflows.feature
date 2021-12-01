@@ -6,7 +6,7 @@ Feature: Jobs and workflows
     Scenario: Check all mandatory components on Jobs Monitor tab
         Given open url
         And wait load page
-        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
@@ -100,14 +100,14 @@ Feature: Jobs and workflows
         Given open url
         And wait load page
         And wait load page
-        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
-        Then type value "ing" to "Table_Name_Filter_Input" field on "Jobs_Monitor_Tab" wizard
+        Then type value "test" to "Table_Name_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
         And wait load page
-        Then value in "name" column with "text" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "ing"
+        Then value in "name" column with "text" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "test"
 
     @passive
     @inProgress
@@ -132,7 +132,7 @@ Feature: Jobs and workflows
     Scenario: verify filtering by job label with key on Jobs Monitor tab
         Given open url
         And wait load page
-        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
@@ -140,9 +140,9 @@ Feature: Jobs and workflows
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
         And wait load page
         Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host"
-        Then type value "host=test-m-ingest-lw42t" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
+        Then type value "host=aggregate-test-8kv8x" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
-        Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=test-m-ingest-lw42t"
+        Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=aggregate-test-8kv8x"
 
     @passive
     @inProgress
@@ -214,7 +214,7 @@ Feature: Jobs and workflows
     Scenario: Check all mandatory components in Item infopane on Overview tab table on Jobs Monitor Page
         Given open url
         And wait load page
-        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
@@ -264,7 +264,7 @@ Feature: Jobs and workflows
         Then verify "Schedule" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
         Then select "Delete" option in action menu on "Schedule_Monitor_Tab" wizard in "Schedule_Monitor_Table" table at row with "clean-data" value in "name" column
         Then verify if "Delete_Scheduled_Job_Popup" popup dialog appears
-        Then "Description" component on "Delete_Scheduled_Job_Popup" should contains "Descriptions"."Delete_Scheduled_Job"
+        Then "Description" component on "Delete_Scheduled_Job_Popup" should be equal "Descriptions"."Delete_Scheduled_Job"
         Then verify "Cancel_Button" element visibility on "Delete_Scheduled_Job_Popup" wizard
         Then verify "Delete_Button" element visibility on "Delete_Scheduled_Job_Popup" wizard
 
@@ -282,11 +282,11 @@ Feature: Jobs and workflows
         When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
         Then click on "Name_Edit_Button" element on "New_JobTemplate_Edit" wizard
-        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display "Input_Hint"."Jobs_Name_Hint"
+#        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display "Input_Hint"."Jobs_Name_Hint"
         Then type value "" to "Job_Name_Input" field on "New_JobTemplate_Edit" wizard
         Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
-        Then type value "   " to "Job_Name_Input" field on "New_JobTemplate_Edit" wizard
-        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then type value "   " to "Job_Name_Input" field on "New_JobTemplate_Edit" wizard
+#        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         Then verify "Shedule_For_Later_Button" element visibility on "New_JobTemplate_Edit" wizard
@@ -468,7 +468,7 @@ Feature: Jobs and workflows
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-        Then verify "Advanced_Secrets_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Advanced_Environment_Variables_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
 
     @passive
@@ -490,6 +490,7 @@ Feature: Jobs and workflows
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         Then verify "Advanced_Environment_Variables_Demo_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Advanced_Secrets_Table" element visibility in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
 
     @passive
@@ -509,23 +510,34 @@ Feature: Jobs and workflows
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-        When add rows to "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-            | value_input |
-            |    value1   |
-            |    value2   |
-            |    value3   |
-        Then verify values in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-            | kind | value  |
-            | file | value1 |
-            | file | value2 |
-            | file | value3 |
-         When click on "delete_btn" in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
-            | value  |
-            | value3 |
-            | value1 |
-        Then verify values in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
-            | kind | value  |
-            | file | value2 |
+        When add new volume rows to "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
+            | Environment_Variables_Name_Input | Environment_Variables_Value_Input | Add_Row_Button | Discard_Row_Button |
+            |              name0               |              value0               |       yes      |                    |
+            |              name1               |              value1               |                |        yes         |
+            |              name2               |              value2               |       yes      |                    |
+            |              name3               |              value3               |                |        yes         |
+            |              name4               |              value4               |       yes      |                    |
+            |              name5               |              value5               |       yes      |                    |
+            |              name6               |              value6               |                |        yes         |
+            |              name7               |              value7               |                |        yes         |
+            |              name8               |              value8               |       yes      |                    |
+            |              name9               |              value9               |                |        yes         |
+        Then verify values in "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+            | name  |    value    |
+            | name0 | value0      |
+            | name2 | value2      |
+            | name4 | value4      |
+            | name5 | value5      |
+            | name8 | value8      |
+        When click on "delete_btn" in "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
+            | name  |
+            | name2 |
+            | name4 |
+            | name8 |
+        Then verify values in "Advanced_Environment_Variables_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+            | name  |    value    |
+            | name0 | value0      |
+            | name5 | value5      |
 
     @passive
     @inProgress
@@ -548,22 +560,22 @@ Feature: Jobs and workflows
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         When add new volume rows to "Advanced_Environment_Variables_Demo_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
-            | Environment_Variables_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Value_Input | Add_Row_Button |
+            | Environment_Variables_Demo_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Demo_Value_Input | Add_Row_Button |
             |                                  |               Value                 |                                   |       yes      |
-        Then verify "Environment_Variables_Name_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
-        Then verify "Environment_Variables_Value_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
+        Then verify "Environment_Variables_Demo_Name_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
+        Then verify "Environment_Variables_Demo_Value_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
         When click on "Discard_Row_Button" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         When add new volume rows to "Advanced_Environment_Variables_Demo_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
-            | Environment_Variables_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Seret_Name_Input | Environment_Variables_Seret_Key_Input | Add_Row_Button |
+            | Environment_Variables_Demo_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Seret_Name_Input | Environment_Variables_Seret_Key_Input | Add_Row_Button |
             |                                  |              Secret                 |                                        |                 @#$                   |       yes      |
-        Then verify "Environment_Variables_Name_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
+        Then verify "Environment_Variables_Demo_Name_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Environment_Variables_Seret_Name_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Environment_Variables_Seret_Name_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display hint "Input_Hint"."SECRET_INPUT_HINT"
-        Then verify "Environment_Variables_Seret_Key_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+#        Then verify "Environment_Variables_Seret_Key_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Environment_Variables_Seret_Key_Input" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard should display hint "Input_Hint"."VALUE_INPUT_HINT"
         When click on "Discard_Row_Button" element in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
         When add new volume rows to "Advanced_Environment_Variables_Demo_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
-            | Environment_Variables_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Value_Input | Add_Row_Button | Discard_Row_Button |
+            | Environment_Variables_Demo_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Demo_Value_Input | Add_Row_Button | Discard_Row_Button |
             |              name0               |                Value                |              value0               |       yes      |                    |
             |              name1               |                Value                |              value1               |                |        yes         |
             |              name2               |                Value                |              value2               |       yes      |                    |
@@ -575,7 +587,7 @@ Feature: Jobs and workflows
             |              name8               |                Value                |              value8               |       yes      |                    |
             |              name9               |                Value                |              value9               |                |        yes         |
         When add new volume rows to "Advanced_Environment_Variables_Demo_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
-            | Environment_Variables_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Seret_Name_Input | Environment_Variables_Seret_Key_Input | Add_Row_Button | Discard_Row_Button |
+            | Environment_Variables_Demo_Name_Input | Environment_Variables_Type_Dropdown | Environment_Variables_Seret_Name_Input | Environment_Variables_Seret_Key_Input | Add_Row_Button | Discard_Row_Button |
             |            name0                 |             Secret                  |               value0                   |                key0                   |                |        yes         |
             |            name1                 |             Secret                  |               value1                   |                key1                   |       yes      |                    |
             |            name2                 |             Secret                  |               value2                   |                key2                   |                |        yes         |
@@ -611,6 +623,23 @@ Feature: Jobs and workflows
             | name5 | value  | value5      |
             | name3 | secret | value3:key3 |
             | name6 | secret | value6:key6 |
+        When add rows to "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+            | value_input |
+            |    value1   |
+            |    value2   |
+            |    value3   |
+        Then verify values in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+            | kind | value  |
+            | file | value1 |
+            | file | value2 |
+            | file | value3 |
+        When click on "delete_btn" in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
+            | value  |
+            | value3 |
+            | value1 |
+        Then verify values in "Advanced_Secrets_Table" table in "Advanced_Accordion" on "New_JobTemplate_Edit" wizard
+            | kind | value  |
+            | file | value2 |
 
     @passive
     Scenario: Verify View YAML action on Jobs Monitor tab
