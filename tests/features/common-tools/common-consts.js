@@ -43,6 +43,26 @@ module.exports = {
       'Labels'
     ]
   },
+  Models_Info_Pane: {
+    Tab_List: ['Overview', 'Preview'],
+    Overview_General_Headers: [
+      'Hash',
+      'Key',
+      'Iter',
+      'Kind',
+      'Size',
+      'Path',
+      'URI',
+      'Model file',
+      'Feature vector',
+      'UID',
+      'Updated',
+      'Framework',
+      'Algorithm',
+      'Labels',
+      'Metrics'
+    ]
+  },
   New_Feature_Store: {
     Kind_Options: ['HTTP', 'CSV', 'PARQUET'],
     Target_Store_File_Type: [
@@ -90,6 +110,10 @@ module.exports = {
       'The name of the data container that contains the data',
     DataAccess_Key_Hint: 'A platform data-access key',
     Name_Already_Exists: 'Name already exists',
+    Timestamp_Key_Hint:
+      'Used for specifying the time field when joining by time',
+    Timestamp_Key_Warning:
+      'Timestamp Key is required for offline target when partitioning by time is enabled - see the Target Store section.',
     Relative_Directory_Path_Hint:
       'A relative directory path within the data container',
     SECRET_INPUT_HINT:
@@ -108,9 +132,9 @@ module.exports = {
     New_Job_Volumes:
       'Volumes that define data paths and the required information for accessing the data from the function',
     Members_Hint: 'Some of the members might be user groups',
-    Files_Hash:
+    Overview_Hash:
       'Represents hash of the data. when the data changes the hash would change',
-    Files_UID:
+    Overview_UID:
       'Unique identifier representing the job or the workflow that generated the artifact'
   },
   Descriptions: {

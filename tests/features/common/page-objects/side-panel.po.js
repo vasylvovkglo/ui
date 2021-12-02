@@ -801,7 +801,10 @@ module.exports = {
         )
       ),
       Start_Date_Time_Picker: singleDatepicker(startDateTimePickerCalendar),
-      End_Date_Time_Picker: singleDatepicker(endDateTimePickerCalendar)
+      End_Date_Time_Picker: singleDatepicker(endDateTimePickerCalendar),
+      Schedule_Button: By.css(
+        '.feature-set-panel .accordion__container:nth-of-type(1)  button.schedule-tumbler'
+      )
     },
     Schema_Accordion: {
       Accordion_Header: By.css(
@@ -822,8 +825,8 @@ module.exports = {
         generateInputGroup(
           '.feature-set-panel .accordion__container:nth-of-type(2) .input-wrapper:nth-of-type(2)',
           true,
-          false,
-          false
+          true,
+          true
         )
       )
     },

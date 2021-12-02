@@ -247,6 +247,17 @@ Then(
 )
 
 Then(
+  '{string} component in {string} on {string} should contains {string} value',
+  async function(component, accordion, wizard, value) {
+    await verifyText(
+      this.driver,
+      pageObjects[wizard][accordion][component],
+      value
+    )
+  }
+)
+
+Then(
   '{string} component on {string} should be equal {string}.{string}',
   async function(component, wizard, constStorage, constValue) {
     await waiteUntilComponent(this.driver, pageObjects[wizard][component])

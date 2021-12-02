@@ -31,7 +31,7 @@ const ProjectsTableSelector = {
             root: 'div.project-card__actions-menu',
             menuElements: {
               open_button: 'button',
-              options: 'div.actions-menu__container div.actions-menu__option'
+              options: '#overlay_container div.actions-menu__option'
             }
           }
         }

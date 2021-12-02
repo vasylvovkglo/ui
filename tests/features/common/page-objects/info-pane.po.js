@@ -235,6 +235,9 @@ const commonActionMenu = actionMenu(actionMenuStructure)
 const crossCloseButton = By.css(
   'div.table__item div.item-header__buttons a div.data-ellipsis'
 )
+const commonDownloadButton = By.css(
+  'div.table__item .item-header__buttons .download-container'
+)
 const commonInfoPaneTabSelector = commonTable(infoPaneTabSelector)
 
 module.exports = {
@@ -333,9 +336,7 @@ module.exports = {
   filesInfoPane: {
     Header: header,
     Updated: updated,
-    Download_Button: By.css(
-      'div.table__item .item-header__buttons .download-container'
-    ),
+    Download_Button: commonDownloadButton,
     Action_Menu: commonActionMenu,
     Cross_Close_Button: crossCloseButton,
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
@@ -350,6 +351,31 @@ module.exports = {
     Overview_UID_Header: labelComponent(
       generateLabelGroup(
         '.item-info__details:nth-of-type(1) .details-item:nth-of-type(7) .details-item__header',
+        false,
+        true
+      )
+    ),
+    Expand_Sources: By.css('.details-item .info-sources'),
+    Info_Sources_Table: commonTable(filesInfoSourcesTable)
+  },
+  modelsInfoPane: {
+    Header: header,
+    Updated: updated,
+    Download_Button: commonDownloadButton,
+    Action_Menu: commonActionMenu,
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_General_Headers: commonTable(infoPaneOverviewHeaders),
+    Overview_Hash_Header: labelComponent(
+      generateLabelGroup(
+        '.item-info__details:nth-of-type(1) .details-item:nth-of-type(1) .details-item__header',
+        false,
+        true
+      )
+    ),
+    Overview_UID_Header: labelComponent(
+      generateLabelGroup(
+        '.item-info__details:nth-of-type(1) .details-item:nth-of-type(10) .details-item__header',
         false,
         true
       )

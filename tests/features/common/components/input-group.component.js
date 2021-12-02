@@ -23,8 +23,7 @@ module.exports = function(inputStructure) {
   }
   if (inputStructure.elements.warningHint) {
     element.warningHint = By.css(
-      // `${inputStructure.root} ${inputStructure.elements.warningHint}`
-      `${inputStructure.elements.warningHint}`
+      `${inputStructure.root} ${inputStructure.elements.warningHint}`
     )
     element.warningText = By.css(
       // `${inputStructure.root} ${inputStructure.elements.warningText}`

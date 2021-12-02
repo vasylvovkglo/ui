@@ -51,6 +51,28 @@ const membersTable = {
   }
 }
 
+const deployModelTable = {
+  root: '.deploy-model .key-value-table',
+  header: {
+    root: '.table-row__header ',
+    sorters: {
+      name: '.table-cell__inputs-wrapper .table-cell__key',
+      value: '.table-cell__inputs-wrapper .table-cell__value'
+    }
+  },
+  body: {
+    add_row_btn: 'button.add-new-item-btn',
+    row: {
+      root: '.table-row',
+      fields: {
+        name: '.table-cell__key .data-ellipsis',
+        value: '.table-cell__value .data-ellipsis',
+        delete_btn: '.key-value-table__btn'
+      }
+    }
+  }
+}
+
 // Common components
 
 const commonCancelButton = By.css(
@@ -224,6 +246,35 @@ module.exports = {
     Cancel_Button: commonCancelButton,
     Register_Button: commonConfirmButton
   },
+  deployModelPopup: {
+    Title: commonTitle,
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Serving_Function_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .select:nth-of-type(1)')
+    ),
+    Tag_Dropdown: dropdownComponent(
+      generateDropdownGroup('.pop-up-dialog .select-row .select:nth-of-type(2)')
+    ),
+    Model_Name_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .input-row .input-wrapper:nth-of-type(1)',
+        true,
+        true,
+        false
+      )
+    ),
+    Class_Name_Input: inputGroup(
+      generateInputGroup(
+        '.pop-up-dialog .input-row .input-wrapper:nth-of-type(2)',
+        true,
+        false,
+        false
+      )
+    ),
+    Deploy_Model_Table: commonTable(deployModelTable),
+    Cancel_Button: commonCancelButton,
+    Deploy_Button: commonConfirmButton
+  },
   viewYamlPopup: {
     Title: By.css('div.pop-up-dialog div.pop-up-dialog__header'),
     Cross_Cancel_Button: commonCrossCancelButton,
@@ -361,5 +412,26 @@ module.exports = {
     Labels_Input: By.css('.pop-up-dialog .labels-container .chips-wrapper'),
     Cancel_Button: commonCancelButton,
     Create_Button: commonConfirmButton
+  },
+  featureSetSchedulePopup: {
+    Title: By.css('.feature-set-panel__schedule .schedule-title'),
+    Repeat_Dropdown: dropdownComponent(
+      generateDropdownGroup(
+        '.feature-set-panel__schedule .repeat_container .select:nth-of-type(1)',
+        false,
+        true,
+
+        '.data-ellipsis > .data-ellipsis'
+      )
+    ),
+    Time_Dropdown: dropdownComponent(
+      generateDropdownGroup(
+        '.feature-set-panel__schedule .repeat_container .schedule-repeat .select',
+        false,
+        false,
+        '.data-ellipsis > .data-ellipsis'
+      )
+    ),
+    Schedule_Button: By.css('.feature-set-panel__schedule .btn__schedule')
   }
 }

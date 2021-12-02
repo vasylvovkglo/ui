@@ -14,11 +14,11 @@ Feature: Feature Store Page
         Then verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
-#        Then type value "   " to "Table_Name_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
-#        Then verify "Table_Name_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "   " to "Table_Name_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Name_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
-#        Then type value "   " to "Table_Label_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
-#        Then verify "Table_Label_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "   " to "Table_Label_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Label_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Feature_Sets_Table" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
 
@@ -271,9 +271,35 @@ Feature: Feature Store Page
         Then verify "Description_Input" element visibility on "New_Feature_Set" wizard
         Then verify "Labels_Table" element visibility on "New_Feature_Set" wizard
         When select "PARQUET" option in "Kind_Dropdown" dropdown on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Schedule_Button" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then click on "Schedule_Button" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify if "Feature_Set_Schedule_Popup" popup dialog appears
         Then verify "Parquet_Timestamp_Column_Input" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Start_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "End_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+
+    @passive
+    @inProgress
+    Scenario: Check all mandatory components on Schedule popup on Feature Store Feature Set new item wizard on Data Source Accordion Parquet Kind
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
+        When select "PARQUET" option in "Kind_Dropdown" dropdown on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Schedule_Button" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then click on "Schedule_Button" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify if "Feature_Set_Schedule_Popup" popup dialog appears
+        Then verify "Repeat_Dropdown" element visibility on "Feature_Set_Schedule_Popup" wizard
+        Then verify "Time_Dropdown" element visibility on "Feature_Set_Schedule_Popup" wizard
+        Then verify "Schedule_Button" element visibility on "Feature_Set_Schedule_Popup" wizard
+        Then select "10" option in "Time_Dropdown" dropdown on "Feature_Set_Schedule_Popup" wizard
+        And click on "Schedule_Button" element on "Feature_Set_Schedule_Popup" wizard
+        Then "Schedule_Button" component in "Data_Source_Accordion" on "New_Feature_Set" should contains "Every 10 minutes" value
+        # Should be finished after drop-down fix
 
     @passive
     @inProgress
@@ -297,8 +323,8 @@ Feature: Feature Store Page
         Then verify "Collapse_Button" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "URL_Combobox" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Attributes_Input" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
-#        Then type value "   " to "Attributes_Input" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
-#        Then verify "Attributes_Input" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "   " to "Attributes_Input" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Attributes_Input" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Data_Source_Accordion" is collapsed on "New_Feature_Set" wizard
         Then verify "Accordion_Header" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
@@ -330,8 +356,8 @@ Feature: Feature Store Page
         And verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Set_Name_Input" on "New_Feature_Set" wizard should display "Input_Hint"."Feature_Set_Name_Hint"
-#        Then type value "#$@" to "Feature_Set_Name_Input" field on "New_Feature_Set" wizard
-#        Then verify "Feature_Set_Name_Input" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "#$@" to "Feature_Set_Name_Input" field on "New_Feature_Set" wizard
+        Then verify "Feature_Set_Name_Input" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Kind_Dropdown" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should contains "New_Feature_Store"."Kind_Options"
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         When collapse "Schema_Accordion" on "New_Feature_Set" wizard
@@ -352,6 +378,30 @@ Feature: Feature Store Page
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Entities_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
         Then verify "Timestamp_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
+
+
+    @passive
+    @inProgress
+    Scenario: Check Schema Accordion components on Feature Store Feature Set new item wizard
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And verify "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard should contains "Feature_Store"."Tab_List"
+        And verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
+        When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Timestamp_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
+        Then type value "text" to "Entities_Input" field on "Schema_Accordion" on "New_Feature_Set" wizard
+        Then type value "" to "Entities_Input" field on "Schema_Accordion" on "New_Feature_Set" wizard
+        Then verify "Entities_Input" element in "Schema_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Require"
+        Then verify "Timestamp_Input" element in "Schema_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Timestamp_Key_Hint"
+        When check "Offline_Partition_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then type value "text" to "Timestamp_Input" field on "Schema_Accordion" on "New_Feature_Set" wizard
+        Then type value "" to "Timestamp_Input" field on "Schema_Accordion" on "New_Feature_Set" wizard
+        Then verify "Timestamp_Input" element in "Schema_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Timestamp_Key_Warning"
 
     @passive
     @inProgress
@@ -412,6 +462,48 @@ Feature: Feature Store Page
         Then verify "External_Offline_Partition_Granularity_Dropdown" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When collapse "Target_Store_Accordion" on "New_Feature_Set" wizard
         And wait load page
+
+    @passive
+    Scenario: Check Partition part in Target Store Accordion components on Feature Store Feature Set new item wizard
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And verify "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard should contains "Feature_Store"."Tab_List"
+        And verify "Feature Sets" tab is activ in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
+        When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
+        When collapse "Schema_Accordion" on "New_Feature_Set" wizard
+        When check "Offline_Partition_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then verify "Offline_Partition_ShowHide_Link" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When click on "Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "Offline_Partition_By_Key_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "Offline_Partition_By_Time_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "Offline_Partition_By_Columns_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When select "Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set"
+        When click on "Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When click on "Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "Offline_Partition_By_Key_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "Offline_Partition_By_Time_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "Offline_Partition_By_Columns_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then is "Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
+        When uncheck "Offline_Partition_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "External_Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When select "Parquet" option in "File_Type_Dropdown" dropdown on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "External_Offline_Partition_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When click on "External_Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "External_Offline_Partition_By_Key_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "External_Offline_Partition_By_Time_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When check "External_Offline_Partition_By_Columns_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When select "External_Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set"
+        When click on "External_Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        When click on "External_Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "External_Offline_Partition_By_Key_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "External_Offline_Partition_By_Time_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "External_Offline_Partition_By_Columns_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then is "External_Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
 
     @passive
     @debug

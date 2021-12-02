@@ -118,6 +118,22 @@ function getFeatureSet(req, res) {
     )
   }
 
+  if (req.query['label']) {
+    let [key, value] = req.query['label'].split('=')
+    collectedFeatureSets = collectedFeatureSets.filter(feature => {
+      if (feature.spec.labels) {
+        return feature.spec.labels[key]
+      }
+    })
+    if (req.query['label'].includes('=')) {
+      collectedFeatureSets = collectedFeatureSets.filter(feature => {
+        if (feature.spec.labels) {
+          return feature.spec.labels[key] === value
+        }
+      })
+    }
+  }
+
   res.send({ feature_sets: collectedFeatureSets })
 }
 
@@ -338,6 +354,17 @@ function getProjectsShedules(req, res) {
     collectedSchedules = collectedSchedules.filter(schedule =>
       schedule.name.includes(req.query['name'].slice(1))
     )
+  }
+  if (req.query['labels']) {
+    let [key, value] = req.query['labels'].split('=')
+    collectedSchedules = collectedSchedules.filter(schedule => {
+      return schedule.labels[key]
+    })
+    if (req.query['labels'].includes('=')) {
+      collectedSchedules = collectedSchedules.filter(
+        schedule => schedule.labels[key] === value
+      )
+    }
   }
 
   res.send({ schedules: collectedSchedules })
@@ -775,7 +802,7 @@ function getFile(req, res) {
 }
 
 function getLog(req, res) {
-  const collectedLog = logs.logs.find(log => log.uid === req.params['uid'])
+  const collectedLog = logs.find(log => log.uid === req.params['uid'])
   res.send(collectedLog.log)
 }
 
