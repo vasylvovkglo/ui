@@ -716,6 +716,18 @@ const commonDeleteNewRowButton = By.css(
   '.new-item-side-panel .accordion__container:nth-of-type(3) .panel-section:nth-of-type(2) .panel-section__body .table__body button:not([class])'
 )
 
+const commonAccessKeyCheckbox = checkboxComponent(
+  generateCheckboxGroup('.new-item-side-panel .access-key', true, false, false)
+)
+const commonAccessKeyInput = inputGroup(
+  generateInputGroup(
+    '.new-item-side-panel .access-key__input',
+    true,
+    false,
+    true
+  )
+)
+
 module.exports = {
   newFeatureSet: {
     Cross_Close_Button: commonCrossCloseButton,
@@ -1061,6 +1073,8 @@ module.exports = {
         )
       )
     },
+    Access_Key_Checkbox: commonAccessKeyCheckbox,
+    Access_Key_Input: commonAccessKeyInput,
     Cancel_Batton: By.css(
       'div.feature-set-panel div.new-item-side-panel__buttons-container button.pop-up-dialog__btn_cancel'
     ),
@@ -1337,6 +1351,8 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(4) .panel-section__body button:nth-of-type(2)'
       )
     },
+    Access_Key_Checkbox: commonAccessKeyCheckbox,
+    Access_Key_Input: commonAccessKeyInput,
     Shedule_For_Later_Button: By.css(
       '.new-item-side-panel__body .new-item-side-panel__buttons-container .data-ellipsis:nth-of-type(1) button'
     ),
@@ -1727,6 +1743,8 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(5) .advanced .panel-section__body .table__body button[class=parameters-table__btn]'
       )
     },
+    Access_Key_Checkbox: commonAccessKeyCheckbox,
+    Access_Key_Input: commonAccessKeyInput,
     Cansel_Button: By.css(
       '.new-item-side-panel .new-item-side-panel__buttons-container .data-ellipsis:nth-of-type(1) button'
     ),

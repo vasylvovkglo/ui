@@ -563,6 +563,7 @@ Then(
       this.driver,
       pageObjects[wizard][input]['inputField']
     )
+    await this.driver.sleep(100)
     await clickNearComponent(
       this.driver,
       pageObjects[wizard][input]['inputField']
@@ -583,6 +584,7 @@ Then(
       this.driver,
       pageObjects[wizard][accordion][input]['inputField']
     )
+    await this.driver.sleep(100)
     await clickNearComponent(
       this.driver,
       pageObjects[wizard][accordion][input]['inputField']
@@ -610,6 +612,13 @@ When('uncheck {string} element in {string} on {string} wizard', async function(
   wizard
 ) {
   await uncheckCheckbox(this.driver, pageObjects[wizard][accordion][checkbox])
+})
+
+When('uncheck {string} element on {string} wizard', async function(
+  checkbox,
+  wizard
+) {
+  await uncheckCheckbox(this.driver, pageObjects[wizard][checkbox])
 })
 
 Then(

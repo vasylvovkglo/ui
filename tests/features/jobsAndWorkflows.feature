@@ -21,6 +21,7 @@ Feature: Jobs and workflows
         Then verify "Table_Name_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Table_Labels_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Start_Time_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
+        When select "Past month" option in "Start_Time_Filter_Dropdown" filter dropdown on "Jobs_Monitor_Tab" wizard
         Then verify "Jobs_Monitor_Table" element visibility on "Jobs_Monitor_Tab" wizard
 
     @passive
@@ -134,6 +135,7 @@ Feature: Jobs and workflows
         And wait load page
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
+        When select "Past month" option in "Start_Time_Filter_Dropdown" filter dropdown on "Jobs_Monitor_Tab" wizard
         Then type value "host" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
         And wait load page
@@ -254,6 +256,7 @@ Feature: Jobs and workflows
         And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then verify "Monitor Jobs" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When select "Past month" option in "Start_Time_Filter_Dropdown" filter dropdown on "Jobs_Monitor_Tab" wizard
         When click on cell with row index 1 in "name" column in "Schedule_Monitor_Table" table on "Schedule_Monitor_Tab" wizard
         And wait load page
         Then verify "Arrow_Back" element visibility on "Jobs_Monitor_Tab_Info_Pane" wizard
@@ -318,12 +321,19 @@ Feature: Jobs and workflows
         And wait load page
         Then click on "Name_Edit_Button" element on "New_JobTemplate_Edit" wizard
 #        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display "Input_Hint"."Jobs_Name_Hint"
-        Then type value "" to "Job_Name_Input" field on "New_JobTemplate_Edit" wizard
-        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
+#        Then type value "" to "Job_Name_Input" field on "New_JobTemplate_Edit" wizard
+#        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
 #        Then type value "   " to "Job_Name_Input" field on "New_JobTemplate_Edit" wizard
 #        Then verify "Job_Name_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Access_Key_Checkbox" element visibility on "New_JobTemplate_Edit" wizard
+        Then uncheck "Access_Key_Checkbox" element on "New_JobTemplate_Edit" wizard
+        Then verify "Access_Key_Input" element visibility on "New_JobTemplate_Edit" wizard
+        Then type value "  " to "Access_Key_Input" field on "New_JobTemplate_Edit" wizard
+        Then verify "Access_Key_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "" to "Access_Key_Input" field on "New_JobTemplate_Edit" wizard
+        Then verify "Access_Key_Input" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Shedule_For_Later_Button" element visibility on "New_JobTemplate_Edit" wizard
         Then verify "Run_Now_Button" element visibility on "New_JobTemplate_Edit" wizard
 
@@ -863,4 +873,25 @@ Feature: Jobs and workflows
         Then verify "Shedule_For_Later_Button" element visibility on "New_JobTemplate_Edit" wizard
         Then verify "Run_Now_Button" element visibility on "New_JobTemplate_Edit" wizard
 
+    @passive
+    Scenario: Check Artifacts preview action on Artifacts tab Item infopane on Workflow List View Tab
+        Given open url
+        And turn on demo mode
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Monitor Workflows" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Monitor Workflows" tab is activ in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Workflows_Monitor_Table" table on "Workflows_Monitor_Tab" wizard
+        And wait load page
+        Then click on "Toggle_View_Button" element on "Workflows_Monitor_Tab" wizard
+        When click on cell with row index 3 in "name" column in "Workflow_List_View_Table" table on "Workflows_Monitor_Tab" wizard
+        And select "Artifacts" tab in "Info_Pane_Tab_Selector" on "Workflows_Monitor_Tab_Info_Pane" wizard
+        Then click on cell with row index 1 in "name" column in "Artifacts_Table" table on "Artifacts_Info_Pane" wizard
+        Then click on "Artifact_Preview_Button" element on "Artifacts_Info_Pane" wizard
+        Then verify "Preview_Header" element visibility on "Artifact_Preview_Popup" wizard
+        Then verify "Cross_Cancel_Button" element visibility on "Artifact_Preview_Popup" wizard
 

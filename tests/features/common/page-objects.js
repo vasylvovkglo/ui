@@ -37,6 +37,7 @@ module.exports = {
   Analysis_Info_Pane: infoPane['analysisInfoPane'],
   Inputs_Info_Pane: infoPane['inputsInfoPane'],
   Artifacts_Info_Pane: infoPane['artifactsInfoPane'],
+  Artifact_Preview_Popup: interactivePopup['artifactPreviewPopup'],
   Results_Info_Pane: infoPane['resultsInfoPane'],
   Register_Dataset: interactivePopup['registerDataset'],
   New_Feature_Set: sidePanel['newFeatureSet'],

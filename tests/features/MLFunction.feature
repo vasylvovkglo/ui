@@ -335,6 +335,13 @@ Feature: ML Functions
             | name  | value  |
             | name2 | value2 |
         When collapse "Environment_Variables_Accordion" on "New_Function" wizard
+        Then verify "Access_Key_Checkbox" element visibility on "New_Function" wizard
+        Then uncheck "Access_Key_Checkbox" element on "New_Function" wizard
+        Then verify "Access_Key_Input" element visibility on "New_Function" wizard
+        Then type value "  " to "Access_Key_Input" field on "New_Function" wizard
+        Then verify "Access_Key_Input" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "" to "Access_Key_Input" field on "New_Function" wizard
+        Then verify "Access_Key_Input" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Cansel_Button" element visibility on "New_Function" wizard
         Then verify "Save_Button" element visibility on "New_Function" wizard
         Then verify "Deploy_Button" element visibility on "New_Function" wizard
@@ -374,7 +381,7 @@ Feature: ML Functions
         Then verify "Function_Environment_Variables_Name_Input" element in "Environment_Variables_Accordion" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Function_Environment_Variables_Seret_Name_Input" element in "Environment_Variables_Accordion" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Function_Environment_Variables_Seret_Name_Input" element in "Environment_Variables_Accordion" on "New_Function" wizard should display hint "Input_Hint"."SECRET_INPUT_HINT"
-#        Then verify "Function_Environment_Variables_Seret_Key_Input" element in "Environment_Variables_Accordion" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then verify "Function_Environment_Variables_Seret_Key_Input" element in "Environment_Variables_Accordion" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Function_Environment_Variables_Seret_Key_Input" element in "Environment_Variables_Accordion" on "New_Function" wizard should display hint "Input_Hint"."VALUE_INPUT_HINT"
         When click on "Discard_Row_Button" element in "Environment_Variables_Accordion" on "New_Function" wizard
         When add new volume rows to "Function_Environment_Variables_Demo_Table" table in "Environment_Variables_Accordion" on "New_Function" wizard using nontable inputs
@@ -726,6 +733,13 @@ Feature: ML Functions
         When collapse "Resouces_Accordion" on "New_Function" wizard
         Then verify "Function_Environment_Variables_Table" element visibility in "Environment_Variables_Accordion" on "New_Function" wizard
         When collapse "Environment_Variables_Accordion" on "New_Function" wizard
+        Then verify "Access_Key_Checkbox" element visibility on "New_Function" wizard
+        Then uncheck "Access_Key_Checkbox" element on "New_Function" wizard
+        Then verify "Access_Key_Input" element visibility on "New_Function" wizard
+        Then type value "  " to "Access_Key_Input" field on "New_Function" wizard
+        Then verify "Access_Key_Input" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "" to "Access_Key_Input" field on "New_Function" wizard
+        Then verify "Access_Key_Input" on "New_Function" wizard should display warning "Input_Hint"."Input_Field_Require"
         Then verify "Cansel_Button" element visibility on "New_Function" wizard
         Then verify "Save_Button" element visibility on "New_Function" wizard
         Then verify "Deploy_Button" element visibility on "New_Function" wizard

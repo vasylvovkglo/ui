@@ -96,7 +96,7 @@ Feature: Files Page
     Then verify "Updated" element visibility on "Files_Info_Pane" wizard
     Then verify "Download_Button" element visibility on "Files_Info_Pane" wizard
     Then verify "Cross_Close_Button" element visibility on "Files_Info_Pane" wizard
-    Then verify "Preview_Tab_Info_Pane_Table" element visibility on "Files_Info_Pane" wizard
+#    Then verify "Preview_Tab_Info_Pane_Table" element visibility on "Files_Info_Pane" wizard
 #    TO DO: should be implemented mock requests
 
   @passive

@@ -73,6 +73,26 @@ const deployModelTable = {
   }
 }
 
+const artifactsPreviewHeader = {
+  root: '.pop-up-dialog .preview-body',
+  header: {
+    root: '',
+    sorters: {}
+  },
+  body: {
+    row: {
+      root: '.preview-item',
+      fields: {
+        name: '.item-data__name',
+        path: '.item-data__path',
+        size: '.item-data:nth-of-type(3)',
+        data: '.item-data:nth-of-type(4)',
+        download_btn: '.preview-body__download'
+      }
+    }
+  }
+}
+
 // Common components
 
 const commonCancelButton = By.css(
@@ -224,7 +244,7 @@ module.exports = {
         '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(1)',
         true,
         true,
-        false
+        true
       )
     ),
     New_File_Target_Path_Input: inputGroup(
@@ -232,7 +252,7 @@ module.exports = {
         '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
         true,
         true,
-        false
+        true
       )
     ),
     New_File_Description_Input: inputGroup(
@@ -240,7 +260,7 @@ module.exports = {
         '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(3)',
         true,
         true,
-        false
+        true
       )
     ),
     Cancel_Button: commonCancelButton,
@@ -433,5 +453,9 @@ module.exports = {
       )
     ),
     Schedule_Button: By.css('.feature-set-panel__schedule .btn__schedule')
+  },
+  artifactPreviewPopup: {
+    Cross_Cancel_Button: commonCrossCancelButton,
+    Preview_Header: commonTable(artifactsPreviewHeader)
   }
 }

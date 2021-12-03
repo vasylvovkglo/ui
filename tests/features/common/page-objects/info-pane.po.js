@@ -328,7 +328,10 @@ module.exports = {
     Inputs_Table: commonTable(inputsTable)
   },
   artifactsInfoPane: {
-    Artifacts_Table: commonTable(artifactsTable)
+    Artifacts_Table: commonTable(artifactsTable),
+    Artifact_Preview_Button: By.css(
+      '.item-artifacts .item-artifacts__preview .data-ellipsis svg'
+    )
   },
   resultsInfoPane: {
     Results_Table: commonTable(resultsTable)

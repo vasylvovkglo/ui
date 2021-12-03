@@ -339,6 +339,11 @@ Feature: Feature Store Page
         Then verify "External_Offline_Checkbox" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When collapse "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "Target_Store_Accordion" is collapsed on "New_Feature_Set" wizard
+        Then verify "Access_Key_Checkbox" element visibility on "New_Feature_Set" wizard
+        Then uncheck "Access_Key_Checkbox" element on "New_Feature_Set" wizard
+        Then verify "Access_Key_Input" element visibility on "New_Feature_Set" wizard
+        Then type value "  " to "Access_Key_Input" field on "New_Feature_Set" wizard
+        Then verify "Access_Key_Input" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Cancel_Batton" element visibility on "New_Feature_Set" wizard
         Then verify "Save_Batton" element visibility on "New_Feature_Set" wizard
         Then verify "Save_And_Ingest_Button" element visibility on "New_Feature_Set" wizard

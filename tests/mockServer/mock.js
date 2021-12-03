@@ -433,6 +433,26 @@ function getProjectsFeaturesEntities(req, res) {
         }
       })
     }
+
+    if (req.query['label']) {
+      let [key, value] = req.query['label'].split('=')
+      collectedArtifacts = collectedArtifacts.filter(feature => {
+        if (artifact === 'feature-vectors') {
+          if (feature.metadata.labels) {
+            return feature.metadata.labels[key]
+          }
+        }
+      })
+      if (artifact === 'feature-vectors') {
+        if (req.query['label'].includes('=')) {
+          collectedArtifacts = collectedArtifacts.filter(feature => {
+            if (feature.metadata.labels) {
+              return feature.metadata.labels[key] === value
+            }
+          })
+        }
+      }
+    }
   }
 
   let result = {}
@@ -496,6 +516,21 @@ function getArtifacts(req, res) {
     collectedArtifacts = collectedArtifacts.filter(artifact =>
       categories[req.query['category']].includes(artifact.kind)
     )
+  }
+  if (req.query['label']) {
+    let [key, value] = req.query['label'].split('=')
+    collectedArtifacts = collectedArtifacts.filter(artifact => {
+      if (artifact.labels) {
+        return artifact.labels[key]
+      }
+    })
+    if (req.query['label'].includes('=')) {
+      collectedArtifacts = collectedArtifacts.filter(artifact => {
+        if (artifact.labels) {
+          return artifact.labels[key] === value
+        }
+      })
+    }
   }
 
   if (req.query['name']) {
