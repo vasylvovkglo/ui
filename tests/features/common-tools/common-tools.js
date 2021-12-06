@@ -22,9 +22,8 @@ module.exports = {
       structure.elements.label = 'label'
     }
     if (hint) {
-      typeof hint === 'string'
-        ? (structure.elements.hint = hint)
-        : (structure.elements.hint = 'div.tip-container svg')
+      structure.elements.hint =
+        typeof hint === 'string' ? hint : 'div.tip-container svg'
     }
     if (warning) {
       structure.elements.warningHint = 'div.input__warning svg'
@@ -50,14 +49,11 @@ module.exports = {
       structure.elements.dec_btn = '.range__buttons button[class*=decrease]'
     }
 
-    label
-      ? (structure.elements.label = label)
-      : (structure.elements.label = '.data-ellipsis')
+    structure.elements.label = label || '.data-ellipsis'
 
     if (hint) {
-      typeof hint === 'string'
-        ? (structure.elements.hint = hint)
-        : (structure.elements.hint = 'div.tip-container svg')
+      structure.elements.hint =
+        typeof hint === 'string' ? hint : 'div.tip-container svg'
     }
     if (warning) {
       structure.elements.warningHint = '.range__warning svg'
@@ -75,14 +71,11 @@ module.exports = {
     const structure = { elements: {} }
     structure.root = root
 
-    label
-      ? (structure.elements.label = label)
-      : (structure.elements.label = '.data-ellipsis')
+    structure.elements.label = label || '.data-ellipsis'
 
     if (hintButton) {
-      typeof hintButton === 'string'
-        ? (structure.elements.hintButton = hintButton)
-        : (structure.elements.hintButton = 'div.tip-container svg')
+      structure.elements.hintButton =
+        typeof hintButton === 'string' ? hintButton : 'div.tip-container svg'
     }
 
     if (hint) {
@@ -101,32 +94,23 @@ module.exports = {
     structure.root = root
     structure.dropdownElements.label = '.data-ellipsis'
 
-    open_button
-      ? (structure.dropdownElements.open_button = open_button)
-      : (structure.dropdownElements.open_button = '.select__value')
+    structure.dropdownElements.open_button = open_button || '.select__value'
 
-    options
-      ? (structure.dropdownElements.options = options)
-      : (structure.dropdownElements.options = '.select__body .select__item')
+    structure.dropdownElements.options =
+      options || '.select__body .select__item'
 
-    option_name
-      ? (structure.dropdownElements.option_name = option_name)
-      : (structure.dropdownElements.option_name = '')
+    structure.dropdownElements.option_name = option_name || ''
 
     return structure
   },
   generateCheckboxGroup: function(root, checkbox, name, icon) {
     const structure = { root, elements: {} }
 
-    checkbox
-      ? (structure.elements.checkbox = 'svg[class]')
-      : (structure.elements.checkbox = '')
+    structure.elements.checkbox = checkbox ? 'svg[class]' : ''
 
-    name ? (structure.elements.name = name) : (structure.elements.name = '')
+    structure.elements.name = name || ''
 
-    icon
-      ? (structure.elements.icon = 'svg:not([class])')
-      : (structure.elements.icon = '')
+    structure.elements.icon = icon ? 'svg:not([class])' : ''
 
     return structure
   }
