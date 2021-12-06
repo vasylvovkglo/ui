@@ -10,12 +10,16 @@ const baseMlRunUrl =
 
 const baseNuclioUrl =
   'http://nuclio-ingress.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+// const baseNuclioUrl =
+//   'http://nuclio-ingress.default-tenant.app.dev35.lab.iguazeng.com/api/'
 const githubFunctionsUrl = 'https://github.com/mlrun/functions/tree/master'
 const githubYamlUrl =
   'https://raw.githubusercontent.com/mlrun/functions/master/'
 const saveFolder = 'data'
 const igzApiUrl =
-  'http://platform-api.default-tenant.app.dev35.lab.iguazeng.com/api/'
+  'platform-api.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+// const igzApiUrl =
+//   'http://platform-api.default-tenant.app.dev35.lab.iguazeng.com/api/'
 
 const fetchData = async (host, endpoint = '') => {
   try {

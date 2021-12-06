@@ -11,7 +11,7 @@ Feature: Project Settings page
         And wait load page
         Then click on "Project_Settings_Button" element on "Project" wizard
         Then verify "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard should contains "Project_Settings"."Tab_List"
-        Then verify "General" tab is activ in "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard
+        Then verify "General" tab is active in "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard
         Then verify "Artifact_Path_Input" element visibility on "Project_Settings_General_Tab" wizard
         Then type value "   " to "Artifact_Path_Input" field on "Project_Settings_General_Tab" wizard
         Then verify "Artifact_Path_Input" on "Project_Settings_General_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"

@@ -41,6 +41,7 @@ Feature: MLRun Projects Page
         Then verify if "Create_New_Project" popup dialog appears
         Then verify "Name_Input" element visibility on "Create_New_Project" wizard
         Then verify "Name_Input" on "Create_New_Project" wizard should display "Input_Hint"."Project_Name_Hint"
+        Then verify "Name_Input" according hint rules on "Create_New_Project" wizard
         Then verify "Description_Input" element visibility on "Create_New_Project" wizard
         Then verify "Cancel_Button" element visibility on "Create_New_Project" wizard
         Then verify "Create_Button" element visibility on "Create_New_Project" wizard

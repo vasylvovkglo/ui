@@ -56,6 +56,7 @@ Feature: Files Page
     Then verify "New_File_Type_Dropdown" element visibility on "Register_File_Popup" wizard
     Then verify "Cancel_Button" element visibility on "Register_File_Popup" wizard
     Then verify "Register_Button" element visibility on "Register_File_Popup" wizard
+#        TO DO: should refactor checking for input warnings
 
   @passive
   @inProgress
@@ -69,7 +70,7 @@ Feature: Files Page
     When click on cell with row index 1 in "name" column in "Files_Table" table on "Files" wizard
     Then verify "Info_Pane_Tab_Selector" element visibility on "Files_Info_Pane" wizard
     Then verify "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard should contains "Files_Info_Pane"."Tab_List"
-    Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
+    Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
     Then verify "Header" element visibility on "Files_Info_Pane" wizard
     Then verify "Updated" element visibility on "Files_Info_Pane" wizard
     Then verify "Download_Button" element visibility on "Files_Info_Pane" wizard
@@ -91,7 +92,7 @@ Feature: Files Page
     And wait load page
     Then verify "Info_Pane_Tab_Selector" element visibility on "Files_Info_Pane" wizard
     Then verify "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard should contains "Files_Info_Pane"."Tab_List"
-    Then verify "Preview" tab is activ in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
+    Then verify "Preview" tab is active in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
     Then verify "Header" element visibility on "Files_Info_Pane" wizard
     Then verify "Updated" element visibility on "Files_Info_Pane" wizard
     Then verify "Download_Button" element visibility on "Files_Info_Pane" wizard
@@ -111,7 +112,7 @@ Feature: Files Page
     When click on cell with row index 2 in "name" column in "Files_Table" table on "Files" wizard
     Then verify "Info_Pane_Tab_Selector" element visibility on "Files_Info_Pane" wizard
     Then verify "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard should contains "Files_Info_Pane"."Tab_List"
-    Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
+    Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Files_Info_Pane" wizard
     When click on "Expand_Sources" element on "Files_Info_Pane" wizard
     Then verify "Info_Sources_Table" element visibility on "Files_Info_Pane" wizard
 

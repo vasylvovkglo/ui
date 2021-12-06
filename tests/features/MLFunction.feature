@@ -45,7 +45,7 @@ Feature: ML Functions
         Then verify "Cross_Close_Button" element visibility on "ML_Function_Info_Pane" wizard
         Then verify "Info_Pane_Tab_Selector" element visibility on "ML_Function_Info_Pane" wizard
         Then verify "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Tab_List"
-        Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard
+        Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "ML_Function_Info_Pane" wizard
         Then verify "Overview_Headers" on "ML_Function_Info_Pane" wizard should contains "ML_Function_Info_Pane"."Overview_Headers"
 
     @passive
@@ -92,6 +92,7 @@ Feature: ML Functions
         Then type value "   " to "New_Function_Name_Input" field on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Name_Input" on "Create_ML_Function_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "New_Function_Name_Input" on "Create_ML_Function_Popup" wizard should display "Input_Hint"."Function_Name_Hint"
+        Then verify "New_Function_Name_Input" according hint rules on "Create_ML_Function_Popup" wizard
         Then type value "   " to "New_Function_Tag_Input" field on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Tag_Input" on "Create_ML_Function_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "New_Function_Runtime_Dropdown" element visibility on "Create_ML_Function_Popup" wizard

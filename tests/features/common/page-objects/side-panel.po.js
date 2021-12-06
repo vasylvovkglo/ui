@@ -432,7 +432,7 @@ const advancedEnvironmentVariablesDemoTable = {
 
 const advancedSecretsTable = {
   root:
-    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .job-panel__section:nth-of-type(2)',
+    '.new-item-side-panel__body .accordion__container:nth-of-type(4) .panel-section:nth-of-type(2) .secrets',
   header: {
     root: '.table__header',
     sorters: {

@@ -124,7 +124,7 @@ Feature: Models Page
     When click on cell with row index 1 in "name" column in "Models_Table" table on "Models" wizard
     Then verify "Info_Pane_Tab_Selector" element visibility on "Models_Info_Pane" wizard
     Then verify "Info_Pane_Tab_Selector" on "Models_Info_Pane" wizard should contains "Models_Info_Pane"."Tab_List"
-    Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Models_Info_Pane" wizard
+    Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Models_Info_Pane" wizard
     Then verify "Header" element visibility on "Models_Info_Pane" wizard
     Then verify "Updated" element visibility on "Models_Info_Pane" wizard
     Then verify "Download_Button" element visibility on "Models_Info_Pane" wizard
@@ -144,7 +144,7 @@ Feature: Models Page
     When click on cell with row index 1 in "name" column in "Models_Table" table on "Models" wizard
     Then verify "Info_Pane_Tab_Selector" element visibility on "Models_Info_Pane" wizard
     Then verify "Info_Pane_Tab_Selector" on "Models_Info_Pane" wizard should contains "Models_Info_Pane"."Tab_List"
-    Then verify "Overview" tab is activ in "Info_Pane_Tab_Selector" on "Models_Info_Pane" wizard
+    Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Models_Info_Pane" wizard
     When click on "Expand_Sources" element on "Models_Info_Pane" wizard
     Then verify "Info_Sources_Table" element visibility on "Models_Info_Pane" wizard
 

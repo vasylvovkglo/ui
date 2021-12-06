@@ -1,3 +1,5 @@
+import { generateRegEx, getLength, getNotToBe, getRule } from './utils'
+
 module.exports = {
   locatorBuilder: function(strings, ...keys) {
     return function(...values) {
@@ -113,5 +115,28 @@ module.exports = {
     structure.elements.icon = icon ? 'svg:not([class])' : ''
 
     return structure
+  },
+  parseString: function(string) {
+    const rulesArray = string.split('\n')
+    const lengthRule = getLength(rulesArray)
+    const validCharactersRule = getRule(rulesArray, 'valid characters')
+    const beginRule = getRule(rulesArray, 'begin')
+    const endRule = getRule(rulesArray, 'end')
+    const notToBe = getNotToBe(rulesArray, 'not be')
+    const notStartWith = getRule(rulesArray, 'not start')
+    const notConsecutiveCharacters = getNotToBe(
+      rulesArray,
+      'consecutive characters'
+    )
+
+    return generateRegEx(
+      beginRule,
+      endRule,
+      lengthRule,
+      validCharactersRule,
+      notToBe,
+      notStartWith,
+      notConsecutiveCharacters
+    )
   }
 }

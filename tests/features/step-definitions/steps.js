@@ -38,6 +38,7 @@ import {
   typeValue,
   getInputValue,
   checkHintText,
+  checkInputAccordingHintText,
   verifyTypedValue,
   checkWarningHintText,
   verifyInputDisabled,
@@ -489,7 +490,7 @@ Then('sort projects in descending order', async function() {
 })
 
 Then(
-  'verify {string} tab is activ in {string} on {string} wizard',
+  'verify {string} tab is active in {string} on {string} wizard',
   async function(tabName, tabSelector, wizard) {
     const arr = await findRowIndexesByColumnValue(
       this.driver,
@@ -738,4 +739,15 @@ Then('select {string} option in action menu on {string} wizard', async function(
   await openActionMenu(this.driver, actionMenu)
   await this.driver.sleep(500)
   await selectOptionInActionMenu(this.driver, actionMenu, option)
+})
+
+Then('verify {string} according hint rules on {string} wizard', async function(
+  inputField,
+  wizardName
+) {
+  await checkInputAccordingHintText(
+    this.driver,
+    pageObjects[wizardName][inputField],
+    pageObjects['commonPagesHeader']['Common_Hint']
+  )
 })
