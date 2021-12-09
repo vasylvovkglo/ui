@@ -8,7 +8,8 @@ import {
   typeIntoInputField,
   hoverComponent,
   componentIsVisible,
-  componentIsNotVisible
+  componentIsNotVisible,
+  scrollToElement
 } from '../common/actions/common.action'
 import {
   getTableRows,
@@ -574,10 +575,15 @@ When(
       )
       for (const indx in pageComponents) {
         if (pageComponents[indx].includes('Dropdown')) {
+          await scrollToElement(
+            this.driver,
+            pageObjects[wizardName][accordionName][pageComponents[indx]].root
+          )
           await openDropdown(
             this.driver,
             pageObjects[wizardName][accordionName][pageComponents[indx]]
           )
+          // await scrollDown(this.driver)
           await selectOptionInDropdown(
             this.driver,
             pageObjects[wizardName][accordionName][pageComponents[indx]],

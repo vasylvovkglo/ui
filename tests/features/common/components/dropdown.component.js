@@ -15,7 +15,7 @@ module.exports = function(dropdownStructure) {
     ),
     options: By.css(
       options(
-        // dropdownStructure.root,
+        '#overlay_container',
         dropdownStructure.dropdownElements.options,
         dropdownStructure.dropdownElements.option_name
       )
@@ -23,7 +23,7 @@ module.exports = function(dropdownStructure) {
     option: function(index) {
       return By.css(
         option(
-          // dropdownStructure.root,
+          '#overlay_container',
           dropdownStructure.dropdownElements.options,
           index,
           dropdownStructure.dropdownElements.option_name
