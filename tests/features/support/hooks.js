@@ -11,8 +11,9 @@ After(async function(testCase) {
     var stream = await this.driver.takeScreenshot()
     await this.attach(stream, 'base64:image/png')
   }
+  let logs = []
   if (browser === 'chrome') {
-    const logs = await this.driver
+    await this.driver
       .then(() =>
         this.driver
           .manage()
@@ -20,16 +21,14 @@ After(async function(testCase) {
           .get(wd.logging.Type.BROWSER)
       )
       .then(result => {
-        return result
+        logs = result
       })
-    await this.driver.quit()
-    if (logs.some(log => log.level.name_ === 'SEVERE')) {
-      await logs.forEach(log =>
-        this.attach(`${log.level.name} ${log.message}`, 'text/plain')
-      )
-      throw new Error('There are some errors in console')
-    }
-  } else {
-    await this.driver.quit()
+  }
+  await this.driver.quit()
+  if (logs.some(log => log.level.name_ === 'SEVERE')) {
+    await logs.forEach(log =>
+      this.attach(`${log.level.name} ${log.message}`, 'text/plain')
+    )
+    throw new Error('There are some errors in console')
   }
 })
