@@ -258,7 +258,8 @@ const commonTableTreeFilterDropdown = dropdownComponent(
     '.content .content__action-bar .filters .tag-filter',
     'input',
     '.tag-filter__dropdown .tag-filter__dropdown-item',
-    ''
+    '',
+    true // options_in_root ?
   )
 )
 

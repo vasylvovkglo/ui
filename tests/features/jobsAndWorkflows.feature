@@ -140,9 +140,9 @@ Feature: Jobs and workflows
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
         And wait load page
         Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host"
-        Then type value "host=aggregate-test-8kv8x" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
+        Then type value "host=aggregate-test-ftk8n" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
-        Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=aggregate-test-8kv8x"
+        Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "host=aggregate-test-ftk8n"
 
     @passive
     @inProgress
