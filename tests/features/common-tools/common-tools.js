@@ -90,7 +90,8 @@ module.exports = {
     root,
     open_button = false,
     options = false,
-    option_name = false
+    option_name = false,
+    options_in_root = false
   ) {
     const structure = { dropdownElements: {} }
     structure.root = root
@@ -102,6 +103,8 @@ module.exports = {
       options || '.select__body .select__item'
 
     structure.dropdownElements.option_name = option_name || ''
+
+    structure.optionsInRoot = options_in_root
 
     return structure
   },

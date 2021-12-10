@@ -35,9 +35,11 @@ const action = {
       .click()
       .perform()
   },
-  hoverComponent: async function(driver, component) {
+  hoverComponent: async function(driver, component, scroll = true) {
     const element = await driver.findElement(component)
-    await scrollToWebElement(driver, element)
+    if (scroll) {
+      await scrollToWebElement(driver, element)
+    }
     const coordinates = await element.getRect()
     const actions = driver.actions({ async: true })
     await actions

@@ -354,7 +354,6 @@ Feature: ML Functions
 
     @passive
     @demo
-    @failed
     Scenario: Check all mandatory components in Resources Accordion on create New Function page in Demo mode
         Given open url
         And wait load page

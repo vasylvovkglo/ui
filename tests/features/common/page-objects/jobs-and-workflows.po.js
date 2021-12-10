@@ -81,7 +81,8 @@ const jobsMonitorTable = {
             '.table-body__cell:nth-of-type(5)',
             '.chip-block span.chips_button',
             '.chip-block .chip-block-hidden_visible .data-ellipsis.tooltip-wrapper',
-            false
+            false,
+            true // options_in_root ?
           )
         },
         parameters: {
@@ -90,7 +91,8 @@ const jobsMonitorTable = {
             '.table-body__cell:nth-of-type(6)',
             '.chip-block span.chips_button',
             '.chip-block .chip-block-hidden_visible .data-ellipsis.tooltip-wrapper',
-            false
+            false,
+            true // options_in_root ?
           )
         },
         results: {
@@ -164,7 +166,8 @@ const scheduleMonitorTable = {
             '.table-body__cell:nth-of-type(5)',
             '.chip-block span.chips_button',
             '.chip-block .chip-block-hidden_visible .data-ellipsis.tooltip-wrapper',
-            false
+            false,
+            true // options_in_root ?
           )
         },
         lastRun: 'div.table-head__item:nth-of-type(6) div.data-ellipsis',
@@ -175,15 +178,6 @@ const scheduleMonitorTable = {
         }
       }
     }
-  }
-}
-
-const startTimeFilterDropdown = {
-  root: 'div.content__action-bar div.filters div.date-picker-container',
-  dropdownElements: {
-    open_button: 'input.date-picker__input',
-    options: 'div.date-picker__pop-up div.select__item',
-    option_name: 'div.data-ellipsis div.data-ellipsis'
   }
 }
 
@@ -366,7 +360,15 @@ module.exports = {
         false
       )
     ),
-    Start_Time_Filter_Dropdown: dropdownComponent(startTimeFilterDropdown),
+    Start_Time_Filter_Dropdown: dropdownComponent(
+      generateDropdownGroup(
+        'div.content__action-bar div.filters div.date-picker-container',
+        'input.date-picker__input',
+        'div.date-picker__pop-up div.select__item',
+        'div.data-ellipsis div.data-ellipsis',
+        true // options_in_root ?
+      )
+    ),
     Date_Time_Picker: datepicker(dateTimePickerCalendars),
     Jobs_Monitor_Table: commonTable(jobsMonitorTable)
   },

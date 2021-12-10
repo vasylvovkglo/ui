@@ -99,7 +99,8 @@ Then(
     )
     await hoverComponent(
       this.driver,
-      pageObjects[wizard][table]['tableFields'][column](indx)
+      pageObjects[wizard][table]['tableFields'][column](indx),
+      false // scroll ?
     )
     await openActionMenu(this.driver, actionMenuSel)
     await this.driver.sleep(500)
