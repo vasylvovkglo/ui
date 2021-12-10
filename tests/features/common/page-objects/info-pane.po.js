@@ -31,7 +31,7 @@ const infoPaneOverviewHeaders = {
   header: {},
   body: {
     row: {
-      root: 'li',
+      root: 'li:not(li.details-item_hidden)',
       fields: {
         tab: '.details-item__header'
       }
@@ -248,7 +248,8 @@ module.exports = {
     Apply_Changes_Button: applyChangesButton,
     Action_Menu: commonActionMenu,
     Cross_Close_Button: crossCloseButton,
-    Info_Pane_Tab_Selector: commonInfoPaneTabSelector
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_General_Headers: commonTable(infoPaneOverviewHeaders)
   },
   featuresInfoPane: {
     Header: header,
@@ -259,6 +260,43 @@ module.exports = {
     Cross_Close_Button: crossCloseButton,
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
     Features_Tab_Info_Pane_Table: commonTable(featuresInfoPaneTable)
+  },
+  featureVectorsInfoPane: {
+    Header: header,
+    Updated: updated,
+    Cancel_Button: cancelButton,
+    Apply_Changes_Button: applyChangesButton,
+    Action_Menu: commonActionMenu,
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_General_Headers: commonTable(infoPaneOverviewHeaders)
+  },
+  datasetsInfoPane: {
+    Header: header,
+    Updated: updated,
+    Cancel_Button: cancelButton,
+    Apply_Changes_Button: applyChangesButton,
+    Download_Button: commonDownloadButton,
+    Action_Menu: commonActionMenu,
+    Cross_Close_Button: crossCloseButton,
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Overview_General_Headers: commonTable(infoPaneOverviewHeaders),
+    Overview_Hash_Header: labelComponent(
+        generateLabelGroup(
+            '.item-info__details:nth-of-type(1) .details-item:nth-of-type(1) .details-item__header',
+            false,
+            true
+        )
+    ),
+    Overview_UID_Header: labelComponent(
+        generateLabelGroup(
+            '.item-info__details:nth-of-type(1) .details-item:nth-of-type(7) .details-item__header',
+            false,
+            true
+        )
+    ),
+    Expand_Sources: By.css('.details-item .info-sources'),
+    Info_Sources_Table: commonTable(filesInfoSourcesTable)
   },
   transformationsInfoPane: {
     Header: header,

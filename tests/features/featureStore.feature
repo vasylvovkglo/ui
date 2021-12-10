@@ -21,6 +21,8 @@ Feature: Feature Store Page
         Then verify "Table_Label_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Feature_Sets_Table" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Create_Set_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" should contains "Create Set" value
 
     @passive
     Scenario: Check all mandatory components on Features tab
@@ -34,6 +36,7 @@ Feature: Feature Store Page
         Then verify "Features" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Features_Tab" wizard should contains "Feature_Store"."Tab_List"
         Then verify "Add_To_Feature_Vector_Button" element visibility on "Feature_Store_Features_Tab" wizard
+        Then "Add_To_Feature_Vector_Button" element on "Feature_Store_Features_Tab" should contains "Add to feature vector" value
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
@@ -53,6 +56,7 @@ Feature: Feature Store Page
         Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Features_Vectors_Tab" wizard should contains "Feature_Store"."Tab_List"
         And turn on demo mode
         Then verify "Create_Vector_Button" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
+        Then "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" should contains "Create Vector" value
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
@@ -71,6 +75,7 @@ Feature: Feature Store Page
         Then verify "Datasets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Datasets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Datasets_Tab" wizard should contains "Feature_Store"."Tab_List"
         Then verify "Register_Dataset_Button" element visibility on "Feature_Store_Datasets_Tab" wizard
+        Then "Register_Dataset_Button" element on "Feature_Store_Datasets_Tab" should contains "Register Dataset" value
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Datasets_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Datasets_Tab" wizard
         Then verify "Table_Tree_Filter_Dropdown" element visibility on "Feature_Store_Datasets_Tab" wizard
@@ -79,7 +84,7 @@ Feature: Feature Store Page
 
     @passive
     @inProgress
-    Scenario: Check all mandatory components in Item infopane on Overview tab table
+    Scenario: Check all mandatory components in Item infopane on Overview tab table on Feature Sets tab
         Given open url
         And wait load page
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
@@ -91,12 +96,94 @@ Feature: Feature Store Page
         Then verify "Header" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Updated" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Cancel_Button" element visibility on "Feature_Sets_Info_Pane" wizard
+        Then "Cancel_Button" element on "Feature_Sets_Info_Pane" should contains "Cancel" value
         Then verify "Apply_Changes_Button" element visibility on "Feature_Sets_Info_Pane" wizard
+        Then "Apply_Changes_Button" element on "Feature_Sets_Info_Pane" should contains "Apply Changes" value
+        Then verify "Action_Menu" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Cross_Close_Button" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Info_Pane_Tab_Selector" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Info_Pane_Tab_Selector" on "Feature_Sets_Info_Pane" wizard should contains "Feature_Sets_Info_Pane"."Tab_List"
         Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Feature_Sets_Info_Pane" wizard
-        # TO DO: Overview Tab info should be verified
+        Then verify "Overview_General_Headers" on "Feature_Sets_Info_Pane" wizard should contains "Feature_Sets_Info_Pane"."Overview_General_Headers"
+
+    @passive
+    @inProgress
+    Scenario: Check all mandatory components in Item infopane on Overview tab table on Feature Vectors tab
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Feature Vectors" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Features_Vectors_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Feature_Vectors_Table" table on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify "Header" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Updated" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Cancel_Button" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then "Cancel_Button" element on "Feature_Vectors_Info_Pane" should contains "Cancel" value
+        Then verify "Apply_Changes_Button" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then "Apply_Changes_Button" element on "Feature_Vectors_Info_Pane" should contains "Apply Changes" value
+        Then verify "Action_Menu" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" on "Feature_Vectors_Info_Pane" wizard should contains "Feature_Vectors_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Overview_General_Headers" on "Feature_Vectors_Info_Pane" wizard should contains "Feature_Vectors_Info_Pane"."Overview_General_Headers"
+
+    @passive
+    @inProgress
+    Scenario: Check all mandatory components in Item infopane with non-latest tag on Overview tab table on Feature Vectors tab
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Feature Vectors" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Features_Vectors_Tab" wizard
+        When select "test-tag" option in "Table_Tag_Filter_Dropdown" filter dropdown on "Feature_Store_Features_Vectors_Tab" wizard
+        And wait load page
+        When click on cell with row index 1 in "name" column in "Feature_Vectors_Table" table on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify "Header" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Updated" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Cancel_Button" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then "Cancel_Button" element on "Feature_Vectors_Info_Pane" should contains "Cancel" value
+        Then verify "Apply_Changes_Button" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then "Apply_Changes_Button" element on "Feature_Vectors_Info_Pane" should contains "Apply Changes" value
+        Then verify "Action_Menu" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" element visibility on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Info_Pane_Tab_Selector" on "Feature_Vectors_Info_Pane" wizard should contains "Feature_Vectors_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Feature_Vectors_Info_Pane" wizard
+        Then verify "Overview_General_Headers" on "Feature_Vectors_Info_Pane" wizard should contains "Feature_Vectors_Info_Pane"."Overview_General_Headers"
+
+    @passive
+    @inProgress
+    Scenario: Check all mandatory components in Item infopane on Overview tab table on Datasets tab
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Datasets" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Datasets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Features_Vectors_Tab" wizard
+        When click on cell with row index 1 in "name" column in "Feature_Vectors_Table" table on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify "Info_Pane_Tab_Selector" on "Datasets_Info_Pane" wizard should contains "Datasets_Info_Pane"."Tab_List"
+        Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Datasets_Info_Pane" wizard
+        Then verify "Header" element visibility on "Datasets_Info_Pane" wizard
+        Then verify "Updated" element visibility on "Datasets_Info_Pane" wizard
+        Then verify "Cancel_Button" element visibility on "Datasets_Info_Pane" wizard
+        Then "Cancel_Button" element on "Datasets_Info_Pane" should contains "Cancel" value
+        Then verify "Apply_Changes_Button" element visibility on "Datasets_Info_Pane" wizard
+        Then "Apply_Changes_Button" element on "Datasets_Info_Pane" should contains "Apply Changes" value
+        Then verify "Download_Button" element visibility on "Datasets_Info_Pane" wizard
+        Then verify "Action_Menu" element visibility on "Datasets_Info_Pane" wizard
+        Then verify "Cross_Close_Button" element visibility on "Datasets_Info_Pane" wizard
+        Then verify "Overview_General_Headers" on "Datasets_Info_Pane" wizard should contains "Datasets_Info_Pane"."Overview_General_Headers"
+        Then verify "Overview_Hash_Header" on "Datasets_Info_Pane" wizard should display "Label_Hint"."Overview_Hash"
+        Then verify "Overview_UID_Header" on "Datasets_Info_Pane" wizard should display "Label_Hint"."Overview_UID"
 
     @passive
     Scenario: Check all mandatory components in Item infopane on Features tab table
@@ -198,7 +285,9 @@ Feature: Feature Store Page
         Then verify "Target_Path_Input" element visibility on "Register_Dataset" wizard
         Then verify "Description_Input" element visibility on "Register_Dataset" wizard
         Then verify "Cancel_Button" element visibility on "Register_Dataset" wizard
-        Then verify "Archive_Button" element visibility on "Register_Dataset" wizard
+        Then "Cancel_Button" element on "Register_Dataset" should contains "Cancel" value
+        Then verify "Register_Button" element visibility on "Register_Dataset" wizard
+        Then "Register_Button" element on "Register_Dataset" should contains "Register" value
 
     @passive
     Scenario: Check filtering by Name on Feature Store Feature Sets Tab
@@ -253,6 +342,32 @@ Feature: Feature Store Page
         Then value in "name" column with "text" in "Feature_Datasets_Table" on "Feature_Store_Datasets_Tab" wizard should contains "ea"
 
     @passive
+    Scenario: Check filtering by Tag on Feature Store Feature Sets Tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        When select "my-tag" option in "Table_Tag_Filter_Dropdown" dropdown on "Feature_Store_Feature_Sets_Tab" wizard
+        Then click on "Table_Refresh_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then value in "tag" column with "text" in "Feature_Sets_Table" on "Feature_Store_Feature_Sets_Tab" wizard should contains "my-tag"
+
+    @passive
+    Scenario: Check filtering by Tag on Feature Store Feature Vectors Tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        When select "test-tag" option in "Table_Tag_Filter_Dropdown" dropdown on "Feature_Store_Features_Vectors_Tab" wizard
+        Then click on "Table_Refresh_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
+        And wait load page
+        Then value in "tag" column with "text" in "Feature_Vectors_Table" on "Feature_Store_Features_Vectors_Tab" wizard should contains "test-tag"
+
+    @passive
     @inProgress
     Scenario: Check all mandatory components on Feature Store Feature Set new item wizard on Data Source Accordion Parquet Kind
         Given open url
@@ -291,6 +406,7 @@ Feature: Feature Store Page
         Then click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
         When select "PARQUET" option in "Kind_Dropdown" dropdown on "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Schedule_Button" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then "Schedule_Button" element in "Data_Source_Accordion" on "New_Feature_Set" should contains "Schedule" value
         Then click on "Schedule_Button" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify if "Feature_Set_Schedule_Popup" popup dialog appears
         Then verify "Repeat_Dropdown" element visibility on "Feature_Set_Schedule_Popup" wizard
@@ -298,7 +414,7 @@ Feature: Feature Store Page
         Then verify "Schedule_Button" element visibility on "Feature_Set_Schedule_Popup" wizard
         Then select "10" option in "Time_Dropdown" dropdown on "Feature_Set_Schedule_Popup" wizard
         And click on "Schedule_Button" element on "Feature_Set_Schedule_Popup" wizard
-        Then "Schedule_Button" component in "Data_Source_Accordion" on "New_Feature_Set" should contains "Every 10 minutes" value
+        Then "Schedule_Button" element in "Data_Source_Accordion" on "New_Feature_Set" should contains "Every 10 minutes" value
         # Should be finished after drop-down fix
 
     @passive
@@ -329,6 +445,7 @@ Feature: Feature Store Page
         Then verify "Data_Source_Accordion" is collapsed on "New_Feature_Set" wizard
         Then verify "Accordion_Header" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
         Then verify "Collapse_Button" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
+        Then verify "Entities_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
         Then verify "Timestamp_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
         When collapse "Schema_Accordion" on "New_Feature_Set" wizard
         Then verify "Schema_Accordion" is collapsed on "New_Feature_Set" wizard
@@ -344,9 +461,12 @@ Feature: Feature Store Page
         Then verify "Access_Key_Input" element visibility on "New_Feature_Set" wizard
         Then type value "  " to "Access_Key_Input" field on "New_Feature_Set" wizard
         Then verify "Access_Key_Input" on "New_Feature_Set" wizard should display warning "Input_Hint"."Input_Field_Invalid"
-        Then verify "Cancel_Batton" element visibility on "New_Feature_Set" wizard
-        Then verify "Save_Batton" element visibility on "New_Feature_Set" wizard
+        Then verify "Cancel_Button" element visibility on "New_Feature_Set" wizard
+        Then "Cancel_Button" element on "New_Feature_Set" should contains "Cancel" value
+        Then verify "Save_Button" element visibility on "New_Feature_Set" wizard
+        Then "Save_Button" element on "New_Feature_Set" should contains "Save" value
         Then verify "Save_And_Ingest_Button" element visibility on "New_Feature_Set" wizard
+        Then "Save_And_Ingest_Button" element on "New_Feature_Set" should contains "Save and ingest" value
 
     @passive
     @inProgress
@@ -384,7 +504,6 @@ Feature: Feature Store Page
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Entities_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
         Then verify "Timestamp_Input" element visibility in "Schema_Accordion" on "New_Feature_Set" wizard
-
 
     @passive
     @inProgress
@@ -575,7 +694,7 @@ Feature: Feature Store Page
         When collapse "Schema_Accordion" on "New_Feature_Set" wizard
         When uncheck "Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When collapse "Target_Store_Accordion" on "New_Feature_Set" wizard
-        Then click on "Save_Batton" element on "New_Feature_Set" wizard
+        Then click on "Save_Button" element on "New_Feature_Set" wizard
         Then click on "OK_Button" element on "Create_Feature_Set_Popup_Dialog" wizard
         Then click on "Cross_Close_Button" element on "Features_Info_Pane" wizard
         Then verify values in "Feature_Sets_Table" table on "Feature_Store_Feature_Sets_Tab" wizard
@@ -703,8 +822,11 @@ Feature: Feature Store Page
         Then verify "Vector_Name_Dropdown" element visibility on "Add_To_Feature_Vector_Popup" wizard
         Then verify "Vector_Tag_Dropdown" element visibility on "Add_To_Feature_Vector_Popup" wizard
         Then verify "Cancel_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then "Cancel_Button" element on "Add_To_Feature_Vector_Popup" should contains "Cancel" value
         Then verify "Select_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then "Select_Button" element on "Add_To_Feature_Vector_Popup" should contains "Select" value
         Then verify "Create_Feature_Vector_Button" element visibility on "Add_To_Feature_Vector_Popup" wizard
+        Then "Create_Feature_Vector_Button" element on "Add_To_Feature_Vector_Popup" should contains "Create new feature vector" value
 
     @passive
     Scenario: Check all mandatory components on Create feature vector popup
@@ -724,7 +846,9 @@ Feature: Feature Store Page
         Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then "Cancel_Button" element on "Create_Feature_Vector_Popup" should contains "Cancel" value
         Then verify "Create_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then "Create_Button" element on "Create_Feature_Vector_Popup" should contains "Create" value
 
     @passive
     Scenario: Check all mandatory components on Add to feature vector tab
@@ -749,8 +873,15 @@ Feature: Feature Store Page
         Then verify "Table_Projects_Filter_Dropdown" element visibility on "Add_To_Feature_Vector_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
         Then verify "Features_Panel_Title" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Features_Panel_Title" on "Add_To_Feature_Vector_Tab" wizard should display "Input_Hint"."Add_Feature_Vector_Hint"
+        When select "stocks" option in "Table_Projects_Filter_Dropdown" filter dropdown on "Add_To_Feature_Vector_Tab" wizard
+        And wait load page
+        Then verify "Features_Panel_Title" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then verify "Features_Panel_Title" on "Add_To_Feature_Vector_Tab" wizard should display "Input_Hint"."Add_Feature_Vector_Hint"
         Then verify "Cancel_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then "Cancel_Button" element on "Add_To_Feature_Vector_Tab" should contains "Cancel" value
         Then verify "Add_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
+        Then "Add_Button" element on "Add_To_Feature_Vector_Tab" should contains "Add" value
 
     @inProgress
     Scenario: Add to feature vector
@@ -771,5 +902,20 @@ Feature: Feature Store Page
         Then click on "Add_Button" element on "Add_To_Feature_Vector_Tab" wizard
         When select "temp_tag" option in "Table_Tree_Filter_Dropdown" filter dropdown on "Add_To_Feature_Vector_Tab" wizard
         Then value in "name" column with "text" in "Feature_Vectors_Table" on "Feature_Store_Features_Vectors_Tab" wizard should contains "temp_vector"
-        # Can't delete vector after creating, run this test only with mock
+        # Need API request to remove created vector
+
+    @passive
+    Scenario: Check all mandatory components on Artifact Preview on Datasets tab
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Datasets" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then verify "Datasets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Datasets_Tab" wizard
+        When click on cell with row index 1 in "artifact_preview_btn" column in "Feature_Datasets_Table" table on "Feature_Store_Datasets_Tab" wizard
+        Then verify "Preview_Header" element visibility on "Artifact_Preview_Popup" wizard
+        Then verify "Cross_Cancel_Button" element visibility on "Artifact_Preview_Popup" wizard
 

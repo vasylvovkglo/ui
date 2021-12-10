@@ -248,7 +248,14 @@ Then(
 )
 
 Then(
-  '{string} component in {string} on {string} should contains {string} value',
+  '{string} element on {string} should contains {string} value',
+  async function(component, wizard, value) {
+    await verifyText(this.driver, pageObjects[wizard][component], value)
+  }
+)
+
+Then(
+  '{string} element in {string} on {string} should contains {string} value',
   async function(component, accordion, wizard, value) {
     await verifyText(
       this.driver,

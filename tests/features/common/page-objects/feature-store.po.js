@@ -3,9 +3,11 @@ import commonTable from '../components/table.component'
 import dropdownComponent from '../components/dropdown.component'
 import actionMenu from '../components/action-menu.component'
 import inputGroup from '../components/input-group.component'
+import labelComponent from '../components/label.component'
 import {
   generateInputGroup,
-  generateDropdownGroup
+  generateDropdownGroup,
+  generateLabelGroup
 } from '../../common-tools/common-tools'
 
 // Feature Sets
@@ -74,6 +76,7 @@ const featureSetsTable = {
       fields: {
         expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
         name: 'div.table-body__cell:nth-of-type(1) a span.link',
+        tag: 'div.table-body__cell:nth-of-type(1) .item-tag',
         description: 'div.table-body__cell:nth-of-type(2) > div.data-ellipsis',
         labels_table: {
           componentType: commonTable,
@@ -154,6 +157,7 @@ const featureVectorTable = {
       fields: {
         expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
         name: 'div.table-body__cell:nth-of-type(1) a span.link',
+        tag: 'div.table-body__cell:nth-of-type(1) .item-tag',
         description: 'div.table-body__cell:nth-of-type(2) div.data-ellipsis',
         labels_table: {
           componentType: commonTable,
@@ -321,8 +325,12 @@ module.exports = {
     Add_To_Feature_Vector_Table: commonTable(addToFeatureVectorTable),
     Add_Button: By.css('.features-panel__buttons .btn-primary'),
     Cancel_Button: By.css('.features-panel__buttons .btn-label'),
-    Features_Panel_Title: By.css(
-      '.features-panel__header-vector .features-panel__header-vector-name'
+    Features_Panel_Title: labelComponent(
+      generateLabelGroup(
+        '.add-to-feature-vector .features-panel__header',
+        false,
+        true
+      )
     )
   }
 }

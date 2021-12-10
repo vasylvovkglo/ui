@@ -1075,10 +1075,10 @@ module.exports = {
     },
     Access_Key_Checkbox: commonAccessKeyCheckbox,
     Access_Key_Input: commonAccessKeyInput,
-    Cancel_Batton: By.css(
+    Cancel_Button: By.css(
       'div.feature-set-panel div.new-item-side-panel__buttons-container button.pop-up-dialog__btn_cancel'
     ),
-    Save_Batton: By.css(
+    Save_Button: By.css(
       'div.feature-set-panel div.new-item-side-panel__buttons-container button[class="btn btn-secondary"]'
     ),
     Save_And_Ingest_Button: By.css(
@@ -1146,7 +1146,7 @@ module.exports = {
           false
         )
       ),
-      Turning_Stratedgy_Dropdown: dropdownComponent(
+      Turning_Strategy_Dropdown: dropdownComponent(
         generateDropdownGroup(
           '.new-item-side-panel__body .accordion__container:nth-of-type(2) .panel-section__body .parameters-additional-settings-container .parameters-additional-settings:nth-of-type(2) .select',
           '.select__label',
@@ -1165,7 +1165,7 @@ module.exports = {
       Job_Custom_Parameters_Table: commonTable(jobCustomParametersTable),
       Job_Predefined_Parameters_Table: commonTable(jobPredefinedParametersTable)
     },
-    Resouces_Accordion: {
+    Resources_Accordion: {
       Accordion_Header: By.css(
         '.new-item-side-panel__body .accordion__container:nth-of-type(3) h5'
       ),
@@ -1353,7 +1353,7 @@ module.exports = {
     },
     Access_Key_Checkbox: commonAccessKeyCheckbox,
     Access_Key_Input: commonAccessKeyInput,
-    Shedule_For_Later_Button: By.css(
+    Schedule_For_Later_Button: By.css(
       '.new-item-side-panel__body .new-item-side-panel__buttons-container .data-ellipsis:nth-of-type(1) button'
     ),
     Run_Now_Button: By.css(
@@ -1395,6 +1395,14 @@ module.exports = {
       New_Function_Handler_Input: inputGroup(
         generateInputGroup(
           '.new-item-side-panel .accordion__container:nth-of-type(2) .handler.input-wrapper',
+          true,
+          true,
+          true
+        )
+      ),
+      New_Function_Default_Class_Input: inputGroup(
+        generateInputGroup(
+          '.new-item-side-panel .accordion__container:nth-of-type(2) .code__default-class .input-wrapper',
           true,
           true,
           true
@@ -1446,9 +1454,17 @@ module.exports = {
       ),
       New_Function_Build_Commands_Text_Area: By.css(
         '.new-item-side-panel .accordion__container:nth-of-type(2) .commands.text-area-wrapper .text-area'
+      ),
+      Force_Build_Checkbox: checkboxComponent(
+        generateCheckboxGroup(
+          '.new-item-side-panel .accordion__container:nth-of-type(2) .code__force-build',
+          true,
+          false,
+          false
+        )
       )
     },
-    Resouces_Accordion: {
+    Resources_Accordion: {
       Accordion_Header: By.css(
         '.new-item-side-panel .accordion__container:nth-of-type(3) h5'
       ),
@@ -1745,7 +1761,7 @@ module.exports = {
     },
     Access_Key_Checkbox: commonAccessKeyCheckbox,
     Access_Key_Input: commonAccessKeyInput,
-    Cansel_Button: By.css(
+    Cancel_Button: By.css(
       '.new-item-side-panel .new-item-side-panel__buttons-container .data-ellipsis:nth-of-type(1) button'
     ),
     Save_Button: By.css(
