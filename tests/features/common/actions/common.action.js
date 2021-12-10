@@ -3,6 +3,11 @@ import { until } from 'selenium-webdriver'
 import { expect } from 'chai'
 import http from 'http'
 
+async function scrollToWebElement(driver, element) {
+  await driver.executeScript('arguments[0].scrollIntoView()', element)
+  await driver.sleep(250)
+}
+
 const action = {
   navigateToPage: async function(driver, baseURL) {
     await driver.get(baseURL)
@@ -26,12 +31,15 @@ const action = {
     const coordinates = await element.getRect()
     const actions = driver.actions({ async: true })
     await actions
-      .move({ x: parseInt(coordinates.x) - 5, y: parseInt(coordinates.y) - 5 })
+      .move({ x: parseInt(coordinates.x) + 1, y: parseInt(coordinates.y) + 1 })
       .click()
       .perform()
   },
-  hoverComponent: async function(driver, component) {
+  hoverComponent: async function(driver, component, scroll = true) {
     const element = await driver.findElement(component)
+    if (scroll) {
+      await scrollToWebElement(driver, element)
+    }
     const coordinates = await element.getRect()
     const actions = driver.actions({ async: true })
     await actions
@@ -173,7 +181,13 @@ const action = {
   getElementText: async function(driver, component) {
     const element = await driver.findElement(component)
     return await element.getText('value')
-  }
+  },
+  scrollToElement: async function(driver, component) {
+    const element = await driver.findElement(component)
+    await driver.executeScript('arguments[0].scrollIntoView()', element)
+    await driver.sleep(250)
+  },
+  scrollToWebElement
 }
 
 module.exports = action

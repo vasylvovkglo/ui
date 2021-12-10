@@ -512,7 +512,6 @@ Feature: Feature Store Page
         Then is "External_Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
 
     @passive
-    @debug
     Scenario: Test rows Labels on Feature Store Feature Set new item wizard
         Given open url
         And wait load page
