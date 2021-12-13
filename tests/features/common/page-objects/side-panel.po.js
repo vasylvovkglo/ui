@@ -770,14 +770,16 @@ module.exports = {
             '.combobox-select',
             '.combobox-select__header', // Open Component
             '.combobox-select__body .combobox-list .combobox-list__option', // Options
-            '' // Option value
+            '', // Option value
+            true
           ),
           comboDropdown: {
             dropdown: generateDropdownGroup(
               '.combobox-dropdown',
               '', // Open Component
               '.combobox-dropdown__list .combobox-list__option', // Options
-              '' // Option value
+              '', // Option value
+              true
             ),
             searchInput: generateInputGroup(
               '.combobox-dropdown__search-input',
