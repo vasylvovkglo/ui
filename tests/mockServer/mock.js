@@ -112,6 +112,12 @@ function getFeatureSet(req, res) {
     featureSet => featureSet.metadata.project === req.params['project']
   )
 
+  if (req.query['tag']) {
+    collectedFeatureSets = collectedFeatureSets.filter(
+      featureSet => featureSet.metadata.tag === req.query['tag']
+    )
+  }
+
   if (req.query['name']) {
     collectedFeatureSets = collectedFeatureSets.filter(featureSet =>
       featureSet.metadata.name.includes(req.query['name'].slice(1))

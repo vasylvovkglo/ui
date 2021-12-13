@@ -5,9 +5,11 @@ import actionMenu from '../components/action-menu.component'
 import datepicker from '../components/date-picker.component'
 import inputGroup from '../components/input-group.component'
 import inputWithAutocomplete from '../components/input-with-autocomplete.component'
+import labelComponent from '../components/label.component'
 import {
   generateInputGroup,
-  generateDropdownGroup
+  generateDropdownGroup,
+  generateLabelGroup
 } from '../../common-tools/common-tools'
 
 // Monitor tab
@@ -67,12 +69,29 @@ const jobsMonitorTable = {
       root: 'div.table-body__row',
       fields: {
         expand_btn: 'div.table-body__cell:nth-of-type(1) svg',
-        name: 'div.table-body__cell:nth-of-type(1) a span.link',
+        status: {
+          componentType: labelComponent,
+          structure: generateLabelGroup(
+            'div.table-body__cell:nth-of-type(1) .status',
+            'i',
+            true,
+            '.tooltip .tooltip__text span'
+          )
+        },
+        name: 'div.table-body__cell:nth-of-type(1) a span.link .data-ellipsis',
         datetime:
           'div.table-body__cell:nth-of-type(1) a div.date__uid_row span:nth-of-type(1)',
         uid:
           'div.table-body__cell:nth-of-type(1) a div.date__uid_row span:nth-of-type(2)',
-        type: 'div.table-body__cell:nth-of-type(2) div.data-ellipsis svg',
+        type: {
+          componentType: labelComponent,
+          structure: generateLabelGroup(
+            'div.table-body__cell:nth-of-type(2)',
+            'div.data-ellipsis ',
+            true,
+            '.tooltip .tooltip__text span'
+          )
+        },
         duration: 'div.table-body__cell:nth-of-type(3) div.data-ellipsis',
         owner: 'div.table-body__cell:nth-of-type(4) div.data-ellipsis',
         labels: {
@@ -124,6 +143,15 @@ const workflowsMonitorTable = {
     row: {
       root: 'div.table-body__row',
       fields: {
+        status: {
+          componentType: labelComponent,
+          structure: generateLabelGroup(
+            'div.table-body__cell:nth-of-type(1) .status',
+            'i',
+            true,
+            '.tooltip .tooltip__text span'
+          )
+        },
         name: 'div.table-body__cell:nth-of-type(1) a span.link',
         created: 'div.table-body__cell:nth-of-type(2) div.data-ellipsis',
         finished: 'div.table-body__cell:nth-of-type(3) div.data-ellipsis',
@@ -157,7 +185,15 @@ const scheduleMonitorTable = {
       root: 'div.table-body__row',
       fields: {
         name: 'div.table-body__cell:nth-of-type(1) a span.link',
-        type: 'div.table-body__cell:nth-of-type(2) div.data-ellipsis svg',
+        type: {
+          componentType: labelComponent,
+          structure: generateLabelGroup(
+            'div.table-body__cell:nth-of-type(2)',
+            '.data-ellipsis',
+            true,
+            '.tooltip .tooltip__text span'
+          )
+        },
         nextRun: 'div.table-body__cell:nth-of-type(3) div.data-ellipsis',
         schedule: 'div.table-body__cell:nth-of-type(4) div.data-ellipsis',
         labels: {
