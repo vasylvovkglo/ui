@@ -234,43 +234,16 @@ const jobCustomParametersTable = {
   },
   body: {
     root: 'div:not([class]):nth-of-type(3)',
+    add_row_btn: 'button.add-input',
     offset: 1,
     row: {
       root: 'div[class^=table__row]',
       fields: {
         checkbox: '.checkbox',
-        name: {
-          componentType: labelComponent,
-          structure: generateLabelGroup(
-            false,
-            '.table__cell_disabled:nth-of-type(1)',
-            false
-          )
-        },
-        type: {
-          componentType: labelComponent,
-          structure: generateLabelGroup(
-            '.table__cell_disabled:nth-of-type(2)',
-            false,
-            false
-          )
-        },
-        simple_hyper: {
-          componentType: labelComponent,
-          structure: generateLabelGroup(
-            '.table__cell:nth-of-type(3)',
-            false,
-            false
-          )
-        },
-        values: {
-          componentType: labelComponent,
-          structure: generateLabelGroup(
-            '.table__cell:nth-of-type(4)',
-            false,
-            false
-          )
-        },
+        name: '.parameter-name',
+        type: '.table__cell:nth-of-type(2)',
+        simple_hyper: '.table__cell:nth-of-type(3)',
+        values: '.table__cell:nth-of-type(4)',
         simple_hyper_dropdown: {
           componentType: dropdownComponent,
           structure: generateDropdownGroup(
@@ -284,7 +257,8 @@ const jobCustomParametersTable = {
           componentType: inputGroup,
           structure: generateInputGroup('.table__cell:nth-of-type(4)', false)
         },
-        apply_edit_btn: '.table__cell:nth-of-type(5) .apply-edit-btn'
+        apply_edit_btn: '.table__cell:nth-of-type(5) .apply-edit-btn',
+        delete_btn: '.table__cell-actions button.btn_delete'
       }
     }
   }
@@ -1165,7 +1139,44 @@ module.exports = {
         )
       ),
       Job_Custom_Parameters_Table: commonTable(jobCustomParametersTable),
-      Job_Predefined_Parameters_Table: commonTable(jobPredefinedParametersTable)
+      Job_Predefined_Parameters_Table: commonTable(
+        jobPredefinedParametersTable
+      ),
+      Parameters_Table_Name_Input: inputGroup(
+        generateInputGroup(
+          '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section__body .input-row-wrapper .input-wrapper:nth-of-type(1)',
+          true,
+          false,
+          true
+        )
+      ),
+      Parameters_Table_Type_Dropdown: dropdownComponent(
+        generateDropdownGroup(
+          '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section__body .input-row-wrapper .select:nth-of-type(2)',
+          '.select__label',
+          false,
+          false
+        )
+      ),
+      Parameter_Table_Simple_Hyper_Dropdown: dropdownComponent(
+        generateDropdownGroup(
+          '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section__body .input-row-wrapper .select:nth-of-type(3)',
+          '.select__label',
+          false,
+          false
+        )
+      ),
+      Parameters_Table_Value_Input: inputGroup(
+        generateInputGroup(
+          '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section__body .input-row-wrapper .input-wrapper:nth-of-type(4)',
+          true,
+          false,
+          true
+        )
+      ),
+      Add_New_Row_Button: By.css(
+        '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section .panel-section__body button.add-input'
+      )
     },
     Resources_Accordion: {
       Accordion_Header: By.css(

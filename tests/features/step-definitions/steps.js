@@ -755,6 +755,7 @@ Then('verify {string} according hint rules on {string} wizard', async function(
 ) {
   await checkInputAccordingHintText(
     this.driver,
+    this.attach,
     pageObjects[wizardName][inputField],
     pageObjects['commonPagesHeader']['Common_Hint']
   )

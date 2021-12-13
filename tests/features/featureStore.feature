@@ -673,7 +673,7 @@ Feature: Feature Store Page
         And verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
         Then type value "demo_feature_set" to "Feature_Set_Name_Input" field on "New_Feature_Set" wizard
-        Then type value "0.0.1" to "Version_Input" field on "New_Feature_Set" wizard
+        Then type value "latest" to "Version_Input" field on "New_Feature_Set" wizard
         Then type value "Some demo description" to "Description_Input" field on "New_Feature_Set" wizard
         When add rows to "Labels_Table" table on "New_Feature_Set" wizard
             | key_input | value_input |
