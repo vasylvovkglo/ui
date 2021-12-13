@@ -16,6 +16,8 @@ Feature: Files Page
     Then verify "Show_Iterations_Checkbox" element visibility on "Files" wizard
     Then verify "Table_Refresh_Button" element visibility on "Files" wizard
     Then verify "Files_Table" element visibility on "Files" wizard
+    Then verify "Register_File_Button" element visibility on "Files" wizard
+    Then "Register_File_Button" element on "Files" should contains "Register File" value
 
   @passive
   Scenario: verify filtering by file name on Files page
@@ -54,9 +56,11 @@ Feature: Files Page
     Then type value "   " to "New_File_Description_Input" field on "Register_File_Popup" wizard
     Then verify "New_File_Description_Input" on "Register_File_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "New_File_Type_Dropdown" element visibility on "Register_File_Popup" wizard
+    Then verify "New_File_Type_Dropdown" dropdown element on "Register_File_Popup" wizard should contains "Register_File"."Type_Options"
     Then verify "Cancel_Button" element visibility on "Register_File_Popup" wizard
+    Then "Cancel_Button" element on "Register_File_Popup" should contains "Cancel" value
     Then verify "Register_Button" element visibility on "Register_File_Popup" wizard
-#        TO DO: should refactor checking for input warnings
+    Then "Register_Button" element on "Register_File_Popup" should contains "Register" value
 
   @passive
   @inProgress

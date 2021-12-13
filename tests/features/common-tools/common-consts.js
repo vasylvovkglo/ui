@@ -1,4 +1,14 @@
 module.exports = {
+  Project: {
+    Create_New_Options: [
+      'Job',
+      'ML Function',
+      'Feature Set',
+      'Register File',
+      'Register Model',
+      'Register Dataset'
+    ]
+  },
   Feature_Store: {
     Tab_List: ['Feature Sets', 'Features', 'Feature Vectors', 'Datasets']
   },
@@ -10,6 +20,43 @@ module.exports = {
       'Preview',
       'Statistics',
       'Analysis'
+    ],
+    Overview_General_Headers: [
+      'Description',
+      'Labels',
+      'Version',
+      'Last updated',
+      'Entities',
+      'URI',
+      'Timestamp key',
+      'Label column',
+      'Usage example'
+    ]
+  },
+  Feature_Vectors_Info_Pane: {
+    Tab_List: ['Overview', 'Requested Features', 'Preview', 'Analysis'],
+    Overview_General_Headers: [
+      'Description',
+      'Labels',
+      'Version',
+      'URI',
+      'Last updated',
+      'Label column',
+      'Usage example'
+    ]
+  },
+  Datasets_Info_Pane: {
+    Tab_List: ['Overview', 'Preview', 'Metadata'],
+    Overview_General_Headers: [
+      'Hash',
+      'Key',
+      'Iter',
+      'Size',
+      'Path',
+      'URI',
+      'UID',
+      'Updated',
+      'Labels'
     ]
   },
   ML_Functions_Tab: {
@@ -74,6 +121,9 @@ module.exports = {
       'Custom'
     ]
   },
+  Register_File: {
+    Type_Options: ['General', 'Chart', 'Plot', 'Table']
+  },
   Project_Settings: {
     Tab_List: ['General', 'Secrets']
   },
@@ -105,17 +155,24 @@ module.exports = {
     Limit_Number_Request_Warning:
       'Request must be less than or equal to Limit and not be less than 1',
     GPU_Minimum_Value_Warning: 'The minimum value should be 1',
-    Moumt_Path_Hint: 'A mount path for referencing the data from the function',
+    Mount_Path_Hint: 'A mount path for referencing the data from the function',
     Data_Container_Hint:
       'The name of the data container that contains the data',
     DataAccess_Key_Hint: 'A platform data-access key',
     Name_Already_Exists: 'Name already exists',
+    Volumes_Path_Already_Exists: 'Multiple volumes cannot share the same path',
     Timestamp_Key_Hint:
       'Used for specifying the time field when joining by time',
     Timestamp_Key_Warning:
       'Timestamp Key is required for offline target when partitioning by time is enabled - see the Target Store section.',
     Relative_Directory_Path_Hint:
       'A relative directory path within the data container',
+    Stream_Path_Hint:
+      'Enables users to store the function error in a V3IO stream',
+    Add_Feature_Vector_Hint:
+      'Add features from the list on the left to this feature vector',
+    Deploy_Model_Name_Hint:
+      'After the function is deployed, it will have a URL for calling the model that is based upon this name.',
     SECRET_INPUT_HINT:
       '• Valid characters: A-Z, a-z, 0-9, -, _, .\n' +
       '• Must begin and end with: A-Z, a-z, 0-9\n' +
@@ -146,7 +203,16 @@ module.exports = {
     Delete_Scheduled_Job: /You try to delete scheduled job "[^"]+[$"]\. Deleted scheduled jobs can not be restored\./
   },
   Jobs_And_Workflows: {
-    Tab_List: ['Monitor Jobs', 'Monitor Workflows', 'Schedule']
+    Tab_List: ['Monitor Jobs', 'Monitor Workflows', 'Schedule'],
+    Job_Action_Menu_Options: ['View YAML', 'Re-run', 'Monitoring'],
+    Workflows_Action_Menu_Options: ['View YAML'],
+    Pending_Job_Action_Menu_Options: [
+      'View YAML',
+      'Re-run',
+      'Monitoring',
+      'Abort'
+    ],
+    Schedule_Action_Menu_Options: ['View YAML', 'Run now', 'Edit', 'Delete']
   },
   Jobs_Monitor_Tab_Info_Pane: {
     Tab_List: ['Overview', 'Inputs', 'Artifacts', 'Results', 'Logs', 'Pods'],

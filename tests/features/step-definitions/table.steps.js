@@ -19,6 +19,7 @@ import {
   getCellByIndexColumn,
   isContainsSubstringInColumnCels,
   isContainsSubstringInColumnDropdownCels,
+  isContainsSubstringInColumnTooltipCells,
   isDatetimeCelsValueInRange,
   findRowIndexesByColumnTooltipsValue
 } from '../common/actions/table.action'
@@ -352,6 +353,15 @@ Then(
     }
     if (type === 'dropdowns') {
       await isContainsSubstringInColumnDropdownCels(
+        this.driver,
+        pageObjects[wizard][table],
+        column,
+        substring
+      )
+    }
+
+    if (type === 'tooltip') {
+      await isContainsSubstringInColumnTooltipCells(
         this.driver,
         pageObjects[wizard][table],
         column,

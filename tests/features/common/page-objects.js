@@ -31,6 +31,8 @@ module.exports = {
   Add_To_Feature_Vector_Tab: featureStore['addToFeatureVector'],
   Feature_Sets_Info_Pane: infoPane['featureSetsInfoPane'],
   Features_Info_Pane: infoPane['featuresInfoPane'],
+  Feature_Vectors_Info_Pane: infoPane['featureVectorsInfoPane'],
+  Datasets_Info_Pane: infoPane['datasetsInfoPane'],
   Transformations_Info_Pane: infoPane['transformationsInfoPane'],
   Preview_Info_Pane: infoPane['previewInfoPane'],
   Statistics_Info_Pane: infoPane['statisticsInfoPane'],

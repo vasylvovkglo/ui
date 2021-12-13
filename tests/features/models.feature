@@ -16,6 +16,8 @@ Feature: Models Page
     Then verify "Show_Iterations_Checkbox" element visibility on "Models" wizard
     Then verify "Table_Refresh_Button" element visibility on "Models" wizard
     Then verify "Models_Table" element visibility on "Models" wizard
+    Then verify "Register_Model_Button" element visibility on "Models" wizard
+    Then "Register_Model_Button" element on "Models" should contains "Register Model" value
 
   @passive
   Scenario: Verify filtering by file name on Models tab
@@ -47,7 +49,6 @@ Feature: Models Page
     Then type value "class=sklearn.linear_model.LogisticRegression" to "Table_Labels_Filter_Input" field on "Models" wizard
     Then click on "Table_Refresh_Button" element on "Models" wizard
     Then value in "labels" column with "dropdowns" in "Models_Table" on "Models" wizard should contains "class=sklearn.linear_model.LogisticRegression"
-#  TO DO: should be implemented mock requests for filters
 
   @passive
   Scenario: Check all mandatory components on Register Model Popup
@@ -71,7 +72,9 @@ Feature: Models Page
     Then type value "   " to "New_File_Description_Input" field on "Register_Model_Popup" wizard
     Then verify "New_File_Description_Input" on "Register_Model_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
     Then verify "Cancel_Button" element visibility on "Register_Model_Popup" wizard
+    Then "Cancel_Button" element on "Register_Model_Popup" should contains "Cancel" value
     Then verify "Register_Button" element visibility on "Register_Model_Popup" wizard
+    Then "Register_Button" element on "Register_Model_Popup" should contains "Register" value
 
   @passive
   Scenario: Check MLRun logo redirection
@@ -149,7 +152,7 @@ Feature: Models Page
     Then verify "Info_Sources_Table" element visibility on "Models_Info_Pane" wizard
 
   @passive
-  Scenario: Check all mandatory components on Register Model Popup
+  Scenario: Check all mandatory components on Deploy Model Popup
     Given open url
     And wait load page
     And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
@@ -162,7 +165,10 @@ Feature: Models Page
     Then verify "Serving_Function_Dropdown" element visibility on "Deploy_Model_Popup" wizard
     Then verify "Tag_Dropdown" element visibility on "Deploy_Model_Popup" wizard
     Then verify "Model_Name_Input" element visibility on "Deploy_Model_Popup" wizard
+    Then verify "Model_Name_Input" on "Deploy_Model_Popup" wizard should display "Input_Hint"."Deploy_Model_Name_Hint"
     Then verify "Class_Name_Input" element visibility on "Deploy_Model_Popup" wizard
     Then verify "Deploy_Model_Table" element visibility on "Deploy_Model_Popup" wizard
     Then verify "Cancel_Button" element visibility on "Deploy_Model_Popup" wizard
+    Then "Cancel_Button" element on "Deploy_Model_Popup" should contains "Cancel" value
     Then verify "Deploy_Button" element visibility on "Deploy_Model_Popup" wizard
+    Then "Deploy_Button" element on "Deploy_Model_Popup" should contains "Deploy" value

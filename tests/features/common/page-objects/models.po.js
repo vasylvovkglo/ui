@@ -44,7 +44,8 @@ const modelsTable = {
             '.table-body__cell:nth-of-type(2)',
             '.chip-block span.chips_button',
             '.chip-block .chip-block-hidden_visible .data-ellipsis.tooltip-wrapper',
-            false
+            false,
+            true
           )
         },
         producer: '.table-body__cell:nth-of-type(3) .data-ellipsis a',

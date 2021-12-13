@@ -7,6 +7,7 @@ Feature: MLRun Projects Page
         Given open url
         And wait load page
         Then verify "New_Project_Button" element visibility on "Projects" wizard
+        Then "New_Project_Button" element on "Projects" should contains "New Project" value
         Then verify "See_On_Github" element visibility on "commonPagesHeader" wizard
         Then verify "Projects_Dropdown" element visibility on "Projects" wizard
         Then verify "Projects_Sort_Dropdown" element visibility on "Projects" wizard
@@ -44,7 +45,9 @@ Feature: MLRun Projects Page
         Then verify "Name_Input" according hint rules on "Create_New_Project" wizard
         Then verify "Description_Input" element visibility on "Create_New_Project" wizard
         Then verify "Cancel_Button" element visibility on "Create_New_Project" wizard
+        Then "Cancel_Button" element on "Create_New_Project" should contains "Cancel" value
         Then verify "Create_Button" element visibility on "Create_New_Project" wizard
+        Then "Create_Button" element on "Create_New_Project" should contains "Create" value
 
     @passive
     Scenario: Verify all mandatory components on Archive ML Project
@@ -54,7 +57,9 @@ Feature: MLRun Projects Page
         Then verify if "Archive_Project" popup dialog appears
         Then "Description" component on "Archive_Project" should contains "Descriptions"."Archive_Project"
         Then verify "Cancel_Button" element visibility on "Archive_Project" wizard
+        Then "Cancel_Button" element on "Archive_Project" should contains "Cancel" value
         Then verify "Archive_Button" element visibility on "Archive_Project" wizard
+        Then "Archive_Button" element on "Archive_Project" should contains "Archive" value
 
     @passive
     Scenario: Verify all mandatory components on Delete existing ML Project
@@ -64,7 +69,9 @@ Feature: MLRun Projects Page
         Then verify if "Delete_Project" popup dialog appears
         Then "Description" component on "Delete_Project" should be equal "Descriptions"."Delete_Project"
         Then verify "Cancel_Button" element visibility on "Delete_Project" wizard
+        Then "Cancel_Button" element on "Delete_Project" should contains "Cancel" value
         Then verify "Delete_Button" element visibility on "Delete_Project" wizard
+        Then "Delete_Button" element on "Delete_Project" should contains "Delete" value
 
     @sanity
     Scenario: Create new ML Project with description

@@ -192,7 +192,7 @@ module.exports = {
     Target_Path_Input: inputGroup(commonTargetPathInput),
     Description_Input: inputGroup(commonDescriptionInput),
     Cancel_Button: commonCancelButton,
-    Archive_Button: commonConfirmButton
+    Register_Button: commonConfirmButton
   },
   createFeatureSetPopupDialog: {
     Cross_Cancel_Button: commonCrossCancelButton,
@@ -315,7 +315,7 @@ module.exports = {
     ),
     Discard_Button: commonCancelButton,
     Apply_Button: By.css('.pop-up-dialog .data-ellipsis button.btn-secondary'),
-    Fotter_Annotation_Label: By.css(
+    Footer_Annotation_Label: By.css(
       '.change-owner__pop-up > .pop-up-dialog .footer-annotation'
     )
   },
@@ -330,7 +330,7 @@ module.exports = {
         true // for single hint
       )
     ),
-    Invate_New_Members_Button: By.css(
+    Invite_New_Members_Button: By.css(
       ' #overlay_container .pop-up-dialog .info-row .invite-new-members-btn'
     ),
     Members_Table: commonTable(membersTable),
@@ -363,7 +363,7 @@ module.exports = {
     Apply_Button: By.css(
       ' #overlay_container .pop-up-dialog .data-ellipsis button.btn-secondary'
     ),
-    Fotter_Annotation_Label: By.css(
+    Footer_Annotation_Label: By.css(
       ' #overlay_container .pop-up-dialog .footer-annotation'
     )
   },
