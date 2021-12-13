@@ -84,6 +84,7 @@ Feature: ML Functions
         Then "Delete_Button" element on "Delete_Function_Popup" should contains "Delete" value
 
     @passive
+    @inProgress
     Scenario: Check all mandatory components on Create ML Function Popup
         Given open url
         And wait load page
@@ -99,6 +100,7 @@ Feature: ML Functions
         Then verify "New_Function_Name_Input" on "Create_ML_Function_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "New_Function_Name_Input" on "Create_ML_Function_Popup" wizard should display "Input_Hint"."Function_Name_Hint"
         Then verify "New_Function_Name_Input" according hint rules on "Create_ML_Function_Popup" wizard
+        # TODO: save to test context sugested names
         Then type value "   " to "New_Function_Tag_Input" field on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Tag_Input" on "Create_ML_Function_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "New_Function_Runtime_Dropdown" element visibility on "Create_ML_Function_Popup" wizard

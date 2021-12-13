@@ -57,9 +57,16 @@ const action = {
     const txt = await element.getText()
     expect(txt).equal(option)
   },
-  checkDropdownOptions: async function(driver, dropdown, values) {
+  checkDropdownOptions: async function(
+    driver,
+    dropdown,
+    values,
+    scroll = true
+  ) {
     const element = await driver.findElement(dropdown.root)
-    await scrollToWebElement(driver, element)
+    if (scroll) {
+      await scrollToWebElement(driver, element)
+    }
     const options = await getOptionValues(driver, dropdown.options)
     expect(differenceWith(options, values, isEqual).length).equal(0)
   }

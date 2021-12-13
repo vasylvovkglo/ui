@@ -410,7 +410,8 @@ Then(
     await checkDropdownOptions(
       this.driver,
       pageObjects[wizard][dropdown],
-      pageObjectsConsts[constStorage][constValue]
+      pageObjectsConsts[constStorage][constValue],
+      false
     )
     await clickNearComponent(
       this.driver,
