@@ -403,6 +403,54 @@ Feature: Jobs and workflows
         Then verify "Criteria_Dropdown" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
 
     @passive
+    Scenario: Verify behaviour of Parameters Table in Resources Accordion on create New JobTemplate edit wizard
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        And wait load page
+        When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Job_Custom_Parameters_Table" element visibility in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        When add new volume rows to "Job_Custom_Parameters_Table" table in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
+            | Parameters_Table_Name_Input | Parameters_Table_Type_Dropdown | Parameter_Table_Simple_Hyper_Dropdown | Parameters_Table_Value_Input | Add_New_Row_Button |
+            | name1                       | str                            | Simple                                | value1                       | yes                |
+            | name2                       | int                            | Hyper                                 | value2                       | yes                |
+            | name3                       | map                            | Simple                                | value3                       | yes                |
+            | name4                       | bool                           | Hyper                                 | value4                       | yes                |
+            | name5                       | str                            | Hyper                                 | value5                       | yes                |
+            | name6                       | float                          | Simple                                | value6                       | yes                |
+            | name7                       | map                            | Hyper                                 | value7                       | yes                |
+            | name8                       | list                           | Simple                                | value8                       | yes                |
+        Then verify values in "Job_Custom_Parameters_Table" table in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+            | name  | type  | simple_hyper | values  |
+            | name1 | str   | Simple       | value1  |
+            | name2 | int   | Hyper        | value2  |
+            | name3 | map   | Simple       | value3  |
+            | name4 | bool  | Hyper        | value4  |
+            | name5 | str   | Hyper        | value5  |
+            | name6 | float | Simple       | value6  |
+            | name7 | map   | Hyper        | value7  |
+            | name8 | list  | Simple       | value8  |
+        When click on "delete_btn" in "Job_Custom_Parameters_Table" table in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
+            | name  |
+            | name2 |
+            | name4 |
+            | name5 |
+            | name8 |
+        Then verify values in "Job_Custom_Parameters_Table" table in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+            | name  | type  | simple_hyper | values  |
+            | name1 | str   | Simple       | value1  |
+            | name3 | map   | Simple       | value3  |
+            | name6 | float | Simple       | value6  |
+            | name7 | map   | Hyper        | value7  |
+
+    @passive
     Scenario: Verify behaviour of Volume Paths Table in Resources Accordion on create New JobTemplate edit wizard
         Given open url
         And wait load page
@@ -481,6 +529,44 @@ Feature: Jobs and workflows
             | Volume_Name_1 | /path/to/happines1 |
             | Volume_Name_5 | /path/to/happines5 |
             | Volume_Name_7 | /path/to/happines7 |
+
+    @passive
+    Scenario: Verify behaviour of Node Selector Table in Resources Accordion on create New JobTemplate edit wizard
+        Given open url
+        And wait load page
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then click on "New_Job_Button" element on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        When expand row with "Data Preparation" at "name" in "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        When select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
+        And wait load page
+        When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
+        When expand "Resources_Accordion" on "New_JobTemplate_Edit" wizard
+        Then verify "Resources_Node_Selector_Table" element visibility in "Resources_Accordion" on "New_JobTemplate_Edit" wizard
+        When add rows to "Resources_Node_Selector_Table" table in "Resources_Accordion" on "New_JobTemplate_Edit" wizard
+            | key_input | value_input |
+            | key1      | value1      |
+            | key2      | value2      |
+            | key3      | value3      |
+            | key4      | value4      |
+        Then verify values in "Resources_Node_Selector_Table" table in "Resources_Accordion" on "New_JobTemplate_Edit" wizard
+            | key  | value  |
+            | key1 | value1 |
+            | key2 | value2 |
+            | key3 | value3 |
+            | key4 | value4 |
+        When click on "delete_btn" in "Resources_Node_Selector_Table" table in "Resources_Accordion" on "New_JobTemplate_Edit" wizard with offset "false"
+            | key  |
+            | key1 |
+            | key3 |
+        Then verify values in "Resources_Node_Selector_Table" table in "Resources_Accordion" on "New_JobTemplate_Edit" wizard
+            | key  | value  |
+            | key2 | value2 |
+            | key4 | value4 |
 
     @passive
     Scenario: verify mandatory elements in Resources Accordion on Create New Jobs side panel
@@ -730,6 +816,11 @@ Feature: Jobs and workflows
         And select "aggregate" in subcolumn "name" at "templates_list" column in "Data Preparation" row by "name" at "Functions_Templates_Table" in "Function_Templates_Accordion" on "Create_Job" wizard
         And wait load page
         When collapse "Data_Inputs_Accordion" on "New_JobTemplate_Edit" wizard
+        When add new volume rows to "Job_Custom_Parameters_Table" table in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs
+            | Parameters_Table_Name_Input | Parameters_Table_Type_Dropdown | Parameter_Table_Simple_Hyper_Dropdown | Parameters_Table_Value_Input | Add_New_Row_Button |
+            | name1                       | str                            | Simple                                | value1                       | yes                |
+            | name1                       | int                            | Hyper                                 | value2                       | yes                |
+        Then verify "Parameters_Table_Name_Input" element in "Parameters_Accordion" on "New_JobTemplate_Edit" wizard should display warning "Input_Hint"."Name_Already_Exists"
         When collapse "Parameters_Accordion" on "New_JobTemplate_Edit" wizard
         When expand "Resources_Accordion" on "New_JobTemplate_Edit" wizard
         When add new volume rows to "Volume_Paths_Table" table in "Resources_Accordion" on "New_JobTemplate_Edit" wizard using nontable inputs

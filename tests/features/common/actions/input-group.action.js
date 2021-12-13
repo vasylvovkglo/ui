@@ -48,6 +48,7 @@ const action = {
   },
   checkInputAccordingHintText: async function(
     driver,
+    attach,
     inputGroup,
     hintComponent
   ) {
@@ -72,6 +73,8 @@ const action = {
       await verifyInputInvalid(driver, inputGroup)
       await clearManually(input)
     }
+
+    await attach(JSON.stringify({ validStrings, invalidStrings }))
   },
   checkWarningHintText: async function(
     driver,
