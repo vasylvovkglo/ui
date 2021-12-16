@@ -1009,6 +1009,13 @@ function getIguazioProjects(req, res) {
   res.send(resultTemplate)
 }
 
+function getIguazioAuthorization(req, res) {
+  console.log('requests log: ', req.method, req.url)
+  console.log('debug: ', req.params, req.query, req.body)
+
+  res.send({ data: [], meta: { ctx: 11661436569072727632 } })
+}
+
 function getIguazioProject(req, res) {
   console.log('requests log: ', req.method, req.url)
   console.log('debug: ', req.params, req.query, req.body)
@@ -1210,6 +1217,11 @@ app.get(`${nuclioApiUrl}/api/functions`, getNuclioFunctions)
 app.get(`${nuclioApiUrl}/api/api_gateways`, getNuclioAPIGateways)
 
 app.get(`${iguazioApiUrl}/api/projects`, getIguazioProjects)
+
+app.get(
+  `${iguazioApiUrl}/api/projects/__name__/:project/authorization`,
+  getIguazioAuthorization
+)
 
 app.get(`${iguazioApiUrl}/api/projects/:id`, getIguazioProject)
 
