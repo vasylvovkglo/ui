@@ -5,7 +5,6 @@ Feature: Project Settings page
 
     @passive
     @inProgress
-    @debug
     Scenario: Verify all mandatory components on General Tab
         Given open url
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard

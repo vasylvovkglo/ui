@@ -4,12 +4,12 @@ const yaml = require('js-yaml')
 const lodash = require('lodash')
 
 const baseMlRunUrl =
-  'http://mlrun-api-ingress.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+  'http://mlrun-api-ingress.default-tenant.app.vmdev36.lab.iguazeng.com:40000/api/'
 // const baseMlRunUrl =
 //   'http://mlrun-api-ingress.default-tenant.app.dev35.lab.iguazeng.com/api/'
 
 const baseNuclioUrl =
-  'http://nuclio-ingress.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+  'http://nuclio-ingress.default-tenant.app.vmdev36.lab.iguazeng.com:40001/api/'
 // const baseNuclioUrl =
 //   'http://nuclio-ingress.default-tenant.app.dev35.lab.iguazeng.com/api/'
 const githubFunctionsUrl = 'https://github.com/mlrun/functions/tree/master'
@@ -17,7 +17,7 @@ const githubYamlUrl =
   'https://raw.githubusercontent.com/mlrun/functions/master/'
 const saveFolder = 'data'
 const igzApiUrl =
-  'platform-api.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+  'platform-api.default-tenant.app.vmdev36.lab.iguazeng.com:40002/api/'
 // const igzApiUrl =
 //   'http://platform-api.default-tenant.app.dev35.lab.iguazeng.com/api/'
 
@@ -341,7 +341,7 @@ const synchronizeBackend = async () => {
   saveDataToJson('./data/nuclioAPIGateways.json', nuclioApiGateways)
 
   // Iguazio API sync
-  if (frontendSpec.feature_flags.project_membership === 'enabled') {
+  if (frontendSpec?.feature_flags?.project_membership === 'enabled') {
     const igzProjects = await fetchData(igzApiUrl, 'projects')
     const igzProjectAuthRoles = await fetchData(
       igzApiUrl,

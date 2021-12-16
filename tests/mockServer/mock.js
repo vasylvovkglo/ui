@@ -918,10 +918,12 @@ function postSubmitJob(req, res) {
   delete job.status.status_text
   job.status.results = {}
 
-  const funcYAMLPath = `./tests/mockServer/data/mlrun/functions/master/${req.body.task.spec.function.slice(
+  const funcYAMLPath = `./tests/mockServer/data/mlrun/functions/${req.body.task.spec.function.slice(
     6
-  )}/function.yaml`
-  const funcObject = yaml.load(fs.readFileSync(funcYAMLPath, 'utf8'))
+  )}/${req.body.task.spec.function.slice(6)}.yaml`
+  let funcObject = yaml.load(
+    fs.readFileSync(funcYAMLPath, 'utf8').replace('|', '')
+  )
   const funcUID = makeUID(32)
   // funcObject.kind = respTemplate.data.metadata.labels.kind
   funcObject.metadata.hash = funcUID
@@ -945,7 +947,7 @@ function postSubmitJob(req, res) {
 
   runs.runs.push(job)
   funcs.funcs.push(funcObject)
-  logs.logs.push(jobLogs)
+  logs.push(jobLogs)
 
   res.send(respTemplate)
 }
