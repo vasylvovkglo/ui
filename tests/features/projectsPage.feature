@@ -26,7 +26,7 @@ Feature: MLRun Projects Page
         Then value in "name" column with "text" in "Projects_Table" on "Projects" wizard should contains "at"
 
     @passive
-    Scenario: Sort projects in ascending and decending order
+    Scenario: Sort projects in ascending and descending order
         Given open url
         And wait load page
         When select "By name" option in "Projects_Sort_Dropdown" dropdown on "Projects" wizard
@@ -83,11 +83,13 @@ Feature: MLRun Projects Page
         Then type into "Name_Input" on "Create_New_Project" popup dialog "automation-test-name" value
         Then type into "Description_Input" on "Create_New_Project" popup dialog "automation test description" value
         Then click on "Create_Button" element on "Create_New_Project" wizard
+        And set tear-down property "project" created with "automation-test-name" value
         Then check "automation-test-name" value in "name" column in "Projects_Table" table on "Projects" wizard
         And remove "automation-test-name" MLRun Project with code 204
 
     Scenario: Archive ML Project
         * create "automation-test-name1" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name1" value
         Given open url
         And wait load page
         Then check "automation-test-name1" value in "name" column in "Projects_Table" table on "Projects" wizard
@@ -101,6 +103,7 @@ Feature: MLRun Projects Page
 
     Scenario: Delete existing ML Project
         * create "automation-test-name2" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name2" value
         Given open url
         And wait load page
         Then check "automation-test-name2" value in "name" column in "Projects_Table" table on "Projects" wizard
@@ -112,6 +115,7 @@ Feature: MLRun Projects Page
 
     Scenario: Unarchive ML Project
         * create "automation-test-name7" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name7" value
         Given open url
         And wait load page
         Then check "automation-test-name7" value in "name" column in "Projects_Table" table on "Projects" wizard

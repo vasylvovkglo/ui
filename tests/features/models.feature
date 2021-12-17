@@ -8,8 +8,10 @@ Feature: Models Page
     And wait load page
     And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
     And wait load page
+    Then verify breadcrumbs "project" label should be equal "default" value
     And click on cell with value "Models" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
     And wait load page
+    Then verify breadcrumbs "tab" label should be equal "Models" value
     Then verify "Table_Name_Filter_Input" element visibility on "Models" wizard
     Then verify "Table_Labels_Filter_Input" element visibility on "Models" wizard
     Then verify "Table_Tree_Filter_Dropdown" element visibility on "Models" wizard

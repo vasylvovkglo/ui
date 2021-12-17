@@ -1,7 +1,11 @@
 import actionMenu from '../components/action-menu.component'
 import commonTable from '../components/table.component'
-import { generateLabelGroup } from '../../common-tools/common-tools'
+import {
+  generateInputGroup,
+  generateLabelGroup
+} from '../../common-tools/common-tools'
 import labelComponent from '../components/label.component'
+import inputGroup from '../components/input-group.component'
 const { By } = require('selenium-webdriver')
 
 // TO DO: that is dublicate from Feature Store PO. In feuture that should be fixed
@@ -222,6 +226,24 @@ const resultsTable = {
   }
 }
 
+const featureSetsInfoPaneLabelsTable = {
+  root: '.item-info__details .details-item__data-chips',
+  header: {},
+  body: {
+    root: 'div.chips-wrapper',
+    add_row_btn: 'button.button-add',
+    row: {
+      root: 'div.chip-block',
+      fields: {
+        key_input: 'input.input-label-key',
+        value_input: 'input.input-label-value',
+        label: '.chip',
+        remove_btn: '.item-icon-close'
+      }
+    }
+  }
+}
+
 // common components
 const header = By.css('div.table__item div.item-header__data h3')
 const updated = By.css('div.table__item div.item-header__data span')
@@ -249,7 +271,23 @@ module.exports = {
     Action_Menu: commonActionMenu,
     Cross_Close_Button: crossCloseButton,
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
-    Overview_General_Headers: commonTable(infoPaneOverviewHeaders)
+    Overview_General_Headers: commonTable(infoPaneOverviewHeaders),
+    Description_Field: By.css(
+      '.item-info__details .details-item:nth-of-type(1) .data-ellipsis'
+    ),
+    Description_Input: inputGroup(
+      generateInputGroup(
+        '.item-info__details .details-item:nth-of-type(1) .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    Labels_Field: By.css(
+      '.item-info__details .details-item:nth-of-type(2) .data-ellipsis'
+    ),
+    Labels_Table: commonTable(featureSetsInfoPaneLabelsTable),
+    Apply_Button: By.css('.item-info__details .details-item__input-btn')
   },
   featuresInfoPane: {
     Header: header,
@@ -282,18 +320,18 @@ module.exports = {
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
     Overview_General_Headers: commonTable(infoPaneOverviewHeaders),
     Overview_Hash_Header: labelComponent(
-        generateLabelGroup(
-            '.item-info__details:nth-of-type(1) .details-item:nth-of-type(1) .details-item__header',
-            false,
-            true
-        )
+      generateLabelGroup(
+        '.item-info__details:nth-of-type(1) .details-item:nth-of-type(1) .details-item__header',
+        false,
+        true
+      )
     ),
     Overview_UID_Header: labelComponent(
-        generateLabelGroup(
-            '.item-info__details:nth-of-type(1) .details-item:nth-of-type(7) .details-item__header',
-            false,
-            true
-        )
+      generateLabelGroup(
+        '.item-info__details:nth-of-type(1) .details-item:nth-of-type(7) .details-item__header',
+        false,
+        true
+      )
     ),
     Expand_Sources: By.css('.details-item .info-sources'),
     Info_Sources_Table: commonTable(filesInfoSourcesTable)

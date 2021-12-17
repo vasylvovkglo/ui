@@ -736,34 +736,9 @@ module.exports = {
       Collapse_Button: By.css(
         'div.feature-set-panel div.accordion__container:nth-of-type(1) button.new-item-side-panel__expand-icon'
       ),
-      URL_Combobox: comboBox({
-        root:
-          '.feature-set-panel .accordion__container:nth-of-type(1) .panel-section__body .combobox',
-        elements: {
-          dropdown: generateDropdownGroup(
-            '.combobox-select',
-            '.combobox-select__header', // Open Component
-            '.combobox-select__body .combobox-list .combobox-list__option', // Options
-            '', // Option value
-            true
-          ),
-          comboDropdown: {
-            dropdown: generateDropdownGroup(
-              '.combobox-dropdown',
-              '', // Open Component
-              '.combobox-dropdown__list .combobox-list__option', // Options
-              '', // Option value
-              true
-            ),
-            searchInput: generateInputGroup(
-              '.combobox-dropdown__search-input',
-              false,
-              false,
-              false
-            )
-          }
-        }
-      }),
+      URL_Combobox: comboBox(
+        '.feature-set-panel .accordion__container:nth-of-type(1) .panel-section__body .combobox'
+      ),
       Kind_Dropdown: dropdownComponent(
         generateDropdownGroup(
           '.feature-set-panel .accordion__container:nth-of-type(1) .panel-section__body .select',
@@ -1097,6 +1072,12 @@ module.exports = {
           false,
           false
         )
+      ),
+      Add_Input_Button: By.css(
+        '.new-item-side-panel__body .accordion__container:nth-of-type(1) .add-input'
+      ),
+      URL_Combobox: comboBox(
+        '.new-item-side-panel__body .accordion__container:nth-of-type(1) .combobox'
       )
     },
     Parameters_Accordion: {

@@ -9,6 +9,7 @@ Feature: Project Settings page
         Given open url
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "default" value
         Then click on "Project_Settings_Button" element on "Project" wizard
         Then verify "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard should contains "Project_Settings"."Tab_List"
         Then verify "General" tab is active in "Project_Settings_Tab_Selector" on "Project_Settings_General_Tab" wizard
@@ -22,6 +23,7 @@ Feature: Project Settings page
 
     Scenario: Verify Parameters Table on General Tab
         * create "automation-test-name5" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name5" value
         Given open url
         And click on cell with value "automation-test-name5" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
@@ -99,6 +101,7 @@ Feature: Project Settings page
     @inProgress
     Scenario: Verify Secrets table on Secrets tab
         * create "automation-test-name6" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name6" value
         Given open url
         And click on cell with value "automation-test-name6" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page

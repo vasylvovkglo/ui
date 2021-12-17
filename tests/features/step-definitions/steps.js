@@ -166,12 +166,35 @@ When(
   }
 )
 
+When(
+  'type searchable fragment {string} into {string} combobox input in {string} on {string} wizard',
+  async function(subName, combobox, accordion, wizard) {
+    await typeSearchebleValue(
+      this.driver,
+      pageObjects[wizard][accordion][combobox]['comboDropdown'],
+      subName
+    )
+  }
+)
+
 Then(
-  'searchable fragment {string} should be in every sugested option into {string} on {string} wizard',
+  'searchable fragment {string} should be in every suggested option into {string} on {string} wizard',
   async function(subName, inputGroup, wizard) {
     await isContainsSubstringInSuggestedOptions(
       this.driver,
       pageObjects[wizard][inputGroup],
+      subName
+    )
+  }
+)
+
+Then(
+  'searchable fragment {string} should be in every suggested option into {string} combobox input in {string} on {string} wizard',
+  async function(subName, combobox, accordion, wizard) {
+    await this.driver.sleep(200)
+    await isContainsSubstringInSuggestedOptions(
+      this.driver,
+      pageObjects[wizard][accordion][combobox]['comboDropdown'],
       subName
     )
   }
@@ -698,6 +721,25 @@ When('select {string} in {string} on {string}', async function(
   )
 })
 
+Then(
+  'verify options in {string} combobox in {string} on {string} wizard should contains {string}.{string}',
+  async function(combobox, accordion, wizard, constStorage, constValue) {
+    await openDropdown(
+      this.driver,
+      pageObjects[wizard][accordion][combobox]['dropdown']
+    )
+    await checkDropdownOptions(
+      this.driver,
+      pageObjects[wizard][accordion][combobox]['dropdown'],
+      pageObjectsConsts[constStorage][constValue],
+      false
+    )
+    await clickNearComponent(
+      this.driver,
+      pageObjects[wizard][accordion][combobox]['dropdown']['open_button']
+    )
+  }
+)
 When(
   'select {string} option in {string} combobox on {string} accordion on {string} wizard',
   async function(option, comboBox, accordion, wizardName) {
@@ -721,6 +763,7 @@ When(
       pageObjects[wizard][accordion][comboBox]['comboDropdown'],
       option
     )
+    await this.driver.sleep(200)
   }
 )
 
@@ -758,5 +801,46 @@ Then('verify {string} according hint rules on {string} wizard', async function(
     this.attach,
     pageObjects[wizardName][inputField],
     pageObjects['commonPagesHeader']['Common_Hint']
+  )
+})
+
+Then(
+  'set tear-down property {string} created with {string} value',
+  async function(type, name) {
+    this.parameters[type] = name
+  }
+)
+
+Then(
+  'set tear-down property {string} created in {string} project with {string} value',
+  async function(type, projectName, itemName) {
+    this.parameters[type] = { projectName, itemName }
+  }
+)
+
+Then(
+  'verify breadcrumbs {string} label should be equal {string} value',
+  async function(labelType, value) {
+    await verifyText(
+      this.driver,
+      pageObjects['commonPagesHeader']['Breadcrumbs'][`${labelType}Label`],
+      value
+    )
+  }
+)
+
+Then('select {string} with {string} value in breadcrumbs menu', async function(
+  itemType,
+  name
+) {
+  await openDropdown(
+    this.driver,
+    pageObjects['commonPagesHeader']['Breadcrumbs'][itemType]
+  )
+
+  await selectOptionInDropdown(
+    this.driver,
+    pageObjects['commonPagesHeader']['Breadcrumbs'][itemType],
+    name
   )
 })

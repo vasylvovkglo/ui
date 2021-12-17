@@ -112,6 +112,7 @@ module.exports = {
   },
   New_Feature_Store: {
     Kind_Options: ['HTTP', 'CSV', 'PARQUET'],
+    Combobox_Options: ['MLRun store', 'V3IO', 'S3', 'Azure storage'],
     Target_Store_File_Type: [
       'CSV',
       'TSDB',
@@ -119,6 +120,17 @@ module.exports = {
       'NoSql',
       'Dataframe',
       'Custom'
+    ]
+  },
+  Create_New_Job: {
+    Combobox_Options: [
+      'MLRun store',
+      'V3IO',
+      'S3',
+      'HTTP',
+      'HTTPS',
+      'Azure storage',
+      'Google storage'
     ]
   },
   Register_File: {
@@ -173,6 +185,13 @@ module.exports = {
       'Add features from the list on the left to this feature vector',
     Deploy_Model_Name_Hint:
       'After the function is deployed, it will have a URL for calling the model that is based upon this name.',
+    MLRun_Store_Path_Hint:
+      'Field must be in "artifacts/my-project/my-artifact:my-tag" format',
+    Jobs_MLRun_Store_Path_Hint:
+      'Field must be in "artifacts/my-project/my-artifact:my-tag" or "artifacts/my-project/my-artifact@my-uid" format',
+    V3IO_Path_Hint: 'Field must be in "container-name/file" format',
+    S3_Path_Hint: 'Field must be in "bucket/path" format',
+    Azure_Storage_Path_Hint: 'Field must be in "container/path" format',
     SECRET_INPUT_HINT:
       '• Valid characters: A-Z, a-z, 0-9, -, _, .\n' +
       '• Must begin and end with: A-Z, a-z, 0-9\n' +
