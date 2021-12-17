@@ -62,7 +62,15 @@ module.exports = {
   generalTab: {
     Project_Settings_Tab_Selector: commonTable(tabSelector),
     Source_URL_Edit_Button: By.css(
-      '.settings__card-content .settings__source .settings__source-edit'
+      '.settings__card-content .settings__source .settings__source-link'
+    ),
+    Source_URL_Edit_Input: inputGroup(
+      generateInputGroup(
+        '.settings__card-content .settings__source .input-wrapper',
+        true,
+        false,
+        true
+      )
     ),
     Artifact_Path_Input: inputGroup(
       generateInputGroup(

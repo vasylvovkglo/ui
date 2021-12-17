@@ -16,6 +16,7 @@ import featureVectors from './data/featureVectors.json'
 import runs from './data/runs.json'
 import run from './data/run.json'
 import pipelines from './data/pipelines.json'
+import secretKeys from './data/secretKeys.json'
 import pipelineIDs from './data/piplineIDs.json'
 import schedules from './data/schedules.json'
 import artifactTags from './data/artifactsTags.json'
@@ -277,6 +278,13 @@ function putProject(req, res) {
       project => project.metadata.name === req.params['project']
     )
   )
+}
+
+function getSecretKeys(req, res) {
+  console.log('requests log: ', req.method, req.url)
+  console.log('debug: ', req.params, req.query, req.body)
+
+  res.send(secretKeys[req.params['project']])
 }
 
 function getProjectsSummaries(req, res) {
@@ -918,10 +926,12 @@ function postSubmitJob(req, res) {
   delete job.status.status_text
   job.status.results = {}
 
-  const funcYAMLPath = `./tests/mockServer/data/mlrun/functions/master/${req.body.task.spec.function.slice(
+  const funcYAMLPath = `./tests/mockServer/data/mlrun/functions/${req.body.task.spec.function.slice(
     6
-  )}/function.yaml`
-  const funcObject = yaml.load(fs.readFileSync(funcYAMLPath, 'utf8'))
+  )}/${req.body.task.spec.function.slice(6)}.yaml`
+  let funcObject = yaml.load(
+    fs.readFileSync(funcYAMLPath, 'utf8').replace('|', '')
+  )
   const funcUID = makeUID(32)
   // funcObject.kind = respTemplate.data.metadata.labels.kind
   funcObject.metadata.hash = funcUID
@@ -945,7 +955,7 @@ function postSubmitJob(req, res) {
 
   runs.runs.push(job)
   funcs.funcs.push(funcObject)
-  logs.logs.push(jobLogs)
+  logs.push(jobLogs)
 
   res.send(respTemplate)
 }
@@ -1005,6 +1015,13 @@ function getIguazioProjects(req, res) {
   resultTemplate.included.push(owner)
 
   res.send(resultTemplate)
+}
+
+function getIguazioAuthorization(req, res) {
+  console.log('requests log: ', req.method, req.url)
+  console.log('debug: ', req.params, req.query, req.body)
+
+  res.send({ data: [], meta: { ctx: 11661436569072727632 } })
 }
 
 function getIguazioProject(req, res) {
@@ -1133,6 +1150,7 @@ app.get(`${mlrunAPIIngress}/api/projects/:project`, getProject)
 app.delete(`${mlrunAPIIngress}/api/projects/:project`, deleteProject)
 app.patch(`${mlrunAPIIngress}/api/projects/:project`, patchProject)
 app.put(`${mlrunAPIIngress}/api/projects/:project`, putProject)
+app.get(`${mlrunAPIIngress}/api/projects/:project/secret-keys`, getSecretKeys)
 
 app.get(`${mlrunAPIIngress}/api/project-summaries`, getProjectsSummaries)
 app.get(`${mlrunAPIIngress}/api/project-summaries/:project`, getProjectSummary)
@@ -1208,6 +1226,11 @@ app.get(`${nuclioApiUrl}/api/functions`, getNuclioFunctions)
 app.get(`${nuclioApiUrl}/api/api_gateways`, getNuclioAPIGateways)
 
 app.get(`${iguazioApiUrl}/api/projects`, getIguazioProjects)
+
+app.get(
+  `${iguazioApiUrl}/api/projects/__name__/:project/authorization`,
+  getIguazioAuthorization
+)
 
 app.get(`${iguazioApiUrl}/api/projects/:id`, getIguazioProject)
 

@@ -16,6 +16,9 @@ Feature: Project Settings page
         Then type value "   " to "Artifact_Path_Input" field on "Project_Settings_General_Tab" wizard
         Then verify "Artifact_Path_Input" on "Project_Settings_General_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Parameters_Table" element visibility on "Project_Settings_General_Tab" wizard
+        Then click on "Source_URL_Edit_Button" element on "Project_Settings_General_Tab" wizard
+        Then type value "   " to "Source_URL_Edit_Input" field on "Project_Settings_General_Tab" wizard
+        Then verify "Source_URL_Edit_Input" on "Project_Settings_General_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
 
     Scenario: Verify Parameters Table on General Tab
         * create "automation-test-name5" MLRun Project with code 200
