@@ -16,6 +16,7 @@ import featureVectors from './data/featureVectors.json'
 import runs from './data/runs.json'
 import run from './data/run.json'
 import pipelines from './data/pipelines.json'
+import secretKeys from './data/secretKeys.json'
 import pipelineIDs from './data/piplineIDs.json'
 import schedules from './data/schedules.json'
 import artifactTags from './data/artifactsTags.json'
@@ -277,6 +278,13 @@ function putProject(req, res) {
       project => project.metadata.name === req.params['project']
     )
   )
+}
+
+function getSecretKeys(req, res) {
+  console.log('requests log: ', req.method, req.url)
+  console.log('debug: ', req.params, req.query, req.body)
+
+  res.send(secretKeys[req.params['project']])
 }
 
 function getProjectsSummaries(req, res) {
@@ -1142,6 +1150,7 @@ app.get(`${mlrunAPIIngress}/api/projects/:project`, getProject)
 app.delete(`${mlrunAPIIngress}/api/projects/:project`, deleteProject)
 app.patch(`${mlrunAPIIngress}/api/projects/:project`, patchProject)
 app.put(`${mlrunAPIIngress}/api/projects/:project`, putProject)
+app.get(`${mlrunAPIIngress}/api/projects/:project/secret-keys`, getSecretKeys)
 
 app.get(`${mlrunAPIIngress}/api/project-summaries`, getProjectsSummaries)
 app.get(`${mlrunAPIIngress}/api/project-summaries/:project`, getProjectSummary)

@@ -3,23 +3,23 @@ const fs = require('fs-extra')
 const yaml = require('js-yaml')
 const lodash = require('lodash')
 
-// const baseMlRunUrl =
-//   'http://mlrun-api-ingress.default-tenant.app.vmdev36.lab.iguazeng.com:40000/api/'
 const baseMlRunUrl =
-  'http://mlrun-api-ingress.default-tenant.app.dev35.lab.iguazeng.com:40003/api/'
+  'http://mlrun-api-ingress.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+// const baseMlRunUrl =
+//   'http://mlrun-api-ingress.default-tenant.app.dev35.lab.iguazeng.com/api/'
 
-// const baseNuclioUrl =
-//   'http://nuclio-ingress.default-tenant.app.vmdev36.lab.iguazeng.com:40001/api/'
 const baseNuclioUrl =
-  'http://nuclio-ingress.default-tenant.app.dev35.lab.iguazeng.com:40004/api/'
+  'http://nuclio-ingress.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+// const baseNuclioUrl =
+//   'http://nuclio-ingress.default-tenant.app.dev35.lab.iguazeng.com/api/'
 const githubFunctionsUrl = 'https://github.com/mlrun/functions/tree/master'
 const githubYamlUrl =
   'https://raw.githubusercontent.com/mlrun/functions/master/'
 const saveFolder = 'data'
-// const igzApiUrl =
-//   'platform-api.default-tenant.app.vmdev36.lab.iguazeng.com:40002/api/'
 const igzApiUrl =
-  'http://platform-api.default-tenant.app.dev35.lab.iguazeng.com:40005/api/'
+  'platform-api.default-tenant.app.vmdev36.lab.iguazeng.com/api/'
+// const igzApiUrl =
+//   'http://platform-api.default-tenant.app.dev35.lab.iguazeng.com/api/'
 
 const fetchData = async (host, endpoint = '') => {
   try {
@@ -307,6 +307,13 @@ const synchronizeBackend = async () => {
     'pipelines/'
   )
 
+  const secretKeys = await fetchJsonsPerProject(
+    projectNames,
+    baseMlRunUrl,
+    'projects/',
+    '/secret-keys?provider=kubernetes'
+  )
+
   const artifactsLogs = await fetchArtifactsLogs(runs.runs)
   const logs = await fetchAllLogs(artifactsLogs)
 
@@ -321,6 +328,7 @@ const synchronizeBackend = async () => {
   saveDataToJson('./data/featureSets.json', featureSets)
   saveDataToJson('./data/featureVectors.json', featureVectors)
   saveDataToJson('./data/pipelines.json', pipelines)
+  saveDataToJson('./data/secretKeys.json', secretKeys)
   saveDataToJson('./data/schedules.json', schedules)
   saveDataToJson('./data/funcs.json', functions)
   saveDataToJson('./data/runs.json', runs)
