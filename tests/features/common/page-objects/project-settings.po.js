@@ -44,9 +44,8 @@ const secretsTable = {
   root: '.settings__card-content',
   header: {},
   body: {
-    offset: 1,
     row: {
-      root: '.secret-row',
+      root: '.secret__row',
       fields: {
         key: '.secret__cell:nth-of-type(1)',
         edit_btn:
