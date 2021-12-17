@@ -281,10 +281,25 @@ function putProject(req, res) {
 }
 
 function getSecretKeys(req, res) {
-  console.log('requests log: ', req.method, req.url)
-  console.log('debug: ', req.params, req.query, req.body)
-
   res.send(secretKeys[req.params['project']])
+}
+
+function postSecretKeys(req, res) {
+  secretKeys[req.params['project']].secret_keys.push(
+    Object.keys(req.body.secrets)[0]
+  )
+
+  res.statusCode = 201
+  res.send('')
+}
+
+function deleteSecretKeys(req, res) {
+  secretKeys[req.params['project']].secret_keys = secretKeys[
+    req.params['project']
+  ].secret_keys.filter(item => item !== req.query.secret)
+
+  res.statusCode = 204
+  res.send('')
 }
 
 function getProjectsSummaries(req, res) {
@@ -1151,6 +1166,8 @@ app.delete(`${mlrunAPIIngress}/api/projects/:project`, deleteProject)
 app.patch(`${mlrunAPIIngress}/api/projects/:project`, patchProject)
 app.put(`${mlrunAPIIngress}/api/projects/:project`, putProject)
 app.get(`${mlrunAPIIngress}/api/projects/:project/secret-keys`, getSecretKeys)
+app.post(`${mlrunAPIIngress}/api/projects/:project/secrets`, postSecretKeys)
+app.delete(`${mlrunAPIIngress}/api/projects/:project/secrets`, deleteSecretKeys)
 
 app.get(`${mlrunAPIIngress}/api/project-summaries`, getProjectsSummaries)
 app.get(`${mlrunAPIIngress}/api/project-summaries/:project`, getProjectSummary)
