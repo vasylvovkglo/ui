@@ -8,8 +8,10 @@ Feature: ML Functions
         And wait load page
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "default" value
         And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Functions" value
         Then verify "Table_Name_Filter_Input" element visibility on "ML_Functions" wizard
         Then verify "Show_Untagged_Functions_Checkbox" element visibility on "ML_Functions" wizard
         Then verify "New_Function_Button" element visibility on "ML_Functions" wizard
@@ -100,7 +102,6 @@ Feature: ML Functions
         Then verify "New_Function_Name_Input" on "Create_ML_Function_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "New_Function_Name_Input" on "Create_ML_Function_Popup" wizard should display "Input_Hint"."Function_Name_Hint"
         Then verify "New_Function_Name_Input" according hint rules on "Create_ML_Function_Popup" wizard
-        # TODO: save to test context sugested names
         Then type value "   " to "New_Function_Tag_Input" field on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Tag_Input" on "Create_ML_Function_Popup" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "New_Function_Runtime_Dropdown" element visibility on "Create_ML_Function_Popup" wizard

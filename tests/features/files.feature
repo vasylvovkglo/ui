@@ -8,8 +8,10 @@ Feature: Files Page
     And wait load page
     And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
     And wait load page
+    Then verify breadcrumbs "project" label should be equal "default" value
     And click on cell with value "Files" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
     And wait load page
+    Then verify breadcrumbs "tab" label should be equal "Files" value
     Then verify "Table_Name_Filter_Input" element visibility on "Files" wizard
     Then verify "Table_Label_Filter_Input" element visibility on "Files" wizard
     Then verify "Table_Tree_Filter_Dropdown" element visibility on "Files" wizard
@@ -25,8 +27,10 @@ Feature: Files Page
     And wait load page
     And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
     And wait load page
+    Then verify breadcrumbs "project" label should be equal "default" value
     And click on cell with value "Files" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
     And wait load page
+    Then verify breadcrumbs "tab" label should be equal "Files" value
     Then verify "Table_Name_Filter_Input" element visibility on "Files" wizard
     Then type value "test" to "Table_Name_Filter_Input" field on "Files" wizard
     Then click on "Table_Refresh_Button" element on "Files" wizard

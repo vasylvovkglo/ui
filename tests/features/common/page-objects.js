@@ -1,5 +1,7 @@
 import { By } from 'selenium-webdriver'
 
+import breadcrumbsComponent from './components/breadcrumbs.component'
+
 import project from './page-objects/project.po'
 import projects from './page-objects/projects.po'
 import featureStore from './page-objects/feature-store.po'
@@ -17,7 +19,8 @@ module.exports = {
     loader: By.css('div.loader-wrapper div.loader'),
     See_On_Github: By.css('header.header a.header__link'),
     Common_Hint: By.css('div.tip'),
-    MLRun_Logo: By.css('header.header a.header__logo')
+    MLRun_Logo: By.css('header.header a.header__logo'),
+    Breadcrumbs: breadcrumbsComponent
   },
   Projects: projects,
   Project: project,

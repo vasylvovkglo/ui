@@ -1,4 +1,11 @@
 import { generateRegEx, getLength, getNotToBe, getRule } from './utils'
+import {
+  deleteAPIMLProject,
+  deleteAPIFunction,
+  deleteAPIFeatureSet,
+  deleteAPIFeatureVector,
+  deleteAPIJob
+} from '../common/actions/common.action'
 
 module.exports = {
   locatorBuilder: function(strings, ...keys) {
@@ -141,5 +148,35 @@ module.exports = {
       notStartWith,
       notConsecutiveCharacters
     )
+  },
+  clearBackendAfterTest: function(items) {
+    Object.keys(items).forEach(key => {
+      switch (key) {
+        case 'project':
+          return deleteAPIMLProject(items[key], 204)
+        case 'featureSet':
+          return deleteAPIFeatureSet(
+            items[key].projectName,
+            items[key].itemName,
+            204
+          )
+        case 'featureVector':
+          return deleteAPIFeatureVector(
+            items[key].projectName,
+            items[key].itemName,
+            204
+          )
+        case 'function':
+          return deleteAPIFunction(
+            items[key].projectName,
+            items[key].itemName,
+            204
+          )
+        case 'job':
+          return deleteAPIJob(items[key].projectName, items[key].itemName, 204)
+        default:
+          return null
+      }
+    })
   }
 }

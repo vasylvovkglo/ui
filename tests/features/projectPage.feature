@@ -8,6 +8,7 @@ Feature: MLRun Project Page
         Given open url
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "default" value
         Then verify "Create_New" element visibility on "Project" wizard
         Then verify "Refresh_Button" element visibility on "Project" wizard
         Then verify "Dashboard_Realtime_Functions_Table" element visibility on "Project" wizard
@@ -334,3 +335,124 @@ Feature: MLRun Project Page
         Then verify "Cancel_Button" element visibility on "New_Feature_Set" wizard
         Then verify "Save_Button" element visibility on "New_Feature_Set" wizard
         Then verify "Save_And_Ingest_Button" element visibility on "New_Feature_Set" wizard
+
+    @passive
+    Scenario: Check Project Counter redirection to Models tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on cell with value "Models" in "name" column in "Mono_Values_Cards" table on "Project" wizard
+        And wait load page
+        Then verify "Table_Name_Filter_Input" element visibility on "Models" wizard
+        Then verify "Table_Labels_Filter_Input" element visibility on "Models" wizard
+        Then verify "Table_Tree_Filter_Dropdown" element visibility on "Models" wizard
+        Then verify "Show_Iterations_Checkbox" element visibility on "Models" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Models" wizard
+        Then verify "Models_Table" element visibility on "Models" wizard
+        Then verify "Register_Model_Button" element visibility on "Models" wizard
+        Then "Register_Model_Button" element on "Models" should contains "Register Model" value
+
+    @passive
+    Scenario: Check Project Counter redirection to Feature Sets tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on cell with value "Feature sets" in "name" column in "Mono_Values_Cards" table on "Project" wizard
+        And wait load page
+        Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard should contains "Feature_Store"."Tab_List"
+        Then verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then type value "   " to "Table_Name_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Name_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then type value "   " to "Table_Label_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Label_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then verify "Feature_Sets_Table" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Feature_Store_Tab_Selector" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Create_Set_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" should contains "Create Set" value
+
+    @passive
+    Scenario: Check Project Counter redirection to Files tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on cell with value "Files" in "name" column in "Mono_Values_Cards" table on "Project" wizard
+        And wait load page
+        Then verify "Table_Name_Filter_Input" element visibility on "Files" wizard
+        Then verify "Table_Label_Filter_Input" element visibility on "Files" wizard
+        Then verify "Table_Tree_Filter_Dropdown" element visibility on "Files" wizard
+        Then verify "Show_Iterations_Checkbox" element visibility on "Files" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Files" wizard
+        Then verify "Files_Table" element visibility on "Files" wizard
+        Then verify "Register_File_Button" element visibility on "Files" wizard
+        Then "Register_File_Button" element on "Files" should contains "Register File" value
+
+    @passive
+    Scenario: Check Project Counter redirection to Monitor Jobs tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on cell with value "Running jobs" in "name" column in "Jobs_Info_Card_Statistics" table on "Project" wizard
+        And wait load page
+        Then verify "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard should contains "Jobs_And_Workflows"."Tab_List"
+        Then verify "Monitor Jobs" tab is active in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then verify "New_Job_Button" element visibility on "Jobs_Monitor_Tab" wizard
+        Then "New_Job_Button" element on "Jobs_Monitor_Tab" should contains "New Job" value
+        Then verify "Resource_Monitoring_Button" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Table_Expand_Rows_Button" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Status_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Group_By_Name_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Table_Name_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Table_Labels_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
+        Then verify "Start_Time_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
+        When select "Past month" option in "Start_Time_Filter_Dropdown" filter dropdown on "Jobs_Monitor_Tab" wizard
+        Then verify "Jobs_Monitor_Table" element visibility on "Jobs_Monitor_Tab" wizard
+
+    @passive
+    Scenario: Check Project Counter redirection to Schedules tab
+        Given open url
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then click on cell with value "Scheduled" in "name" column in "Jobs_Info_Card_Statistics" table on "Project" wizard
+        And wait load page
+        Then verify "Schedule" tab is active in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then verify "Table_Name_Filter_Input" element visibility on "Schedule_Monitor_Tab" wizard
+        Then verify "Table_Labels_Filter_Input" element visibility on "Schedule_Monitor_Tab" wizard
+        Then verify "Table_Refresh_Button" element visibility on "Schedule_Monitor_Tab" wizard
+        Then verify "Schedule_Monitor_Table" element visibility on "Schedule_Monitor_Tab" wizard
+
+    @passive
+    Scenario: Verify behaviour of Breadcrumbs menu
+        Given open url
+        And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        Then verify breadcrumbs "project" label should be equal "churn-project-admin" value
+        Then select "project" with "default" value in breadcrumbs menu
+        Then verify breadcrumbs "project" label should be equal "default" value
+        Then click on cell with value "Models" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Models" value
+        Then verify "Models_Table" element visibility on "Models" wizard
+        Then select "tab" with "Feature Store (Beta)" value in breadcrumbs menu
+        And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Feature Store (Beta)" value
+        Then verify "Feature_Sets_Table" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then select "tab" with "Files" value in breadcrumbs menu
+        And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Files" value
+        Then verify "Files_Table" element visibility on "Files" wizard
+        Then select "tab" with "Jobs" value in breadcrumbs menu
+        And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Jobs" value
+        When select "Past month" option in "Start_Time_Filter_Dropdown" filter dropdown on "Jobs_Monitor_Tab" wizard
+        Then verify "Jobs_Monitor_Table" element visibility on "Jobs_Monitor_Tab" wizard
+        Then select "tab" with "ML functions" value in breadcrumbs menu
+        And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Functions" value
+        Then verify "Functions_Table" element visibility on "ML_Functions" wizard
+        Then select "project" with "churn-project-admin" value in breadcrumbs menu
+        Then verify breadcrumbs "project" label should be equal "churn-project-admin" value
+        Then verify breadcrumbs "tab" label should be equal "Functions" value

@@ -3,6 +3,9 @@ import { until } from 'selenium-webdriver'
 import { expect } from 'chai'
 import http from 'http'
 
+const REACT_APP_MLRUN_API_URL =
+  'http://mlrun-api-ingress.default-tenant.app.vmdev36.lab.iguazeng.com'
+
 async function scrollToWebElement(driver, element) {
   await driver.executeScript('arguments[0].scrollIntoView()', element)
   await driver.sleep(250)
@@ -143,6 +146,74 @@ const action = {
       method: 'DELETE'
     }
 
+    const req = http.get(options)
+    req.end()
+
+    req.once('response', async function(res) {
+      await expect(res.statusCode).equal(expectedStatusCode)
+    })
+  },
+  deleteAPIFeatureSet: async function(
+    projectName,
+    featureSetName,
+    expectedStatusCode
+  ) {
+    const options = {
+      host: test_url,
+      port: test_port,
+      path: `${REACT_APP_MLRUN_API_URL}/api/projects/${projectName}/feature-sets/${featureSetName}`,
+      method: 'DELETE'
+    }
+    const req = http.get(options)
+    req.end()
+
+    req.once('response', async function(res) {
+      await expect(res.statusCode).equal(expectedStatusCode)
+    })
+  },
+  deleteAPIFeatureVector: async function(
+    projectName,
+    featureVectorName,
+    expectedStatusCode
+  ) {
+    const options = {
+      host: test_url,
+      port: test_port,
+      path: `${REACT_APP_MLRUN_API_URL}/api/projects/${projectName}/feature-vectors/${featureVectorName}`,
+      method: 'DELETE'
+    }
+    const req = http.get(options)
+    req.end()
+
+    req.once('response', async function(res) {
+      await expect(res.statusCode).equal(expectedStatusCode)
+    })
+  },
+  deleteAPIFunction: async function(
+    projectName,
+    functionName,
+    expectedStatusCode
+  ) {
+    const options = {
+      host: test_url,
+      port: test_port,
+      path: `${REACT_APP_MLRUN_API_URL}/api/projects/${projectName}/functions/${functionName}`,
+      method: 'DELETE'
+    }
+    const req = http.get(options)
+    req.end()
+
+    req.once('response', async function(res) {
+      await expect(res.statusCode).equal(expectedStatusCode)
+    })
+  },
+  deleteAPIJob: async function(projectName, jobName, expectedStatusCode) {
+    const options = {
+      host: test_url,
+      port: test_port,
+      path: `${REACT_APP_MLRUN_API_URL}/api/runs?project=${projectName}&run=${jobName}`,
+      method: 'DELETE'
+    }
     const req = http.get(options)
     req.end()
 

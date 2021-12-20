@@ -8,8 +8,10 @@ Feature: Feature Store Page
         And wait load page
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "default" value
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Feature Store (Beta)" value
         Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard should contains "Feature_Store"."Tab_List"
         Then verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
@@ -29,8 +31,10 @@ Feature: Feature Store Page
         Given open url
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "default" value
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Feature Store (Beta)" value
         And select "Features" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And wait load page
         Then verify "Features" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
@@ -48,10 +52,12 @@ Feature: Feature Store Page
         Given open url
         And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "fsdemo-admin" value
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Feature Store (Beta)" value
         Then verify "Feature Vectors" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Feature_Store_Tab_Selector" on "Feature_Store_Features_Vectors_Tab" wizard should contains "Feature_Store"."Tab_List"
         And turn on demo mode
@@ -68,8 +74,10 @@ Feature: Feature Store Page
         Given open url
         And click on cell with value "getting-started-tutorial-admin" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
+        Then verify breadcrumbs "project" label should be equal "getting-started-tutorial-admin" value
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
+        Then verify breadcrumbs "tab" label should be equal "Feature Store (Beta)" value
         And select "Datasets" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And wait load page
         Then verify "Datasets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Datasets_Tab" wizard
@@ -98,6 +106,7 @@ Feature: Feature Store Page
         Then verify "Cancel_Button" element visibility on "Feature_Sets_Info_Pane" wizard
         Then "Cancel_Button" element on "Feature_Sets_Info_Pane" should contains "Cancel" value
         Then verify "Apply_Changes_Button" element visibility on "Feature_Sets_Info_Pane" wizard
+        Then verify "Apply_Changes_Button" element on "Feature_Sets_Info_Pane" wizard is disabled
         Then "Apply_Changes_Button" element on "Feature_Sets_Info_Pane" should contains "Apply Changes" value
         Then verify "Action_Menu" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Cross_Close_Button" element visibility on "Feature_Sets_Info_Pane" wizard
@@ -105,6 +114,37 @@ Feature: Feature Store Page
         Then verify "Info_Pane_Tab_Selector" on "Feature_Sets_Info_Pane" wizard should contains "Feature_Sets_Info_Pane"."Tab_List"
         Then verify "Overview" tab is active in "Info_Pane_Tab_Selector" on "Feature_Sets_Info_Pane" wizard
         Then verify "Overview_General_Headers" on "Feature_Sets_Info_Pane" wizard should contains "Feature_Sets_Info_Pane"."Overview_General_Headers"
+        Then click on "Description_Field" element on "Feature_Sets_Info_Pane" wizard
+        Then type value " " to "Description_Input" field on "Feature_Sets_Info_Pane" wizard
+        Then verify "Description_Input" on "Feature_Sets_Info_Pane" wizard should display warning "Input_Hint"."Input_Field_Invalid"
+        Then type value "test_description" to "Description_Input" field on "Feature_Sets_Info_Pane" wizard
+        Then click on "Apply_Button" element on "Feature_Sets_Info_Pane" wizard
+        Then "Description_Field" element on "Feature_Sets_Info_Pane" should contains "test_description" value
+        Then verify "Apply_Changes_Button" element on "Feature_Sets_Info_Pane" wizard is enabled
+        Then click on "Description_Field" element on "Feature_Sets_Info_Pane" wizard
+        Then type value "" to "Description_Input" field on "Feature_Sets_Info_Pane" wizard
+        Then click on "Apply_Button" element on "Feature_Sets_Info_Pane" wizard
+        Then verify "Apply_Changes_Button" element on "Feature_Sets_Info_Pane" wizard is disabled
+        Then click on "Labels_Field" element on "Feature_Sets_Info_Pane" wizard
+        When add rows to "Labels_Table" table on "Feature_Sets_Info_Pane" wizard
+            | key_input | value_input |
+            |    key1   |    value1   |
+            |    key2   |    value2   |
+            |    key3   |    value3   |
+        Then verify values in "Labels_Table" table on "Feature_Sets_Info_Pane" wizard
+            |       label     |
+            | key1\n:\nvalue1 |
+            | key2\n:\nvalue2 |
+            | key3\n:\nvalue3 |
+        When click on "remove_btn" in "Labels_Table" table on "Feature_Sets_Info_Pane" wizard
+            |       label     |
+            | key1\n:\nvalue1 |
+            | key3\n:\nvalue3 |
+        Then verify values in "Labels_Table" table on "Feature_Sets_Info_Pane" wizard
+            |       label     |
+            | key2\n:\nvalue2 |
+        Then click on "Apply_Button" element on "Feature_Sets_Info_Pane" wizard
+        Then verify "Apply_Changes_Button" element on "Feature_Sets_Info_Pane" wizard is enabled
 
     @passive
     @inProgress
@@ -394,6 +434,45 @@ Feature: Feature Store Page
         Then verify "End_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
 
     @passive
+        Scenario: Verify behaviour of Combobox element on Feature Store Feature Set new item wizard on Data Source Accordion
+        Given open url
+        And wait load page
+        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then verify "Create_Set_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then click on "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify options in "URL_Combobox" combobox in "Data_Source_Accordion" on "New_Feature_Set" wizard should contains "New_Feature_Store"."Combobox_Options"
+        When select "MLRun store" option in "URL_Combobox" combobox on "Data_Source_Accordion" accordion on "New_Feature_Set" wizard
+        Then searchable fragment "Artifacts" should be in every suggested option into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        When select "Artifacts" option in "URL_Combobox" combobox suggestion on "Data_Source_Accordion" accordion on "New_Feature_Set" wizard
+        When type searchable fragment "m" into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then searchable fragment "m" should be in every suggested option into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        When select "mask-detection" option in "URL_Combobox" combobox suggestion on "Data_Source_Accordion" accordion on "New_Feature_Set" wizard
+        When type searchable fragment "train" into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then searchable fragment "train" should be in every suggested option into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        When type value "  " to "URL_Combobox" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then click on "Accordion_Header" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "URL_Combobox" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."MLRun_Store_Path_Hint"
+        When type value "artifacts/stocks" to "URL_Combobox" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then searchable fragment "stocks" should be in every suggested option into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        When type value "artifacts/stocks/train" to "URL_Combobox" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then searchable fragment "train" should be in every suggested option into "URL_Combobox" combobox input in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then select "V3IO" option in "URL_Combobox" combobox on "Data_Source_Accordion" accordion on "New_Feature_Set" wizard
+        Then type value "  " to "URL_Combobox" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then click on "Accordion_Header" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "URL_Combobox" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."V3IO_Path_Hint"
+        Then select "S3" option in "URL_Combobox" combobox on "Data_Source_Accordion" accordion on "New_Feature_Set" wizard
+        Then type value "@!$&" to "URL_Combobox" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then click on "Accordion_Header" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "URL_Combobox" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."S3_Path_Hint"
+        Then select "Azure storage" option in "URL_Combobox" combobox on "Data_Source_Accordion" accordion on "New_Feature_Set" wizard
+        Then type value "__" to "URL_Combobox" field on "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then click on "Accordion_Header" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "URL_Combobox" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display warning "Input_Hint"."Azure_Storage_Path_Hint"
+
+    @passive
     @inProgress
     Scenario: Check all mandatory components on Schedule popup on Feature Store Feature Set new item wizard on Data Source Accordion Parquet Kind
         Given open url
@@ -663,6 +742,7 @@ Feature: Feature Store Page
     @failed
     Scenario: Save new Feature Store Feature Set new item wizard
         * create "automation-test-name3" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name3" value
         Given open url
         And wait load page
         And click on cell with value "automation-test-name3" in "name" column in "Projects_Table" table on "Projects" wizard
