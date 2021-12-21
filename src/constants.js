@@ -39,6 +39,8 @@ export const WORKFLOW_SUB_PAGE = 'workflow'
 export const MODELS_PAGE = 'MODELS'
 export const MODELS_TAB = 'models'
 export const MODEL_ENDPOINTS_TAB = 'model-endpoints'
+export const REAL_TIME_PIPELINES_TAB = 'real-time-pipelines'
+export const PIPELINE_SUB_PAGE = 'pipeline'
 
 export const FEATURE_STORE_PAGE = 'FEATURE-STORE'
 export const DATASETS_TAB = 'datasets'
@@ -433,10 +435,17 @@ export const UPDATE_FEATURE_VECTOR = 'UPDATE_FEATURE_VECTOR'
 
 /*=========== FILTERS =============*/
 
+export const DATE_FILTER_ANY_TIME = ['', '']
+export const GROUP_BY_NAME = 'name'
+export const GROUP_BY_NONE = 'none'
+export const GROUP_BY_WORKFLOW = 'workflow'
+export const SHOW_ITERATIONS = 'iter'
+export const SHOW_UNTAGGED_ITEMS = 'showUntagged'
+export const STATE_FILTER_ALL_ITEMS = 'all'
+export const TAG_FILTER_ALL_ITEMS = 'All'
+export const TAG_FILTER_LATEST = 'latest'
+
 export const REMOVE_FILTERS = 'REMOVE_FILTERS'
-export const INIT_GROUP_FILTER = 'name'
-export const INIT_STATE_FILTER = 'all'
-export const INIT_TAG_FILTER = 'latest'
 export const SET_FILTERS = 'SET_FILTERS'
 export const SET_FILTER_TAG_OPTIONS = 'SET_FILTER_TAG_OPTIONS'
 export const SET_FILTER_PROJECT_OPTIONS = 'SET_FILTER_PROJECT_OPTIONS'
@@ -491,4 +500,15 @@ export const validation = {
 
 /*=========== STATUS CODES =============*/
 
-export const CONFLICT = 409
+export const AMOUNT_LIMIT_CODE = 405
+export const CONFLICT_CODE = 409
+
+/*=========== ML REACT FLOW =============*/
+
+export const ML_NODE = 'ml-node'
+
+export const INPUT_NODE = 'input-node'
+export const OUTPUT_NODE = 'output-node'
+export const PRIMARY_NODE = 'primary-node'
+export const SECONDARY_NODE = 'secondary-node'
+export const ERROR_NODE = 'error-node'

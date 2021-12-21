@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -19,13 +19,16 @@ import { ReactComponent as ExpandIcon } from '../../images/expand.svg'
 import {
   DATE_RANGE_TIME_FILTER,
   GROUP_BY_FILTER,
+  GROUP_BY_NONE,
   ITERATIONS_FILTER,
   KEY_CODES,
   LABELS_FILTER,
   NAME_FILTER,
   PERIOD_FILTER,
   PROJECT_FILTER,
+  SHOW_ITERATIONS,
   SHOW_UNTAGGED_FILTER,
+  SHOW_UNTAGGED_ITEMS,
   SORT_BY,
   STATUS_FILTER,
   TAG_FILTER,
@@ -74,12 +77,23 @@ const FilterMenu = ({
         filter => filter.type === TREE_FILTER || filter.type === TAG_FILTER
       )
     ) {
-      setTagOptions([
-        ...filtersStore.tagOptions.map(tag => ({
-          label: tag,
-          id: tag
-        }))
-      ])
+      setTagOptions(prevOptions => {
+        const prevOptionsTags = prevOptions.map(option => option.id)
+
+        return [
+          ...prevOptions,
+          ...filtersStore.tagOptions.reduce((acc, tag) => {
+            if (!prevOptionsTags.includes(tag)) {
+              acc.push({
+                label: tag,
+                id: tag
+              })
+            }
+
+            return acc
+          }, [])
+        ]
+      })
     }
   }, [filters, filtersStore.tagOptions])
 
@@ -135,10 +149,10 @@ const FilterMenu = ({
       (filter.type === TREE_FILTER || filter.type === TAG_FILTER) &&
       item !== filtersStore.tag
     ) {
-      setFilters({ tag: item.toLowerCase() })
+      setFilters({ tag: item })
       applyChanges({
         ...filtersStore,
-        tag: item.toLowerCase()
+        tag: item
       })
     } else if (filter.type === PROJECT_FILTER) {
       setFilters({
@@ -195,7 +209,7 @@ const FilterMenu = ({
   }
 
   const handleIter = iteration => {
-    const iterValue = filtersStore.iter === iteration ? 'iter' : ''
+    const iterValue = filtersStore.iter === iteration ? SHOW_ITERATIONS : ''
 
     setFilters({
       iter: iterValue
@@ -289,7 +303,7 @@ const FilterMenu = ({
                 <CheckBox
                   key={filter.type}
                   className="filters-checkbox"
-                  item={{ label: filter.label, id: 'showUntagged' }}
+                  item={{ label: filter.label, id: SHOW_UNTAGGED_ITEMS }}
                   onChange={handleShowUntagged}
                   selectedId={filtersStore.showUntagged}
                 />
@@ -349,7 +363,7 @@ const FilterMenu = ({
         >
           <RefreshIcon />
         </RoundedIcon>
-        {!withoutExpandButton && filtersStore.groupBy !== 'none' && (
+        {!withoutExpandButton && filtersStore.groupBy !== GROUP_BY_NONE && (
           <RoundedIcon
             tooltipText={expand ? 'Collapse' : 'Expand all'}
             onClick={() => handleExpandAll()}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -28,20 +28,22 @@ import {
   handleFetchData,
   navigateToDetailsPane,
   pageDataInitialState,
-  validTabs
+  tabs
 } from './featureStore.util'
 import { isDetailsTabExists } from '../../utils/isDetailsTabExists'
 import { isEveryObjectValueEmpty } from '../../utils/isEveryObjectValueEmpty'
 import { getIdentifierMethod } from '../../utils/getUniqueIdentifier'
-import { isUrlValid } from '../../utils/handleRedirect'
+import { isPageTabValid } from '../../utils/handleRedirect'
 import {
   DATASETS_TAB,
-  FEATURES_TAB,
   FEATURE_SETS_TAB,
+  FEATURE_STORE_PAGE,
   FEATURE_VECTORS_TAB,
-  INIT_GROUP_FILTER,
-  INIT_TAG_FILTER,
-  FEATURE_STORE_PAGE
+  FEATURES_TAB,
+  GROUP_BY_NAME,
+  GROUP_BY_NONE,
+  SHOW_ITERATIONS,
+  TAG_FILTER_LATEST
 } from '../../constants'
 import { useDemoMode } from '../../hooks/demoMode.hook'
 
@@ -291,8 +293,8 @@ const FeatureStore = ({
 
   useEffect(() => {
     fetchData({
-      tag: INIT_TAG_FILTER,
-      iter: match.params.pageTab === DATASETS_TAB ? 'iter' : ''
+      tag: TAG_FILTER_LATEST,
+      iter: match.params.pageTab === DATASETS_TAB ? SHOW_ITERATIONS : ''
     })
 
     return () => {
@@ -317,10 +319,10 @@ const FeatureStore = ({
   ])
 
   useEffect(() => {
-    if (filtersStore.tag === INIT_TAG_FILTER) {
-      setFilters({ groupBy: INIT_GROUP_FILTER })
-    } else if (filtersStore.groupBy === INIT_GROUP_FILTER) {
-      setFilters({ groupBy: 'none' })
+    if (filtersStore.tag === TAG_FILTER_LATEST) {
+      setFilters({ groupBy: GROUP_BY_NAME })
+    } else if (filtersStore.groupBy === GROUP_BY_NAME) {
+      setFilters({ groupBy: GROUP_BY_NONE })
     }
   }, [filtersStore.groupBy, filtersStore.tag, match.params.pageTab, setFilters])
 
@@ -460,7 +462,11 @@ const FeatureStore = ({
   ])
 
   useEffect(() => {
-    isUrlValid(match, validTabs, history)
+    isPageTabValid(
+      match,
+      tabs.map(tab => tab.id),
+      history
+    )
   }, [history, match])
 
   const applyDetailsChanges = changes => {
@@ -494,7 +500,7 @@ const FeatureStore = ({
 
     return fetchData({
       project: match.params.projectName,
-      tag: INIT_TAG_FILTER
+      tag: TAG_FILTER_LATEST
     })
   }
 

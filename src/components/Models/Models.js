@@ -7,36 +7,47 @@ import Loader from '../../common/Loader/Loader'
 import Content from '../../layout/Content/Content'
 import RegisterArtifactPopup from '../RegisterArtifactPopup/RegisterArtifactPopup'
 import DeployModelPopUp from '../../elements/DeployModelPopUp/DeployModelPopUp'
+import Pipeline from '../Pipeline/Pipeline'
 
 import artifactsAction from '../../actions/artifacts'
+import functionsAction from '../../actions/functions'
 import detailsActions from '../../actions/details'
 import filtersActions from '../../actions/filters'
 import {
-  handleFetchData,
-  generatePageData,
-  getFeatureVectorData,
   checkForSelectedModel,
   checkForSelectedModelEndpoint,
-  validTabs
+  checkForSelectedRealTimePipelines,
+  generatePageData,
+  getFeatureVectorData,
+  handleFetchData,
+  pageDataInitialState,
+  tabs
 } from './models.util'
 import {
-  INIT_GROUP_FILTER,
-  INIT_TAG_FILTER,
-  MODELS_TAB,
+  GROUP_BY_NAME,
+  GROUP_BY_NONE,
   MODEL_ENDPOINTS_TAB,
-  MODELS_PAGE
+  MODELS_PAGE,
+  MODELS_TAB,
+  REAL_TIME_PIPELINES_TAB,
+  SHOW_ITERATIONS,
+  TAG_FILTER_LATEST
 } from '../../constants'
 import { generateArtifacts } from '../../utils/generateArtifacts'
 import { filterArtifacts } from '../../utils/filterArtifacts'
 import { isDetailsTabExists } from '../../utils/isDetailsTabExists'
 import { isEveryObjectValueEmpty } from '../../utils/isEveryObjectValueEmpty'
-import { getArtifactIdentifier } from '../../utils/getUniqueIdentifier'
-import { isUrlValid } from '../../utils/handleRedirect'
+import {
+  getArtifactIdentifier,
+  getFunctionIdentifier
+} from '../../utils/getUniqueIdentifier'
+import { isPageTabValid } from '../../utils/handleRedirect'
 
 const Models = ({
   artifactsStore,
   detailsStore,
   fetchArtifactTags,
+  fetchFunctions,
   fetchModel,
   fetchModelEndpointWithAnalysis,
   fetchModelEndpoints,
@@ -48,7 +59,8 @@ const Models = ({
   match,
   removeModel,
   removeModels,
-  setFilters
+  setFilters,
+  subPage
 }) => {
   const [content, setContent] = useState([])
   const [selectedModel, setSelectedModel] = useState({})
@@ -58,19 +70,14 @@ const Models = ({
     setIsRegisterArtifactPopupOpen
   ] = useState(false)
   const [isDeployPopupOpen, setIsDeployPopupOpen] = useState(false)
-  const [pageData, setPageData] = useState({
-    details: { menu: [], infoHeaders: [] },
-    filters: [],
-    page: MODELS_PAGE,
-    registerArtifactDialogTitle: '',
-    tabs: []
-  })
+  const [pageData, setPageData] = useState(pageDataInitialState)
 
   const fetchData = useCallback(
     async filters => {
       const data = await handleFetchData(
         fetchModelEndpoints,
         fetchModels,
+        fetchFunctions,
         filters,
         match.params.projectName,
         match.params.pageTab
@@ -83,6 +90,7 @@ const Models = ({
       return data.originalContent
     },
     [
+      fetchFunctions,
       fetchModelEndpoints,
       fetchModels,
       match.params.pageTab,
@@ -192,14 +200,15 @@ const Models = ({
 
   useEffect(() => {
     fetchData({
-      tag: INIT_TAG_FILTER,
-      iter: match.params.pageTab === MODELS_TAB ? 'iter' : ''
+      tag: TAG_FILTER_LATEST,
+      iter: match.params.pageTab === MODELS_TAB ? SHOW_ITERATIONS : ''
     })
 
     return () => {
       setContent([])
       removeModels()
       setSelectedModel({})
+      setPageData(pageDataInitialState)
     }
   }, [fetchData, match.params.pageTab, removeModels])
 
@@ -207,6 +216,7 @@ const Models = ({
     setPageData(state => ({
       ...state,
       ...generatePageData(
+        subPage,
         selectedModel,
         match.params.pageTab,
         handleDeployModel,
@@ -220,28 +230,40 @@ const Models = ({
     handleRemoveModel,
     handleRequestOnExpand,
     match.params.pageTab,
-    selectedModel
+    selectedModel,
+    subPage
   ])
 
   useEffect(() => {
     if (match.params.pageTab === MODEL_ENDPOINTS_TAB) {
-      setFilters({ groupBy: 'none', sortBy: 'function' })
-    } else if (filtersStore.tag === INIT_TAG_FILTER) {
-      setFilters({ groupBy: INIT_GROUP_FILTER })
+      setFilters({ groupBy: GROUP_BY_NONE, sortBy: 'function' })
+    } else if (match.params.pageTab === REAL_TIME_PIPELINES_TAB) {
+      setFilters({ groupBy: GROUP_BY_NONE })
+    } else if (filtersStore.tag === TAG_FILTER_LATEST) {
+      setFilters({ groupBy: GROUP_BY_NAME })
     } else {
-      setFilters({ groupBy: 'none' })
+      setFilters({ groupBy: GROUP_BY_NONE })
     }
-  }, [filtersStore.tag, match.params.pageTab, setFilters])
+  }, [
+    match.params.pageTab,
+    match.params.projectName,
+    match.params.pipelineId,
+    filtersStore.tag,
+    setFilters
+  ])
 
   useEffect(() => {
     if (
-      match.params.name &&
-      ((match.params.pageTab === MODELS_TAB &&
-        artifactsStore.models.allData.length > 0) ||
-        (match.params.pageTab === MODEL_ENDPOINTS_TAB &&
-          artifactsStore.modelEndpoints.length > 0))
+      (match.params.name &&
+        ((match.params.pageTab === MODELS_TAB &&
+          artifactsStore.models.allData.length > 0) ||
+          (match.params.pageTab === MODEL_ENDPOINTS_TAB &&
+            artifactsStore.modelEndpoints.length > 0))) ||
+      (match.params.pipelineId &&
+        match.params.pageTab === REAL_TIME_PIPELINES_TAB &&
+        content.length > 0)
     ) {
-      const { name, tag, iter } = match.params
+      const { name, tag, iter, pipelineId } = match.params
 
       if (match.params.pageTab === MODELS_TAB) {
         checkForSelectedModel(
@@ -262,6 +284,8 @@ const Models = ({
           tag,
           setSelectedModel
         )
+      } else if (match.params.pageTab === REAL_TIME_PIPELINES_TAB) {
+        checkForSelectedRealTimePipelines(history, pipelineId, match, content)
       }
     } else {
       setSelectedModel({})
@@ -269,6 +293,7 @@ const Models = ({
   }, [
     artifactsStore.modelEndpoints,
     artifactsStore.models,
+    content,
     fetchModelEndpointWithAnalysis,
     history,
     match
@@ -323,7 +348,11 @@ const Models = ({
   ])
 
   useEffect(() => {
-    isUrlValid(match, validTabs, history)
+    isPageTabValid(
+      match,
+      tabs.map(tab => tab.id),
+      history
+    )
   }, [history, match])
 
   const sortedContent = useMemo(() => {
@@ -345,8 +374,16 @@ const Models = ({
         pageData={pageData}
         refresh={fetchData}
         selectedItem={selectedModel.item}
-        getIdentifier={getArtifactIdentifier}
-      />
+        getIdentifier={
+          match.params.pageTab === REAL_TIME_PIPELINES_TAB
+            ? getFunctionIdentifier
+            : getArtifactIdentifier
+        }
+      >
+        {match.params.pipelineId ? (
+          <Pipeline content={content} match={match} />
+        ) : null}
+      </Content>
       {isRegisterArtifactPopupOpen && (
         <RegisterArtifactPopup
           artifactKind={pageData.page.slice(0, -1)}
@@ -371,13 +408,15 @@ Models.propTypes = {
 }
 
 export default connect(
-  ({ artifactsStore, filtersStore, detailsStore }) => ({
+  ({ artifactsStore, functionsStore, filtersStore, detailsStore }) => ({
     artifactsStore,
+    functionsStore,
     filtersStore,
     detailsStore
   }),
   {
     ...artifactsAction,
+    ...functionsAction,
     ...detailsActions,
     ...filtersActions
   }

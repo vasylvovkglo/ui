@@ -6,8 +6,12 @@ import {
   FEATURE_STORE_PAGE,
   FILES_PAGE,
   FUNCTIONS_PAGE,
+  GROUP_BY_NAME,
+  GROUP_BY_NONE,
+  GROUP_BY_WORKFLOW,
   JOBS_PAGE,
-  MODELS_PAGE
+  MODELS_PAGE,
+  REAL_TIME_PIPELINES_TAB
 } from '../constants'
 import createJobsContent from './createJobsContent'
 import createFunctionsContent from './createFunctionsContent'
@@ -26,7 +30,7 @@ export const generateTableContent = (
 ) => {
   if (
     !isEmpty(groupedContent) &&
-    (groupFilter === 'name' || groupFilter === 'workflow')
+    (groupFilter === GROUP_BY_NAME || groupFilter === GROUP_BY_WORKFLOW)
   ) {
     return map(groupedContent, group =>
       page === JOBS_PAGE
@@ -35,10 +39,11 @@ export const generateTableContent = (
             isSelectedItem,
             params,
             isDemoMode,
-            groupFilter === 'workflow'
+            groupFilter === GROUP_BY_WORKFLOW
           )
-        : page === FUNCTIONS_PAGE
-        ? createFunctionsContent(group, isSelectedItem)
+        : page === FUNCTIONS_PAGE ||
+          (page === MODELS_PAGE && params.pageTab === REAL_TIME_PIPELINES_TAB)
+        ? createFunctionsContent(group, isSelectedItem, params)
         : page === FEATURE_STORE_PAGE && params.pageTab !== DATASETS_TAB
         ? createFeatureStoreContent(
             group,
@@ -55,12 +60,12 @@ export const generateTableContent = (
             isSelectedItem
           )
     )
-  } else if (groupFilter === 'none' || !groupFilter) {
+  } else if (groupFilter === GROUP_BY_NONE || !groupFilter) {
     return page === JOBS_PAGE
       ? createJobsContent(content, isSelectedItem, params, isDemoMode, false)
       : page === ARTIFACTS_PAGE ||
         page === FILES_PAGE ||
-        page === MODELS_PAGE ||
+        (page === MODELS_PAGE && params.pageTab !== REAL_TIME_PIPELINES_TAB) ||
         params.pageTab === DATASETS_TAB
       ? createArtifactsContent(
           content,
@@ -77,6 +82,6 @@ export const generateTableContent = (
           isTablePanelOpen,
           isSelectedItem
         )
-      : createFunctionsContent(content, isSelectedItem)
+      : createFunctionsContent(content, isSelectedItem, params)
   } else return []
 }
