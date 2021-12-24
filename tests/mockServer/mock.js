@@ -307,11 +307,11 @@ function getProjectsSummaries(req, res) {
 }
 
 function getProjectSummary(req, res) {
-  const collectedProjet = projectsSummary.project_summaries.find(
+  const collectedProject = projectsSummary.project_summaries.find(
     item => item.name === req.params['project']
   )
 
-  res.send(collectedProjet)
+  res.send(collectedProject)
 }
 
 function getRuns(req, res) {
@@ -373,7 +373,7 @@ function getRun(req, res) {
   res.send({ data: run_prj_uid })
 }
 
-function getProjectsShedules(req, res) {
+function getProjectsSchedules(req, res) {
   let collectedSchedules = schedules.schedules.filter(
     schedule =>
       schedule.scheduled_object.task.metadata.project === req.params['project']
@@ -397,6 +397,14 @@ function getProjectsShedules(req, res) {
   }
 
   res.send({ schedules: collectedSchedules })
+}
+
+function getProjectsSchedule(req, res) {
+  const collectedSchedule = schedules.schedules.find(
+    item => item.name === req.params['schedule']
+  )
+
+  res.send(collectedSchedule)
 }
 
 function getProjectsFeaturesEntities(req, res) {
@@ -1178,7 +1186,11 @@ app.get(`${mlrunAPIIngress}/api/run/:project/:uid`, getRun)
 
 app.get(
   `${mlrunAPIIngress}/api/projects/:project/schedules`,
-  getProjectsShedules
+  getProjectsSchedules
+)
+app.get(
+  `${mlrunAPIIngress}/api/projects/:project/schedules/:schedule`,
+  getProjectsSchedule
 )
 app.get(
   `${mlrunAPIIngress}/api/projects/:project/:artifact`,

@@ -452,7 +452,7 @@ module.exports = {
         'div.create-container div.create-container__data div.accordion__container.functions-wrapper h5.data-header__title span'
       ),
       Collapse_Button: By.css(
-        'div.create-container div.create-container__data div.accordion__container.functions-wrapper button.accordion__icon'
+        'div.create-container div.create-container__data div.accordion__container.functions-wrapper div.accordion__icon'
       ),
       Select_Function_From_Dropdown: dropdownComponent(
         selectFunctionFromDropdown
@@ -464,7 +464,7 @@ module.exports = {
         'div.create-container div.create-container__data > div.accordion__container:nth-of-type(3) h5.data-header__title'
       ),
       Collapse_Button: By.css(
-        'div.create-container div.create-container__data > div.accordion__container:nth-of-type(3) > button.accordion__icon'
+        'div.create-container div.create-container__data > div.accordion__container:nth-of-type(3) > div.accordion__icon'
       ),
       Functions_Templates_Table: commonTable(functionsTemplates)
     }

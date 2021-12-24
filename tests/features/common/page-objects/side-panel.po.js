@@ -674,7 +674,7 @@ const commonVolumePathsTableTypeDropdown = dropdownComponent(
   )
 )
 
-function resourcesTableCommonInpute(accordionIndx, rowIndx, inputIndx) {
+function resourcesTableCommonInput(accordionIndx, rowIndx, inputIndx) {
   return generateInputGroup(
     `.new-item-side-panel .accordion__container:nth-of-type(${accordionIndx}) .panel-section:nth-of-type(2) .panel-section__body .table__body .input-row-wrapper:nth-of-type(${rowIndx}) .input-wrapper:nth-of-type(${inputIndx})`,
     true,
@@ -734,7 +734,7 @@ module.exports = {
         'div.feature-set-panel div.accordion__container:nth-of-type(1) h5'
       ),
       Collapse_Button: By.css(
-        'div.feature-set-panel div.accordion__container:nth-of-type(1) button.new-item-side-panel__expand-icon'
+        'div.feature-set-panel div.accordion__container:nth-of-type(1) div.new-item-side-panel__expand-icon'
       ),
       URL_Combobox: comboBox(
         '.feature-set-panel .accordion__container:nth-of-type(1) .panel-section__body .combobox'
@@ -774,7 +774,7 @@ module.exports = {
         'div.feature-set-panel div.accordion__container:nth-of-type(2) h5'
       ),
       Collapse_Button: By.css(
-        'div.feature-set-panel div.accordion__container:nth-of-type(2) button.new-item-side-panel__expand-icon'
+        'div.feature-set-panel div.accordion__container:nth-of-type(2) div.new-item-side-panel__expand-icon'
       ),
       Entities_Input: inputGroup(
         generateInputGroup(
@@ -798,7 +798,7 @@ module.exports = {
         'div.feature-set-panel div.accordion__container:nth-of-type(3) h5'
       ),
       Collapse_Button: By.css(
-        'div.feature-set-panel div.accordion__container:nth-of-type(3) button.new-item-side-panel__expand-icon'
+        'div.feature-set-panel div.accordion__container:nth-of-type(3) div.new-item-side-panel__expand-icon'
       ),
       // online group
       Online_Checkbox: checkboxComponent(
@@ -889,7 +889,7 @@ module.exports = {
           description: 'span.radio-button__info'
         }
       }),
-      Offline_Partition_Key_Buckering_Number_Input: numberInputGroup(
+      Offline_Partition_Key_Bucketing_Number_Input: numberInputGroup(
         generateNumberInputGroup(
           '.feature-set-panel div.accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(2) .target-store__inputs-container .range-normal',
           false,
@@ -998,7 +998,7 @@ module.exports = {
           }
         }
       ),
-      External_Offline_Partition_Key_Buckering_Number_Input: numberInputGroup(
+      External_Offline_Partition_Key_Bucketing_Number_Input: numberInputGroup(
         generateNumberInputGroup(
           '.feature-set-panel div.accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(3) .target-store__inputs-container .range-normal',
           false,
@@ -1017,7 +1017,7 @@ module.exports = {
       ),
       External_Offline_Partition_Granularity_Dropdown: dropdownComponent(
         generateDropdownGroup(
-          'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(3) div.select',
+          'div.feature-set-panel div.accordion__container:nth-of-type(3) div.panel-section__body div.target-store__item:nth-of-type(3) div.partition-fields__inputs-container div.select',
           'div.select__header div.select__value',
           'div.select__body div.select__item',
           'div.data-ellipsis > div.data-ellipsis'
@@ -1054,7 +1054,7 @@ module.exports = {
         '.new-item-side-panel__body .accordion__container:nth-of-type(1) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel__body .accordion__container:nth-of-type(1) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel__body .accordion__container:nth-of-type(1) div.new-item-side-panel__expand-icon'
       ),
       Data_Source_Input_Sources_Table: commonTable(dataSourceInputSourcesTable),
       Default_Input_Path_Input: inputGroup(
@@ -1062,7 +1062,7 @@ module.exports = {
           '.new-item-side-panel__body .accordion__container:nth-of-type(1) .panel-section:nth-of-type(2) .input-wrapper:nth-of-type(1)',
           true,
           false,
-          false
+          true
         )
       ),
       Default_Artifact_Path_Input: inputGroup(
@@ -1070,11 +1070,22 @@ module.exports = {
           '.new-item-side-panel__body .accordion__container:nth-of-type(1) .panel-section:nth-of-type(2) .input-wrapper:nth-of-type(2)',
           true,
           false,
-          false
+          true
+        )
+      ),
+      Data_Inputs_Table_Name_Input: inputGroup(
+        generateInputGroup(
+          '.new-item-side-panel__body .accordion__container:nth-of-type(1) .table__row-add-item .input-wrapper',
+          true,
+          false,
+          true
         )
       ),
       Add_Input_Button: By.css(
         '.new-item-side-panel__body .accordion__container:nth-of-type(1) .add-input'
+      ),
+      Add_Row_Button: By.css(
+        '.new-item-side-panel__body .accordion__container:nth-of-type(1) .table__row-add-item .btn-add'
       ),
       URL_Combobox: comboBox(
         '.new-item-side-panel__body .accordion__container:nth-of-type(1) .combobox'
@@ -1085,14 +1096,14 @@ module.exports = {
         '.new-item-side-panel__body .accordion__container:nth-of-type(2) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel__body .accordion__container:nth-of-type(2) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel__body .accordion__container:nth-of-type(2) div.new-item-side-panel__expand-icon'
       ),
       Parameters_Additional_Settings_Input: inputGroup(
         generateInputGroup(
           '.new-item-side-panel__body .accordion__container:nth-of-type(2) .panel-section__body .parameters-additional-settings-container .parameters-additional-settings:nth-of-type(2) .input-wrapper',
           true,
           false,
-          false
+          true
         )
       ),
       Result_Input: inputGroup(
@@ -1100,7 +1111,7 @@ module.exports = {
           '.new-item-side-panel__body .accordion__container:nth-of-type(2) .panel-section__body .parameters-additional-settings-container .parameters-additional-settings:nth-of-type(3) .input-wrapper',
           true,
           false,
-          false
+          true
         )
       ),
       Turning_Strategy_Dropdown: dropdownComponent(
@@ -1136,7 +1147,7 @@ module.exports = {
           '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section__body .input-row-wrapper .select:nth-of-type(2)',
           '.select__label',
           false,
-          false
+          '.data-ellipsis > .data-ellipsis'
         )
       ),
       Parameter_Table_Simple_Hyper_Dropdown: dropdownComponent(
@@ -1144,7 +1155,7 @@ module.exports = {
           '.new-item-side-panel .accordion__container:nth-of-type(2) .panel-section__body .input-row-wrapper .select:nth-of-type(3)',
           '.select__label',
           false,
-          false
+          '.data-ellipsis > .data-ellipsis'
         )
       ),
       Parameters_Table_Value_Input: inputGroup(
@@ -1164,7 +1175,7 @@ module.exports = {
         '.new-item-side-panel__body .accordion__container:nth-of-type(3) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel__body .accordion__container:nth-of-type(3) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel__body .accordion__container:nth-of-type(3) div.new-item-side-panel__expand-icon'
       ),
       Volumes_Subheader: labelComponent(
         generateLabelGroup(
@@ -1176,28 +1187,28 @@ module.exports = {
       // Volume Path inputs
       Volume_Paths_Table_Type_Dropdown: commonVolumePathsTableTypeDropdown,
       Volume_Paths_Table_Volume_Name_Input: inputGroup(
-        resourcesTableCommonInpute(3, 1, 2)
+        resourcesTableCommonInput(3, 1, 2)
       ),
       Volume_Paths_Table_Path_Input: inputGroup(
-        resourcesTableCommonInpute(3, 1, 3)
+        resourcesTableCommonInput(3, 1, 3)
       ),
       Volume_Paths_Table_Container_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Config_Map_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Secret_Name_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Claime_Name_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Access_Key_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 2)
+        resourcesTableCommonInput(3, 2, 2)
       ),
       Volume_Paths_Table_Resource_Path_Input: inputGroup(
-        resourcesTableCommonInpute(3, 3, 1)
+        resourcesTableCommonInput(3, 3, 1)
       ),
       Add_New_Row_Button: commonAddNewRowButton,
       Delete_New_Row_Button: commonDeleteNewRowButton,
@@ -1273,7 +1284,7 @@ module.exports = {
         '.new-item-side-panel__body .accordion__container:nth-of-type(4) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel__body .accordion__container:nth-of-type(4) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel__body .accordion__container:nth-of-type(4) div.new-item-side-panel__expand-icon'
       ),
       Advanced_Environment_Variables_Table: commonTable(
         advancedEnvironmentVariablesTable
@@ -1363,7 +1374,7 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(1) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(1) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel .accordion__container:nth-of-type(1) div.new-item-side-panel__expand-icon'
       ),
       // TODO: add labels for name, tag and runtime
       New_Function_Description_Text_Area: By.css(
@@ -1376,7 +1387,7 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(2) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(2) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel .accordion__container:nth-of-type(2) div.new-item-side-panel__expand-icon'
       ),
       New_Function_Code_Entry_Dropdown: dropdownComponent(
         generateDropdownGroup(
@@ -1463,7 +1474,7 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(3) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(3) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel .accordion__container:nth-of-type(3) div.new-item-side-panel__expand-icon'
       ),
       Volumes_Subheader: labelComponent(
         generateLabelGroup(
@@ -1484,28 +1495,28 @@ module.exports = {
       // Volume Path inputs
       Volume_Paths_Table_Type_Dropdown: commonVolumePathsTableTypeDropdown,
       Volume_Paths_Table_Volume_Name_Input: inputGroup(
-        resourcesTableCommonInpute(3, 1, 2)
+        resourcesTableCommonInput(3, 1, 2)
       ),
       Volume_Paths_Table_Path_Input: inputGroup(
-        resourcesTableCommonInpute(3, 1, 3)
+        resourcesTableCommonInput(3, 1, 3)
       ),
       Volume_Paths_Table_Container_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Config_Map_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Secret_Name_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Claime_Name_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 1)
+        resourcesTableCommonInput(3, 2, 1)
       ),
       Volume_Paths_Table_Access_Key_Input: inputGroup(
-        resourcesTableCommonInpute(3, 2, 2)
+        resourcesTableCommonInput(3, 2, 2)
       ),
       Volume_Paths_Table_Resource_Path_Input: inputGroup(
-        resourcesTableCommonInpute(3, 3, 1)
+        resourcesTableCommonInput(3, 3, 1)
       ),
       Add_New_Row_Button: commonAddNewRowButton,
       Delete_New_Row_Button: commonDeleteNewRowButton,
@@ -1580,7 +1591,7 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(4) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(4) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel .accordion__container:nth-of-type(4) div.new-item-side-panel__expand-icon'
       ),
       Function_Environment_Variables_Table: commonTable(
         functionEnvironmentVariablesTable
@@ -1640,7 +1651,7 @@ module.exports = {
         '.new-item-side-panel .accordion__container:nth-of-type(5) h5'
       ),
       Collapse_Button: By.css(
-        '.new-item-side-panel .accordion__container:nth-of-type(5) button.new-item-side-panel__expand-icon'
+        '.new-item-side-panel .accordion__container:nth-of-type(5) div.new-item-side-panel__expand-icon'
       ),
       Topology_Router_Type_Dropdown: dropdownComponent(
         generateDropdownGroup(

@@ -167,6 +167,33 @@ const statisticsInfoPaneTable = {
   }
 }
 
+const requestedFeaturesTable = {
+  root:
+    'div.table__item div.item-requested-features div.item-requested-features__table',
+  header: {
+    root: 'div.item-requested-features__table-header',
+    sorters: {
+      projectName: 'div.header_project-name',
+      featureSet: 'div.header_feature-set',
+      feature: 'div.header_feature',
+      alias: 'div.header_alias'
+    }
+  },
+  body: {
+    root: 'div.item-requested-features__table-body',
+    row: {
+      root: 'div.item-requested-features__table-row',
+      fields: {
+        projectName: 'div.cell_project-name',
+        featureSet: 'div.item-requested-features__table-cell:nth-of-type(2)',
+        feature: 'div.cell_feature',
+        alias: 'div.cell_alias',
+        delete_btn: 'div.cell_delete svg'
+      }
+    }
+  }
+}
+
 const inputsTable = {
   root: '.table__item .inputs_container',
   header: {
@@ -373,6 +400,9 @@ module.exports = {
     Action_Menu: commonActionMenu,
     Cross_Close_Button: crossCloseButton,
     Info_Pane_Tab_Selector: commonInfoPaneTabSelector
+  },
+  requestedFeaturesInfoPane: {
+    Requested_Features_Table: commonTable(requestedFeaturesTable)
   },
   mlFunctionInfoPane: {
     Header: header,
