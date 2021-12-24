@@ -2,18 +2,34 @@ import { By } from 'selenium-webdriver'
 import inputGroup from '../components/input-group.component'
 import {
   generateInputGroup,
-  generateDropdownGroup
+  generateDropdownGroup,
+  generateLabelGroup
 } from '../../common-tools/common-tools'
 import dropdownComponent from '../components/dropdown.component'
 import checkboxComponent from '../components/checkbox.component'
 import commonTable from '../components/table.component'
 import actionMenu from '../components/action-menu.component'
+import labelComponent from '../components/label.component'
 
 const actionMenuStructure = {
   root: 'div.actions-menu__container',
   menuElements: {
     open_button: 'button',
     options: 'div.actions-menu__body div.actions-menu__option'
+  }
+}
+
+const tabSelector = {
+  root: 'div.content_with-menu div.content-menu',
+  header: {},
+  body: {
+    root: 'ul.content-menu__list',
+    row: {
+      root: 'li.content-menu__item',
+      fields: {
+        tab: 'a'
+      }
+    }
   }
 }
 
@@ -67,8 +83,43 @@ const modelsTable = {
   }
 }
 
+const realTimePipelinesTable = {
+  root: 'div.table div.table__content',
+  header: {
+    root: 'div.table-head',
+    sorters: {
+      name: 'div.table-head__item:nth-of-type(1) div.data-ellipsis',
+      type: 'div.table-head__item:nth-of-type(2) div.data-ellipsis'
+    }
+  },
+  body: {
+    root: 'div.table-body',
+    row: {
+      root: 'div.table-body__row',
+      fields: {
+        status: {
+          componentType: labelComponent,
+          structure: generateLabelGroup(
+            'div.table-body__cell:nth-of-type(1) .status',
+            'i',
+            true,
+            '.tooltip .tooltip__text span'
+          )
+        },
+        name: 'div.table-body__cell:nth-of-type(1) a span.link',
+        type: 'div.table-body__cell:nth-of-type(2) div.data-ellipsis',
+        action_menu: {
+          componentType: actionMenu,
+          structure: actionMenuStructure
+        }
+      }
+    }
+  }
+}
+
 module.exports = {
   modelsTab: {
+    Models_Tab_Selector: commonTable(tabSelector),
     Table_Tree_Filter_Dropdown: dropdownComponent(
       generateDropdownGroup(
         '.content .content__action-bar .filters .tag-filter',
@@ -102,5 +153,19 @@ module.exports = {
     ),
     Models_Table: commonTable(modelsTable),
     Register_Model_Button: By.css('.page-actions-container .btn_register')
+  },
+  realTimePipelinesTab: {
+    Table_Name_Filter_Input: inputGroup(
+      generateInputGroup(
+        '.content .content__action-bar .filters .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    Table_Refresh_Button: By.css(
+      '.content .content__action-bar .actions #refresh'
+    ),
+    Real_Time_Pipelines_Table: commonTable(realTimePipelinesTable)
   }
 }

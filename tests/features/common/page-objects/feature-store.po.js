@@ -194,7 +194,37 @@ const addToFeatureVectorTable = {
         featureName: 'div.table-body__cell:nth-of-type(1) div.data-ellipsis',
         featureSet: 'div.table-body__cell:nth-of-type(2) a span.link',
         type: 'div.table-body__cell:nth-of-type(3) div.data-ellipsis',
-        entities: 'div.table-body__cell:nth-of-type(4) div.chips-wrapper'
+        entities: 'div.table-body__cell:nth-of-type(4) div.chips-wrapper',
+        add_feature_btn: 'div.add-feature-button svg'
+      }
+    }
+  }
+}
+
+const featuresPanelTable = {
+  root: '.table__panel-container .features-panel__expand-content',
+  header: {},
+  body: {
+    row: {
+      root: '.feature-row',
+      fields: {
+        feature: 'div.feature-row__feature-template',
+        set_as_label_btn: 'div.feature-row__actions svg.set-as-label',
+        remove_btn: 'div.feature-row__actions svg.remove'
+      }
+    }
+  }
+}
+
+const featuresByProjectsTable = {
+  root:
+    '.table__panel-container .features-panel__divider:nth-of-type(4) + div + .accordion__container',
+  header: {},
+  body: {
+    row: {
+      root: '.feature-row',
+      fields: {
+        feature: 'div.feature-row__feature-template'
       }
     }
   }
@@ -331,6 +361,18 @@ module.exports = {
         false,
         true
       )
-    )
+    ),
+    Edit_Feature_Vector_Button: By.css(
+      '.add-to-feature-vector .features-panel__header-vector-actions button'
+    ),
+    Selected_Project_Accordion: {
+      Features_Panel_Table: commonTable(featuresPanelTable)
+    },
+    Features_By_Projects_Accordion: {
+      Collapse_Button: By.css(
+        '.table__panel-container .features-panel__divider:nth-of-type(4) + div + .accordion__container .round-icon-cp__icon'
+      ),
+      Features_By_Projects_Table: commonTable(featuresByProjectsTable)
+    }
   }
 }

@@ -60,12 +60,13 @@ Feature: ML Functions
         And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "test-m" value in "name" column
-        Then verify if "Delete_Function_Popup" popup dialog appears
-        Then "Description" component on "Delete_Function_Popup" should be equal "Descriptions"."Delete_Function"
-        Then verify "Cancel_Button" element visibility on "Delete_Function_Popup" wizard
-        Then "Cancel_Button" element on "Delete_Function_Popup" should contains "Cancel" value
-        Then verify "Delete_Button" element visibility on "Delete_Function_Popup" wizard
-        Then "Delete_Button" element on "Delete_Function_Popup" should contains "Delete" value
+        Then verify if "Common_Popup" popup dialog appears
+        Then "Title" element on "Common_Popup" should contains "Delete function?" value
+        Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Function"
+        Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
+        Then "Cancel_Button" element on "Common_Popup" should contains "Cancel" value
+        Then verify "Delete_Button" element visibility on "Common_Popup" wizard
+        Then "Delete_Button" element on "Common_Popup" should contains "Delete" value
 
     @passive
     Scenario: Verify all mandatory components on Delete existing function in Item infopane
@@ -78,12 +79,13 @@ Feature: ML Functions
         When click on cell with row index 1 in "name" column in "Functions_Table" table on "ML_Functions" wizard
         Then verify "Action_Menu" element visibility on "ML_Function_Info_Pane" wizard
         Then select "Delete" option in action menu on "ML_Function_Info_Pane" wizard
-        Then verify if "Delete_Function_Popup" popup dialog appears
-        Then "Description" component on "Delete_Function_Popup" should be equal "Descriptions"."Delete_Function"
-        Then verify "Cancel_Button" element visibility on "Delete_Function_Popup" wizard
-        Then "Cancel_Button" element on "Delete_Function_Popup" should contains "Cancel" value
-        Then verify "Delete_Button" element visibility on "Delete_Function_Popup" wizard
-        Then "Delete_Button" element on "Delete_Function_Popup" should contains "Delete" value
+        Then verify if "Common_Popup" popup dialog appears
+        Then "Title" element on "Common_Popup" should contains "Delete function?" value
+        Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Function"
+        Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
+        Then "Cancel_Button" element on "Common_Popup" should contains "Cancel" value
+        Then verify "Delete_Button" element visibility on "Common_Popup" wizard
+        Then "Delete_Button" element on "Common_Popup" should contains "Delete" value
 
     @passive
     @inProgress
@@ -96,6 +98,7 @@ Feature: ML Functions
         And wait load page
         Then click on "New_Function_Button" element on "ML_Functions" wizard
         Then verify if "Create_ML_Function_Popup" popup dialog appears
+        Then "Title" element on "Create_ML_Function_Popup" should contains "Create New Function" value
         And verify "Cross_Cancel_Button" element visibility on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Name_Input" element visibility on "Create_ML_Function_Popup" wizard
         Then type value "   " to "New_Function_Name_Input" field on "Create_ML_Function_Popup" wizard
@@ -198,6 +201,8 @@ Feature: ML Functions
         When collapse "General_Accordion" on "New_Function" wizard
         When collapse "Code_Accordion" on "New_Function" wizard
         Then verify "Volumes_Subheader" element in "Resources_Accordion" on "New_Function" wizard should display hint "Label_Hint"."New_Job_Volumes"
+        Then verify "New_Function_Volume_Mount_Dropdown" element visibility in "Resources_Accordion" on "New_Function" wizard
+        Then verify "New_Function_Volume_Mount_Dropdown" element in "Resources_Accordion" on "New_Function" wizard should contains "Dropdown_Options"."Volume_Mount_Options"
         Then type value "0" to "Memory_Limit_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
         Then verify "Memory_Limit_Number_Input" element in "Resources_Accordion" on "New_Function" wizard should display warning "Input_Hint"."Limit_Number_Warning"
         Then type value "1" to "Memory_Limit_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
@@ -213,6 +218,7 @@ Feature: ML Functions
         Then type value "0" to "GPU_Limit_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
         Then verify "GPU_Limit_Number_Input" element in "Resources_Accordion" on "New_Function" wizard should display warning "Input_Hint"."GPU_Minimum_Value_Warning"
         Then verify "Memory_Unit_Dropdown" element visibility in "Resources_Accordion" on "New_Function" wizard
+        Then verify "Memory_Unit_Dropdown" element in "Resources_Accordion" on "New_Function" wizard should contains "Dropdown_Options"."Memory_Unit_Options"
         Then verify "Memory_Request_Number_Input" element visibility in "Resources_Accordion" on "New_Function" wizard
         Then type value "1" to "Memory_Request_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
         Then increase value on 15 points in "Memory_Request_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
@@ -222,6 +228,7 @@ Feature: ML Functions
         Then increase value on 15 points in "Memory_Limit_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
         Then decrease value on 15 points in "Memory_Limit_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
         Then verify "CPU_Unit_Dropdown" element visibility in "Resources_Accordion" on "New_Function" wizard
+        Then verify "CPU_Unit_Dropdown" element in "Resources_Accordion" on "New_Function" wizard should contains "Dropdown_Options"."CPU_Unit_Options"
         Then verify "CPU_Request_Number_Input" element visibility in "Resources_Accordion" on "New_Function" wizard
         Then type value "3" to "CPU_Request_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
         Then increase value on 15 points in "CPU_Request_Number_Input" field on "Resources_Accordion" on "New_Function" wizard
@@ -469,7 +476,7 @@ Feature: ML Functions
             |         name        |
             | new-aqa-function-00 |
         And select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "new-aqa-function-00" value in "name" column
-        And click on "Delete_Button" element on "Delete_Function_Popup" wizard
+        And click on "Delete_Button" element on "Common_Popup" wizard
 
     @passive
     @demo
@@ -640,7 +647,7 @@ Feature: ML Functions
 
     @passive
     @inProgress
-    Scenario: verify un unique value input hint on Create New Function page
+    Scenario: verify non-unique value input hint on Create New Function page
         Given open url
         And wait load page
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
@@ -662,7 +669,7 @@ Feature: ML Functions
 
     @passive
     @demo
-    Scenario: verify un unique value input hint on Create New Serving Function page
+    Scenario: verify non-unique value input hint on Create New Serving Function page
         Given open url
         And wait load page
         And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard

@@ -14,9 +14,9 @@ import {
   deleteAPIMLProject,
   createAPIMLProject,
   isComponentContainsAttributeValue,
-  collapseAccorditionSection,
-  expandAccorditionSection,
-  isAccorditionSectionCollapsed,
+  collapseAccordionSection,
+  expandAccordionSection,
+  isAccordionSectionCollapsed,
   clickNearComponent,
   verifyElementDisabled,
   verifyElementEnabled
@@ -60,7 +60,7 @@ import {
   applyDatetimePickerRange
 } from '../common/actions/date-picker.action'
 import {
-  typeSearchebleValue,
+  typeSearchableValue,
   isContainsSubstringInSuggestedOptions
 } from '../common/actions/input-with-autocomplete.action'
 
@@ -158,7 +158,7 @@ Then(
 When(
   'type searchable fragment {string} into {string} on {string} wizard',
   async function(subName, inputGroup, wizard) {
-    await typeSearchebleValue(
+    await typeSearchableValue(
       this.driver,
       pageObjects[wizard][inputGroup],
       subName
@@ -169,7 +169,7 @@ When(
 When(
   'type searchable fragment {string} into {string} combobox input in {string} on {string} wizard',
   async function(subName, combobox, accordion, wizard) {
-    await typeSearchebleValue(
+    await typeSearchableValue(
       this.driver,
       pageObjects[wizard][accordion][combobox]['comboDropdown'],
       subName
@@ -180,6 +180,7 @@ When(
 Then(
   'searchable fragment {string} should be in every suggested option into {string} on {string} wizard',
   async function(subName, inputGroup, wizard) {
+    await this.driver.sleep(200)
     await isContainsSubstringInSuggestedOptions(
       this.driver,
       pageObjects[wizard][inputGroup],
@@ -291,7 +292,6 @@ Then(
 Then(
   '{string} component on {string} should be equal {string}.{string}',
   async function(component, wizard, constStorage, constValue) {
-    await waiteUntilComponent(this.driver, pageObjects[wizard][component])
     await verifyTextRegExp(
       this.driver,
       pageObjects[wizard][component],
@@ -399,7 +399,7 @@ Then(
 )
 
 Then(
-  'verify error mesege in {string} on {string} wizard with value {string}.{string}',
+  'verify error message in {string} on {string} wizard with value {string}.{string}',
   async function(datetimePicker, wizard, constStorage, constValue) {
     await verifyText(
       this.driver,
@@ -433,8 +433,7 @@ Then(
     await checkDropdownOptions(
       this.driver,
       pageObjects[wizard][dropdown],
-      pageObjectsConsts[constStorage][constValue],
-      false
+      pageObjectsConsts[constStorage][constValue]
     )
     await clickNearComponent(
       this.driver,
@@ -461,7 +460,7 @@ Then(
 )
 
 When('collapse {string} on {string} wizard', async function(accordion, wizard) {
-  collapseAccorditionSection(
+  await collapseAccordionSection(
     this.driver,
     pageObjects[wizard][accordion]['Collapse_Button']
   )
@@ -469,7 +468,7 @@ When('collapse {string} on {string} wizard', async function(accordion, wizard) {
 })
 
 When('expand {string} on {string} wizard', async function(accordion, wizard) {
-  expandAccorditionSection(
+  await expandAccordionSection(
     this.driver,
     pageObjects[wizard][accordion]['Collapse_Button']
   )
@@ -480,7 +479,7 @@ Then('verify {string} is collapsed on {string} wizard', async function(
   accordion,
   wizard
 ) {
-  await isAccorditionSectionCollapsed(
+  await isAccordionSectionCollapsed(
     this.driver,
     pageObjects[wizard][accordion]['Collapse_Button']
   )
@@ -510,7 +509,10 @@ Then('sort projects in descending order', async function() {
     'sort_down'
   )
   if (!downSorted) {
-    clickOnComponent(this.driver, pageObjects['Projects']['Projects_Sorter'])
+    await clickOnComponent(
+      this.driver,
+      pageObjects['Projects']['Projects_Sorter']
+    )
   }
   await isTableColumnSorted(
     this.driver,
@@ -731,8 +733,7 @@ Then(
     await checkDropdownOptions(
       this.driver,
       pageObjects[wizard][accordion][combobox]['dropdown'],
-      pageObjectsConsts[constStorage][constValue],
-      false
+      pageObjectsConsts[constStorage][constValue]
     )
     await clickNearComponent(
       this.driver,
