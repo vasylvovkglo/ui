@@ -13,6 +13,7 @@ import {
   waitPageLoad,
   deleteAPIMLProject,
   createAPIMLProject,
+  getProjects,
   isComponentContainsAttributeValue,
   collapseAccordionSection,
   expandAccordionSection,
@@ -808,14 +809,14 @@ Then('verify {string} according hint rules on {string} wizard', async function(
 Then(
   'set tear-down property {string} created with {string} value',
   async function(type, name) {
-    this.parameters[type] = name
+    this.createdItems.push({ name, type })
   }
 )
 
 Then(
   'set tear-down property {string} created in {string} project with {string} value',
-  async function(type, projectName, itemName) {
-    this.parameters[type] = { projectName, itemName }
+  async function(type, project, name) {
+    this.createdItems.push({ project, name, type })
   }
 )
 
@@ -844,4 +845,15 @@ Then('select {string} with {string} value in breadcrumbs menu', async function(
     pageObjects['commonPagesHeader']['Breadcrumbs'][itemType],
     name
   )
+})
+
+Then('create up to limit projects with code {int}', async function(status) {
+  const projects = await getProjects()
+  const projectsLimit = 50
+
+  for (let i = 0; i <= projectsLimit - projects.length; i++) {
+    const name = `automation-test-name${i}`
+    await createAPIMLProject(name, status)
+    this.createdItems.push({ name, type: 'project' })
+  }
 })
