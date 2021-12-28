@@ -2,18 +2,34 @@ import { By } from 'selenium-webdriver'
 import inputGroup from '../components/input-group.component'
 import {
   generateInputGroup,
-  generateDropdownGroup
+  generateDropdownGroup,
+  generateLabelGroup
 } from '../../common-tools/common-tools'
 import dropdownComponent from '../components/dropdown.component'
 import checkboxComponent from '../components/checkbox.component'
 import commonTable from '../components/table.component'
 import actionMenu from '../components/action-menu.component'
+import labelComponent from '../components/label.component'
 
 const actionMenuStructure = {
-  root: 'div.actions-menu__container',
+  root: '.actions-menu__container',
   menuElements: {
     open_button: 'button',
-    options: 'div.actions-menu__body div.actions-menu__option'
+    options: '.actions-menu__body .actions-menu__option'
+  }
+}
+
+const tabSelector = {
+  root: '.content_with-menu .content-menu',
+  header: {},
+  body: {
+    root: '.content-menu__list',
+    row: {
+      root: '.content-menu__item',
+      fields: {
+        tab: 'a'
+      }
+    }
   }
 }
 
@@ -36,8 +52,8 @@ const modelsTable = {
     row: {
       root: '.table-body__row',
       fields: {
-        expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
-        name: '.table-body__cell:nth-of-type(1) a .name-wrapper span.link',
+        expand_btn: '.table-body__cell:nth-of-type(1) svg.expand-arrow',
+        name: '.table-body__cell:nth-of-type(1) a .name-wrapper .link',
         labels: {
           componentType: dropdownComponent,
           structure: generateDropdownGroup(
@@ -67,8 +83,43 @@ const modelsTable = {
   }
 }
 
+const realTimePipelinesTable = {
+  root: '.table .table__content',
+  header: {
+    root: '.table-head',
+    sorters: {
+      name: '.table-head__item:nth-of-type(1) .data-ellipsis',
+      type: '.table-head__item:nth-of-type(2) .data-ellipsis'
+    }
+  },
+  body: {
+    root: '.table-body',
+    row: {
+      root: '.table-body__row',
+      fields: {
+        status: {
+          componentType: labelComponent,
+          structure: generateLabelGroup(
+            '.table-body__cell:nth-of-type(1) .status',
+            'i',
+            true,
+            '.tooltip .tooltip__text span'
+          )
+        },
+        name: '.table-body__cell:nth-of-type(1) a .link',
+        type: '.table-body__cell:nth-of-type(2) .data-ellipsis',
+        action_menu: {
+          componentType: actionMenu,
+          structure: actionMenuStructure
+        }
+      }
+    }
+  }
+}
+
 module.exports = {
   modelsTab: {
+    Models_Tab_Selector: commonTable(tabSelector),
     Table_Tree_Filter_Dropdown: dropdownComponent(
       generateDropdownGroup(
         '.content .content__action-bar .filters .tag-filter',
@@ -102,5 +153,19 @@ module.exports = {
     ),
     Models_Table: commonTable(modelsTable),
     Register_Model_Button: By.css('.page-actions-container .btn_register')
+  },
+  realTimePipelinesTab: {
+    Table_Name_Filter_Input: inputGroup(
+      generateInputGroup(
+        '.content .content__action-bar .filters .input-wrapper',
+        true,
+        false,
+        true
+      )
+    ),
+    Table_Refresh_Button: By.css(
+      '.content .content__action-bar .actions #refresh'
+    ),
+    Real_Time_Pipelines_Table: commonTable(realTimePipelinesTable)
   }
 }

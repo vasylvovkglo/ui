@@ -110,30 +110,30 @@ const action = {
     const element = await driver.findElement(component)
     return (await element.getAttribute(attribute)) === value
   },
-  collapseAccorditionSection: async function(driver, collapseComponet) {
-    const element = await driver.findElement(collapseComponet)
+  collapseAccordionSection: async function(driver, collapseComponent) {
+    const element = await driver.findElement(collapseComponent)
     const attributes = await element.getAttribute('class')
     const flag = attributes.includes('open')
     if (flag) {
       await element.click()
     }
   },
-  expandAccorditionSection: async function(driver, collapseComponet) {
-    const element = await driver.findElement(collapseComponet)
+  expandAccordionSection: async function(driver, collapseComponent) {
+    const element = await driver.findElement(collapseComponent)
     const attributes = await element.getAttribute('class')
     const flag = attributes.includes('open')
     if (!flag) {
       await element.click()
     }
   },
-  isAccorditionSectionExpanded: async function(driver, collapseComponet) {
-    const element = await driver.findElement(collapseComponet)
+  isAccordionSectionExpanded: async function(driver, collapseComponent) {
+    const element = await driver.findElement(collapseComponent)
     const attributes = await element.getAttribute('class')
     const flag = attributes.includes('open')
     expect(flag).equal(true)
   },
-  isAccorditionSectionCollapsed: async function(driver, collapseComponet) {
-    const element = await driver.findElement(collapseComponet)
+  isAccordionSectionCollapsed: async function(driver, collapseComponent) {
+    const element = await driver.findElement(collapseComponent)
     const attributes = await element.getAttribute('class')
     const flag = attributes.includes('open')
     expect(flag).equal(false)

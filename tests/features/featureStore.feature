@@ -46,6 +46,10 @@ Feature: Feature Store Page
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Features_Table" element visibility on "Feature_Store_Features_Tab" wizard
+        Then select "project" with "test-test" value in breadcrumbs menu
+        Then "No_Data_Message" component on "commonPagesHeader" should contains "No_Data_Message"."Common_Message"
+        Then select "All" option in "Table_Tag_Filter_Dropdown" dropdown on "Feature_Store_Features_Tab" wizard
+        Then "No_Data_Message" component on "commonPagesHeader" should contains "No_Data_Message"."No_Features_Yet"
 
     @passive
     Scenario: Check all mandatory components on Feature Vectors tab
@@ -100,7 +104,7 @@ Feature: Feature Store Page
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
-        When click on cell with row index 1 in "name" column in "Feature_Sets_Table" table on "Feature_Store_Feature_Sets_Tab" wizard
+        When click on cell with row index 2 in "name" column in "Feature_Sets_Table" table on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Header" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Updated" element visibility on "Feature_Sets_Info_Pane" wizard
         Then verify "Cancel_Button" element visibility on "Feature_Sets_Info_Pane" wizard
@@ -354,6 +358,9 @@ Feature: Feature Store Page
         Then click on "Table_Refresh_Button" element on "Feature_Store_Features_Tab" wizard
         And wait load page
         Then value in "feature_name" column with "text" in "Features_Table" on "Feature_Store_Features_Tab" wizard should contains "ea"
+        Then type value "zzzzz" to "Table_Name_Filter_Input" field on "Feature_Store_Features_Tab" wizard
+        Then click on "Table_Refresh_Button" element on "Feature_Store_Features_Tab" wizard
+        Then "No_Data_Message" component on "commonPagesHeader" should contains "No_Data_Message"."Common_Message"
 
     @passive
     Scenario: Check filtering by Name on Feature Store Feature Vectors Tab
@@ -635,12 +642,13 @@ Feature: Feature Store Page
         Then is not "Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
         When select "Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set"
         Then is "Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
-        Then verify "Offline_Partition_Key_Buckering_Number_Input" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Key_Buckering_Number_Hint"
-        Then type value "432493" to "Offline_Partition_Key_Buckering_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
-        Then increase value on 15 points in "Offline_Partition_Key_Buckering_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
-        Then decrease value on 15 points in "Offline_Partition_Key_Buckering_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then verify "Offline_Partition_Key_Bucketing_Number_Input" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Key_Bucketing_Number_Hint"
+        Then type value "432493" to "Offline_Partition_Key_Bucketing_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then increase value on 15 points in "Offline_Partition_Key_Bucketing_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then decrease value on 15 points in "Offline_Partition_Key_Bucketing_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "Offline_Partition_Columns_Input" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "Offline_Partition_Granularity_Dropdown" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then verify "Offline_Partition_Granularity_Dropdown" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should contains "Dropdown_Options"."Partition_Granularity_Options"
         Then "External_Offline_Checkbox" element should be unchecked in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When uncheck "Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When check "External_Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
@@ -658,10 +666,10 @@ Feature: Feature Store Page
         Then is not "External_Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
         When select "External_Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set"
         Then is "External_Offline_Partition_Number_Of_Buckets_Radiobutton" in "Target_Store_Accordion" on "New_Feature_Set" selected
-        Then verify "External_Offline_Partition_Key_Buckering_Number_Input" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Key_Buckering_Number_Hint"
-        Then type value "432493" to "External_Offline_Partition_Key_Buckering_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
-        Then increase value on 15 points in "External_Offline_Partition_Key_Buckering_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
-        Then decrease value on 15 points in "External_Offline_Partition_Key_Buckering_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then verify "External_Offline_Partition_Key_Bucketing_Number_Input" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Key_Bucketing_Number_Hint"
+        Then type value "432493" to "External_Offline_Partition_Key_Bucketing_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then increase value on 15 points in "External_Offline_Partition_Key_Bucketing_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then decrease value on 15 points in "External_Offline_Partition_Key_Bucketing_Number_Input" field on "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "External_Offline_Partition_Columns_Input" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "External_Offline_Partition_Granularity_Dropdown" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When collapse "Target_Store_Accordion" on "New_Feature_Set" wizard
@@ -775,7 +783,7 @@ Feature: Feature Store Page
         When uncheck "Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When collapse "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then click on "Save_Button" element on "New_Feature_Set" wizard
-        Then click on "OK_Button" element on "Create_Feature_Set_Popup_Dialog" wizard
+        Then click on "Confirm_Button" element on "Common_Popup" wizard
         Then click on "Cross_Close_Button" element on "Features_Info_Pane" wizard
         Then verify values in "Feature_Sets_Table" table on "Feature_Store_Feature_Sets_Tab" wizard
             |       name       |      description      |
@@ -794,7 +802,7 @@ Feature: Feature Store Page
         Then verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then check "expand_btn" visibility in "Feature_Sets_Table" on "Feature_Store_Feature_Sets_Tab" wizard
         When select "my-tag" option in "Table_Tag_Filter_Dropdown" dropdown on "Feature_Store_Feature_Sets_Tab" wizard
-        Then check "expand_btn" not visibile in "Feature_Sets_Table" on "Feature_Store_Feature_Sets_Tab" wizard
+        Then check "expand_btn" not visible in "Feature_Sets_Table" on "Feature_Store_Feature_Sets_Tab" wizard
 
     @passive
     Scenario: Check MLRun logo redirection
@@ -919,9 +927,39 @@ Feature: Feature Store Page
         And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And wait load page
         Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
-        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
+        Then "Title" element on "Create_Feature_Vector_Popup" should contains "Create feature vector" value
         Then verify "Cross_Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Name_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Name_Input" according hint rules on "Create_Feature_Vector_Popup" wizard
+        Then verify "Tag_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then "Cancel_Button" element on "Create_Feature_Vector_Popup" should contains "Cancel" value
+        Then verify "Create_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then "Create_Button" element on "Create_Feature_Vector_Popup" should contains "Create" value
+
+    @passive
+    Scenario: Check all mandatory components on Edit feature vector Popup
+        Given open url
+        And turn on demo mode
+        And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
+        Then type into "Name_Input" on "Create_Feature_Vector_Popup" popup dialog "test" value
+        Then type into "Tag_Input" on "Create_Feature_Vector_Popup" popup dialog "latest" value
+        Then click on "Create_Button" element on "Create_Feature_Vector_Popup" wizard
+        And wait load page
+        Then click on "Edit_Feature_Vector_Button" element on "Add_To_Feature_Vector_Tab" wizard
+        Then "Title" element on "Create_Feature_Vector_Popup" should contains "Edit feature vector" value
+        Then verify "Cross_Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Name_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Name_Input" according hint rules on "Create_Feature_Vector_Popup" wizard
         Then verify "Tag_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
@@ -954,6 +992,9 @@ Feature: Feature Store Page
         Then verify "Table_Refresh_Button" element visibility on "Add_To_Feature_Vector_Tab" wizard
         Then verify "Features_Panel_Title" element visibility on "Add_To_Feature_Vector_Tab" wizard
         Then verify "Features_Panel_Title" on "Add_To_Feature_Vector_Tab" wizard should display "Input_Hint"."Add_Feature_Vector_Hint"
+        When select "test-test" option in "Table_Projects_Filter_Dropdown" filter dropdown on "Add_To_Feature_Vector_Tab" wizard
+        And wait load page
+        Then "No_Data_Message" component on "commonPagesHeader" should contains "No_Data_Message"."Common_Message"
         When select "stocks" option in "Table_Projects_Filter_Dropdown" filter dropdown on "Add_To_Feature_Vector_Tab" wizard
         And wait load page
         Then verify "Features_Panel_Title" element visibility on "Add_To_Feature_Vector_Tab" wizard
@@ -975,14 +1016,117 @@ Feature: Feature Store Page
         And wait load page
         Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify if "Create_Feature_Vector_Popup" popup dialog appears
-        Then type into "Name_Input" on "Create_Feature_Vector_Popup" popup dialog "temp_vector" value
+        Then type into "Name_Input" on "Create_Feature_Vector_Popup" popup dialog "temp_vector01" value
         Then type into "Tag_Input" on "Create_Feature_Vector_Popup" popup dialog "temp_tag" value
         Then click on "Create_Button" element on "Create_Feature_Vector_Popup" wizard
         And wait load page
+        Then click on "add_feature_btn" in "Add_To_Feature_Vector_Table" table on "Add_To_Feature_Vector_Tab" wizard
+            | featureName |
+            | department  |
+            | room        |
+            | age         |
+            | gender      |
+        Then verify values in "Features_Panel_Table" table in "Selected_Project_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                              |
+            | patient_details : latest #department |
+            | patient_details : latest #room       |
+            | patient_details : latest #age        |
+            | patient_details : latest #gender     |
+        Then click on "remove_btn" in "Features_Panel_Table" table in "Selected_Project_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                        |
+            | patient_details : latest #room |
+        Then verify values in "Features_Panel_Table" table in "Selected_Project_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                              |
+            | patient_details : latest #department |
+            | patient_details : latest #age        |
+            | patient_details : latest #gender     |
+        Then select "stocks" option in "Table_Projects_Filter_Dropdown" dropdown on "Add_To_Feature_Vector_Tab" wizard
+        Then expand "Features_By_Projects_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+        Then verify values in "Features_By_Projects_Table" table in "Features_By_Projects_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                              |
+            | patient_details : latest #department |
+            | patient_details : latest #age        |
+            | patient_details : latest #gender     |
+        Then click on "add_feature_btn" in "Add_To_Feature_Vector_Table" table on "Add_To_Feature_Vector_Tab" wizard
+            | featureName |
+            | name        |
+            | exchange    |
+            | bid         |
+            | extra       |
+        Then verify values in "Features_Panel_Table" table in "Selected_Project_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                      |
+            | stocks : latest #name        |
+            | stocks : latest #exchange    |
+            | stock-quotes : latest #bid   |
+            | stock-quotes : latest #extra |
+        Then click on "remove_btn" in "Features_Panel_Table" table in "Selected_Project_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                      |
+            | stock-quotes : latest #bid   |
+            | stock-quotes : latest #extra |
+        Then verify values in "Features_Panel_Table" table in "Selected_Project_Accordion" on "Add_To_Feature_Vector_Tab" wizard
+            | feature                      |
+            | stocks : latest #name        |
+            | stocks : latest #exchange    |
         Then click on "Add_Button" element on "Add_To_Feature_Vector_Tab" wizard
+        And set tear-down property "featureVector" created in "fsdemo-admin" project with "temp_vector01" value
         When select "temp_tag" option in "Table_Tree_Filter_Dropdown" filter dropdown on "Add_To_Feature_Vector_Tab" wizard
         Then value in "name" column with "text" in "Feature_Vectors_Table" on "Feature_Store_Features_Vectors_Tab" wizard should contains "temp_vector"
-        # Need API request to remove created vector
+
+    @inProgress
+    Scenario: Check all mandatory components in Item infopane on Requested Features tab on Feature Vectors tab
+        Given open url
+        And turn on demo mode
+        And click on cell with value "fsdemo-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
+        And wait load page
+        Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
+        Then type into "Name_Input" on "Create_Feature_Vector_Popup" popup dialog "temp_vector02" value
+        Then type into "Tag_Input" on "Create_Feature_Vector_Popup" popup dialog "latest" value
+        Then click on "Create_Button" element on "Create_Feature_Vector_Popup" wizard
+        And wait load page
+        Then click on "add_feature_btn" in "Add_To_Feature_Vector_Table" table on "Add_To_Feature_Vector_Tab" wizard
+            | featureName |
+            | department  |
+            | bad         |
+            | age         |
+        Then select "stocks-admin" option in "Table_Projects_Filter_Dropdown" dropdown on "Add_To_Feature_Vector_Tab" wizard
+        Then click on "add_feature_btn" in "Add_To_Feature_Vector_Table" table on "Add_To_Feature_Vector_Tab" wizard
+            | featureName  |
+            | price        |
+            | volume       |
+            | last_updated |
+        Then click on "Add_Button" element on "Add_To_Feature_Vector_Tab" wizard
+        And wait load page
+        And set tear-down property "featureVector" created in "fsdemo-admin" project with "temp_vector02" value
+        Then click on cell with value "temp_vector02" in "name" column in "Feature_Vectors_Table" table on "Feature_Store_Features_Vectors_Tab" wizard
+        Then select "Requested Features" tab in "Info_Pane_Tab_Selector" on "Feature_Vectors_Info_Pane" wizard
+        Then verify values in "Requested_Features_Table" table on "Requested_Features_Info_Pane" wizard
+            | projectName  | featureSet      | feature      |
+            | fsdemo-admin | patient_details | department   |
+            | fsdemo-admin | patient_details | bad          |
+            | fsdemo-admin | patient_details | age          |
+            | stocks-admin | stocks          | price        |
+            | stocks-admin | stocks          | volume       |
+            | stocks-admin | stocks          | last_updated |
+        Then click on "delete_btn" in "Requested_Features_Table" table on "Requested_Features_Info_Pane" wizard
+            | feature    |
+            | department |
+        Then verify if "Common_Popup" popup dialog appears
+        Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Feature"
+        Then "Cancel_Button" element on "Common_Popup" should contains "Cancel" value
+        Then "Delete_Button" element on "Common_Popup" should contains "Delete" value
+        Then click on "Delete_Button" element on "Common_Popup" wizard
+        Then verify values in "Requested_Features_Table" table on "Requested_Features_Info_Pane" wizard
+            | projectName  | featureSet      | feature      |
+            | fsdemo-admin | patient_details | bad          |
+            | fsdemo-admin | patient_details | age          |
+            | stocks-admin | stocks          | price        |
+            | stocks-admin | stocks          | volume       |
+            | stocks-admin | stocks          | last_updated |
 
     @passive
     Scenario: Check all mandatory components on Artifact Preview on Datasets tab

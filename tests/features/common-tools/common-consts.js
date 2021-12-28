@@ -12,6 +12,9 @@ module.exports = {
   Feature_Store: {
     Tab_List: ['Feature Sets', 'Features', 'Feature Vectors', 'Datasets']
   },
+  Models: {
+    Tab_List: ['Models', 'Model Endpoints (Beta)', 'Real-Time Pipelines']
+  },
   Feature_Sets_Info_Pane: {
     Tab_List: [
       'Overview',
@@ -34,7 +37,7 @@ module.exports = {
     ]
   },
   Feature_Vectors_Info_Pane: {
-    Tab_List: ['Overview', 'Requested Features', 'Preview', 'Analysis'],
+    Tab_List: ['Overview', 'Requested Features', 'Analysis'],
     Overview_General_Headers: [
       'Description',
       'Labels',
@@ -150,7 +153,7 @@ module.exports = {
     Input_Field_Require: 'This field is required',
     Input_Field_Invalid: 'This field is invalid',
     URL_Field_Require: 'URL is required',
-    Key_Buckering_Number_Hint:
+    Key_Bucketing_Number_Hint:
       'If you partition by key and the number of unique keys is very high it is recommended to use buckets for ' +
       'better performance. In this case the path would be path/bucket-num/year=/month=/day= etc.. In case the ' +
       'value is 0 then no bucketing will be done and your data will be partitioned by key.',
@@ -219,7 +222,8 @@ module.exports = {
       "setting the project as archive you'll remove scheduled jobs and suspend Nuclio functions.",
     Delete_Project: /You try to delete project "[^"]+[$"]\. Deleted projects can not be restored\./,
     Delete_Function: /You try to delete function "[^"]+[$"]\. Deleted functions cannot be restored\./,
-    Delete_Scheduled_Job: /You try to delete scheduled job "[^"]+[$"]\. Deleted scheduled jobs can not be restored\./
+    Delete_Scheduled_Job: /You try to delete scheduled job "[^"]+[$"]\. Deleted scheduled jobs can not be restored\./,
+    Delete_Feature: /You try to delete feature "[^"]+[$"] from vector "[^"]+[$"]\. The feature could be added back later./
   },
   Jobs_And_Workflows: {
     Tab_List: ['Monitor Jobs', 'Monitor Workflows', 'Schedule'],
@@ -258,5 +262,70 @@ module.exports = {
   },
   Date_Time_Picker: {
     Error_Message: '“To” must be later than “From”'
+  },
+  Error_Messages: {
+    Create_New_Project: /Project name "[^"]+[$"] already exists/
+  },
+  Dropdown_Options: {
+    Tag_Filer_Options: ['sAll', 'latest'],
+    Status_Filter_Options: [
+      'All',
+      'Completed',
+      'Running',
+      'Pending',
+      'Error',
+      'Aborted'
+    ],
+    Group_By_Filter_Options: ['None', 'Name'],
+    Start_Time_Filter_Options: [
+      'Any time',
+      'Past hour',
+      'Past 24 hours',
+      'Past week',
+      'Past month',
+      'Past year',
+      'Custom range'
+    ],
+    Parameters_Table_Type_Options: [
+      'str',
+      'int',
+      'float',
+      'bool',
+      'list',
+      'map'
+    ],
+    Parameter_Table_Simple_Hyper_Options: ['Simple', 'Hyper'],
+    Turning_Strategy_Options: ['List', 'Grid', 'Random'],
+    Criteria_Dropdown_Options: ['Max', 'Min'],
+    Volume_Mount_Options: ['Auto', 'Manual', 'None'],
+    Memory_Unit_Options: [
+      'Bytes',
+      'KB',
+      'KiB',
+      'MB',
+      'MiB',
+      'GB',
+      'GiB',
+      'TB',
+      'TiB',
+      'PB',
+      'PiB',
+      'EB',
+      'EiB'
+    ],
+    CPU_Unit_Options: ['cpu', 'millicpu'],
+    Partition_Granularity_Options: [
+      'Second',
+      'Minute',
+      'Hour',
+      'Day',
+      'Month',
+      'Year'
+    ]
+  },
+  No_Data_Message: {
+    Common_Message: 'No data to show',
+    No_Features_Yet:
+      'No features yet. Go to "Feature Sets" tab to create your first feature set.'
   }
 }

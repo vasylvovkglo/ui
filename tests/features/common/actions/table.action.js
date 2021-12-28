@@ -35,7 +35,7 @@ const action = {
     const arr = await getColumnValues(driver, table, columnName)
     expect(arr.includes(value)).equal(false)
   },
-  isContainsSubstringInColumnCels: async function(
+  isContainsSubstringInColumnCells: async function(
     driver,
     table,
     columnName,
