@@ -16,11 +16,11 @@ import models from './page-objects/models.po'
 
 module.exports = {
   commonPagesHeader: {
-    loader: By.css('div.loader-wrapper div.loader'),
+    loader: By.css('.loader-wrapper .loader'),
     See_On_Github: By.css('header.header a.header__link'),
-    Common_Hint: By.css('div.tip'),
-    MLRun_Logo: By.css('header.header a.header__logo'),
-    No_Data_Message: By.css('div.no-data-block h3'),
+    Common_Hint: By.css('.tip'),
+    MLRun_Logo: By.css('.header .header__logo'),
+    No_Data_Message: By.css('.no-data-block h3'),
     Breadcrumbs: breadcrumbsComponent
   },
   Projects: projects,

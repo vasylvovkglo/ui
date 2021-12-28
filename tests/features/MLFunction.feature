@@ -60,7 +60,6 @@ Feature: ML Functions
         And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "test-m" value in "name" column
-        Then verify if "Common_Popup" popup dialog appears
         Then "Title" element on "Common_Popup" should contains "Delete function?" value
         Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Function"
         Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
@@ -79,7 +78,6 @@ Feature: ML Functions
         When click on cell with row index 1 in "name" column in "Functions_Table" table on "ML_Functions" wizard
         Then verify "Action_Menu" element visibility on "ML_Function_Info_Pane" wizard
         Then select "Delete" option in action menu on "ML_Function_Info_Pane" wizard
-        Then verify if "Common_Popup" popup dialog appears
         Then "Title" element on "Common_Popup" should contains "Delete function?" value
         Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Function"
         Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
@@ -97,7 +95,6 @@ Feature: ML Functions
         And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then click on "New_Function_Button" element on "ML_Functions" wizard
-        Then verify if "Create_ML_Function_Popup" popup dialog appears
         Then "Title" element on "Create_ML_Function_Popup" should contains "Create New Function" value
         And verify "Cross_Cancel_Button" element visibility on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Name_Input" element visibility on "Create_ML_Function_Popup" wizard

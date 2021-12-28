@@ -130,7 +130,6 @@ Feature: MLRun Project Page
         Then verify "Create_New" element visibility on "Project" wizard
         Then verify "Create_New" dropdown element on "Project" wizard should contains "Project"."Create_New_Options"
         Then select "Register File" option in "Create_New" dropdown on "Project" wizard
-        Then verify if "Register_File_Popup" popup dialog appears
         Then "Title" element on "Register_File_Popup" should contains "Register file" value
         Then verify "Cross_Cancel_Button" element visibility on "Register_File_Popup" wizard
         Then verify "New_File_Name_Input" element visibility on "Register_File_Popup" wizard
@@ -159,7 +158,6 @@ Feature: MLRun Project Page
         Then verify "Create_New" element visibility on "Project" wizard
         Then verify "Create_New" dropdown element on "Project" wizard should contains "Project"."Create_New_Options"
         Then select "Register Model" option in "Create_New" dropdown on "Project" wizard
-        Then verify if "Register_Model_Popup" popup dialog appears
         Then "Title" element on "Register_Model_Popup" should contains "Register model" value
         Then verify "Cross_Cancel_Button" element visibility on "Register_Model_Popup" wizard
         Then verify "New_File_Name_Input" element visibility on "Register_Model_Popup" wizard
@@ -186,7 +184,6 @@ Feature: MLRun Project Page
         Then verify "Create_New" element visibility on "Project" wizard
         Then verify "Create_New" dropdown element on "Project" wizard should contains "Project"."Create_New_Options"
         Then select "Register Dataset" option in "Create_New" dropdown on "Project" wizard
-        Then verify if "Register_Dataset" popup dialog appears
         Then "Title" element on "Register_Dataset" should contains "Register dataset" value
         Then verify "Name_Input" element visibility on "Register_Dataset" wizard
         Then verify "Name_Input" on "Register_Dataset" wizard should display "Input_Hint"."Artifact_Names_Unique"
@@ -253,7 +250,6 @@ Feature: MLRun Project Page
         Then verify "Create_New" element visibility on "Project" wizard
         Then verify "Create_New" dropdown element on "Project" wizard should contains "Project"."Create_New_Options"
         Then select "ML Function" option in "Create_New" dropdown on "Project" wizard
-        Then verify if "Create_ML_Function_Popup" popup dialog appears
         Then "Title" element on "Create_ML_Function_Popup" should contains "Create New Function" value
         And verify "Cross_Cancel_Button" element visibility on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Name_Input" element visibility on "Create_ML_Function_Popup" wizard
@@ -308,7 +304,6 @@ Feature: MLRun Project Page
         Then verify "Create_New" element visibility on "Project" wizard
         Then verify "Create_New" dropdown element on "Project" wizard should contains "Project"."Create_New_Options"
         Then select "ML Function" option in "Create_New" dropdown on "Project" wizard
-        Then verify if "Create_ML_Function_Popup" popup dialog appears
         Then "Title" element on "Create_ML_Function_Popup" should contains "Create New Function" value
         And verify "Cross_Cancel_Button" element visibility on "Create_ML_Function_Popup" wizard
         Then verify "New_Function_Name_Input" element visibility on "Create_ML_Function_Popup" wizard

@@ -32,11 +32,11 @@ module.exports = {
     }
     if (hint) {
       structure.elements.hint =
-        typeof hint === 'string' ? hint : 'div.tip-container svg'
+        typeof hint === 'string' ? hint : '.tip-container svg'
     }
     if (warning) {
-      structure.elements.warningHint = 'div.input__warning svg'
-      structure.elements.warningText = 'div.tooltip div.tooltip__text'
+      structure.elements.warningHint = '.input__warning svg'
+      structure.elements.warningText = '.tooltip .tooltip__text'
     }
 
     return structure
@@ -62,11 +62,11 @@ module.exports = {
 
     if (hint) {
       structure.elements.hint =
-        typeof hint === 'string' ? hint : 'div.tip-container svg'
+        typeof hint === 'string' ? hint : '.tip-container svg'
     }
     if (warning) {
       structure.elements.warningHint = '.range__warning svg'
-      structure.elements.warningText = 'div.tooltip div.tooltip__text'
+      structure.elements.warningText = '.tooltip .tooltip__text'
     }
 
     return structure
@@ -84,7 +84,7 @@ module.exports = {
 
     if (hintButton) {
       structure.elements.hintButton =
-        typeof hintButton === 'string' ? hintButton : 'div.tip-container svg'
+        typeof hintButton === 'string' ? hintButton : '.tip-container svg'
     }
 
     if (hint) {

@@ -12,20 +12,20 @@ import actionMenu from '../components/action-menu.component'
 import labelComponent from '../components/label.component'
 
 const actionMenuStructure = {
-  root: 'div.actions-menu__container',
+  root: '.actions-menu__container',
   menuElements: {
     open_button: 'button',
-    options: 'div.actions-menu__body div.actions-menu__option'
+    options: '.actions-menu__body .actions-menu__option'
   }
 }
 
 const tabSelector = {
-  root: 'div.content_with-menu div.content-menu',
+  root: '.content_with-menu .content-menu',
   header: {},
   body: {
-    root: 'ul.content-menu__list',
+    root: '.content-menu__list',
     row: {
-      root: 'li.content-menu__item',
+      root: '.content-menu__item',
       fields: {
         tab: 'a'
       }
@@ -52,8 +52,8 @@ const modelsTable = {
     row: {
       root: '.table-body__row',
       fields: {
-        expand_btn: 'div.table-body__cell:nth-of-type(1) svg.expand-arrow',
-        name: '.table-body__cell:nth-of-type(1) a .name-wrapper span.link',
+        expand_btn: '.table-body__cell:nth-of-type(1) svg.expand-arrow',
+        name: '.table-body__cell:nth-of-type(1) a .name-wrapper .link',
         labels: {
           componentType: dropdownComponent,
           structure: generateDropdownGroup(
@@ -84,30 +84,30 @@ const modelsTable = {
 }
 
 const realTimePipelinesTable = {
-  root: 'div.table div.table__content',
+  root: '.table .table__content',
   header: {
-    root: 'div.table-head',
+    root: '.table-head',
     sorters: {
-      name: 'div.table-head__item:nth-of-type(1) div.data-ellipsis',
-      type: 'div.table-head__item:nth-of-type(2) div.data-ellipsis'
+      name: '.table-head__item:nth-of-type(1) .data-ellipsis',
+      type: '.table-head__item:nth-of-type(2) .data-ellipsis'
     }
   },
   body: {
-    root: 'div.table-body',
+    root: '.table-body',
     row: {
-      root: 'div.table-body__row',
+      root: '.table-body__row',
       fields: {
         status: {
           componentType: labelComponent,
           structure: generateLabelGroup(
-            'div.table-body__cell:nth-of-type(1) .status',
+            '.table-body__cell:nth-of-type(1) .status',
             'i',
             true,
             '.tooltip .tooltip__text span'
           )
         },
-        name: 'div.table-body__cell:nth-of-type(1) a span.link',
-        type: 'div.table-body__cell:nth-of-type(2) div.data-ellipsis',
+        name: '.table-body__cell:nth-of-type(1) a .link',
+        type: '.table-body__cell:nth-of-type(2) .data-ellipsis',
         action_menu: {
           componentType: actionMenu,
           structure: actionMenuStructure

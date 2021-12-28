@@ -927,7 +927,6 @@ Feature: Feature Store Page
         And select "Feature Vectors" tab in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         And wait load page
         Then click on "Create_Vector_Button" element on "Feature_Store_Features_Vectors_Tab" wizard
-        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
         Then "Title" element on "Create_Feature_Vector_Popup" should contains "Create feature vector" value
         Then verify "Cross_Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Name_Input" element visibility on "Create_Feature_Vector_Popup" wizard
@@ -957,7 +956,6 @@ Feature: Feature Store Page
         Then click on "Create_Button" element on "Create_Feature_Vector_Popup" wizard
         And wait load page
         Then click on "Edit_Feature_Vector_Button" element on "Add_To_Feature_Vector_Tab" wizard
-        Then verify if "Create_Feature_Vector_Popup" popup dialog appears
         Then "Title" element on "Create_Feature_Vector_Popup" should contains "Edit feature vector" value
         Then verify "Cross_Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Name_Input" element visibility on "Create_Feature_Vector_Popup" wizard

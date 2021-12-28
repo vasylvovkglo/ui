@@ -57,10 +57,10 @@ const inviteNewMemberLabelTable = {
   root: '#overlay_container .pop-up-dialog .invite-new-members',
   header: {},
   body: {
-    root: 'div.chips-input-container',
+    root: '.chips-input-container',
     add_row_btn: '.new-member-btn .btn-secondary',
     row: {
-      root: 'div.chip',
+      root: '.chip',
       fields: {
         label: '.chip__label',
         remove_btn: '.item-icon-close'
@@ -115,17 +115,15 @@ const artifactsPreviewHeader = {
 // Common components
 
 const commonCancelButton = By.css(
-  'div.pop-up-dialog button.pop-up-dialog__btn_cancel'
+  '.pop-up-dialog button.pop-up-dialog__btn_cancel'
 )
 
-const commonDeleteButton = By.css('div.pop-up-dialog button.btn-danger')
+const commonDeleteButton = By.css('.pop-up-dialog .btn-danger')
 
-const commonDescription = By.css(
-  'div.pop-up-dialog div.confirm-dialog__message'
-)
+const commonDescription = By.css('.pop-up-dialog .confirm-dialog__message')
 
 const commonCrossCancelButton = By.css(
-  'div.pop-up-dialog div.pop-up-dialog__btn_close svg'
+  '.pop-up-dialog .pop-up-dialog__btn_close svg'
 )
 const commonNameInput = generateInputGroup(
   '.pop-up-dialog .artifact-register-form .input-wrapper:nth-of-type(2)',
@@ -150,14 +148,14 @@ const commonDescriptionInput = generateInputGroup(
 
 const commonConfirmButton = By.css('.pop-up-dialog .btn.btn-primary')
 
-const commonTitle = By.css('div.pop-up-dialog div.pop-up-dialog__header-text')
+const commonTitle = By.css('.pop-up-dialog .pop-up-dialog__header-text')
 
 module.exports = {
   createNewProject: {
     Title: commonTitle,
     Name_Input: inputGroup(
       generateInputGroup(
-        'div.pop-up-dialog div.input-wrapper:nth-of-type(1)',
+        '.pop-up-dialog .input-wrapper:nth-of-type(1)',
         true,
         true,
         true
@@ -165,7 +163,7 @@ module.exports = {
     ),
     Description_Input: inputGroup(
       generateInputGroup(
-        'div.pop-up-dialog div.input-wrapper:nth-of-type(2)',
+        '.pop-up-dialog .input-wrapper:nth-of-type(2)',
         true,
         false,
         true
@@ -173,8 +171,8 @@ module.exports = {
     ),
     Cross_Cancel_Button: commonCrossCancelButton,
     Cancel_Button: commonCancelButton,
-    Create_Button: By.css('div.pop-up-dialog button.btn-secondary'),
-    Error_Message: By.css('div.pop-up-dialog div.error-message')
+    Create_Button: By.css('.pop-up-dialog .btn-secondary'),
+    Error_Message: By.css('.pop-up-dialog .error-message')
   },
   commonPopup: {
     Title: commonTitle,
@@ -289,7 +287,7 @@ module.exports = {
       Key_Value_Table: commonTable(deployModelTable),
       Class_Argument_Name_Input: inputGroup(
         generateInputGroup(
-          'div.deploy-model div.key-value-table div.input-wrapper:nth-of-type(1)',
+          '.deploy-model .key-value-table .input-wrapper:nth-of-type(1)',
           true,
           false,
           true
@@ -297,28 +295,26 @@ module.exports = {
       ),
       Class_Argument_Value_Input: inputGroup(
         generateInputGroup(
-          'div.deploy-model div.key-value-table div.input-wrapper:nth-of-type(2)',
+          '.deploy-model .key-value-table .input-wrapper:nth-of-type(2)',
           true,
           false,
           true
         )
       ),
       Add_New_Row_Button: By.css(
-        'div.deploy-model div.key-value-table div.table-cell__actions button.btn-add'
+        '.deploy-model .key-value-table .table-cell__actions .btn-add'
       ),
       Delete_New_Row_Button: By.css(
-        'div.deploy-model div.key-value-table div.table-cell__actions button:nth-of-type(2)'
+        '.deploy-model .key-value-table .table-cell__actions button:nth-of-type(2)'
       )
     },
     Cancel_Button: commonCancelButton,
     Deploy_Button: commonConfirmButton
   },
   viewYamlPopup: {
-    Title: By.css('div.pop-up-dialog div.pop-up-dialog__header'),
+    Title: By.css('.pop-up-dialog .pop-up-dialog__header'),
     Cross_Cancel_Button: commonCrossCancelButton,
-    YAML_Modal_Container: By.css(
-      'div.pop-up-dialog div.yaml-modal-container pre'
-    )
+    YAML_Modal_Container: By.css('.pop-up-dialog .yaml-modal-container pre')
   },
   changeProjectOwnerPopup: {
     Cross_Cancel_Button: commonCrossCancelButton,
@@ -356,8 +352,8 @@ module.exports = {
       root: '#overlay_container .pop-up-dialog .invite-new-members',
       elements: {
         input: 'input',
-        options: 'div.suggestion-list .suggestion-row',
-        option_name: 'div.suggestion-row-label'
+        options: '.suggestion-list .suggestion-row',
+        option_name: '.suggestion-row-label'
       }
     }),
     New_Member_Name_Dropdown: dropdownComponent(
@@ -432,7 +428,7 @@ module.exports = {
         true
       )
     ),
-    Cancel_Button: By.css('div.pop-up-dialog button.btn-label'),
+    Cancel_Button: By.css('.pop-up-dialog .btn-label'),
     Save_Button: By.css(
       '.pop-up-dialog .secrets__footer-container .btn.btn-primary'
     )
@@ -510,10 +506,10 @@ module.exports = {
   },
   discardChangesPopup: {
     Title: By.css(
-      'div.pop-up-dialog__overlay:nth-of-type(2) div.pop-up-dialog__header-text'
+      '.pop-up-dialog__overlay:nth-of-type(2) .pop-up-dialog__header-text'
     ),
     No_Button: By.css(
-      'div.pop-up-dialog__overlay:nth-of-type(2) button.pop-up-dialog__btn_cancel'
+      '.pop-up-dialog__overlay:nth-of-type(2) .pop-up-dialog__btn_cancel'
     ),
     Discard_Button: commonConfirmButton
   }

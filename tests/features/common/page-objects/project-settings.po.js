@@ -7,7 +7,7 @@ const tabSelector = {
   root: '.content-menu',
   header: {},
   body: {
-    root: 'ul.content-menu__list',
+    root: '.content-menu__list',
     row: {
       root: '.content-menu__item',
       fields: {

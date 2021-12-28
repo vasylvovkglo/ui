@@ -58,7 +58,6 @@ Feature: MLRun Projects Page
         And wait load page
         Then select "Archive" option in action menu on "Projects" wizard in "Projects_Table" table at row with "cat-vs-dog-classification" value in "name" column
         Then verify if "Common_Popup" popup dialog appears
-        Then "Title" element on "Common_Popup" should contains "Archive project" value
         Then "Description" component on "Common_Popup" should contains "Descriptions"."Archive_Project"
         Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
         Then "Cancel_Button" element on "Common_Popup" should contains "Cancel" value
