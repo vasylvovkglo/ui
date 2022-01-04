@@ -1,9 +1,6 @@
 import { timeout } from '../../../config'
 import { until } from 'selenium-webdriver'
 import { expect } from 'chai'
-import { mainHttpClient } from '../../../../src/httpClient'
-
-const REACT_APP_MLRUN_API_URL = 'http://localhost:3000'
 
 async function scrollToWebElement(driver, element) {
   await driver.executeScript('arguments[0].scrollIntoView()', element)
@@ -136,84 +133,6 @@ const action = {
     const attributes = await element.getAttribute('class')
     const flag = attributes.includes('open')
     expect(flag).equal(false)
-  },
-  deleteAPIMLProject: async function(mlProjectName, expectedStatusCode) {
-    await mainHttpClient
-      .delete(`${REACT_APP_MLRUN_API_URL}/api/projects/${mlProjectName}`)
-      .then(res => {
-        expect(res.status).equal(expectedStatusCode)
-      })
-  },
-  deleteAPIFeatureSet: async function(
-    projectName,
-    featureSetName,
-    expectedStatusCode
-  ) {
-    await mainHttpClient
-      .delete(
-        `${REACT_APP_MLRUN_API_URL}/api/projects/${projectName}/feature-sets/${featureSetName}`
-      )
-      .then(res => {
-        expect(res.status).equal(expectedStatusCode)
-      })
-  },
-  deleteAPIFeatureVector: async function(
-    projectName,
-    featureVectorName,
-    expectedStatusCode
-  ) {
-    await mainHttpClient
-      .delete(
-        `http://localhost:3000/api/projects/${projectName}/feature-vectors/${featureVectorName}`
-      )
-      .then(res => {
-        expect(res.status).equal(expectedStatusCode)
-      })
-  },
-  deleteAPIFunction: async function(
-    projectName,
-    functionName,
-    expectedStatusCode
-  ) {
-    await mainHttpClient
-      .delete(
-        `${REACT_APP_MLRUN_API_URL}/api/projects/${projectName}/functions/${functionName}`
-      )
-      .then(res => {
-        expect(res.status).equal(expectedStatusCode)
-      })
-  },
-  deleteAPIJob: async function(projectName, jobName, expectedStatusCode) {
-    await mainHttpClient
-      .delete(
-        `${REACT_APP_MLRUN_API_URL}/api/runs?project=${projectName}&run=${jobName}`
-      )
-      .then(res => {
-        expect(res.status).equal(expectedStatusCode)
-      })
-  },
-  createAPIMLProject: async function(mlProjectName, expectedStatusCode) {
-    const project_data = {
-      metadata: {
-        name: mlProjectName
-      },
-      spec: {
-        description: 'automation test description'
-      }
-    }
-
-    await mainHttpClient
-      .post(`${REACT_APP_MLRUN_API_URL}/api/projects`, project_data)
-      .then(res => {
-        expect(res.status).equal(expectedStatusCode)
-      })
-  },
-  getProjects: () => {
-    return mainHttpClient
-      .get(`${REACT_APP_MLRUN_API_URL}/api/projects`)
-      .then(res => {
-        return res.data.projects
-      })
   },
   getElementText: async function(driver, component) {
     const element = await driver.findElement(component)

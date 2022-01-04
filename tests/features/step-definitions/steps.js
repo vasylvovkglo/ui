@@ -11,9 +11,6 @@ import {
   verifyText,
   verifyTextRegExp,
   waitPageLoad,
-  deleteAPIMLProject,
-  createAPIMLProject,
-  getProjects,
   isComponentContainsAttributeValue,
   collapseAccordionSection,
   expandAccordionSection,
@@ -296,6 +293,21 @@ Then(
     await verifyTextRegExp(
       this.driver,
       pageObjects[wizard][component],
+      pageObjectsConsts[constStorage][constValue]
+    )
+  }
+)
+
+Then(
+  '{string} component in {string} on {string} should contains {string}.{string}',
+  async function(component, accordion, wizard, constStorage, constValue) {
+    await waiteUntilComponent(
+      this.driver,
+      pageObjects[wizard][accordion][component]
+    )
+    await verifyText(
+      this.driver,
+      pageObjects[wizard][accordion][component],
       pageObjectsConsts[constStorage][constValue]
     )
   }
@@ -769,21 +781,6 @@ When(
   }
 )
 
-Then('remove {string} MLRun Project with code {int}', async function(
-  nameProject,
-  status
-) {
-  await deleteAPIMLProject(nameProject, status)
-})
-
-When('create {string} MLRun Project with code {int}', async function(
-  nameProject,
-  status
-) {
-  await createAPIMLProject(nameProject, status)
-  await this.driver.sleep(2000)
-})
-
 Then('select {string} option in action menu on {string} wizard', async function(
   option,
   wizard
@@ -805,20 +802,6 @@ Then('verify {string} according hint rules on {string} wizard', async function(
     pageObjects['commonPagesHeader']['Common_Hint']
   )
 })
-
-Then(
-  'set tear-down property {string} created with {string} value',
-  async function(type, name) {
-    this.createdItems.push({ name, type })
-  }
-)
-
-Then(
-  'set tear-down property {string} created in {string} project with {string} value',
-  async function(type, project, name) {
-    this.createdItems.push({ project, name, type })
-  }
-)
 
 Then(
   'verify breadcrumbs {string} label should be equal {string} value',
@@ -845,15 +828,4 @@ Then('select {string} with {string} value in breadcrumbs menu', async function(
     pageObjects['commonPagesHeader']['Breadcrumbs'][itemType],
     name
   )
-})
-
-Then('create up to limit projects with code {int}', async function(status) {
-  const projects = await getProjects()
-  const projectsLimit = 50
-
-  for (let i = 0; i <= projectsLimit - projects.length; i++) {
-    const name = `automation-test-name${i}`
-    await createAPIMLProject(name, status)
-    this.createdItems.push({ name, type: 'project' })
-  }
 })
