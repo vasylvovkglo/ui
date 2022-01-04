@@ -529,41 +529,28 @@ function getProjectsFeaturesEntities(req, res) {
 
     if (req.query['label']) {
       let [key, value] = req.query['label'].split('=')
-      collectedArtifacts = collectedArtifacts.filter(feature => {
-        if (artifact === 'feature-vectors') {
-          if (feature.metadata.labels) {
-            return feature.metadata.labels[key]
-          }
-        }
-      })
-      if (artifact === 'feature-vectors') {
-        if (req.query['label'].includes('=')) {
-          collectedArtifacts = collectedArtifacts.filter(feature => {
-            if (feature.metadata.labels) {
-              return feature.metadata.labels[key] === value
-            }
-          })
-        }
-      }
-    }
-
-    if (req.query['label']) {
-      let [key, value] = req.query['label'].split('=')
 
       collectedArtifacts = collectedArtifacts.filter(item => {
-        return item.feature?.labels ? item.feature.labels[key] : item.entity?.labels ? item.entity.labels[key] : false
+        if (artifact === 'feature-vectors' && item.metadata.labels) {
+          return item.metadata.labels[key]
+        } else if (item.feature?.labels) {
+          return item.feature.labels[key]
+        } else if (item.entity?.labels) {
+          return item.entity.labels[key]
+        }
       })
 
       if (req.query['label'].includes('=')) {
-        collectedArtifacts = collectedArtifacts.filter(
-            item => {
-              if (artifact === 'features') {
-                return item.feature.labels[key] === value
-              } else if (artifact === 'entities') {
-                return item.entity.labels[key] === value
-              }
-            }
-        )
+        collectedArtifacts = collectedArtifacts.filter(item => {
+          if (artifact === 'feature-vectors' && item.metadata.labels) {
+            return item.metadata.labels[key] === value
+          }
+          if (artifact === 'features') {
+            return item.feature.labels[key] === value
+          } else if (artifact === 'entities') {
+            return item.entity.labels[key] === value
+          }
+        })
       }
     }
   }
