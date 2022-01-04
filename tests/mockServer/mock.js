@@ -546,6 +546,26 @@ function getProjectsFeaturesEntities(req, res) {
         }
       }
     }
+
+    if (req.query['label']) {
+      let [key, value] = req.query['label'].split('=')
+
+      collectedArtifacts = collectedArtifacts.filter(item => {
+        return item.feature?.labels ? item.feature.labels[key] : item.entity?.labels ? item.entity.labels[key] : false
+      })
+
+      if (req.query['label'].includes('=')) {
+        collectedArtifacts = collectedArtifacts.filter(
+            item => {
+              if (artifact === 'features') {
+                return item.feature.labels[key] === value
+              } else if (artifact === 'entities') {
+                return item.entity.labels[key] === value
+              }
+            }
+        )
+      }
+    }
   }
 
   let result = {}
