@@ -341,6 +341,26 @@ Feature: Jobs and workflows
         Then verify "Delete_Button" element visibility on "Common_Popup" wizard
         Then "Delete_Button" element on "Common_Popup" should contains "Delete" value
 
+    Scenario: Delete Scheduled Job
+        * create "automation-test-name01" MLRun Project with code 201
+        * create "new-aqa-schedule-01" Schedule in "automation-test-name01" project with code 200
+        And set tear-down property "schedule" created in "automation-test-name01" project with "new-aqa-schedule-01" value
+        And set tear-down property "project" created with "automation-test-name01" value
+        Given open url
+        And wait load page
+        And click on cell with value "automation-test-name01" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "Jobs and workflows" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        And select "Schedule" tab in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        And wait load page
+        Then verify "Schedule" tab is active in "Jobs_Tab_Selector" on "Jobs_Monitor_Tab" wizard
+        Then select "Delete" option in action menu on "Schedule_Monitor_Tab" wizard in "Schedule_Monitor_Table" table at row with "new-aqa-schedule-01" value in "name" column
+        Then verify if "Common_Popup" popup dialog appears
+        Then click on "Delete_Button" element on "Common_Popup" wizard
+        And wait load page
+        Then check "new-aqa-schedule-01" value not in "name" column in "Schedule_Monitor_Table" table on "Schedule_Monitor_Tab" wizard
+
     @passive
     Scenario: verify mandatory elements on Create New Jobs side panel except accordions
         Given open url

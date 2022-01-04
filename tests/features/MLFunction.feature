@@ -468,12 +468,25 @@ Feature: ML Functions
         When collapse "General_Accordion" on "New_Function" wizard
         When collapse "Resources_Accordion" on "New_Function" wizard
         Then click on "Save_Button" element on "New_Function" wizard
+        And set tear-down property "function" created in "default" project with "new-aqa-function-00" value
         Then click on "Cross_Close_Button" element on "ML_Function_Info_Pane" wizard
-        Then verify values in "Functions_Table" table on "ML_Functions" wizard
-            |         name        |
-            | new-aqa-function-00 |
-        And select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "new-aqa-function-00" value in "name" column
+        Then check "new-aqa-function-00" value in "name" column in "Functions_Table" table on "ML_Functions" wizard
+
+    Scenario: Delete ml-function
+        * create "automation-test-name01" MLRun Project with code 200
+        And set tear-down property "project" created with "automation-test-name01" value
+        * create "new-aqa-function-01" Function in "automation-test-name01" project with code 200
+        And set tear-down property "function" created in "automation-test-name01" project with "new-aqa-function-01" value
+        Given open url
+        And wait load page
+        And click on cell with value "automation-test-name01" in "name" column in "Projects_Table" table on "Projects" wizard
+        And wait load page
+        And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+        And wait load page
+        Then check "new-aqa-function-01" value in "name" column in "Functions_Table" table on "ML_Functions" wizard
+        And select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "new-aqa-function-01" value in "name" column
         And click on "Delete_Button" element on "Common_Popup" wizard
+        Then check "new-aqa-function-01" value not in "name" column in "Functions_Table" table on "ML_Functions" wizard
 
     @passive
     @demo

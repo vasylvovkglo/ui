@@ -112,6 +112,24 @@ const artifactsPreviewHeader = {
   }
 }
 
+const createFeatureVectorLabelsTable = {
+  root: '.new-feature-vector__labels-row .chips-cell',
+  header: {},
+  body: {
+    root: '.chips-wrapper',
+    add_row_btn: '.button-add',
+    row: {
+      root: '.chip-block',
+      fields: {
+        key_input: 'input.input-label-key',
+        value_input: 'input.input-label-value',
+        label: '.chip',
+        remove_btn: '.item-icon-close'
+      }
+    }
+  }
+}
+
 // Common components
 
 const commonCancelButton = By.css(
@@ -471,7 +489,7 @@ module.exports = {
       )
     ),
     Description_Input: By.css('.pop-up-dialog .text-area-wrapper textarea'),
-    Labels_Input: By.css('.pop-up-dialog .labels-container .chips-wrapper'),
+    Labels_Table: commonTable(createFeatureVectorLabelsTable),
     Cancel_Button: commonCancelButton,
     Create_Button: commonConfirmButton
   },

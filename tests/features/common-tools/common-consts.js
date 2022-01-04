@@ -195,6 +195,15 @@ module.exports = {
     V3IO_Path_Hint: 'Field must be in "container-name/file" format',
     S3_Path_Hint: 'Field must be in "bucket/path" format',
     Azure_Storage_Path_Hint: 'Field must be in "container/path" format',
+    Timestamp_Column: 'The field name for filtering the source data.',
+    Start_Time_Input: 'Filter data by start date >= value',
+    End_Time_Input: 'Filter data by start date <= value',
+    Target_Store_Online: 'Store the feature set in Iguazio NoSQL database',
+    Target_Store_Offline:
+      'Store the feature set as a Parquet file in Iguazio object store',
+    Target_Store_External_Offline:
+      'Store the feature set in a remote object store (e.g. AWS S3 or Azure storage)',
+    Distinct_Keys: 'The partition is based on key.',
     SECRET_INPUT_HINT:
       '• Valid characters: A-Z, a-z, 0-9, -, _, .\n' +
       '• Must begin and end with: A-Z, a-z, 0-9\n' +
@@ -264,7 +273,10 @@ module.exports = {
     Error_Message: '“To” must be later than “From”'
   },
   Error_Messages: {
-    Create_New_Project: /Project name "[^"]+[$"] already exists/
+    Project_Already_Exists: /Project name "[^"]+[$"] already exists/,
+    Projects_Limit_Reached:
+      'Resource limit reached. Cannot create more records',
+    Must_Select_One: 'Must select at least one'
   },
   Dropdown_Options: {
     Tag_Filer_Options: ['sAll', 'latest'],

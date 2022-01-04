@@ -434,11 +434,14 @@ Feature: Feature Store Page
         Then verify "Labels_Table" element visibility on "New_Feature_Set" wizard
         When select "PARQUET" option in "Kind_Dropdown" dropdown on "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify "Schedule_Button" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Parquet_Timestamp_Column_Input" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Parquet_Timestamp_Column_Input" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Timestamp_Column"
+        Then verify "Start_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "Start_Date_Time_Hint" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Start_Time_Input"
+        Then verify "End_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
+        Then verify "End_Date_Time_Hint" element in "Data_Source_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."End_Time_Input"
         Then click on "Schedule_Button" element in "Data_Source_Accordion" on "New_Feature_Set" wizard
         Then verify if "Feature_Set_Schedule_Popup" popup dialog appears
-        Then verify "Parquet_Timestamp_Column_Input" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
-        Then verify "Start_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
-        Then verify "End_Date_Time_Picker" element visibility in "Data_Source_Accordion" on "New_Feature_Set" wizard
 
     @passive
         Scenario: Verify behaviour of Combobox element on Feature Store Feature Set new item wizard on Data Source Accordion
@@ -629,9 +632,16 @@ Feature: Feature Store Page
         When collapse "Data_Source_Accordion" on "New_Feature_Set" wizard
         When collapse "Schema_Accordion" on "New_Feature_Set" wizard
         Then "Online_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
-        Then "Online_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then "Offline_Checkbox" element should be checked in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then "Offline_Partition_Checkbox" element should be unchecked in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then verify "Online_Checkbox_Hint" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Target_Store_Online"
+        Then verify "Offline_Checkbox_Hint" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Target_Store_Offline"
+        Then verify "External_Offline_Checkbox_Hint" element in "Target_Store_Accordion" on "New_Feature_Set" wizard should display hint "Input_Hint"."Target_Store_External_Offline"
+        Then uncheck "External_Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then uncheck "Online_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then uncheck "Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
+        Then "Error_Message" component in "Target_Store_Accordion" on "New_Feature_Set" should contains "Error_Messages"."Must_Select_One"
+        Then check "Offline_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When check "Offline_Partition_Checkbox" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
         Then verify "Offline_Partition_ShowHide_Link" element visibility in "Target_Store_Accordion" on "New_Feature_Set" wizard
         When click on "Offline_Partition_ShowHide_Link" element in "Target_Store_Accordion" on "New_Feature_Set" wizard
@@ -933,7 +943,30 @@ Feature: Feature Store Page
         Then verify "Name_Input" according hint rules on "Create_Feature_Vector_Popup" wizard
         Then verify "Tag_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
-        Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Labels_Table" element visibility on "Create_Feature_Vector_Popup" wizard
+        When add rows to "Labels_Table" table on "Create_Feature_Vector_Popup" wizard
+            | key_input | value_input |
+            |    key1   |    value1   |
+            |    key2   |    value2   |
+            |    key3   |    value3   |
+            |    key4   |    value4   |
+            |    key5   |    value5   |
+        Then verify values in "Labels_Table" table on "Create_Feature_Vector_Popup" wizard
+            |       label     |
+            | key1\n:\nvalue1 |
+            | key2\n:\nvalue2 |
+            | key3\n:\nvalue3 |
+            | key4\n:\nvalue4 |
+            | key5\n:\nvalue5 |
+        When click on "remove_btn" in "Labels_Table" table on "Create_Feature_Vector_Popup" wizard
+            |       label     |
+            | key1\n:\nvalue1 |
+            | key3\n:\nvalue3 |
+        Then verify values in "Labels_Table" table on "Create_Feature_Vector_Popup" wizard
+            |       label     |
+            | key2\n:\nvalue2 |
+            | key4\n:\nvalue4 |
+            | key5\n:\nvalue5 |
         Then verify "Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
         Then "Cancel_Button" element on "Create_Feature_Vector_Popup" should contains "Cancel" value
         Then verify "Create_Button" element visibility on "Create_Feature_Vector_Popup" wizard
@@ -962,7 +995,7 @@ Feature: Feature Store Page
         Then verify "Name_Input" according hint rules on "Create_Feature_Vector_Popup" wizard
         Then verify "Tag_Input" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Description_Input" element visibility on "Create_Feature_Vector_Popup" wizard
-        Then verify "Labels_Input" element visibility on "Create_Feature_Vector_Popup" wizard
+        Then verify "Labels_Table" element visibility on "Create_Feature_Vector_Popup" wizard
         Then verify "Cancel_Button" element visibility on "Create_Feature_Vector_Popup" wizard
         Then "Cancel_Button" element on "Create_Feature_Vector_Popup" should contains "Cancel" value
         Then verify "Create_Button" element visibility on "Create_Feature_Vector_Popup" wizard
