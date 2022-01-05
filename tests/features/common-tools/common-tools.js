@@ -1,11 +1,12 @@
 import { generateRegEx, getLength, getNotToBe, getRule } from './utils'
 import {
-  deleteAPIMLProject,
-  deleteAPIFunction,
+  deleteAPIArtifact,
   deleteAPIFeatureSet,
   deleteAPIFeatureVector,
-  deleteAPIJob
-} from '../common/actions/common.action'
+  deleteAPIFunction,
+  deleteAPIMLProject,
+  deleteAPISchedule
+} from '../common/actions/api.actions'
 
 module.exports = {
   locatorBuilder: function(strings, ...keys) {
@@ -149,19 +150,21 @@ module.exports = {
       notConsecutiveCharacters
     )
   },
-  clearBackendAfterTest: function(items) {
+  clearBackendAfterTest: function(driver, items) {
     items.forEach(item => {
       switch (item.type) {
         case 'project':
-          return deleteAPIMLProject(item.name, 204)
+          return deleteAPIMLProject(driver, item.name, 204)
         case 'featureSet':
           return deleteAPIFeatureSet(item.project, item.name, 204)
         case 'featureVector':
           return deleteAPIFeatureVector(item.project, item.name, 204)
         case 'function':
           return deleteAPIFunction(item.project, item.name, 204)
-        case 'job':
-          return deleteAPIJob(item.project, item.name, 204)
+        case 'schedule':
+          return deleteAPISchedule(item.project, item.name, 204)
+        case 'artifact':
+          return deleteAPIArtifact(item.project, item.name, 204)
         default:
           return null
       }

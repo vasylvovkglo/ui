@@ -762,7 +762,21 @@ module.exports = {
         )
       ),
       Start_Date_Time_Picker: singleDatepicker(startDateTimePickerCalendar),
+      Start_Date_Time_Hint: labelComponent(
+        generateLabelGroup(
+          '.feature-set-panel .accordion__container:nth-of-type(1) .panel-section__body .data-source__inputs-container .date-picker-container:nth-of-type(2)',
+          false,
+          true
+        )
+      ),
       End_Date_Time_Picker: singleDatepicker(endDateTimePickerCalendar),
+      End_Date_Time_Hint: labelComponent(
+        generateLabelGroup(
+          '.feature-set-panel .accordion__container:nth-of-type(1) .panel-section__body .data-source__inputs-container .date-picker-container:nth-of-type(3)',
+          false,
+          true
+        )
+      ),
       Schedule_Button: By.css(
         '.feature-set-panel .accordion__container:nth-of-type(1)  button.schedule-tumbler'
       )
@@ -807,6 +821,13 @@ module.exports = {
           true
         )
       ),
+      Online_Checkbox_Hint: labelComponent(
+        generateLabelGroup(
+          '.feature-set-panel .accordion__container:nth-of-type(3) .accordion__body .target-store__item:nth-of-type(1) .checkbox',
+          false,
+          true
+        )
+      ),
       Online_Path_Input: inputGroup(
         generateInputGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .panel-section__body .target-store__item:nth-of-type(1) .input-wrapper',
@@ -820,6 +841,13 @@ module.exports = {
         generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .accordion__body .target-store__item:nth-of-type(2) .checkbox',
           true,
+          false,
+          true
+        )
+      ),
+      Offline_Checkbox_Hint: labelComponent(
+        generateLabelGroup(
+          '.feature-set-panel .accordion__container:nth-of-type(3) .accordion__body .target-store__item:nth-of-type(2) .checkbox',
           false,
           true
         )
@@ -917,6 +945,13 @@ module.exports = {
         generateCheckboxGroup(
           '.feature-set-panel .accordion__container:nth-of-type(3) .accordion__body .target-store__item:nth-of-type(3) .checkbox',
           true,
+          false,
+          true
+        )
+      ),
+      External_Offline_Checkbox_Hint: labelComponent(
+        generateLabelGroup(
+          '.feature-set-panel .accordion__container:nth-of-type(3) .accordion__body .target-store__item:nth-of-type(3) .checkbox',
           false,
           true
         )
@@ -1020,6 +1055,9 @@ module.exports = {
           '.select__body .select__item',
           '.data-ellipsis > .data-ellipsis'
         )
+      ),
+      Error_Message: By.css(
+        '.feature-set-panel .accordion__container:nth-of-type(3) .error-message'
       )
     },
     Access_Key_Checkbox: commonAccessKeyCheckbox,

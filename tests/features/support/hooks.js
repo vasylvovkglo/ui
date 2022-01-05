@@ -26,7 +26,7 @@ After(async function(testCase) {
         logs = result
       })
   }
-  await clearBackendAfterTest(this.createdItems)
+  await clearBackendAfterTest(this.driver, this.createdItems)
   await this.driver.quit()
   if (logs.some(log => log.level.name_ === 'SEVERE')) {
     await logs.forEach(log =>
