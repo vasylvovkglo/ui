@@ -7,6 +7,8 @@ import {
 } from './dropdown.action'
 import { hoverComponent, getElementText } from './common.action'
 
+import { DataFrame } from 'pandas-js'
+
 async function getColumnValues(driver, table, columnName) {
   return await driver
     .findElements(table.tableColumns[columnName])
@@ -209,6 +211,51 @@ const action = {
       )
     }
     return result
+  },
+  getRowsGeometry: async function(driver, table) {
+    const rowsNumber = await getTableRows(driver, table)
+    let result = []
+    for (let i = 1; i <= rowsNumber; i++) {
+      let rowRoot = await driver.findElement(table.rowRoot(i))
+      let position = await rowRoot.getRect()
+      result.push(position)
+    }
+    return result
+  },
+  getFieldsGeometry: async function(driver, table, column, attribute) {
+    const rowsNumber = await getTableRows(driver, table)
+    let result = []
+    for (let i = 1; i <= rowsNumber; i++) {
+      let rowRoot = await driver.findElement(table.tableFields[column](i))
+      let coord = await rowRoot.getRect()
+      result.push(coord)
+    }
+    return result
+  },
+  getNamedRowsGeometry: async function(driver, table, name = 'name') {
+    const rowsNumber = await getTableRows(driver, table)
+    let result = []
+    for (let i = 1; i <= rowsNumber; i++) {
+      let rowRoot = await driver.findElement(table.rowRoot(i))
+      const rowName = await driver
+        .findElement(table.tableFields[name](i))
+        .getText()
+      let position = await rowRoot.getRect()
+      // await table.tableFields[name](i).text
+      position['name'] = rowName
+      result.push(position)
+    }
+    return new DataFrame(result)
+  },
+  getNamedFieldsGeometry: async function(driver, table, column) {
+    const rowsNumber = await getTableRows(driver, table)
+    let result = []
+    for (let i = 1; i <= rowsNumber; i++) {
+      let rowRoot = await driver.findElement(table.tableFields[column](i))
+      let coord = await rowRoot.getRect()
+      result.push(coord)
+    }
+    return new DataFrame(result)
   }
 }
 

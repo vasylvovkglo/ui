@@ -22,6 +22,8 @@ import {
   isContainsSubstringInColumnTooltipCells,
   isDatetimeCelsValueInRange,
   findRowIndexesByColumnTooltipsValue
+  // getRowsCoordinates,
+  // getfieldAttributeValues
 } from '../common/actions/table.action'
 import {
   openActionMenu,
@@ -798,5 +800,15 @@ Then(
         pageObjects[wizardName][tableName].tableFields[cellName](i + 1)
       )
     }
+  }
+)
+
+When(
+  'click on node with index {int} in {string} graf on {string} wizard',
+  async function(index, grafName, wizardName) {
+    await clickOnComponent(
+      this.driver,
+      pageObjects[wizardName][grafName].nodesTable['tableFields']['name'](index)
+    )
   }
 )
