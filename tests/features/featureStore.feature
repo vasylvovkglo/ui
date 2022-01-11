@@ -253,7 +253,7 @@ Feature: Feature Store Page
     @inProgress
     Scenario: Check all mandatory components in Item infopane on Transformations tab table
         Given open url
-        And click on cell with value "default" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "fraud-demo2-admin" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "Feature store (Beta)" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
@@ -268,7 +268,8 @@ Feature: Feature Store Page
         Then verify "Cancel_Button" element visibility on "Transformations_Info_Pane" wizard
         Then verify "Apply_Changes_Button" element visibility on "Transformations_Info_Pane" wizard
         Then verify "Cross_Close_Button" element visibility on "Transformations_Info_Pane" wizard
-        # TO DO: graph-view component for future work
+        Then verify "Transformation_Graph" element visibility on "Transformations_Info_Pane" wizard
+        Then verify arrow lines position on "Transformation_Graph" on "Transformations_Info_Pane" wizard
         # TO DO: configuration component for future work
 
     @passive

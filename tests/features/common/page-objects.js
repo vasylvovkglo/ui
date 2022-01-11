@@ -76,5 +76,6 @@ module.exports = {
   Create_Feature_Vector_Popup: interactivePopup['createFeatureVectorPopup'],
   Remove_Member_Popup: interactivePopup['removeMemberPopup'],
   Discard_Changes_Popup: interactivePopup['discardChangesPopup'],
-  Common_Popup: interactivePopup['commonPopup']
+  Common_Popup: interactivePopup['commonPopup'],
+  Real_Time_Pipline_Pane: infoPane['modelsRealTimePiplineInfoPane']
 }

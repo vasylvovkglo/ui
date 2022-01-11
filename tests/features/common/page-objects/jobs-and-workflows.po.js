@@ -166,50 +166,6 @@ const workflowsMonitorTable = {
   }
 }
 
-// const workflowGrafNodesTable = {
-//   root: '',
-//   header: {},
-//   body: {
-//     root: '.react-flow__nodes',
-//     row: {
-//       root: '.selectable',
-//       fields: {
-//         name: '.react-flow__node-label .data-ellipsis .data-ellipsis',
-//         top_hendler: '.data-ellipsis .react-flow__handle-top',
-//         bottom_hendler: '.data-ellipsis .react-flow__handle-bottom'
-//       }
-//     }
-//   }
-// }
-
-// const workflowGrafConnectionsTable = {
-//   root: '',
-//   header: {
-//     root: '',
-//     header: {},
-//     body: {
-//       root: '.react-flow__nodes',
-//       row: {
-//         root: '.selectable',
-//         fields: {
-//           name: '.react-flow__node-label .data-ellipsis .data-ellipsis',
-//           top_hendler: '.data-ellipsis .react-flow__handle-top',
-//           bottom_hendler: '.data-ellipsis .react-flow__handle-bottom'
-//         }
-//       }
-//     }
-//   },
-//   body: {
-//     root: '.react-flow__edges g[transform]',
-//     row: {
-//       root: '.react-flow__edge',
-//       fields: {
-//         path: '.react-flow__edge-path'
-//       }
-//     }
-//   }
-// }
-
 const monitorWorkflowGraph = {
   root: '.react-flow',
   elements: {

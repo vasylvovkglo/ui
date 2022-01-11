@@ -10,6 +10,7 @@ import checkboxComponent from '../components/checkbox.component'
 import commonTable from '../components/table.component'
 import actionMenu from '../components/action-menu.component'
 import labelComponent from '../components/label.component'
+import graph from '../components/graph.component'
 
 const actionMenuStructure = {
   root: '.actions-menu__container',
@@ -117,6 +118,48 @@ const realTimePipelinesTable = {
   }
 }
 
+const realTimePipelinesGraph = {
+  root: '.react-flow',
+  elements: {
+    workflowGrafNodesTable: {
+      componentType: commonTable,
+      structure: {
+        root: '',
+        header: {},
+        body: {
+          root: '.react-flow__nodes',
+          row: {
+            root: '.react-flow__node-ml-node',
+            fields: {
+              name: '.react-flow__node-label .data-ellipsis .data-ellipsis',
+              top_hendler: '.data-ellipsis .react-flow__handle-top',
+              bottom_hendler: '.data-ellipsis .react-flow__handle-bottom'
+            }
+          }
+        }
+      }
+    },
+    workflowGrafConnectionsTable: {
+      componentType: commonTable,
+      structure: {
+        root: '',
+        header: {},
+        body: {
+          root: '.react-flow__edges g[transform]',
+          row: {
+            root: '.react-flow__edge',
+            fields: {
+              path: '.react-flow__edge-path'
+            }
+          }
+        }
+      }
+    },
+    svg: '.react-flow__edges',
+    zoomPane: '.react-flow__nodes'
+  }
+}
+
 module.exports = {
   modelsTab: {
     Models_Tab_Selector: commonTable(tabSelector),
@@ -166,6 +209,7 @@ module.exports = {
     Table_Refresh_Button: By.css(
       '.content .content__action-bar .actions #refresh'
     ),
-    Real_Time_Pipelines_Table: commonTable(realTimePipelinesTable)
+    Real_Time_Pipelines_Table: commonTable(realTimePipelinesTable),
+    Real_Time_Pipelines_Graph: graph(realTimePipelinesGraph)
   }
 }

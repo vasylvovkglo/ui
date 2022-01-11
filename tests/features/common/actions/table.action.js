@@ -187,7 +187,8 @@ const action = {
   },
   checkTableColumnValues: async function(driver, table, columnName, values) {
     const arr = await getColumnValues(driver, table, columnName)
-    expect(differenceWith(arr, values, isEqual).length).equal(0)
+    const diff = differenceWith(arr, values, isEqual)
+    expect(diff.length).equal(0, 'Diff arrays: ' + diff)
   },
   getAllCellsWithAttribute: async function(driver, table, attribute) {
     let result = []

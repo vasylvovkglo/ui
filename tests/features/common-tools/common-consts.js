@@ -15,6 +15,17 @@ module.exports = {
   Models: {
     Tab_List: ['Models', 'Model Endpoints (Beta)', 'Real-Time Pipelines']
   },
+  Real_Time_Pipline_Pane: {
+    Overview_Headers: [
+      'Type:',
+      'After:',
+      'Class name:',
+      'Function name:',
+      'Handler:',
+      'Input path:',
+      'Result path:'
+    ]
+  },
   Feature_Sets_Info_Pane: {
     Tab_List: [
       'Overview',
