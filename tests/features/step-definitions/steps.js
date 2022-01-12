@@ -72,6 +72,7 @@ import {
   openActionMenu,
   selectOptionInActionMenu
 } from '../common/actions/action-menu.action'
+import { expect } from 'chai'
 
 Given('open url', async function() {
   await navigateToPage(this.driver, `http://${test_url}:${test_port}`)
@@ -80,6 +81,21 @@ Given('open url', async function() {
 When('turn on demo mode', async function() {
   const url = await this.driver.getCurrentUrl()
   await navigateToPage(this.driver, `${url}?demo=true`)
+})
+
+Then('additionally redirect by INVALID-TAB', async function() {
+  const beforeURL = await this.driver.getCurrentUrl()
+  const urlNodesArr = beforeURL.split('/')
+  const invalidTab = beforeURL.replace(
+    urlNodesArr[urlNodesArr.length - 1],
+    'INVALID-TAB'
+  )
+  await navigateToPage(this.driver, `${invalidTab}`)
+  const afterURL = await this.driver.getCurrentUrl()
+  expect(beforeURL).equal(
+    afterURL,
+    `Redirection from "${beforeURL}/INVALID-TAB"\nshould be "${beforeURL}"\nbut is "${afterURL}"`
+  )
 })
 
 Then('wait load page', async function() {

@@ -3,6 +3,7 @@ Feature: Feature Store Page
     Testcases that verifies functionality on Feature Store Page
 
     @passive
+    @debug
     Scenario: Check all mandatory components on Feature Store tab
         Given open url
         And wait load page
@@ -26,6 +27,7 @@ Feature: Feature Store Page
         Then verify "Feature_Store_Tab_Selector" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Create_Set_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" should contains "Create Set" value
+        Then additionally redirect by INVALID-TAB
 
     @passive
     Scenario: Check all mandatory components on Features tab

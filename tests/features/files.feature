@@ -3,7 +3,6 @@ Feature: Files Page
   Testcases that verifies functionality on Files Page
 
   @passive
-  @debug
   Scenario: Check all mandatory components on Files tab
     Given open url
     And wait load page
