@@ -3,6 +3,7 @@ Feature: Models Page
   Testcases that verifies functionality on Models Page
 
   @passive
+  @failed
   Scenario: Check all mandatory components on Models tab
     Given open url
     And wait load page
@@ -16,12 +17,12 @@ Feature: Models Page
     Then verify "Table_Name_Filter_Input" element visibility on "Models" wizard
     Then verify "Table_Labels_Filter_Input" element visibility on "Models" wizard
     Then verify "Table_Tree_Filter_Dropdown" element visibility on "Models" wizard
-    Then verify "Table_Tree_Filter_Dropdown" dropdown element on "Models" wizard should contains "Dropdown_Options"."Tag_Filer_Options"
     Then verify "Show_Iterations_Checkbox" element visibility on "Models" wizard
     Then verify "Table_Refresh_Button" element visibility on "Models" wizard
     Then verify "Models_Table" element visibility on "Models" wizard
     Then verify "Register_Model_Button" element visibility on "Models" wizard
     Then "Register_Model_Button" element on "Models" should contains "Register Model" value
+    Then verify "Table_Tree_Filter_Dropdown" dropdown element on "Models" wizard should contains "Dropdown_Options"."Tag_Filer_Options"
 
   @passive
   Scenario: Check all mandatory components on Real-Time Pipelines tab

@@ -124,7 +124,7 @@ module.exports = {
       generateDropdownGroup(
         '.content .content__action-bar .filters .tag-filter',
         'input',
-        '.tag-filter__dropdown .tag-filter__dropdown-item',
+        '.tag-filter__dropdown div',
         ''
       )
     ),

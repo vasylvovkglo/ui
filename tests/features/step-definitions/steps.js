@@ -29,7 +29,8 @@ import {
   selectOptionInDropdown,
   selectOptionInDropdownWithoutCheck,
   checkDropdownSelectedOption,
-  checkDropdownOptions
+  checkDropdownOptions,
+  checkDropdownContainsOptions
 } from '../common/actions/dropdown.action'
 import { isTabActive } from '../common/actions/tab-selector.action'
 import {
@@ -441,16 +442,16 @@ Then(
 
 Then(
   'verify {string} dropdown element on {string} wizard should contains {string}.{string}',
-  async function(dropdown, wizard, constStorage, constValue) {
-    await openDropdown(this.driver, pageObjects[wizard][dropdown])
-    await checkDropdownOptions(
+  async function(dropdownName, wizardName, constStorage, constValue) {
+    await openDropdown(this.driver, pageObjects[wizardName][dropdownName])
+    await checkDropdownContainsOptions(
       this.driver,
-      pageObjects[wizard][dropdown],
+      pageObjects[wizardName][dropdownName],
       pageObjectsConsts[constStorage][constValue]
     )
     await clickNearComponent(
       this.driver,
-      pageObjects[wizard][dropdown]['open_button']
+      pageObjects[wizardName][dropdownName]['open_button']
     )
   }
 )

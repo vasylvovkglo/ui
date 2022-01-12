@@ -62,7 +62,28 @@ const action = {
   },
   checkDropdownOptions: async function(driver, dropdown, values) {
     const options = await getOptionValues(driver, dropdown.options)
-    expect(differenceWith(options, values, isEqual).length).equal(0)
+    console.log('debug: ', options)
+    const diff = differenceWith(options, values, isEqual)
+    expect(diff.length).equal(0, 'Options difference: ' + diff)
+  },
+  checkDropdownContainsOptions: async function(driver, dropdown, values) {
+    const options = await getOptionValues(driver, dropdown.options)
+    let notPresent = []
+    for (let option of values) {
+      if (options.every(item => item !== option)) {
+        notPresent.push(option)
+      }
+    }
+    expect(notPresent.length).equal(
+      0,
+      '\nOptions not present: ' +
+        notPresent +
+        '\noptions: ' +
+        options +
+        '\nconst: ' +
+        values +
+        '\n'
+    )
   }
 }
 
