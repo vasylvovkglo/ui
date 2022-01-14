@@ -91,7 +91,7 @@ Feature: MLRun Projects Page
         And remove "automation-test-name" MLRun Project with code 204
 
     Scenario: Archive ML Project
-        * create "automation-test-name1" MLRun Project with code 200
+        * create "automation-test-name1" MLRun Project with code 201
         And set tear-down property "project" created with "automation-test-name1" value
         Given open url
         And wait load page
@@ -105,7 +105,7 @@ Feature: MLRun Projects Page
         And remove "automation-test-name1" MLRun Project with code 204
 
     Scenario: Delete existing ML Project
-        * create "automation-test-name2" MLRun Project with code 200
+        * create "automation-test-name2" MLRun Project with code 201
         And set tear-down property "project" created with "automation-test-name2" value
         Given open url
         And wait load page
@@ -117,7 +117,7 @@ Feature: MLRun Projects Page
         And remove "automation-test-name2" MLRun Project with code 500
 
     Scenario: Unarchive ML Project
-        * create "automation-test-name7" MLRun Project with code 200
+        * create "automation-test-name7" MLRun Project with code 201
         And set tear-down property "project" created with "automation-test-name7" value
         Given open url
         And wait load page
@@ -145,7 +145,7 @@ Feature: MLRun Projects Page
     @danger
 #   Run this test case only with mocked backend!!!
     Scenario: Check projects limit message
-        Then create up to limit projects with code 200
+        Then create up to limit projects with code 201
         Given open url
         And wait load page
         Then click on "New_Project_Button" element on "Projects" wizard

@@ -60,6 +60,7 @@ Feature: ML Functions
         And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page
         Then select "Delete" option in action menu on "ML_Functions" wizard in "Functions_Table" table at row with "test-m" value in "name" column
+        And wait load page
         Then "Title" element on "Common_Popup" should contains "Delete function?" value
         Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Function"
         Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
@@ -78,6 +79,7 @@ Feature: ML Functions
         When click on cell with row index 1 in "name" column in "Functions_Table" table on "ML_Functions" wizard
         Then verify "Action_Menu" element visibility on "ML_Function_Info_Pane" wizard
         Then select "Delete" option in action menu on "ML_Function_Info_Pane" wizard
+        And wait load page
         Then "Title" element on "Common_Popup" should contains "Delete function?" value
         Then "Description" component on "Common_Popup" should be equal "Descriptions"."Delete_Function"
         Then verify "Cancel_Button" element visibility on "Common_Popup" wizard
@@ -473,13 +475,13 @@ Feature: ML Functions
         Then check "new-aqa-function-00" value in "name" column in "Functions_Table" table on "ML_Functions" wizard
 
     Scenario: Delete ml-function
-        * create "automation-test-name01" MLRun Project with code 200
-        And set tear-down property "project" created with "automation-test-name01" value
-        * create "new-aqa-function-01" Function in "automation-test-name01" project with code 200
-        And set tear-down property "function" created in "automation-test-name01" project with "new-aqa-function-01" value
+        * create "automation-test-name07" MLRun Project with code 201
+        And set tear-down property "project" created with "automation-test-name07" value
+        * create "new-aqa-function-01" Function in "automation-test-name07" project with code 200
+        And set tear-down property "function" created in "automation-test-name07" project with "new-aqa-function-01" value
         Given open url
         And wait load page
-        And click on cell with value "automation-test-name01" in "name" column in "Projects_Table" table on "Projects" wizard
+        And click on cell with value "automation-test-name07" in "name" column in "Projects_Table" table on "Projects" wizard
         And wait load page
         And click on cell with value "ML functions" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
         And wait load page

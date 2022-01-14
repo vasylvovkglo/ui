@@ -36,7 +36,7 @@ Then('remove {string} MLRun Project with code {int}', async function(
   nameProject,
   status
 ) {
-  await deleteAPIMLProject(nameProject, status)
+  await deleteAPIMLProject(this.driver, nameProject, status)
 })
 
 Then('create up to limit projects with code {int}', async function(status) {

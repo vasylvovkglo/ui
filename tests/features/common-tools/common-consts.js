@@ -290,7 +290,7 @@ module.exports = {
     Must_Select_One: 'Must select at least one'
   },
   Dropdown_Options: {
-    Tag_Filer_Options: ['sAll', 'latest'],
+    Tag_Filer_Options: ['All', 'latest'],
     Status_Filter_Options: [
       'All',
       'Completed',

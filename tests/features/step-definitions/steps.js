@@ -30,7 +30,8 @@ import {
   selectOptionInDropdown,
   selectOptionInDropdownWithoutCheck,
   checkDropdownSelectedOption,
-  checkDropdownOptions
+  checkDropdownOptions,
+  checkDropdownContainsOptions
 } from '../common/actions/dropdown.action'
 import { isTabActive } from '../common/actions/tab-selector.action'
 import {
@@ -72,6 +73,7 @@ import {
   openActionMenu,
   selectOptionInActionMenu
 } from '../common/actions/action-menu.action'
+import { expect } from 'chai'
 
 Given('open url', async function() {
   await navigateToPage(this.driver, `http://${test_url}:${test_port}`)
@@ -80,6 +82,21 @@ Given('open url', async function() {
 When('turn on demo mode', async function() {
   const url = await this.driver.getCurrentUrl()
   await navigateToPage(this.driver, `${url}?demo=true`)
+})
+
+Then('additionally redirect by INVALID-TAB', async function() {
+  const beforeURL = await this.driver.getCurrentUrl()
+  const urlNodesArr = beforeURL.split('/')
+  const invalidTab = beforeURL.replace(
+    urlNodesArr[urlNodesArr.length - 1],
+    'INVALID-TAB'
+  )
+  await navigateToPage(this.driver, `${invalidTab}`)
+  const afterURL = await this.driver.getCurrentUrl()
+  expect(beforeURL).equal(
+    afterURL,
+    `Redirection from "${beforeURL}/INVALID-TAB"\nshould be "${beforeURL}"\nbut is "${afterURL}"`
+  )
 })
 
 Then('wait load page', async function() {
@@ -442,16 +459,16 @@ Then(
 
 Then(
   'verify {string} dropdown element on {string} wizard should contains {string}.{string}',
-  async function(dropdown, wizard, constStorage, constValue) {
-    await openDropdown(this.driver, pageObjects[wizard][dropdown])
-    await checkDropdownOptions(
+  async function(dropdownName, wizardName, constStorage, constValue) {
+    await openDropdown(this.driver, pageObjects[wizardName][dropdownName])
+    await checkDropdownContainsOptions(
       this.driver,
-      pageObjects[wizard][dropdown],
+      pageObjects[wizardName][dropdownName],
       pageObjectsConsts[constStorage][constValue]
     )
     await clickNearComponent(
       this.driver,
-      pageObjects[wizard][dropdown]['open_button']
+      pageObjects[wizardName][dropdownName]['open_button']
     )
   }
 )
@@ -612,9 +629,10 @@ Then(
       pageObjects[wizard][input]['inputField']
     )
     await this.driver.sleep(100)
-    await clickNearComponent(
+    await hoverComponent(
       this.driver,
-      pageObjects[wizard][input]['inputField']
+      pageObjects[wizard][input]['inputField'],
+      false
     )
     await checkWarningHintText(
       this.driver,

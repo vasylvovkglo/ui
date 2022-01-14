@@ -16,6 +16,7 @@ Feature: Feature Store Page
         Then verify "Feature Sets" tab is active in "Feature_Store_Tab_Selector" on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
+        Then verify "Table_Tag_Filter_Dropdown" dropdown element on "Feature_Store_Feature_Sets_Tab" wizard should contains "Dropdown_Options"."Tag_Filer_Options"
         Then type value "   " to "Table_Name_Filter_Input" field on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Table_Name_Filter_Input" on "Feature_Store_Feature_Sets_Tab" wizard should display warning "Input_Hint"."Input_Field_Invalid"
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
@@ -25,6 +26,7 @@ Feature: Feature Store Page
         Then verify "Feature_Store_Tab_Selector" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then verify "Create_Set_Button" element visibility on "Feature_Store_Feature_Sets_Tab" wizard
         Then "Create_Set_Button" element on "Feature_Store_Feature_Sets_Tab" should contains "Create Set" value
+        Then additionally redirect by INVALID-TAB
 
     @passive
     Scenario: Check all mandatory components on Features tab
@@ -45,6 +47,7 @@ Feature: Feature Store Page
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Features_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Features_Tab" wizard
+        Then verify "Table_Tag_Filter_Dropdown" dropdown element on "Feature_Store_Features_Tab" wizard should contains "Dropdown_Options"."Tag_Filer_Options"
         Then verify "Features_Table" element visibility on "Feature_Store_Features_Tab" wizard
         Then select "project" with "test-test" value in breadcrumbs menu
         Then "No_Data_Message" component on "commonPagesHeader" should contains "No_Data_Message"."Common_Message"
@@ -70,6 +73,7 @@ Feature: Feature Store Page
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify "Table_Tag_Filter_Dropdown" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
+        Then verify "Table_Tag_Filter_Dropdown" dropdown element on "Feature_Store_Features_Vectors_Tab" wizard should contains "Dropdown_Options"."Tag_Filer_Options"
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
         Then verify "Feature_Vectors_Table" element visibility on "Feature_Store_Features_Vectors_Tab" wizard
 
@@ -91,6 +95,7 @@ Feature: Feature Store Page
         Then verify "Table_Name_Filter_Input" element visibility on "Feature_Store_Datasets_Tab" wizard
         Then verify "Table_Label_Filter_Input" element visibility on "Feature_Store_Datasets_Tab" wizard
         Then verify "Table_Tree_Filter_Dropdown" element visibility on "Feature_Store_Datasets_Tab" wizard
+        Then verify "Table_Tree_Filter_Dropdown" dropdown element on "Feature_Store_Datasets_Tab" wizard should contains "Dropdown_Options"."Tag_Filer_Options"
         Then verify "Table_Refresh_Button" element visibility on "Feature_Store_Datasets_Tab" wizard
         Then verify "Feature_Datasets_Table" element visibility on "Feature_Store_Datasets_Tab" wizard
 
@@ -760,7 +765,7 @@ Feature: Feature Store Page
     @inProgress
     @failed
     Scenario: Save new Feature Store Feature Set new item wizard
-        * create "automation-test-name3" MLRun Project with code 200
+        * create "automation-test-name3" MLRun Project with code 201
         And set tear-down property "project" created with "automation-test-name3" value
         Given open url
         And wait load page
@@ -1136,6 +1141,7 @@ Feature: Feature Store Page
         Then click on "Add_Button" element on "Add_To_Feature_Vector_Tab" wizard
         And wait load page
         And set tear-down property "featureVector" created in "fsdemo-admin" project with "temp_vector02" value
+        And wait load page
         Then click on cell with value "temp_vector02" in "name" column in "Feature_Vectors_Table" table on "Feature_Store_Features_Vectors_Tab" wizard
         Then select "Requested Features" tab in "Info_Pane_Tab_Selector" on "Feature_Vectors_Info_Pane" wizard
         Then verify values in "Requested_Features_Table" table on "Requested_Features_Info_Pane" wizard
