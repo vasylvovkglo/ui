@@ -40,7 +40,6 @@ const action = {
       await scrollToWebElement(driver, element)
     }
     const coordinates = await element.getRect()
-    console.log(coordinates)
     const actions = driver.actions({ async: true })
     await actions
       .move({ x: parseInt(coordinates.x), y: parseInt(coordinates.y) })

@@ -3,7 +3,6 @@ import { locatorBuilder } from '../../common-tools/common-tools'
 
 module.exports = function(graphStructure) {
   const options = locatorBuilder`${0} ${1}`
-
   const nodesTable = {
     ...graphStructure.elements.workflowGrafNodesTable.structure
   }

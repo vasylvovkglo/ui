@@ -62,10 +62,7 @@ import {
   typeSearchableValue,
   isContainsSubstringInSuggestedOptions
 } from '../common/actions/input-with-autocomplete.action'
-import {
-  // checkNodesConnections,
-  checkNodesConnectionsNPandas
-} from '../common/actions/graph.action'
+import { checkNodesConnectionsNPandas } from '../common/actions/graph.action'
 
 import {
   isRadioButtonSelected,
@@ -838,8 +835,6 @@ Then('select {string} with {string} value in breadcrumbs menu', async function(
 Then(
   'verify arrow lines position on {string} on {string} wizard',
   async function(graphName, wizardName) {
-    // await this.driver.sleep(5000)
-    // await checkNodesConnections(this.driver, pageObjects[wizardName][graphName])
     await checkNodesConnectionsNPandas(
       this.driver,
       pageObjects[wizardName][graphName]

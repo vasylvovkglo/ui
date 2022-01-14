@@ -1,31 +1,10 @@
-import {
-  getRowsGeometry,
-  getFieldsGeometry,
-  getNamedRowsGeometry,
-  getNamedFieldsGeometry
-} from './table.action'
-
-// import { DataFrame } from 'pandas-js'
+import { getNamedRowsGeometry, getNamedFieldsGeometry } from './table.action'
 
 import numjs from 'numjs'
 import { expect } from 'chai'
 
-function differenciator(array0, array1, deviation) {
-  console.log(array0, array1)
-  let diff = []
-  for (let item0 of array0) {
-    let diffsMap = []
-    for (let item1 of array1) {
-      let connection = Math.abs(item1 - item0) < deviation ? 1 : 0
-      diffsMap.push(connection)
-    }
-    diff.push(diffsMap)
-  }
-  return diff
-}
-
 function diffMapper(array0, array1, deviation) {
-  let tmpDiff = numjs.abs(
+  const tmpDiff = numjs.abs(
     numjs.subtract(
       numjs.dot(numjs.ones(array0.shape).T, array1),
       numjs.dot(array0.T, numjs.ones(array1.shape))
@@ -42,123 +21,13 @@ function diffMapper(array0, array1, deviation) {
 }
 
 const action = {
-  checkNodesConnections: async function(driver, graphComponent) {
-    let nodesGeometry = await getRowsGeometry(driver, graphComponent.nodesTable)
-
-    let connectorsGeometry = [
-      ...(await getFieldsGeometry(
-        driver,
-        graphComponent.nodesTable,
-        'top_hendler'
-      )),
-      ...(await getFieldsGeometry(
-        driver,
-        graphComponent.nodesTable,
-        'bottom_hendler'
-      ))
-    ]
-    const maxConnectorSide = Math.max(
-      ...[
-        ...connectorsGeometry.map(item => item.height),
-        ...connectorsGeometry.map(item => item.width)
-      ]
-    )
-
-    let arrowGeometry = await getRowsGeometry(
-      driver,
-      graphComponent.grafConnections
-    )
-
-    const topNodePoints = nodesGeometry.map(item => {
-      return {
-        x: item.x + item.width / 2,
-        y: item.y
-      }
-    })
-    const bottomNodePoints = nodesGeometry.map(item => {
-      return {
-        x: item.x + item.width / 2,
-        y: item.y + item.height
-      }
-    })
-
-    const arrowsNodeLeftEdges = arrowGeometry.map(item => {
-      return {
-        x: item.x
-      }
-    })
-    const arrowsNodeRightEdges = arrowGeometry.map(item => {
-      return {
-        x: item.x + item.width
-      }
-    })
-
-    const arrowsNodeLeftEdgesX = await arrowsNodeLeftEdges.map(item => item.x)
-    const topNodePointsX = await topNodePoints.map(item => item.x)
-    const leftEdgesConnections = differenciator(
-      arrowsNodeLeftEdgesX,
-      topNodePointsX,
-      maxConnectorSide
-    )
-    console.log('\n', leftEdgesConnections)
-
-    const arrowsNodeRightEdgesX = await arrowsNodeRightEdges.map(item => item.x)
-    let rightEdgesConnections = differenciator(
-      arrowsNodeRightEdgesX,
-      topNodePointsX,
-      maxConnectorSide
-    )
-    console.log('\n', rightEdgesConnections)
-
-    const bottomNodeEdges = await bottomNodePoints.map(item => item.y)
-    const topArrowEdges = await arrowGeometry.map(item => item.y)
-    const startArrowsEdges = differenciator(
-      topArrowEdges,
-      bottomNodeEdges,
-      maxConnectorSide
-    )
-    console.log('\n', startArrowsEdges)
-
-    const topNodeEdges = await topNodePoints.map(item => item.y)
-    const bottomArrowEdges = await arrowGeometry.map(
-      item => item.y + item.height
-    )
-    const endArrowsEdges = differenciator(
-      bottomArrowEdges,
-      topNodeEdges,
-      maxConnectorSide
-    )
-    console.log('\n', endArrowsEdges)
-
-    let startPoints = []
-    for (let i = 0; i < topArrowEdges.length; i++) {
-      let tmpMult = []
-      for (let j = 0; j < bottomNodeEdges.length; j++) {
-        tmpMult.push(
-          startArrowsEdges[i][j] * leftEdgesConnections[i][j] +
-            startArrowsEdges[i][j] * rightEdgesConnections[i][j]
-        )
-      }
-      startPoints.push(tmpMult)
-    }
-
-    const summarizer = (previousValue, currentValue) =>
-      previousValue + currentValue
-    console.log(
-      '\n',
-      startPoints
-        .map(item => item.reduce(summarizer, 0))
-        .every(item => item > 0),
-      startPoints.map(item => item.reduce(summarizer, 0))
-    )
-  },
   checkNodesConnectionsNPandas: async function(driver, graphComponent) {
     const nodesGeometry = await getNamedRowsGeometry(
       driver,
       graphComponent.nodesTable
     )
 
-    let arrowsGeometry = await getNamedRowsGeometry(
+    const arrowsGeometry = await getNamedRowsGeometry(
       driver,
       graphComponent.grafConnections,
       'path'
@@ -196,12 +65,12 @@ const action = {
       [Array.from(arrowsGeometry.get('height'))]
     )
 
-    let startArrowsEdges = diffMapper(
+    const startArrowsEdges = diffMapper(
       arrowTopEdges,
       nodeBottomEdges,
       maxConnectorSide / 2
     )
-    let endArrowsEdges = diffMapper(
+    const endArrowsEdges = diffMapper(
       arrowBottomEdges,
       nodeTopEdges,
       maxConnectorSide / 2
@@ -218,12 +87,12 @@ const action = {
       [Array.from(arrowsGeometry.get('x'))],
       [Array.from(arrowsGeometry.get('width'))]
     )
-    let leftEdgesConnections = diffMapper(
+    const leftEdgesConnections = diffMapper(
       arrowsNodeLeftEdgesX,
       nodeMidlePoints,
       maxConnectorSide / 2
     )
-    let righEdgesConnections = diffMapper(
+    const righEdgesConnections = diffMapper(
       arrowsNodeRightEdgesX,
       nodeMidlePoints,
       maxConnectorSide / 2

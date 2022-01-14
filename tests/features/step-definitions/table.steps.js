@@ -22,8 +22,6 @@ import {
   isContainsSubstringInColumnTooltipCells,
   isDatetimeCelsValueInRange,
   findRowIndexesByColumnTooltipsValue
-  // getRowsCoordinates,
-  // getfieldAttributeValues
 } from '../common/actions/table.action'
 import {
   openActionMenu,

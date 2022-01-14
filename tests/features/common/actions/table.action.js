@@ -23,6 +23,7 @@ async function getTableRows(driver, table) {
     .then(function(elements) {
       return Promise.all(elements.map(element => element))
     })
+
   return await arr.length
 }
 
@@ -57,6 +58,7 @@ const action = {
     const rows = await getTableRows(driver, table)
     expect(rows).not.equal(0)
     let flag = true
+
     for (let i = 1; i <= rows; i++) {
       await openDropdown(driver, table.tableFields[column](i))
       const options = await getOptionValues(
@@ -71,6 +73,7 @@ const action = {
         options[0]
       )
     }
+
     expect(flag).equal(true)
   },
   isContainsSubstringInColumnTooltipCells: async function(
@@ -82,6 +85,7 @@ const action = {
     const rows = await getTableRows(driver, table)
     const arr = []
     expect(rows).not.equal(0)
+
     for (let i = rows; i >= 1; i--) {
       await hoverComponent(driver, table.tableFields[column](i)['label'])
       const text = await getElementText(
@@ -90,6 +94,7 @@ const action = {
       )
       arr.push(text)
     }
+
     expect(arr.every(item => item.includes(value))).equal(true)
   },
   isDatetimeCelsValueInRange: async function(
@@ -116,6 +121,7 @@ const action = {
         indexes.push(parseInt(indx) + 1)
       }
     }
+
     return indexes
   },
   findRowIndexesByColumnTooltipsValue: async function(
@@ -149,6 +155,7 @@ const action = {
         }
       }
     }
+
     return indexes.reverse()
   },
   openActionMenuByIndex: async function(driver, table, index) {
@@ -162,6 +169,7 @@ const action = {
 
       if (element) {
         await element.click()
+
         return table.tableFields['action_menu'](index)
       }
     }
@@ -183,6 +191,7 @@ const action = {
     if (order === 'desc') {
       sortedArr = columnArray.reverse()
     }
+
     expect(sortedArr).equal(columnArray)
   },
   checkTableColumnValues: async function(driver, table, columnName, values) {
@@ -191,7 +200,7 @@ const action = {
     expect(diff.length).equal(0, 'Diff arrays: ' + diff)
   },
   getAllCellsWithAttribute: async function(driver, table, attribute) {
-    let result = []
+    const result = []
 
     for (const column of table.tableCulumnNames) {
       const classes = await driver
@@ -211,51 +220,59 @@ const action = {
           .map(dayNum => [column, dayNum])
       )
     }
+
     return result
   },
   getRowsGeometry: async function(driver, table) {
     const rowsNumber = await getTableRows(driver, table)
-    let result = []
+    const result = []
+
     for (let i = 1; i <= rowsNumber; i++) {
-      let rowRoot = await driver.findElement(table.rowRoot(i))
-      let position = await rowRoot.getRect()
+      const rowRoot = await driver.findElement(table.rowRoot(i))
+      const position = await rowRoot.getRect()
       result.push(position)
     }
+
     return result
   },
   getFieldsGeometry: async function(driver, table, column, attribute) {
     const rowsNumber = await getTableRows(driver, table)
-    let result = []
+    const result = []
+
     for (let i = 1; i <= rowsNumber; i++) {
-      let rowRoot = await driver.findElement(table.tableFields[column](i))
-      let coord = await rowRoot.getRect()
+      const rowRoot = await driver.findElement(table.tableFields[column](i))
+      const coord = await rowRoot.getRect()
       result.push(coord)
     }
+
     return result
   },
   getNamedRowsGeometry: async function(driver, table, name = 'name') {
     const rowsNumber = await getTableRows(driver, table)
-    let result = []
+    const result = []
+
     for (let i = 1; i <= rowsNumber; i++) {
-      let rowRoot = await driver.findElement(table.rowRoot(i))
+      const rowRoot = await driver.findElement(table.rowRoot(i))
       const rowName = await driver
         .findElement(table.tableFields[name](i))
         .getText()
-      let position = await rowRoot.getRect()
-      // await table.tableFields[name](i).text
+      const position = await rowRoot.getRect()
       position['name'] = rowName
       result.push(position)
     }
+
     return new DataFrame(result)
   },
   getNamedFieldsGeometry: async function(driver, table, column) {
     const rowsNumber = await getTableRows(driver, table)
-    let result = []
+    const result = []
+
     for (let i = 1; i <= rowsNumber; i++) {
-      let rowRoot = await driver.findElement(table.tableFields[column](i))
-      let coord = await rowRoot.getRect()
+      const rowRoot = await driver.findElement(table.tableFields[column](i))
+      const coord = await rowRoot.getRect()
       result.push(coord)
     }
+
     return new DataFrame(result)
   }
 }

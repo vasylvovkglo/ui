@@ -1264,6 +1264,7 @@ Feature: Jobs and workflows
         Then "Run_Now_Button" element on "New_JobTemplate_Edit" should contains "Save" value
 
     @passive
+    @debug
     Scenario: Check all mandatory components on Workflow graf View
         Given open url
         And turn on demo mode
