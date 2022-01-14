@@ -17,7 +17,8 @@ import {
   isAccordionSectionCollapsed,
   clickNearComponent,
   verifyElementDisabled,
-  verifyElementEnabled
+  verifyElementEnabled,
+  hoverComponent
 } from '../common/actions/common.action'
 import {
   findRowIndexesByColumnValue,
@@ -61,7 +62,7 @@ import {
   typeSearchableValue,
   isContainsSubstringInSuggestedOptions
 } from '../common/actions/input-with-autocomplete.action'
-
+import { checkNodesConnectionsNPandas } from '../common/actions/graph.action'
 import {
   isRadioButtonSelected,
   isRadioButtonUnselected,
@@ -827,5 +828,27 @@ Then('select {string} with {string} value in breadcrumbs menu', async function(
     this.driver,
     pageObjects['commonPagesHeader']['Breadcrumbs'][itemType],
     name
+  )
+})
+
+Then(
+  'verify arrow lines position on {string} on {string} wizard',
+  async function(graphName, wizardName) {
+    await checkNodesConnectionsNPandas(
+      this.driver,
+      pageObjects[wizardName][graphName]
+    )
+  }
+)
+
+Then('get {string} component coordinates on {string} wizard', async function(
+  componentName,
+  wizardName
+) {
+  // step for debagging
+  await hoverComponent(
+    this.driver,
+    pageObjects[wizardName][componentName],
+    false
   )
 })

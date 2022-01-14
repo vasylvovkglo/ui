@@ -6,6 +6,7 @@ import datepicker from '../components/date-picker.component'
 import inputGroup from '../components/input-group.component'
 import inputWithAutocomplete from '../components/input-with-autocomplete.component'
 import labelComponent from '../components/label.component'
+import graph from '../components/graph.component'
 import {
   generateInputGroup,
   generateDropdownGroup,
@@ -162,6 +163,48 @@ const workflowsMonitorTable = {
         }
       }
     }
+  }
+}
+
+const monitorWorkflowGraph = {
+  root: '.react-flow',
+  elements: {
+    workflowGrafNodesTable: {
+      componentType: commonTable,
+      structure: {
+        root: '',
+        header: {},
+        body: {
+          root: '.react-flow__nodes',
+          row: {
+            root: '.selectable',
+            fields: {
+              name: '.react-flow__node-label .data-ellipsis .data-ellipsis',
+              top_hendler: '.data-ellipsis .react-flow__handle-top',
+              bottom_hendler: '.data-ellipsis .react-flow__handle-bottom'
+            }
+          }
+        }
+      }
+    },
+    workflowGrafConnectionsTable: {
+      componentType: commonTable,
+      structure: {
+        root: '',
+        header: {},
+        body: {
+          root: '.react-flow__edges g[transform]',
+          row: {
+            root: '.react-flow__edge',
+            fields: {
+              path: '.react-flow__edge-path'
+            }
+          }
+        }
+      }
+    },
+    svg: '.react-flow__edges',
+    zoomPane: '.react-flow__nodes'
   }
 }
 
@@ -409,7 +452,8 @@ module.exports = {
   WorkflowsMonitorTab: {
     Workflows_Monitor_Table: commonTable(workflowsMonitorTable),
     Toggle_View_Button: By.css('.workflow-header .actions .toggle-view-btn'),
-    Workflow_List_View_Table: commonTable(jobsMonitorTable)
+    Workflow_List_View_Table: commonTable(jobsMonitorTable),
+    Workflow_Graf: graph(monitorWorkflowGraph)
   },
   ScheduleMonitorTab: {
     Table_Name_Filter_Input: inputGroup(

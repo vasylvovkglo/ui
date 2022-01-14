@@ -6,7 +6,8 @@ import {
 } from '../../common-tools/common-tools'
 import labelComponent from '../components/label.component'
 import inputGroup from '../components/input-group.component'
-const { By } = require('selenium-webdriver')
+import graph from '../components/graph.component'
+import { By } from 'selenium-webdriver'
 
 // TO DO: that is duplicate from Feature Store PO. In feature that should be fixed
 const actionMenuStructure = {
@@ -266,6 +267,64 @@ const featureSetsInfoPaneLabelsTable = {
   }
 }
 
+// Models real time piplines infopane headers
+const modelsRealTimeinfoPaneOverviewHeaders = {
+  root: '.table-container',
+  header: {},
+  body: {
+    root: '.graph-pane',
+    offset: 1,
+    row: {
+      root: '.graph-pane__row',
+      fields: {
+        tab: ' .graph-pane__row-label'
+      }
+    }
+  }
+}
+
+const featureSetTransformationGraph = {
+  root: '.react-flow',
+  elements: {
+    workflowGrafNodesTable: {
+      componentType: commonTable,
+      structure: {
+        root: '',
+        header: {},
+        body: {
+          root: '.react-flow__nodes',
+          row: {
+            root: '.react-flow__node-ml-node',
+            fields: {
+              name: '.react-flow__node-label .data-ellipsis .data-ellipsis',
+              top_hendler: '.data-ellipsis .react-flow__handle-top',
+              bottom_hendler: '.data-ellipsis .react-flow__handle-bottom'
+            }
+          }
+        }
+      }
+    },
+    workflowGrafConnectionsTable: {
+      componentType: commonTable,
+      structure: {
+        root: '',
+        header: {},
+        body: {
+          root: '.react-flow__edges g[transform]',
+          row: {
+            root: '.react-flow__edge',
+            fields: {
+              path: '.react-flow__edge-path'
+            }
+          }
+        }
+      }
+    },
+    svg: '.react-flow__edges',
+    zoomPane: '.react-flow__nodes'
+  }
+}
+
 // common components
 const header = By.css('.table__item .item-header__data h3')
 const updated = By.css('.table__item .item-header__data span')
@@ -365,7 +424,8 @@ module.exports = {
     Apply_Changes_Button: applyChangesButton,
     Action_Menu: commonActionMenu,
     Cross_Close_Button: crossCloseButton,
-    Info_Pane_Tab_Selector: commonInfoPaneTabSelector
+    Info_Pane_Tab_Selector: commonInfoPaneTabSelector,
+    Transformation_Graph: graph(featureSetTransformationGraph)
   },
   previewInfoPane: {
     Header: header,
@@ -486,5 +546,12 @@ module.exports = {
     ),
     Expand_Sources: By.css('.details-item .info-sources'),
     Info_Sources_Table: commonTable(filesInfoSourcesTable)
+  },
+  modelsRealTimePiplineInfoPane: {
+    Header: By.css('.graph-pane__title span'),
+    Cross_Close_Button: By.css(
+      '.graph-pane__title .round-icon-cp .round-icon-cp__icon'
+    ),
+    Overview_Headers: commonTable(modelsRealTimeinfoPaneOverviewHeaders)
   }
 }

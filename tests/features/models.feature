@@ -244,3 +244,26 @@ Feature: Models Page
     Then "Cancel_Button" element on "Deploy_Model_Popup" should contains "Cancel" value
     Then verify "Deploy_Button" element visibility on "Deploy_Model_Popup" wizard
     Then "Deploy_Button" element on "Deploy_Model_Popup" should contains "Deploy" value
+
+
+  @passive
+  Scenario: Check all mandatory components on Real-Time Pipelines graf
+    Given open url
+    And wait load page
+    And click on cell with value "churn-project-admin" in "name" column in "Projects_Table" table on "Projects" wizard
+    And wait load page
+    Then verify breadcrumbs "project" label should be equal "churn-project-admin" value
+    And click on cell with value "Models" in "link" column in "General_Info_Quick_Links" table on "Project" wizard
+    And wait load page
+    Then verify breadcrumbs "tab" label should be equal "Models" value
+    And select "Real-Time Pipelines" tab in "Models_Tab_Selector" on "Models" wizard
+    And wait load page
+    Then verify "Real-Time Pipelines" tab is active in "Models_Tab_Selector" on "Models" wizard
+    When click on cell with row index 1 in "name" column in "Real_Time_Pipelines_Table" table on "Real_Time_Pipelines" wizard
+    And wait load page
+    Then verify "Real_Time_Pipelines_Graph" element visibility on "Real_Time_Pipelines" wizard
+    Then verify arrow lines position on "Real_Time_Pipelines_Graph" on "Real_Time_Pipelines" wizard
+    When click on node with index 2 in "Real_Time_Pipelines_Graph" graf on "Real_Time_Pipelines" wizard
+    Then verify "Header" element visibility on "Real_Time_Pipline_Pane" wizard
+    Then verify "Cross_Close_Button" element visibility on "Real_Time_Pipline_Pane" wizard
+    Then verify "Overview_Headers" on "Real_Time_Pipline_Pane" wizard should contains "Real_Time_Pipline_Pane"."Overview_Headers"
