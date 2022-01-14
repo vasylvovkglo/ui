@@ -6,6 +6,7 @@ module.exports = function(graphStructure) {
   const nodesTable = {
     ...graphStructure.elements.workflowGrafNodesTable.structure
   }
+
   nodesTable.root = options(
     graphStructure.root,
     graphStructure.elements.workflowGrafNodesTable.root
@@ -14,6 +15,7 @@ module.exports = function(graphStructure) {
   const grafConnections = {
     ...graphStructure.elements.workflowGrafConnectionsTable.structure
   }
+
   grafConnections.root = options(
     graphStructure.root,
     graphStructure.elements.workflowGrafConnectionsTable.root

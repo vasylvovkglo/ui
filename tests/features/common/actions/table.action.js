@@ -56,8 +56,9 @@ const action = {
   ) {
     const subString = value.replace('=', '\n:\n')
     const rows = await getTableRows(driver, table)
-    expect(rows).not.equal(0)
     let flag = true
+
+    expect(rows).not.equal(0)
 
     for (let i = 1; i <= rows; i++) {
       await openDropdown(driver, table.tableFields[column](i))
@@ -83,8 +84,10 @@ const action = {
     value
   ) {
     const rows = await getTableRows(driver, table)
-    const arr = []
+
     expect(rows).not.equal(0)
+
+    const arr = []
 
     for (let i = rows; i >= 1; i--) {
       await hoverComponent(driver, table.tableFields[column](i)['label'])
@@ -197,6 +200,7 @@ const action = {
   checkTableColumnValues: async function(driver, table, columnName, values) {
     const arr = await getColumnValues(driver, table, columnName)
     const diff = differenceWith(arr, values, isEqual)
+
     expect(diff.length).equal(0, 'Diff arrays: ' + diff)
   },
   getAllCellsWithAttribute: async function(driver, table, attribute) {
@@ -230,6 +234,7 @@ const action = {
     for (let i = 1; i <= rowsNumber; i++) {
       const rowRoot = await driver.findElement(table.rowRoot(i))
       const position = await rowRoot.getRect()
+
       result.push(position)
     }
 
@@ -257,6 +262,7 @@ const action = {
         .findElement(table.tableFields[name](i))
         .getText()
       const position = await rowRoot.getRect()
+
       position['name'] = rowName
       result.push(position)
     }

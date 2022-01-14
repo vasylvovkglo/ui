@@ -63,7 +63,6 @@ import {
   isContainsSubstringInSuggestedOptions
 } from '../common/actions/input-with-autocomplete.action'
 import { checkNodesConnectionsNPandas } from '../common/actions/graph.action'
-
 import {
   isRadioButtonSelected,
   isRadioButtonUnselected,
