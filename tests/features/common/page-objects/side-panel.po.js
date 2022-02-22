@@ -706,7 +706,7 @@ module.exports = {
       generateInputGroup(
         '.feature-set-panel .panel-title .name',
         true,
-        true,
+        '.input__warning svg',
         true
       )
     ),

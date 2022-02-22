@@ -20,11 +20,10 @@ Feature: Jobs and workflows
         Then "New_Job_Button" element on "Jobs_Monitor_Tab" should contains "New Job" value
         Then verify "Resource_Monitoring_Button" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Table_Refresh_Button" element visibility on "Jobs_Monitor_Tab" wizard
-        Then verify "Table_Expand_Rows_Button" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Status_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Status_Filter_Dropdown" dropdown element on "Jobs_Monitor_Tab" wizard should contains "Dropdown_Options"."Status_Filter_Options"
-        Then verify "Group_By_Name_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
-        Then verify "Group_By_Name_Filter_Dropdown" dropdown element on "Jobs_Monitor_Tab" wizard should contains "Dropdown_Options"."Group_By_Filter_Options"
+        # Then verify "Group_By_Name_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
+        # Then verify "Group_By_Name_Filter_Dropdown" dropdown element on "Jobs_Monitor_Tab" wizard should contains "Dropdown_Options"."Group_By_Filter_Options"
         Then verify "Table_Name_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Table_Labels_Filter_Input" element visibility on "Jobs_Monitor_Tab" wizard
         Then verify "Start_Time_Filter_Dropdown" element visibility on "Jobs_Monitor_Tab" wizard
@@ -159,6 +158,7 @@ Feature: Jobs and workflows
         Then value in "name" column with "text" in "Schedule_Monitor_Table" on "Schedule_Monitor_Tab" wizard should contains "test"
 
     @passive
+    @debug
     Scenario: verify filtering by job label with key on Jobs Monitor tab
         Given open url
         And wait load page
@@ -170,6 +170,7 @@ Feature: Jobs and workflows
         And wait load page
         When select "Any time" option in "Start_Time_Filter_Dropdown" filter dropdown on "Jobs_Monitor_Tab" wizard
         Then type value "author" to "Table_Labels_Filter_Input" field on "Jobs_Monitor_Tab" wizard
+        And wait load page
         Then click on "Table_Refresh_Button" element on "Jobs_Monitor_Tab" wizard
         And wait load page
         Then value in "labels" column with "dropdowns" in "Jobs_Monitor_Table" on "Jobs_Monitor_Tab" wizard should contains "author"
@@ -426,7 +427,6 @@ Feature: Jobs and workflows
         Then check "new-aqa-schedule-01" value not in "name" column in "Schedule_Monitor_Table" table on "Schedule_Monitor_Tab" wizard
 
     @passive
-    @debug
     Scenario: verify mandatory elements on Create New Jobs side panel except accordions
         Given open url
         And wait load page
