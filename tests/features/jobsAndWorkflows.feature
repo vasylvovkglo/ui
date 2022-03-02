@@ -158,7 +158,6 @@ Feature: Jobs and workflows
         Then value in "name" column with "text" in "Schedule_Monitor_Table" on "Schedule_Monitor_Tab" wizard should contains "test"
 
     @passive
-    @debug
     Scenario: verify filtering by job label with key on Jobs Monitor tab
         Given open url
         And wait load page

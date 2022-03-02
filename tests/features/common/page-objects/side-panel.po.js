@@ -714,7 +714,7 @@ module.exports = {
       generateInputGroup(
         '.feature-set-panel .panel-title .version',
         true,
-        false,
+        '.input__warning svg',
         true
       )
     ),
