@@ -439,7 +439,7 @@ module.exports = {
   },
   WorkflowsMonitorTab: {
     Workflows_Monitor_Table: commonTable(workflowsMonitorTable),
-    Toggle_View_Button: By.css('.workflow-header .actions .toggle-view-btn'),
+    Toggle_View_Button: By.css('.workflow-container .actions .toggle-view-btn'),
     Workflow_List_View_Table: commonTable(jobsMonitorTable),
     Workflow_Graph: graph(monitorWorkflowGraph)
   },
